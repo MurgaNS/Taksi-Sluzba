@@ -15,17 +15,13 @@ class App {
         System.out.println("Unesite lozinku: ");
         String lozinka = scanner.nextLine();
         login(korisnickoIme, lozinka);
-
-
     }
 
     public static void login(String korisnickoIme, String lozinka) {
         File file = new File("src\\Data\\korisnici.csv");
-
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
-
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineParts = line.split(",");
 //                System.out.println(lineParts.toString());
@@ -40,13 +36,11 @@ class App {
                             break;
 
                         case "dispecer":
-                            Dispecer dispecer = new Dispecer(Long.parseLong(lineParts[0]),lineParts[1],lineParts[2],lineParts[3],lineParts[4],lineParts[5],lineParts[6],lineParts[7],Double.parseDouble(lineParts[8]),lineParts[9],lineParts[10]);
+                            Dispecer dispecer = new Dispecer(Long.parseLong(lineParts[0]), lineParts[1], lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], Double.parseDouble(lineParts[8]), lineParts[9], lineParts[10]);
                             break;
 
                     }
-
                     bufferedReader.close();
-
                     System.out.println("Uspesno ste se ulogovali");
                     return;
                 }
@@ -57,7 +51,6 @@ class App {
             System.out.println("Greska pri citanju datoteke");
         } catch (Exception e) {
             System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
-
         }
 
 
@@ -65,13 +58,12 @@ class App {
         Scanner sc = new Scanner(System.in);
         try {
             while (true) {
-                System.out.println("1.Prikazi podatke o taksi sluzbi");
-                System.out.println("2.Izmeni podatke o taksi sluzbi");
                 System.out.print("Unesi opciju: ");
                 String line = sc.nextLine();
                 switch (Integer.parseInt(line)) {
                     case 1 -> Dispecer.prikazPodatakaOTaksiSluzbi();
                     case 2 -> Dispecer.izmenaPodatakaTaksiSluzbe();
+//                    case 3 -> Dispecer.prikaziAutomobile();
                 }
             }
         } catch (IllegalStateException | NoSuchElementException | IOException e) {

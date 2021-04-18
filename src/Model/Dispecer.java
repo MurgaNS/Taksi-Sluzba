@@ -48,7 +48,8 @@ public class Dispecer extends Korisnik {
 
     protected static TaksiSluzba preuzmiPodatkeOTaksiSluzbi() {
         TaksiSluzba taksiSluzba = null;
-        try (BufferedReader br = new BufferedReader(new FileReader("src/Data/taksiSluzba.csv"))) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/Data/taksiSluzba.csv"));
             String[] red = br.readLine().split(",");
             taksiSluzba = new TaksiSluzba(Long.parseLong(red[0]), red[1], red[2], Double.parseDouble(red[3]), Double.parseDouble(red[4]));
             return taksiSluzba;
@@ -153,7 +154,7 @@ public class Dispecer extends Korisnik {
         return false;
     }
 
-    protected void prikaziAutomobile(List<Automobil> automobili) {
+    protected static void prikaziAutomobile(List<Automobil> automobili) {
     }
 
     protected boolean dodajAutomobil(Automobil automobil) {
@@ -207,4 +208,9 @@ public class Dispecer extends Korisnik {
     protected void godisnjiIzvestajVozaca(Vozac vozac) {
     }
 
+    public void meni() {
+        System.out.println("1.Prikazi podatke o taksi sluzbi");
+        System.out.println("2.Izmeni podatke o taksi sluzbi");
+        System.out.println("3.Prikazi sve automobile");
+    }
 }
