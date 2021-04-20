@@ -26,17 +26,17 @@ class App {
                 String[] lineParts = line.split(",");
 //                System.out.println(lineParts.toString());
                 if (korisnickoIme.equals(lineParts[1]) && lozinka.equals(lineParts[2])) {
-                    switch (lineParts[11]) {
+                    switch (lineParts[0]) {
                         case "musterija":
-                            Musterija musterija = new Musterija();
+                            Musterija musterija = new Musterija(Long.parseLong(lineParts[1]),lineParts[2],lineParts[3],lineParts[4],lineParts[5],lineParts[6],lineParts[7],lineParts[8]);
                             break;
 
                         case "vozac":
-                            Vozac vozac = new Vozac();
+                            Vozac vozac = new Vozac(Long.parseLong(lineParts[1]),lineParts[2],lineParts[3],lineParts[4],lineParts[5],lineParts[6],lineParts[7],lineParts[8],Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
                             break;
 
                         case "dispecer":
-                            Dispecer dispecer = new Dispecer(Long.parseLong(lineParts[0]), lineParts[1], lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], Double.parseDouble(lineParts[8]), lineParts[9], lineParts[10]);
+                            Dispecer dispecer = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
                             break;
 
                     }
