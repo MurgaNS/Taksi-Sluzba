@@ -1,4 +1,5 @@
 import Model.Dispecer;
+import Model.Korisnik;
 import Model.Musterija;
 import Model.Vozac;
 
@@ -18,6 +19,7 @@ class App {
     }
 
     public static void login(String korisnickoIme, String lozinka) {
+        Korisnik korisnik = null;
         File file = new File("src\\Data\\korisnici.csv");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -25,29 +27,31 @@ class App {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineParts = line.split(",");
 //                System.out.println(lineParts.toString());
-                if (korisnickoIme.equals(lineParts[1]) && lozinka.equals(lineParts[2])) {
+                if (korisnickoIme.equals(lineParts[2]) && lozinka.equals(lineParts[3])) {
                     switch (lineParts[0]) {
                         case "musterija":
-                            Musterija musterija = new Musterija(Long.parseLong(lineParts[1]),lineParts[2],lineParts[3],lineParts[4],lineParts[5],lineParts[6],lineParts[7],lineParts[8]);
+                            korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
                             break;
 
                         case "vozac":
-                            Vozac vozac = new Vozac(Long.parseLong(lineParts[1]),lineParts[2],lineParts[3],lineParts[4],lineParts[5],lineParts[6],lineParts[7],lineParts[8],Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
+                            korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
                             break;
 
                         case "dispecer":
-                            Dispecer dispecer = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
+                            korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
                             break;
 
                     }
-                    bufferedReader.close();
                     System.out.println("Uspesno ste se ulogovali");
-                    return;
+                    break;
                 }
             }
+            bufferedReader.close();
+
         } catch (FileNotFoundException exception) {
             System.out.println("Fajl nije pronadjen");
         } catch (IOException exception) {
+            exception.printStackTrace();
             System.out.println("Greska pri citanju datoteke");
         } catch (Exception e) {
             System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
@@ -55,6 +59,34 @@ class App {
 
 
 //        dispecer
+
+        if(korisnik instanceof Dispecer){
+            Scanner sc = new Scanner(System.in);
+            try {
+                while (true) {
+                    Dispecer.prikaziMeni();
+                    System.out.print("Unesi opciju: ");
+                    String line = sc.nextLine();
+                    switch (Integer.parseInt(line)) {
+
+                        case 1 -> Dispecer.prikazPodatakaOTaksiSluzbi();
+                        case 2 -> Dispecer.izmenaPodatakaTaksiSluzbe();
+//                        case 3 -> Dispecer.prikaziVozace(); #todo
+
+
+                    }
+                }
+            } catch (IllegalStateException | NoSuchElementException | IOException e) {
+                System.out.println("Doslo je do greske! System.in je zatvoren.");
+            }
+        }
+        else if(korisnik instanceof Musterija){
+
+        }
+        else if(korisnik instanceof  Vozac){
+
+        }
+        /*
         Scanner sc = new Scanner(System.in);
         try {
             while (true) {
@@ -69,6 +101,8 @@ class App {
         } catch (IllegalStateException | NoSuchElementException | IOException e) {
             System.out.println("Doslo je do greske! System.in je zatvoren.");
         }
+        */
+
 
 
     }

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 
+
 public class Dispecer extends Korisnik {
 
 
@@ -139,20 +140,66 @@ public class Dispecer extends Korisnik {
         System.out.println(taksiSluzba.toString());
     }
 
-    protected void prikaziVozace(List<Vozac> vozaci) {
-    }
+        public static void prikaziMeni(){
+            System.out.println("1. Prikaz podataka taksi službe");
+            System.out.println("2. Izmena podataka o taksi službi");
+            System.out.println("3. Prikaz vozača");
+            System.out.println("4. Dodavanje vozača");
+            System.out.println("5. Izmena vozača");
+            System.out.println("6. Brisanje vozača");
 
-    protected boolean dodajVozaca(Vozac vozac) {
+        }
+
+//        public static void prikaziVozace() {
+//            List<Korisnik> sviKorisnici = Dispecer.ucitajSveKorisnike();
+//            for(Korisnik korisnik : sviKorisnici){
+//                if(korisnik instanceof Vozac){
+//                    System.out.println(korisnik.getIme() + " " + korisnik.getJMBG());
+//                }
+//            }
+//        }
+//
+//
+//    public static boolean dodajVozaca(){
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Unesi JMBG");
+//        long JMBG = scanner.nextLong();
+//        System.out.println("Unesi korisnicko ime");
+//        String korisnickoIme = scanner.nextLine();
+//
+//        // unesi ostale podatke
+//        // napravi vozac objekat
+//        // i pozovi se na metodu upisiVozaca
+//
+//
+//    }
+//
+//    public static void upisiVozaca(Vozac vozac) throws FileNotFoundException {
+//        File file = new File("");
+//        try {
+//            PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
+//            writer.append("\nvozac"+vozac.getJMBG()+","+vozac.getKorisnickoIme()+","
+//                    +vozac.getLozinka()+","+vozac.getIme()+","+
+//                    vozac.getPrezime()+","+vozac.getAdresa()+","+vozac.getPol()+","+vozac.getBrojTelefona()+","+
+//                    vozac.getPlata()+","+vozac.getBrojClanskeKarte());
+//            writer.flush();
+//            writer.close();
+//        }
+//        catch (FileNotFoundException exception){
+//            System.out.println("Nepostojeći fajl");
+//        }
+//    }
+
+    protected boolean izmeniVozaca() {
         return false;
     }
 
-    protected boolean izmeniVozaca(Vozac vozac) {
+    protected boolean izbrisiVozaca() {
         return false;
     }
 
-    protected boolean izbrisiVozaca(Vozac vozac) {
-        return false;
-    }
+
+
 
     protected static void prikaziAutomobile(List<Automobil> automobili) {
     }
@@ -208,7 +255,7 @@ public class Dispecer extends Korisnik {
     protected void godisnjiIzvestajVozaca(Vozac vozac) {
     }
 
-    public void meni() {
+    public static void meni() {
         System.out.println("1.Prikazi podatke o taksi sluzbi");
         System.out.println("2.Izmeni podatke o taksi sluzbi");
         System.out.println("3.Prikazi sve automobile");

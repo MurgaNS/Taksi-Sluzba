@@ -1,5 +1,9 @@
 package Model;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Korisnik {
 
     protected long JMBG;
@@ -24,6 +28,48 @@ public abstract class Korisnik {
         this.pol = pol;
         this.brojTelefona = brojTelefona;
     }
+    public static List<Korisnik> ucitajSveKorisnike(){
+        List<Korisnik> sviKorisnici = new ArrayList<>();
+        File file = new File("src\\Data\\korisnici.csv");
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                Korisnik korisnik = null;
+                String[] lineParts = line.split(",");
+//                System.out.println(lineParts.toString());
+                    switch (lineParts[0]) {
+                        case "musterija":
+                            korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
+                            break;
+
+                        case "vozac":
+                            korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
+                            break;
+
+                        case "dispecer":
+                            korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
+                            break;
+
+                    }
+
+                sviKorisnici.add(korisnik);
+            }
+
+            bufferedReader.close();
+
+        } catch (FileNotFoundException exception) {
+            System.out.println("Fajl nije pronadjen");
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            System.out.println("Greska pri citanju datoteke");
+        } catch (Exception e) {
+            System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
+        }
+        return sviKorisnici;
+
+    }
+
 
     public long getJMBG() {
         return JMBG;
