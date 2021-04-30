@@ -103,10 +103,11 @@ class App {
                     System.out.print("Unesi opciju: ");
                     String line = sc.nextLine();
                     switch (Integer.parseInt(line)) {
-                        case 1 -> Vozac.prikaziListuVoznji(vozac);
+                        case 1 -> Vozac.prikaziListuVoznji(Vozac.ucitajListuVoznji(vozac));
+                        case 2 -> Vozac.prikazVoznjiPutemAplikacije();
                     }
                 }
-            } catch (IllegalStateException | NoSuchElementException e){
+            } catch (IllegalStateException | NoSuchElementException e) {
                 System.out.println("Doslo je do greske! System.in je zatvoren.");
             }
         }

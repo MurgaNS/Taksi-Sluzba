@@ -50,7 +50,8 @@ public class Vozac extends Korisnik {
         }
     }
 
-    public void prikazVoznjiPutemAplikacije(List<Voznja> listaVoznji) {
+    public static void prikazVoznjiPutemAplikacije() {
+        List<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
 //        todo prihvatanje/odbijanje voznje
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine() == "putem aplikacije") {
@@ -162,7 +163,7 @@ public class Vozac extends Korisnik {
                     Date date = (Date) formatter.parse(tmp[1]);
                     Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7]);
                     listaVoznji.add(voznja);
-                }else{
+                } else {
                     System.out.println("Ne postoje voznje za ovog korisnika.");
                 }
             }
@@ -171,9 +172,9 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
-    public static void prikaziListuVoznji(Vozac vozac){
-        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
-        for(Voznja voznja: listaVoznji){
+
+    public static void prikaziListuVoznji(List<Voznja> listaVoznji) {
+        for (Voznja voznja : listaVoznji) {
             System.out.println(voznja.toString());
         }
     }
