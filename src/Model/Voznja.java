@@ -1,6 +1,16 @@
 package Model;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.io.*;
+import java.util.ArrayList;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,8 +32,7 @@ public class Voznja {
     public Voznja() {
     }
 
-    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara,
-                  double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Vozac vozac, Musterija musterija) {
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Vozac vozac, Musterija musterija) {
         this.id = id;
         this.datumPorudzbine = datumPorudzbine;
         this.adresaPolaska = adresaPolaska;
@@ -115,6 +124,21 @@ public class Voznja {
     public void setMusterija(Musterija musterija) {
         this.musterija = musterija;
     }
+//
+//    public static ArrayList<Voznja> listaSvihVoznji() throws IOException, ParseException {
+//        ArrayList<Voznja> listaVoznji = new ArrayList<>();
+//        BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
+//        String red;
+//        while ((red = bf.readLine()) != null) {
+//            String[] tmp = red.split(",");
+//            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+//            Date date = (Date) formatter.parse(tmp[1]);
+//            Vozac vozac = Vozac.pronadjiPoJMBG(Long.parseLong(tmp[8]));
+//            Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], vozac, null);
+//            listaVoznji.add(voznja);
+//        }
+//        return listaVoznji;
+//    }
 
     @Override
     public String toString() {

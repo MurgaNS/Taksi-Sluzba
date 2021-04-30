@@ -1,15 +1,12 @@
 package Model;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.spi.CalendarNameProvider;
 
 public class Vozac extends Korisnik {
 
@@ -37,6 +34,9 @@ public class Vozac extends Korisnik {
 
     public String korisnikUString(){
         return "vozac,"+super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
+    }
+
+    public static void prikaziMeni() {
     }
 
     public double getPlata() {
@@ -71,10 +71,19 @@ public class Vozac extends Korisnik {
         this.automobil = automobil;
     }
 
-    protected void prikazIstorijeSpostvenihVoznji() {
+    protected void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
+        for (Voznja voznja : vozac.getListaVoznji()) {
+            System.out.println(voznja.toString());
+        }
     }
 
-    protected void prikazVoznjiPutemAplikacije() {
+    protected void prikazVoznjiPutemAplikacije(ArrayList<Voznja> listaVoznji) {
+//        todo prihvatanje/odbijanje voznje
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getNacinPorudzbine() == "putem aplikacije") {
+                System.out.println(voznja.toString());
+            }
+        }
     }
 
     protected void prikazVoznjiPutemTelefona() {
@@ -99,10 +108,10 @@ public class Vozac extends Korisnik {
     protected void aukcija(int minutaDoDolaska) {
     }
 
-    protected static Vozac pronadjiPoJMBG(String JMBG) {
+    public static Vozac pronadjiPoJMBG(Long JMBG) {
         List<Vozac> vozaci = ucitajSveVozace();
         for (Vozac vozac : vozaci) {
-            if (String.valueOf(vozac.getJMBG()).equals(JMBG)) {
+            if (vozac.getJMBG() == JMBG) {
                 return vozac;
             }
         }
@@ -168,19 +177,18 @@ public class Vozac extends Korisnik {
         return vozaci;
     }
 
-    protected static List<Voznja> ucitajListuVoznji(Vozac vozac) {
-        List<Voznja> listaVoznji = null;
+    public static ArrayList<Voznja> ucitajListuVoznji(Vozac vozac) {
+        ArrayList<Voznja> listaVoznji = null;
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
-                if (tmp[8].equals(vozac.getJMBG())) {
+                if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
                     Date date = (Date) formatter.parse(tmp[1]);
                     Musterija musterija = new Musterija();
-                    vozac = null;
-                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], vozac, musterija);
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], null, musterija);
                     listaVoznji.add(voznja);
                 }
             }

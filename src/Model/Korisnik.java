@@ -169,4 +169,14 @@ public abstract class Korisnik {
     public void setBrojTelefona(String brojTelefona) {
         this.brojTelefona = brojTelefona;
     }
+
+    public static Korisnik pronadjiPoJMBG(String JMBG) {
+        List<Korisnik> listaKorisnika = Korisnik.ucitajSveKorisnike();
+        for (Korisnik korisnik : listaKorisnika) {
+            if (korisnik.getJMBG() == Long.valueOf(JMBG)) {
+                return korisnik;
+            }
+        }
+        return null;
+    }
 }

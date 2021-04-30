@@ -79,9 +79,35 @@ class App {
                 System.out.println("Doslo je do greske! System.in je zatvoren.");
             }
         } else if (korisnik instanceof Musterija) {
-
+            Scanner sc = new Scanner(System.in);
+            try {
+                while (true) {
+                    Musterija.prikaziMeni();
+                    System.out.print("Unesi opciju: ");
+                    String line = sc.nextLine();
+                    switch (Integer.parseInt(line)) {
+                        case 1 -> Musterija.narucivanjePutemTelefona();
+                        case 2 -> Musterija.narucivanjePutemAplikacije();
+                    }
+                }
+            } catch (IllegalStateException | NoSuchElementException e) {
+                System.out.println("Doslo je do greske! System.in je zatvoren.");
+            }
         } else if (korisnik instanceof Vozac) {
-
+            Vozac vozac = Vozac.pronadjiPoJMBG(korisnik.getJMBG());
+            Scanner sc = new Scanner(System.in);
+            try {
+                while (true) {
+                    Vozac.prikaziMeni();
+                    System.out.print("Unesi opciju: ");
+                    String line = sc.nextLine();
+                    switch (Integer.parseInt(line)) {
+                        case 1 -> Vozac.ucitajListuVoznji(vozac);
+                    }
+                }
+            } catch (IllegalStateException | NoSuchElementException e){
+                System.out.println("Doslo je do greske! System.in je zatvoren.");
+            }
         }
     }
 }

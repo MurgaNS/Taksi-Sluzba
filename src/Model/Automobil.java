@@ -2,7 +2,6 @@ package Model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Automobil {
 
@@ -99,7 +98,12 @@ public class Automobil {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/automobili.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
-                Automobil automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5], Long.parseLong(tmp[6]));
+                Automobil automobil = null;
+                try {
+                    automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5], Long.parseLong(tmp[6]));
+                } catch (NumberFormatException e) {
+                    automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5]);
+                }
                 automobili.add(automobil);
             }
         } catch (IOException e) {
@@ -121,7 +125,7 @@ public class Automobil {
 
     protected static void sacuvajAutomobilUFajl(Automobil automobil) throws IOException {
         File file = new File("src/Data/automobili.csv");
-        FileWriter fileWriter = new FileWriter(file, false);
+        FileWriter fileWriter = new FileWriter(file, true);
         fileWriter.write(automobil.stringToSave());
         fileWriter.close();
     }
@@ -140,6 +144,6 @@ public class Automobil {
     }
 
     public String stringToSave() {
-        return brTaksiVozila + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + vozac;
+        return brTaksiVozila + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + vozac + '\n';
     }
 }

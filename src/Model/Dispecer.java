@@ -345,7 +345,7 @@ public class Dispecer extends Korisnik {
         System.out.println("Proizvodjac: ");
         String proizvodjac = sc.nextLine();
         System.out.println("Godina proizvodnje: ");
-        int godinaProizvodnje = sc.nextInt();
+        int godinaProizvodnje = Integer.valueOf(sc.nextLine());
         System.out.println("Registarska oznaka: ");
         String regOznaka = sc.nextLine();
         System.out.println("Vrsta: ");
@@ -353,16 +353,12 @@ public class Dispecer extends Korisnik {
         Automobil automobil = new Automobil(brTaksiVozila, model, proizvodjac, godinaProizvodnje, regOznaka, vrsta);
         System.out.println("Da li zelite da dodate vozaca ovom automobilu? [Y/N]");
         if (sc.nextLine().equals("Y")) {
-            if (dodajAutomobiluVozaca(automobil)) {
-                System.out.println("Uspesno ste dodali vozaca");
-            } else {
-                System.out.println("Doslo je do greske. Vozac sa tim JMBG ne postoji.");
-            }
+            dodajAutomobiluVozaca(automobil);
         }
         Automobil.sacuvajAutomobilUFajl(automobil);
     }
 
-    private static boolean dodajAutomobiluVozaca(Automobil automobil) {
+    private static void dodajAutomobiluVozaca(Automobil automobil) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Vozac> vozaci = Vozac.vozaciBezAutomobila();
         if (vozaci != null) {
@@ -374,12 +370,13 @@ public class Dispecer extends Korisnik {
             System.out.println("Izaberite JMBG vozaca kojem dodeljujete automobil: ");
             String JMBG = sc.nextLine();
             Vozac vozac = null;
-            if ((vozac = Vozac.pronadjiPoJMBG(JMBG)) != null) {
+            if ((vozac = Vozac.pronadjiPoJMBG(Long.parseLong(JMBG))) != null) {
                 automobil.setVozac(vozac.getJMBG());
-                return true;
+                System.out.println("Uspesno ste dodali vozaca");
             }
+        } else {
+            automobil.setVozac(Long.valueOf(0));
+            System.out.println("Vozac ne postoji.");
         }
-        automobil.setVozac(Long.valueOf(0));
-        return false;
     }
 }
