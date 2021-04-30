@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Automobil {
 
-    protected String brTaksiVozila;
-    protected String model;
-    protected String proizvodjac;
-    protected int godProizvodnje;
-    protected String brRegistarskeOznake;
-    protected String vrsta;
-    protected Long vozac;
+    private String brTaksiVozila;
+    private String model;
+    private String proizvodjac;
+    private int godProizvodnje;
+    private String brRegistarskeOznake;
+    private String vrsta;
+    private Long vozac;
 
     public Automobil() {
     }
@@ -123,7 +123,7 @@ public class Automobil {
         return null;
     }
 
-    protected static void sacuvajAutomobilUFajl(Automobil automobil) throws IOException {
+    public static void sacuvajAutomobilUFajl(Automobil automobil) throws IOException {
         File file = new File("src/Data/automobili.csv");
         FileWriter fileWriter = new FileWriter(file, true);
         fileWriter.write(automobil.stringToSave());

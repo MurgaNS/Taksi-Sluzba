@@ -7,9 +7,9 @@ import java.util.*;
 public class Dispecer extends Korisnik {
 
 
-    protected double plata;
-    protected String brojTelefonskeLinije;
-    protected String odeljenjeRada;
+    private double plata;
+    private String brojTelefonskeLinije;
+    private String odeljenjeRada;
 
     public Dispecer() {
     }
@@ -111,35 +111,35 @@ public class Dispecer extends Korisnik {
         izmeniCenuVoznjePoKilometru(taksiSluzba);
     }
 
-    protected static void izmeniCenuVoznjePoKilometru(TaksiSluzba taksiSluzba) {
+    private static void izmeniCenuVoznjePoKilometru(TaksiSluzba taksiSluzba) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Cena voznje po kilometru:");
         double cenaVoznjePoKilometru = sc.nextDouble();
         taksiSluzba.setCenaPoKilometru(cenaVoznjePoKilometru);
     }
 
-    protected static void izmeniCenuStartaVoznje(TaksiSluzba taksiSluzba) {
+    private static void izmeniCenuStartaVoznje(TaksiSluzba taksiSluzba) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Cena starta voznje:");
         double cenaStartaVoznje = sc.nextDouble();
         taksiSluzba.setCenaStarta(cenaStartaVoznje);
     }
 
-    protected static void izmeniAdresu(TaksiSluzba taksiSluzba) {
+    private static void izmeniAdresu(TaksiSluzba taksiSluzba) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Adresa:");
         String adresa = sc.nextLine();
         taksiSluzba.setAdresa(adresa);
     }
 
-    protected static void izmeniNaziv(TaksiSluzba taksiSluzba) {
+    private static void izmeniNaziv(TaksiSluzba taksiSluzba) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Naziv:");
         String naziv = sc.nextLine();
         taksiSluzba.setNaziv(naziv);
     }
 
-    protected static void izmeniPIB(TaksiSluzba taksiSluzba) {
+    private static void izmeniPIB(TaksiSluzba taksiSluzba) {
         Scanner sc = new Scanner(System.in);
         System.out.println("PIB: ");
         long PIB = sc.nextInt();
@@ -345,7 +345,7 @@ public class Dispecer extends Korisnik {
         System.out.println("Proizvodjac: ");
         String proizvodjac = sc.nextLine();
         System.out.println("Godina proizvodnje: ");
-        int godinaProizvodnje = Integer.valueOf(sc.nextLine());
+        int godinaProizvodnje = Integer.parseInt(sc.nextLine());
         System.out.println("Registarska oznaka: ");
         String regOznaka = sc.nextLine();
         System.out.println("Vrsta: ");
@@ -361,7 +361,7 @@ public class Dispecer extends Korisnik {
     private static void dodajAutomobiluVozaca(Automobil automobil) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Vozac> vozaci = Vozac.vozaciBezAutomobila();
-        if (vozaci != null) {
+        if (!vozaci.isEmpty()) {
             for (Vozac vozac : vozaci) {
                 if (vozac.getAutomobil() == null) {
                     System.out.println(vozac.toString());
@@ -369,13 +369,13 @@ public class Dispecer extends Korisnik {
             }
             System.out.println("Izaberite JMBG vozaca kojem dodeljujete automobil: ");
             String JMBG = sc.nextLine();
-            Vozac vozac = null;
+            Vozac vozac;
             if ((vozac = Vozac.pronadjiPoJMBG(Long.parseLong(JMBG))) != null) {
                 automobil.setVozac(vozac.getJMBG());
                 System.out.println("Uspesno ste dodali vozaca");
             }
         } else {
-            automobil.setVozac(Long.valueOf(0));
+            automobil.setVozac(null);
             System.out.println("Vozac ne postoji.");
         }
     }
