@@ -46,6 +46,10 @@ public class Dispecer extends Korisnik {
         this.odeljenjeRada = odeljenjeRada;
     }
 
+    public String korisnikUString(){
+        return "dispecer,"+super.korisnikUString() + "," + plata + "," + brojTelefonskeLinije + "," + odeljenjeRada;
+    }
+
     protected static TaksiSluzba preuzmiPodatkeOTaksiSluzbi() {
         TaksiSluzba taksiSluzba = null;
         try {
@@ -154,55 +158,174 @@ public class Dispecer extends Korisnik {
         System.out.println("8. Prikaz automobila");
         System.out.println("9. Izmena automobila");
         System.out.println("10. Brisanje automobila");
+        System.out.println("11. Prikaz voznji");
+
 
     }
 
-//    public static void prikaziVozace() {
-//        List<Korisnik> sviKorisnici = Dispecer.ucitajSveKorisnike();
-//        for (Korisnik korisnik : sviKorisnici) {
-//            if (korisnik instanceof Vozac) {
-//                System.out.println(korisnik.getIme() + " " + korisnik.getJMBG());
-//            }
-//        }
-//    }
-//
-//
-//    public static boolean dodajVozaca(){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Unesi JMBG");
-//        long JMBG = scanner.nextLong();
-//        System.out.println("Unesi korisnicko ime");
-//        String korisnickoIme = scanner.nextLine();
-//
-//        // unesi ostale podatke
-//        // napravi vozac objekat
-//        // i pozovi se na metodu upisiVozaca
-//
-//
-//    }
-//
-//    public static void upisiVozaca(Vozac vozac) throws FileNotFoundException {
-//        File file = new File("");
-//        try {
-//            PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
-//            writer.append("\nvozac"+vozac.getJMBG()+","+vozac.getKorisnickoIme()+","
-//                    +vozac.getLozinka()+","+vozac.getIme()+","+
-//                    vozac.getPrezime()+","+vozac.getAdresa()+","+vozac.getPol()+","+vozac.getBrojTelefona()+","+
-//                    vozac.getPlata()+","+vozac.getBrojClanskeKarte());
-//            writer.flush();
-//            writer.close();
-//        }
-//        catch (FileNotFoundException exception){
-//            System.out.println("Nepostojeći fajl");
-//        }
-//    }
-
-    protected boolean izmeniVozaca() {
-        return false;
+    public static void prikaziVozace() {
+        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
+        for (Korisnik korisnik : sviKorisnici) {
+            if (korisnik instanceof Vozac) {
+                System.out.println("JMBG:" + korisnik.getJMBG() + " " + "Korisnicko ime:" + korisnik.getKorisnickoIme() + " " +
+                        "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " "  + "Prezime:" +
+                        korisnik.getPrezime()+ " " + "Adresa: " + korisnik.getAdresa()+ " " + "Pol:" + korisnik.getPol() + " " +
+                        "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
+                        "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
+            }
+        }
     }
 
-    protected boolean izbrisiVozaca() {
-        return false;
+
+    public static void dodajVozaca(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Unesi JMBG");
+        long JMBG = scanner.nextLong();
+        System.out.println("Unesi korisnicko ime");
+        String korisnickoIme = scanner.next();
+        System.out.println("Unesi lozinku");
+        String lozinka = scanner.next();
+        System.out.println("Unesi ime: ");
+        String ime = scanner.next();
+        System.out.println("Unesi prezime:");
+        String prezime = scanner.next();
+        System.out.println("Unesi adresu");
+        String adresa = scanner.next();
+        System.out.println("Unesi pol");
+        String pol = scanner.next();
+        System.out.println("Broj telefona");
+        String brojTelefona = scanner.next();
+        System.out.println("Unesi platu");
+        double plata = scanner.nextDouble();
+        System.out.println("Unesi broj članske karte");
+        int brojClanskeKarte = scanner.nextInt();
+
+        Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, plata, brojClanskeKarte);
+        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+        korisnici.add(vozac);
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno upisan vozač");
+    }
+
+
+    public static void izmeniVozaca() {
+        System.out.println("Unesi JMBG vozaca kojeg zelite da izmenite");
+        Scanner scanner = new Scanner(System.in);
+        long JMBG = scanner.nextLong();
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        Vozac vozac = null;
+        for(Korisnik korisnik : korisnici){
+            if(korisnik.getJMBG() == JMBG){
+                vozac = (Vozac) korisnik;
+            }
+        }
+        if(vozac == null){
+            return;
+        }
+        System.out.println("1. Izmena korisnickog imena" +
+                "\n2. Izmena sifre" +
+                "\n3. Izmena imena" +
+                "\n4. Izmena prezimena" +
+                "\n5. Izmena adrese" +
+                "\n6. Izmena pola" +
+                "\n7. Izmena broja telefona" +
+                "\n8. Izmena plate" +
+                "\n9. Izmena clanske karte");
+        System.out.println("Odaberi opciju");
+        int opcija = scanner.nextInt();
+        switch (opcija) {
+            case 1:
+                System.out.println("Unesi korisnicko ime: ");
+                String korisnickoIme = scanner.next();
+                vozac.setKorisnickoIme(korisnickoIme);
+                break;
+            case 2:
+                System.out.println("Unesi lozinku: ");
+                String lozinka = scanner.next();
+                vozac.setLozinka(lozinka);
+                break;
+            case 3:
+                System.out.println("Unesi ime: ");
+                String ime = scanner.next();
+                vozac.setIme(ime);
+                break;
+            case 4:
+                System.out.println("Unesi prezime: ");
+                String prezime = scanner.next();
+                vozac.setPrezime(prezime);
+                break;
+            case 5:
+                System.out.println("Unesite adresu: ");
+                String adresa = scanner.next();
+                vozac.setAdresa(adresa);
+                break;
+            case 6:
+                System.out.println("Unesite pol: ");
+                String pol = scanner.next();
+                vozac.setPol(pol);
+                break;
+
+            case 7:
+                System.out.println("Unesite broj telefona: ");
+                String brojTelefona = scanner.nextLine();
+                vozac.setBrojTelefona(brojTelefona);
+                break;
+
+            case 8:
+                System.out.println("Unesite platu: ");
+                Double plata = scanner.nextDouble();
+                vozac.setPlata(plata);
+                break;
+
+            case 9:
+                System.out.println("Unesite broj clanske karte");
+                int brojClanskeKarte = scanner.nextInt();
+                vozac.setBrojClanskeKarte(brojClanskeKarte);
+                break;
+
+        }
+
+
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno upisan korisnik");
+        }
+
+
+    public static void upisiVozaca(Vozac vozac) {
+        File file = new File("src\\Data\\korisnici.csv");
+        try {
+            PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
+            writer.append("\nvozac,"+vozac.getJMBG()+","+vozac.getKorisnickoIme()+","
+                    +vozac.getLozinka()+","+vozac.getIme()+","+
+                    vozac.getPrezime()+","+vozac.getAdresa()+","+vozac.getPol()+","+vozac.getBrojTelefona()+","+
+                    vozac.getPlata()+","+vozac.getBrojClanskeKarte());
+            writer.flush();
+            writer.close();
+        }
+        catch (FileNotFoundException exception){
+            System.out.println("Nepostojeći fajl");
+        }
+    }
+
+
+    public static void izbrisiVozaca() {
+        System.out.println("Unesi JMBG vozaca kojeg zelite da obrisete");
+        Scanner scanner = new Scanner(System.in);
+        long JMBG = scanner.nextLong();
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        Vozac vozac = null;
+        for(Korisnik korisnik : korisnici){
+            if(korisnik.getJMBG() == JMBG){
+                vozac = (Vozac) korisnik;
+            }
+        }
+        if(vozac == null){
+            return;
+        }
+        korisnici.remove(vozac);
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno ste obrisali vozača!");
+
     }
 
 

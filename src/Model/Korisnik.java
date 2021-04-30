@@ -28,6 +28,15 @@ public abstract class Korisnik {
         this.pol = pol;
         this.brojTelefona = brojTelefona;
     }
+    public static Korisnik nadjiKorisnikaPrekoJMBG(long JMBG){
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        for(Korisnik korisnik : korisnici){
+            if(korisnik.getJMBG() == JMBG){
+                return korisnik;
+            }
+        }
+        return null;
+    }
     public static List<Korisnik> ucitajSveKorisnike(){
         List<Korisnik> sviKorisnici = new ArrayList<>();
         File file = new File("src\\Data\\korisnici.csv");
@@ -52,7 +61,6 @@ public abstract class Korisnik {
                             break;
 
                     }
-
                 sviKorisnici.add(korisnik);
             }
 
@@ -68,6 +76,21 @@ public abstract class Korisnik {
         }
         return sviKorisnici;
 
+    }
+    
+    public static void upisiSveKorisnike(List<Korisnik> korisnici){
+        File file = new File("src\\Data\\korisnici.csv");
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for(Korisnik korisnik : korisnici) {
+                writer.write(korisnik.korisnikUString()+"\n");
+            }
+            writer.flush();
+            writer.close();
+        }
+        catch (FileNotFoundException exception){
+            System.out.println("Nepostojeći fajl");
+        }
     }
 
 
@@ -101,6 +124,18 @@ public abstract class Korisnik {
 
     public void setIme(String ime) {
         this.ime = ime;
+    }
+
+
+    public String korisnikUString() {
+        return JMBG +
+                "," + korisnickoIme +
+                "," + lozinka +
+                "," + ime +
+                "," + prezime +
+                "," + adresa +
+                "," + pol +
+                "," + brojTelefona;
     }
 
     public String getPrezime() {

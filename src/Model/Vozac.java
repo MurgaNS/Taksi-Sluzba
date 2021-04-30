@@ -35,6 +35,10 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
     }
 
+    public String korisnikUString(){
+        return "vozac,"+super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
+    }
+
     public double getPlata() {
         return plata;
     }

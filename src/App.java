@@ -1,7 +1,4 @@
-import Model.Dispecer;
-import Model.Korisnik;
-import Model.Musterija;
-import Model.Vozac;
+import Model.*;
 
 import java.io.*;
 import java.util.NoSuchElementException;
@@ -67,9 +64,13 @@ class App {
 
                         case 1 -> Dispecer.prikazPodatakaOTaksiSluzbi();
                         case 2 -> Dispecer.izmenaPodatakaTaksiSluzbe();
-//                        case 3 -> Dispecer.prikaziVozace(); #todo
+                        case 3 -> Dispecer.prikaziVozace();
+                        case 4 -> Dispecer.dodajVozaca();
+                        case 5 -> Dispecer.izmeniVozaca();
+                        case 6 -> Dispecer.izbrisiVozaca();
                         case 7 -> Dispecer.dodajAutomobil();
                         case 8 -> Dispecer.prikaziAutomobile();
+                        case 11 -> Voznja.prikaziSveVoznje();
 
 
                     }
