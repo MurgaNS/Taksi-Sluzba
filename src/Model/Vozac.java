@@ -37,6 +37,11 @@ public class Vozac extends Korisnik {
     }
 
     public static void prikaziMeni() {
+        System.out.println("1. Prikaz istorije sopstvenih voznji");
+        System.out.println("2. Prikaz svih voznji zakazanih putem aplikacije");
+        System.out.println("3. Prikaz dodeljenih voznji");
+        System.out.println("4. Statistika");
+        System.out.println("5. Aukcija");
     }
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {

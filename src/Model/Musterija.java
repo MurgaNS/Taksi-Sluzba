@@ -31,7 +31,9 @@ public class Musterija extends Korisnik {
     }
 
     public static void prikaziMeni() {
-//        todo dodati meni
+        System.out.println("1. Narucivanje voznje putem telefona");
+        System.out.println("2. Narucivanje voznje putem aplikacije");
+        System.out.println("3. Prikaz svih voznji");
     }
 
     public ArrayList<Voznja> ucitajListuVoznji(Musterija musterija) throws IOException, ParseException {
