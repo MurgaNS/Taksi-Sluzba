@@ -21,33 +21,8 @@ public class Dispecer extends Korisnik {
         this.odeljenjeRada = odeljenjeRada;
     }
 
-
-    public double getPlata() {
-        return plata;
-    }
-
-    public void setPlata(double plata) {
-        this.plata = plata;
-    }
-
-    public String getBrojTelefonskeLinije() {
-        return brojTelefonskeLinije;
-    }
-
-    public void setBrojTelefonskeLinije(String brojTelefonskeLinije) {
-        this.brojTelefonskeLinije = brojTelefonskeLinije;
-    }
-
-    public String getOdeljenjeRada() {
-        return odeljenjeRada;
-    }
-
-    public void setOdeljenjeRada(String odeljenjeRada) {
-        this.odeljenjeRada = odeljenjeRada;
-    }
-
-    public String korisnikUString(){
-        return "dispecer,"+super.korisnikUString() + "," + plata + "," + brojTelefonskeLinije + "," + odeljenjeRada;
+    public String korisnikUString() {
+        return "dispecer," + super.korisnikUString() + "," + plata + "," + brojTelefonskeLinije + "," + odeljenjeRada;
     }
 
     public static TaksiSluzba preuzmiPodatkeOTaksiSluzbi() {
@@ -168,8 +143,8 @@ public class Dispecer extends Korisnik {
         for (Korisnik korisnik : sviKorisnici) {
             if (korisnik instanceof Vozac) {
                 System.out.println("JMBG:" + korisnik.getJMBG() + " " + "Korisnicko ime:" + korisnik.getKorisnickoIme() + " " +
-                        "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " "  + "Prezime:" +
-                        korisnik.getPrezime()+ " " + "Adresa: " + korisnik.getAdresa()+ " " + "Pol:" + korisnik.getPol() + " " +
+                        "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " " + "Prezime:" +
+                        korisnik.getPrezime() + " " + "Adresa: " + korisnik.getAdresa() + " " + "Pol:" + korisnik.getPol() + " " +
                         "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
                         "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
             }
@@ -177,7 +152,7 @@ public class Dispecer extends Korisnik {
     }
 
 
-    public static void dodajVozaca(){
+    public static void dodajVozaca() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Unesi JMBG");
         long JMBG = scanner.nextLong();
@@ -214,12 +189,12 @@ public class Dispecer extends Korisnik {
         long JMBG = scanner.nextLong();
         List<Korisnik> korisnici = ucitajSveKorisnike();
         Vozac vozac = null;
-        for(Korisnik korisnik : korisnici){
-            if(korisnik.getJMBG() == JMBG){
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
                 vozac = (Vozac) korisnik;
             }
         }
-        if(vozac == null){
+        if (vozac == null) {
             return;
         }
         System.out.println("1. Izmena korisnickog imena" +
@@ -288,21 +263,20 @@ public class Dispecer extends Korisnik {
 
         Korisnik.upisiSveKorisnike(korisnici);
         System.out.println("Uspešno upisan korisnik");
-        }
+    }
 
 
     public static void upisiVozaca(Vozac vozac) {
         File file = new File("src\\Data\\korisnici.csv");
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
-            writer.append("\nvozac,"+vozac.getJMBG()+","+vozac.getKorisnickoIme()+","
-                    +vozac.getLozinka()+","+vozac.getIme()+","+
-                    vozac.getPrezime()+","+vozac.getAdresa()+","+vozac.getPol()+","+vozac.getBrojTelefona()+","+
-                    vozac.getPlata()+","+vozac.getBrojClanskeKarte());
+            writer.append("\nvozac," + vozac.getJMBG() + "," + vozac.getKorisnickoIme() + ","
+                    + vozac.getLozinka() + "," + vozac.getIme() + "," +
+                    vozac.getPrezime() + "," + vozac.getAdresa() + "," + vozac.getPol() + "," + vozac.getBrojTelefona() + "," +
+                    vozac.getPlata() + "," + vozac.getBrojClanskeKarte());
             writer.flush();
             writer.close();
-        }
-        catch (FileNotFoundException exception){
+        } catch (FileNotFoundException exception) {
             System.out.println("Nepostojeći fajl");
         }
     }
@@ -314,12 +288,12 @@ public class Dispecer extends Korisnik {
         long JMBG = scanner.nextLong();
         List<Korisnik> korisnici = ucitajSveKorisnike();
         Vozac vozac = null;
-        for(Korisnik korisnik : korisnici){
-            if(korisnik.getJMBG() == JMBG){
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
                 vozac = (Vozac) korisnik;
             }
         }
-        if(vozac == null){
+        if (vozac == null) {
             return;
         }
         korisnici.remove(vozac);
@@ -379,4 +353,30 @@ public class Dispecer extends Korisnik {
             System.out.println("Vozac ne postoji.");
         }
     }
+
+
+    public double getPlata() {
+        return plata;
+    }
+
+    public void setPlata(double plata) {
+        this.plata = plata;
+    }
+
+    public String getBrojTelefonskeLinije() {
+        return brojTelefonskeLinije;
+    }
+
+    public void setBrojTelefonskeLinije(String brojTelefonskeLinije) {
+        this.brojTelefonskeLinije = brojTelefonskeLinije;
+    }
+
+    public String getOdeljenjeRada() {
+        return odeljenjeRada;
+    }
+
+    public void setOdeljenjeRada(String odeljenjeRada) {
+        this.odeljenjeRada = odeljenjeRada;
+    }
+
 }

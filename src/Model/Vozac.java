@@ -32,43 +32,11 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
     }
 
-    public String korisnikUString(){
-        return "vozac,"+super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
+    public String korisnikUString() {
+        return "vozac," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
     }
 
     public static void prikaziMeni() {
-    }
-
-    public double getPlata() {
-        return plata;
-    }
-
-    public void setPlata(double plata) {
-        this.plata = plata;
-    }
-
-    public int getBrojClanskeKarte() {
-        return brojClanskeKarte;
-    }
-
-    public void setBrojClanskeKarte(int brojClanskeKarte) {
-        this.brojClanskeKarte = brojClanskeKarte;
-    }
-
-    public List<Voznja> getListaVoznji() {
-        return listaVoznji;
-    }
-
-    public void setListaVoznji(List<Voznja> listaVoznji) {
-        this.listaVoznji = listaVoznji;
-    }
-
-    public Automobil getAutomobil() {
-        return automobil;
-    }
-
-    public void setAutomobil(Automobil automobil) {
-        this.automobil = automobil;
     }
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
@@ -215,4 +183,38 @@ public class Vozac extends Korisnik {
                 ", automobil=" + automobil +
                 '}';
     }
+
+
+    public double getPlata() {
+        return plata;
+    }
+
+    public void setPlata(double plata) {
+        this.plata = plata;
+    }
+
+    public int getBrojClanskeKarte() {
+        return brojClanskeKarte;
+    }
+
+    public void setBrojClanskeKarte(int brojClanskeKarte) {
+        this.brojClanskeKarte = brojClanskeKarte;
+    }
+
+    public List<Voznja> getListaVoznji() {
+        return listaVoznji;
+    }
+
+    public void setListaVoznji(List<Voznja> listaVoznji) {
+        this.listaVoznji = listaVoznji;
+    }
+
+    public Automobil getAutomobil() {
+        return automobil;
+    }
+
+    public void setAutomobil(Automobil automobil) {
+        this.automobil = automobil;
+    }
+
 }

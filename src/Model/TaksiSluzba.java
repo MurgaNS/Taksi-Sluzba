@@ -19,6 +19,22 @@ public class TaksiSluzba {
         this.cenaPoKilometru = cenaPoKilometru;
     }
 
+    @Override
+    public String toString() {
+        return "TaksiSluzba{" +
+                "PIB=" + PIB +
+                ", naziv='" + naziv + '\'' +
+                ", adresa='" + adresa + '\'' +
+                ", cenaStarta=" + cenaStarta +
+                ", cenaPoKilometru=" + cenaPoKilometru +
+                '}';
+    }
+
+    public String stringToSave() {
+        return PIB + "," + naziv + "," + adresa + "," + cenaStarta + "," + cenaPoKilometru;
+    }
+
+
     public long getPIB() {
         return PIB;
     }
@@ -59,18 +75,4 @@ public class TaksiSluzba {
         this.cenaPoKilometru = cenaPoKilometru;
     }
 
-    @Override
-    public String toString() {
-        return "TaksiSluzba{" +
-                "PIB=" + PIB +
-                ", naziv='" + naziv + '\'' +
-                ", adresa='" + adresa + '\'' +
-                ", cenaStarta=" + cenaStarta +
-                ", cenaPoKilometru=" + cenaPoKilometru +
-                '}';
-    }
-
-    public String stringToSave() {
-        return PIB + "," + naziv + "," + adresa + "," + cenaStarta + "," + cenaPoKilometru;
-    }
 }
