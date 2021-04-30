@@ -2,6 +2,7 @@ package Model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Automobil {
 
@@ -91,8 +92,8 @@ public class Automobil {
         return vozac;
     }
 
-    protected static ArrayList<Automobil> ucitajSveAutomobile() {
-        ArrayList<Automobil> automobili = new ArrayList<>();
+    protected static List<Automobil> ucitajSveAutomobile() {
+        List<Automobil> automobili = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/automobili.csv"));
@@ -113,7 +114,7 @@ public class Automobil {
     }
 
     public static Automobil pronadjiPoBrojuTaksiVozila(String brTaksiVozila) {
-        ArrayList<Automobil> automobili = ucitajSveAutomobile();
+        List<Automobil> automobili = ucitajSveAutomobile();
         for (Automobil automobil :
                 automobili) {
             if (automobil.getBrTaksiVozila().equals(brTaksiVozila)) {

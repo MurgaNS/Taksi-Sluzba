@@ -330,7 +330,7 @@ public class Dispecer extends Korisnik {
 
 
     public static void prikaziAutomobile() throws IOException {
-        ArrayList<Automobil> automobili = Automobil.ucitajSveAutomobile();
+        List<Automobil> automobili = Automobil.ucitajSveAutomobile();
         for (Automobil automobil : automobili) {
             System.out.println(automobil.toString());
         }

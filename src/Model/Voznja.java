@@ -124,21 +124,6 @@ public class Voznja {
     public void setMusterija(Musterija musterija) {
         this.musterija = musterija;
     }
-//
-//    public static ArrayList<Voznja> listaSvihVoznji() throws IOException, ParseException {
-//        ArrayList<Voznja> listaVoznji = new ArrayList<>();
-//        BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
-//        String red;
-//        while ((red = bf.readLine()) != null) {
-//            String[] tmp = red.split(",");
-//            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
-//            Date date = (Date) formatter.parse(tmp[1]);
-//            Vozac vozac = Vozac.pronadjiPoJMBG(Long.parseLong(tmp[8]));
-//            Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], vozac, null);
-//            listaVoznji.add(voznja);
-//        }
-//        return listaVoznji;
-//    }
 
     @Override
     public String toString() {
@@ -180,12 +165,9 @@ public class Voznja {
                         lineParts[6], lineParts[7],
                         (Vozac) Korisnik.nadjiKorisnikaPrekoJMBG(jmbgVozaca),
                         (Musterija) Korisnik.nadjiKorisnikaPrekoJMBG(jmbgMusterije));
-
                 sveVoznje.add(voznja);
             }
-
             bufferedReader.close();
-
         } catch (FileNotFoundException exception) {
             System.out.println("Fajl nije pronadjen");
         } catch (IOException exception) {
@@ -195,6 +177,5 @@ public class Voznja {
             System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
         }
         return sveVoznje;
-
     }
 }

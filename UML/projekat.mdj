@@ -49,7 +49,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -48,
-											"top": 64,
+											"top": 48,
 											"height": 13
 										},
 										{
@@ -60,7 +60,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 61,
-											"top": 287,
+											"top": 279,
 											"width": 152.48974609375,
 											"height": 13,
 											"text": "TaksiSluzba"
@@ -74,7 +74,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -48,
-											"top": 64,
+											"top": 48,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -88,14 +88,14 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -48,
-											"top": 64,
+											"top": 48,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 56,
-									"top": 280,
+									"top": 272,
 									"width": 162.48974609375,
 									"height": 25,
 									"stereotypeLabel": {
@@ -132,10 +132,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 61,
-											"top": 310,
+											"top": 302,
 											"width": 152.48974609375,
 											"height": 13,
-											"text": "#PIB: long {id}",
+											"text": "-PIB: long {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -149,10 +149,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 61,
-											"top": 325,
+											"top": 317,
 											"width": 152.48974609375,
 											"height": 13,
-											"text": "#naziv: String",
+											"text": "-naziv: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -166,10 +166,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 61,
-											"top": 340,
+											"top": 332,
 											"width": 152.48974609375,
 											"height": 13,
-											"text": "#adresa: String",
+											"text": "-adresa: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -183,10 +183,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 61,
-											"top": 355,
+											"top": 347,
 											"width": 152.48974609375,
 											"height": 13,
-											"text": "#cenaStarta: double",
+											"text": "-cenaStarta: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -200,16 +200,16 @@
 											},
 											"font": "Arial;13;0",
 											"left": 61,
-											"top": 370,
+											"top": 362,
 											"width": 152.48974609375,
 											"height": 13,
-											"text": "#cenaPoKilometru: double",
+											"text": "-cenaPoKilometru: double",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 56,
-									"top": 305,
+									"top": 297,
 									"width": 162.48974609375,
 									"height": 83
 								},
@@ -224,7 +224,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 56,
-									"top": 388,
+									"top": 380,
 									"width": 162.48974609375,
 									"height": 10
 								},
@@ -240,7 +240,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -24,
-									"top": 32,
+									"top": 24,
 									"width": 10,
 									"height": 10
 								},
@@ -256,7 +256,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -24,
-									"top": 32,
+									"top": 24,
 									"width": 10,
 									"height": 10
 								}
@@ -264,7 +264,7 @@
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 56,
-							"top": 280,
+							"top": 272,
 							"width": 162.48974609375,
 							"height": 118,
 							"nameCompartment": {
@@ -712,7 +712,7 @@
 											"top": 422,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#plata: double",
+											"text": "-plata: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -729,7 +729,7 @@
 											"top": 437,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#brojTelefonskeLinije: String",
+											"text": "-brojTelefonskeLinije: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -746,7 +746,7 @@
 											"top": 452,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#odeljenjeRada: String",
+											"text": "-odeljenjeRada: String",
 											"horizontalAlignment": 0
 										}
 									],
@@ -780,7 +780,7 @@
 											"top": 475,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#prikazPodatakaOTaksiSluzbi(): void",
+											"text": "+prikazPodatakaOTaksiSluzbi(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -797,7 +797,7 @@
 											"top": 490,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#izmenaPodatakaTaksiSluzbe(taksiSluzba: TaksiSluzba): boolean",
+											"text": "+izmenaPodatakaTaksiSluzbe(taksiSluzba: TaksiSluzba): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -814,7 +814,7 @@
 											"top": 505,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#prikaziVozace(vozaci: List<Vozac>): void",
+											"text": "+prikaziVozace(vozaci: List<Vozac>): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -831,7 +831,7 @@
 											"top": 520,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#dodajVozaca(vozac: Vozac): boolean",
+											"text": "+dodajVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -848,7 +848,7 @@
 											"top": 535,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#izmeniVozaca(vozac: Vozac): boolean",
+											"text": "+izmeniVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -865,7 +865,7 @@
 											"top": 550,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#izbrisiVozaca(vozac: Vozac): boolean",
+											"text": "+izbrisiVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -882,7 +882,7 @@
 											"top": 565,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#prikaziAutomobile(automobili: List<Automobil>): void",
+											"text": "+prikaziAutomobile(automobili: List<Automobil>): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -899,7 +899,7 @@
 											"top": 580,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#dodajAutomobil(automobil: Automobil): boolean",
+											"text": "+dodajAutomobil(automobil: Automobil): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -916,7 +916,7 @@
 											"top": 595,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#izmeniAutomobil(automobil: Automobil): boolean",
+											"text": "+izmeniAutomobil(automobil: Automobil): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -933,7 +933,7 @@
 											"top": 610,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#izbrisiAutomobil(automobil: Automobil): boolean",
+											"text": "+izbrisiAutomobil(automobil: Automobil): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -950,7 +950,7 @@
 											"top": 625,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#prikazSvihVoznji(listaVoznji: List<Voznja>): void",
+											"text": "+prikazSvihVoznji(listaVoznji: List<Voznja>): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -967,7 +967,7 @@
 											"top": 640,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#dodeljivanjeVoznje(vozac: Vozac, voznja: Voznja): boolean",
+											"text": "+dodeljivanjeVoznje(vozac: Vozac, voznja: Voznja): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -984,7 +984,7 @@
 											"top": 655,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#pretragaVozaca(kriterijum: String): List<Vozac>",
+											"text": "+pretragaVozaca(kriterijum: String): List<Vozac>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1001,7 +1001,7 @@
 											"top": 670,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#pretragaAutomobila(kriterijum: String): List<Automobil>",
+											"text": "+pretragaAutomobila(kriterijum: String): List<Automobil>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1018,7 +1018,7 @@
 											"top": 685,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#dnevniIzvestaj(): void",
+											"text": "+dnevniIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1035,7 +1035,7 @@
 											"top": 700,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#nedeljniIzvestaj(): void",
+											"text": "+nedeljniIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1052,7 +1052,7 @@
 											"top": 715,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#mesecniIzvestaj(): void",
+											"text": "+mesecniIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1069,7 +1069,7 @@
 											"top": 730,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#godisnjiIzvestaj(): void",
+											"text": "+godisnjiIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1086,7 +1086,7 @@
 											"top": 745,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#dnevniIzvestajVozaca(vozac: Vozac): void",
+											"text": "+dnevniIzvestajVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1103,7 +1103,7 @@
 											"top": 760,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#nedeljniIzvestajVozaca(vozac: Vozac): void",
+											"text": "+nedeljniIzvestajVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1120,7 +1120,7 @@
 											"top": 775,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#mesecniIzvestajVozaca(vozac: Vozac): void",
+											"text": "+mesecniIzvestajVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1137,7 +1137,7 @@
 											"top": 790,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "#godisnjiIzvestajVozaca(vozac: Vozac): void",
+											"text": "+godisnjiIzvestajVozaca(vozac: Vozac): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1317,7 +1317,7 @@
 											"top": 542,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#plata: double",
+											"text": "-plata: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1334,7 +1334,7 @@
 											"top": 557,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#brojClanskeKarte: int",
+											"text": "-brojClanskeKarte: int",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1368,7 +1368,7 @@
 											"top": 580,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#prikazIstorijeSpostvenihVoznji(): void",
+											"text": "+prikazIstorijeSpostvenihVoznji(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1385,7 +1385,7 @@
 											"top": 595,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#prikazVoznjiPutemAplikacije(): void",
+											"text": "+prikazVoznjiPutemAplikacije(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1402,7 +1402,7 @@
 											"top": 610,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#prikazVoznjiPutemTelefona(): void",
+											"text": "+prikazVoznjiPutemTelefona(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1419,7 +1419,7 @@
 											"top": 625,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#krajVoznje(predjeniKilometri: double, trajanjeVoznje: double): boolean",
+											"text": "+krajVoznje(predjeniKilometri: double, trajanjeVoznje: double): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1436,7 +1436,7 @@
 											"top": 640,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#dnevniIzvestaj(): void",
+											"text": "+dnevniIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1453,7 +1453,7 @@
 											"top": 655,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#nedeljniIzvestaj(): void",
+											"text": "+nedeljniIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1470,7 +1470,7 @@
 											"top": 670,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#mesecniIzvestaj(): void",
+											"text": "+mesecniIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1487,7 +1487,7 @@
 											"top": 685,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#godisnjiIzvestaj(): void",
+											"text": "+godisnjiIzvestaj(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1504,7 +1504,7 @@
 											"top": 700,
 											"width": 407.95751953125,
 											"height": 13,
-											"text": "#aukcija(minutaDoDolaska: int): void",
+											"text": "+aukcija(minutaDoDolaska: int): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1597,7 +1597,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -112,
+											"left": -144,
 											"top": 688,
 											"height": 13
 										},
@@ -1608,9 +1608,9 @@
 												"$ref": "AAAAAAF4xtO0cDX7llg="
 											},
 											"font": "Arial;13;1",
-											"left": 429,
+											"left": 413,
 											"top": 831,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
 											"text": "Automobil"
 										},
@@ -1622,7 +1622,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -112,
+											"left": -144,
 											"top": 688,
 											"width": 73.67724609375,
 											"height": 13,
@@ -1636,16 +1636,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -112,
+											"left": -144,
 											"top": 688,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 424,
+									"left": 408,
 									"top": 824,
-									"width": 183.41162109375,
+									"width": 280.60693359375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4xtO0cDX8+iE="
@@ -1680,11 +1680,11 @@
 												"$ref": "AAAAAAF4xtRmCzY/adM="
 											},
 											"font": "Arial;13;0",
-											"left": 429,
+											"left": 413,
 											"top": 854,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
-											"text": "#brTaksiVozila: String {id}",
+											"text": "-brTaksiVozila: String {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1697,11 +1697,11 @@
 												"$ref": "AAAAAAF4xtPXozYjo0o="
 											},
 											"font": "Arial;13;0",
-											"left": 429,
+											"left": 413,
 											"top": 869,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
-											"text": "#model: String",
+											"text": "-model: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1714,11 +1714,11 @@
 												"$ref": "AAAAAAF4xtQMMDYq32M="
 											},
 											"font": "Arial;13;0",
-											"left": 429,
+											"left": 413,
 											"top": 884,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
-											"text": "#proizvodjac: String",
+											"text": "-proizvodjac: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1731,11 +1731,11 @@
 												"$ref": "AAAAAAF4xtQeODYxW2E="
 											},
 											"font": "Arial;13;0",
-											"left": 429,
+											"left": 413,
 											"top": 899,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
-											"text": "#godProizvodnje: int",
+											"text": "-godProizvodnje: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1748,11 +1748,11 @@
 												"$ref": "AAAAAAF4xtRGTDY4Vt4="
 											},
 											"font": "Arial;13;0",
-											"left": 429,
+											"left": 413,
 											"top": 914,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
-											"text": "#brRegistarskeOznake: String",
+											"text": "-brRegistarskeOznake: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1765,18 +1765,18 @@
 												"$ref": "AAAAAAF4xtTZozZHMfQ="
 											},
 											"font": "Arial;13;0",
-											"left": 429,
+											"left": 413,
 											"top": 929,
-											"width": 173.41162109375,
+											"width": 270.60693359375,
 											"height": 13,
-											"text": "#vrsta: String",
+											"text": "-vrsta: String",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 424,
+									"left": 408,
 									"top": 849,
-									"width": 183.41162109375,
+									"width": 280.60693359375,
 									"height": 98
 								},
 								{
@@ -1788,11 +1788,47 @@
 									"model": {
 										"$ref": "AAAAAAF4xtO0cDX4d0E="
 									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF5I3rm9Ei/io8=",
+											"_parent": {
+												"$ref": "AAAAAAF4xtO0cDYB8Sw="
+											},
+											"model": {
+												"$ref": "AAAAAAF5I3rm2Ei8xH8="
+											},
+											"font": "Arial;13;0",
+											"left": 413,
+											"top": 952,
+											"width": 270.60693359375,
+											"height": 13,
+											"text": "+ucitajSveAutomobile(): List<Automobil>",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF5I30nwEsfnoA=",
+											"_parent": {
+												"$ref": "AAAAAAF4xtO0cDYB8Sw="
+											},
+											"model": {
+												"$ref": "AAAAAAF5I30ns0scfzI="
+											},
+											"font": "Arial;13;0",
+											"left": 413,
+											"top": 967,
+											"width": 270.60693359375,
+											"height": 13,
+											"text": "+sacuvajAutomobil(automobil: Automobil): void",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
-									"left": 424,
+									"left": 408,
 									"top": 947,
-									"width": 183.41162109375,
-									"height": 10
+									"width": 280.60693359375,
+									"height": 38
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -1805,7 +1841,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -272,
+									"left": -288,
 									"top": 344,
 									"width": 10,
 									"height": 10
@@ -1821,7 +1857,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -272,
+									"left": -288,
 									"top": 344,
 									"width": 10,
 									"height": 10
@@ -1829,10 +1865,10 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 424,
+							"left": 408,
 							"top": 824,
-							"width": 183.41162109375,
-							"height": 148,
+							"width": 280.60693359375,
+							"height": 161,
 							"nameCompartment": {
 								"$ref": "AAAAAAF4xtO0cDX7llg="
 							},
@@ -1890,7 +1926,7 @@
 											"font": "Arial;13;1",
 											"left": 77,
 											"top": 503,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
 											"text": "Voznja"
 										},
@@ -1925,7 +1961,7 @@
 									"font": "Arial;13;0",
 									"left": 72,
 									"top": 496,
-									"width": 211.626953125,
+									"width": 211.98876953125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4xtauVzZi4AI="
@@ -1962,9 +1998,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 526,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#id: long {id}",
+											"text": "-id: long {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1979,9 +2015,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 541,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#datumPorudzbine: Timestamp",
+											"text": "-datumPorudzbine: Timestamp",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1996,9 +2032,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 556,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#adresaPolaska: String",
+											"text": "-adresaPolaska: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2013,9 +2049,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 571,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#adresaDestinacije: String",
+											"text": "-adresaDestinacije: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2030,9 +2066,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 586,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#brojPredjenihKilometara: double",
+											"text": "-brojPredjenihKilometara: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2047,9 +2083,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 601,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#trajanjeVoznjeUMinutama: double",
+											"text": "-trajanjeVoznjeUMinutama: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2064,9 +2100,9 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 616,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#statusVoznje: String",
+											"text": "-statusVoznje: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2081,16 +2117,16 @@
 											"font": "Arial;13;0",
 											"left": 77,
 											"top": 631,
-											"width": 201.626953125,
+											"width": 201.98876953125,
 											"height": 13,
-											"text": "#nacinPorudzbine: String",
+											"text": "-nacinPorudzbine: String",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 72,
 									"top": 521,
-									"width": 211.626953125,
+									"width": 211.98876953125,
 									"height": 128
 								},
 								{
@@ -2105,7 +2141,7 @@
 									"font": "Arial;13;0",
 									"left": 72,
 									"top": 649,
-									"width": 211.626953125,
+									"width": 211.98876953125,
 									"height": 10
 								},
 								{
@@ -2145,7 +2181,7 @@
 							"containerChangeable": true,
 							"left": 72,
 							"top": 496,
-							"width": 211.626953125,
+							"width": 211.98876953125,
 							"height": 193,
 							"nameCompartment": {
 								"$ref": "AAAAAAF4xtauVzZhCY8="
@@ -2372,8 +2408,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 556,
-									"top": 772,
+									"left": 575,
+									"top": 773,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2393,8 +2429,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 543,
-									"top": 765,
+									"left": 561,
+									"top": 768,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -2414,8 +2450,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 583,
-									"top": 785,
+									"left": 604,
+									"top": 784,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -2434,7 +2470,7 @@
 										"$ref": "AAAAAAF4xvMlDUgYnBc="
 									},
 									"font": "Arial;13;0",
-									"left": 519,
+									"left": 540,
 									"top": 787,
 									"width": 63.958984375,
 									"height": 13,
@@ -2444,7 +2480,7 @@
 										"$ref": "AAAAAAF4xvMlDUgbVs8="
 									},
 									"edgePosition": 2,
-									"text": "#automobil"
+									"text": "-automobil"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2457,8 +2493,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 539,
-									"top": 779,
+									"left": 559,
+									"top": 780,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -2477,8 +2513,8 @@
 										"$ref": "AAAAAAF4xvMlDUgYnBc="
 									},
 									"font": "Arial;13;0",
-									"left": 569,
-									"top": 803,
+									"left": 593,
+									"top": 800,
 									"width": 7.22998046875,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -2499,8 +2535,8 @@
 										"$ref": "AAAAAAF4xvMlDUgZEsw="
 									},
 									"font": "Arial;13;0",
-									"left": 544,
-									"top": 758,
+									"left": 561,
+									"top": 761,
 									"width": 41.5517578125,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -2508,7 +2544,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF4xvMlDUgbVs8="
 									},
-									"text": "#vozac"
+									"text": "-vozac"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2521,8 +2557,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 551,
-									"top": 754,
+									"left": 567,
+									"top": 759,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -2540,7 +2576,7 @@
 										"$ref": "AAAAAAF4xvMlDUgZEsw="
 									},
 									"font": "Arial;13;0",
-									"left": 587,
+									"left": 605,
 									"top": 766,
 									"width": 7.22998046875,
 									"height": 13,
@@ -2588,7 +2624,7 @@
 								"$ref": "AAAAAAF4xtO0cDX66Bo="
 							},
 							"lineStyle": 1,
-							"points": "552:823;589:748",
+							"points": "577:823;604:748",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF4xvMlDUgcNLw="
@@ -2717,7 +2753,7 @@
 										"$ref": "AAAAAAF4xwLODjg0vwo="
 									},
 									"edgePosition": 2,
-									"text": "#vozac"
+									"text": "-vozac"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2781,7 +2817,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF4xwLODjg0vwo="
 									},
-									"text": "#listaVoznji"
+									"text": "-listaVoznji"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -3027,7 +3063,7 @@
 											"top": 368,
 											"width": 294.09326171875,
 											"height": 13,
-											"text": "#narucivanjePutemTelefona(): boolean",
+											"text": "+narucivanjePutemTelefona(): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3044,7 +3080,7 @@
 											"top": 383,
 											"width": 294.09326171875,
 											"height": 13,
-											"text": "#narucivanjePutemAplikacije(): boolean",
+											"text": "+narucivanjePutemAplikacije(): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3061,7 +3097,7 @@
 											"top": 398,
 											"width": 294.09326171875,
 											"height": 13,
-											"text": "#prikazIstorijeVoznji(): void",
+											"text": "+prikazIstorijeVoznji(): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3313,7 +3349,7 @@
 										"$ref": "AAAAAAF416Dt60IPz8E="
 									},
 									"edgePosition": 2,
-									"text": "#musterija"
+									"text": "-musterija"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -3377,7 +3413,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF416Dt60IPz8E="
 									},
-									"text": "#listaVoznji"
+									"text": "-listaVoznji"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -3510,7 +3546,7 @@
 								"$ref": "AAAAAAF4xsYj6TTEeTA="
 							},
 							"name": "PIB",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "long",
 							"isID": true
 						},
@@ -3521,7 +3557,7 @@
 								"$ref": "AAAAAAF4xsYj6TTEeTA="
 							},
 							"name": "naziv",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -3531,7 +3567,7 @@
 								"$ref": "AAAAAAF4xsYj6TTEeTA="
 							},
 							"name": "adresa",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -3541,7 +3577,7 @@
 								"$ref": "AAAAAAF4xsYj6TTEeTA="
 							},
 							"name": "cenaStarta",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "double"
 						},
 						{
@@ -3551,7 +3587,7 @@
 								"$ref": "AAAAAAF4xsYj6TTEeTA="
 							},
 							"name": "cenaPoKilometru",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "double"
 						}
 					]
@@ -3678,7 +3714,7 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "plata",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "double"
 						},
 						{
@@ -3688,7 +3724,7 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "brojTelefonskeLinije",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -3698,7 +3734,7 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "odeljenjeRada",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						}
 					],
@@ -3710,7 +3746,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "prikazPodatakaOTaksiSluzbi",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3730,7 +3765,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "izmenaPodatakaTaksiSluzbe",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3738,7 +3772,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xw2Hzj/gstY="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								},
 								{
@@ -3761,7 +3795,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "prikaziVozace",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3790,7 +3823,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "dodajVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3809,7 +3841,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xw7WYUHu3Oc="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -3821,7 +3853,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "izmeniVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3840,7 +3871,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xw8J00JlJRY="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -3852,7 +3883,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "izbrisiVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3871,7 +3901,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xw979ELcFaI="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -3883,7 +3913,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "prikaziAutomobile",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3912,7 +3941,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "dodajAutomobil",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3931,7 +3959,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxDGn0P1eJE="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -3943,7 +3971,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "izmeniAutomobil",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3962,7 +3989,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxEd7ER/pzY="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -3974,7 +4001,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "izbrisiAutomobil",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3993,7 +4019,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxFRvkT2E/k="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -4005,7 +4031,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "prikazSvihVoznji",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4034,7 +4059,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "dodeljivanjeVoznje",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4064,7 +4088,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxRo4Uafgf0="
 									},
-									"type": "boolean",
+									"type": "void",
 									"direction": "return"
 								}
 							]
@@ -4076,7 +4100,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "pretragaVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4105,7 +4128,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "pretragaAutomobila",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4134,7 +4156,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "dnevniIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4154,7 +4175,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "nedeljniIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4174,7 +4194,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "mesecniIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4194,7 +4213,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "godisnjiIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4214,7 +4232,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "dnevniIzvestajVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4245,7 +4262,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "nedeljniIzvestajVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4276,7 +4292,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "mesecniIzvestajVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4307,7 +4322,6 @@
 								"$ref": "AAAAAAF4xssFLzV3XBY="
 							},
 							"name": "godisnjiIzvestajVozaca",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4370,7 +4384,7 @@
 								"reference": {
 									"$ref": "AAAAAAF4xtJ/uDW54Ig="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"multiplicity": "1"
 							},
 							"end2": {
@@ -4383,7 +4397,7 @@
 								"reference": {
 									"$ref": "AAAAAAF4xtauVTZeyXk="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"aggregation": "composite",
 								"multiplicity": "0..*"
 							}
@@ -4397,7 +4411,7 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "plata",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "double"
 						},
 						{
@@ -4407,7 +4421,7 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "brojClanskeKarte",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "int"
 						}
 					],
@@ -4419,7 +4433,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "prikazIstorijeSpostvenihVoznji",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4439,7 +4452,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "prikazVoznjiPutemAplikacije",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4459,7 +4471,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "prikazVoznjiPutemTelefona",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4479,7 +4490,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "krajVoznje",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4517,7 +4527,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "dnevniIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4537,7 +4546,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "nedeljniIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4557,7 +4565,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "mesecniIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4577,7 +4584,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "godisnjiIzvestaj",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4597,7 +4603,6 @@
 								"$ref": "AAAAAAF4xtJ/uDW54Ig="
 							},
 							"name": "aukcija",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4645,7 +4650,7 @@
 								"reference": {
 									"$ref": "AAAAAAF4xtO0cDX4d0E="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"multiplicity": "1"
 							},
 							"end2": {
@@ -4658,7 +4663,7 @@
 								"reference": {
 									"$ref": "AAAAAAF4xtJ/uDW54Ig="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"multiplicity": "1"
 							}
 						}
@@ -4671,7 +4676,7 @@
 								"$ref": "AAAAAAF4xtO0cDX4d0E="
 							},
 							"name": "brTaksiVozila",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String",
 							"isID": true
 						},
@@ -4682,7 +4687,7 @@
 								"$ref": "AAAAAAF4xtO0cDX4d0E="
 							},
 							"name": "model",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -4692,7 +4697,7 @@
 								"$ref": "AAAAAAF4xtO0cDX4d0E="
 							},
 							"name": "proizvodjac",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -4702,7 +4707,7 @@
 								"$ref": "AAAAAAF4xtO0cDX4d0E="
 							},
 							"name": "godProizvodnje",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "int"
 						},
 						{
@@ -4712,7 +4717,7 @@
 								"$ref": "AAAAAAF4xtO0cDX4d0E="
 							},
 							"name": "brRegistarskeOznake",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -4722,8 +4727,59 @@
 								"$ref": "AAAAAAF4xtO0cDX4d0E="
 							},
 							"name": "vrsta",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
+						}
+					],
+					"operations": [
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF5I3rm2Ei8xH8=",
+							"_parent": {
+								"$ref": "AAAAAAF4xtO0cDX4d0E="
+							},
+							"name": "ucitajSveAutomobile",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF5I3s6N0kLxac=",
+									"_parent": {
+										"$ref": "AAAAAAF5I3rm2Ei8xH8="
+									},
+									"type": "List<Automobil>",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF5I30ns0scfzI=",
+							"_parent": {
+								"$ref": "AAAAAAF4xtO0cDX4d0E="
+							},
+							"name": "sacuvajAutomobil",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF5I317xUtQMhc=",
+									"_parent": {
+										"$ref": "AAAAAAF5I30ns0scfzI="
+									},
+									"name": "automobil",
+									"type": {
+										"$ref": "AAAAAAF4xtO0cDX4d0E="
+									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF5I317xUtRJlc=",
+									"_parent": {
+										"$ref": "AAAAAAF5I30ns0scfzI="
+									},
+									"type": "void",
+									"direction": "return"
+								}
+							]
 						}
 					]
 				},
@@ -4742,7 +4798,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "id",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "long",
 							"isID": true
 						},
@@ -4753,7 +4809,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "datumPorudzbine",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "Timestamp"
 						},
 						{
@@ -4763,7 +4819,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "adresaPolaska",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -4773,7 +4829,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "adresaDestinacije",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -4783,7 +4839,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "brojPredjenihKilometara",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "double"
 						},
 						{
@@ -4793,7 +4849,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "trajanjeVoznjeUMinutama",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "double"
 						},
 						{
@@ -4803,7 +4859,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "statusVoznje",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -4813,7 +4869,7 @@
 								"$ref": "AAAAAAF4xtauVTZeyXk="
 							},
 							"name": "nacinPorudzbine",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "String"
 						}
 					]
@@ -4855,7 +4911,7 @@
 								"reference": {
 									"$ref": "AAAAAAF415hBDTkx0Yw="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"multiplicity": "1"
 							},
 							"end2": {
@@ -4868,7 +4924,7 @@
 								"reference": {
 									"$ref": "AAAAAAF4xtauVTZeyXk="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"navigable": false,
 								"aggregation": "composite",
 								"multiplicity": "0..*"
@@ -4883,7 +4939,6 @@
 								"$ref": "AAAAAAF415hBDTkx0Yw="
 							},
 							"name": "narucivanjePutemTelefona",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4903,7 +4958,6 @@
 								"$ref": "AAAAAAF415hBDTkx0Yw="
 							},
 							"name": "narucivanjePutemAplikacije",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4923,7 +4977,6 @@
 								"$ref": "AAAAAAF415hBDTkx0Yw="
 							},
 							"name": "prikazIstorijeVoznji",
-							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",

@@ -23,11 +23,11 @@ public class Musterija extends Korisnik {
         return false;
     }
 
-    protected void prikazIstorijeVoznji() {
-
+    public static void prikazIstorijeVoznji() {
     }
 
     public static void prikaziMeni() {
+//        todo dodati meni
     }
 
     public ArrayList<Voznja> ucitajListuVoznji(Musterija musterija) throws IOException, ParseException {

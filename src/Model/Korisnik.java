@@ -173,7 +173,7 @@ public abstract class Korisnik {
     public static Korisnik pronadjiPoJMBG(String JMBG) {
         List<Korisnik> listaKorisnika = Korisnik.ucitajSveKorisnike();
         for (Korisnik korisnik : listaKorisnika) {
-            if (korisnik.getJMBG() == Long.valueOf(JMBG)) {
+            if (korisnik.getJMBG() == Long.parseLong(JMBG)) {
                 return korisnik;
             }
         }
