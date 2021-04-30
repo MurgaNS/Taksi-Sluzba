@@ -94,7 +94,8 @@ class App {
                 System.out.println("Doslo je do greske! System.in je zatvoren.");
             }
         } else if (korisnik instanceof Vozac) {
-            Vozac vozac = Vozac.pronadjiPoJMBG(korisnik.getJMBG());
+            Vozac vozac = (Vozac) korisnik;
+            System.out.println(vozac.toString());
             Scanner sc = new Scanner(System.in);
             try {
                 while (true) {
@@ -102,7 +103,7 @@ class App {
                     System.out.print("Unesi opciju: ");
                     String line = sc.nextLine();
                     switch (Integer.parseInt(line)) {
-                        case 1 -> Vozac.ucitajListuVoznji(vozac);
+                        case 1 -> Vozac.prikaziListuVoznji(vozac);
                     }
                 }
             } catch (IllegalStateException | NoSuchElementException e){

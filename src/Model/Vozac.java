@@ -50,7 +50,7 @@ public class Vozac extends Korisnik {
         }
     }
 
-    public void prikazVoznjiPutemAplikacije(ArrayList<Voznja> listaVoznji) {
+    public void prikazVoznjiPutemAplikacije(List<Voznja> listaVoznji) {
 //        todo prihvatanje/odbijanje voznje
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine() == "putem aplikacije") {
@@ -150,8 +150,8 @@ public class Vozac extends Korisnik {
         return vozaci;
     }
 
-    public static ArrayList<Voznja> ucitajListuVoznji(Vozac vozac) {
-        ArrayList<Voznja> listaVoznji = null;
+    public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
+        List<Voznja> listaVoznji = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
@@ -160,15 +160,22 @@ public class Vozac extends Korisnik {
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
                     Date date = (Date) formatter.parse(tmp[1]);
-                    Musterija musterija = new Musterija();
-                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], null, musterija);
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7]);
                     listaVoznji.add(voznja);
+                }else{
+                    System.out.println("Ne postoje voznje za ovog korisnika.");
                 }
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return listaVoznji;
+    }
+    public static void prikaziListuVoznji(Vozac vozac){
+        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
+        for(Voznja voznja: listaVoznji){
+            System.out.println(voznja.toString());
+        }
     }
 
     @Override

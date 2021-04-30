@@ -44,6 +44,16 @@ public class Voznja {
         this.vozac = vozac;
         this.musterija = musterija;
     }
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine) {
+        this.id = id;
+        this.datumPorudzbine = datumPorudzbine;
+        this.adresaPolaska = adresaPolaska;
+        this.adresaDestinacije = adresaDestinacije;
+        this.brojPredjenihKilometara = brojPredjenihKilometara;
+        this.trajanjeVoznjeUMinutama = trajanjeVoznjeUMinutama;
+        this.statusVoznje = statusVoznje;
+        this.nacinPorudzbine = nacinPorudzbine;
+    }
 
 
     @Override
