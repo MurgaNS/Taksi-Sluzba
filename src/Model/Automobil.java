@@ -13,6 +13,7 @@ public class Automobil {
     private String brRegistarskeOznake;
     private String vrsta;
     private Long vozac;
+    private boolean obrisan;
 
     public Automobil() {
     }

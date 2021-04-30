@@ -14,6 +14,7 @@ public abstract class Korisnik {
     protected String adresa;
     protected String pol;
     protected String brojTelefona;
+    protected boolean obrisan;
 
     public Korisnik() {
     }
@@ -180,4 +181,11 @@ public abstract class Korisnik {
         this.ime = ime;
     }
 
+    public boolean isObrisan() {
+        return obrisan;
+    }
+
+    public void setObrisan(boolean obrisan) {
+        this.obrisan = obrisan;
+    }
 }
