@@ -18,16 +18,16 @@ import java.util.List;
 
 public class Voznja {
 
-    protected long id;
-    protected Date datumPorudzbine;
-    protected String adresaPolaska;
-    protected String adresaDestinacije;
-    protected double brojPredjenihKilometara;
-    protected double trajanjeVoznjeUMinutama;
-    protected String statusVoznje;
-    protected String nacinPorudzbine;
-    protected Vozac vozac;
-    protected Musterija musterija;
+    private long id;
+    private Date datumPorudzbine;
+    private String adresaPolaska;
+    private String adresaDestinacije;
+    private double brojPredjenihKilometara;
+    private double trajanjeVoznjeUMinutama;
+    private String statusVoznje;
+    private String nacinPorudzbine;
+    private Vozac vozac;
+    private Musterija musterija;
 
     public Voznja() {
     }

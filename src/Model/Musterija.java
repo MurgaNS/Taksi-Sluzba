@@ -2,7 +2,6 @@ package Model;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -31,7 +30,7 @@ public class Musterija extends Korisnik {
     public static void prikaziMeni() {
     }
 
-    private ArrayList<Voznja> ucitajListuVoznji(Musterija musterija) throws IOException, ParseException {
+    public ArrayList<Voznja> ucitajListuVoznji(Musterija musterija) throws IOException, ParseException {
         ArrayList<Voznja> listaVoznji = new ArrayList<Voznja>();
         BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
         String red;

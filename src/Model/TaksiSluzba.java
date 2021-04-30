@@ -2,11 +2,11 @@ package Model;
 
 public class TaksiSluzba {
 
-    protected long PIB;
-    protected String naziv;
-    protected String adresa;
-    protected double cenaStarta;
-    protected double cenaPoKilometru;
+    private long PIB;
+    private String naziv;
+    private String adresa;
+    private double cenaStarta;
+    private double cenaPoKilometru;
 
     public TaksiSluzba() {
     }

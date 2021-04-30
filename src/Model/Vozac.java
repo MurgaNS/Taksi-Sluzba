@@ -10,10 +10,10 @@ import java.util.*;
 
 public class Vozac extends Korisnik {
 
-    protected double plata;
-    protected int brojClanskeKarte;
-    protected List<Voznja> listaVoznji;
-    protected Automobil automobil;
+    private double plata;
+    private int brojClanskeKarte;
+    private List<Voznja> listaVoznji;
+    private Automobil automobil;
 
     public Vozac() {
     }
@@ -71,13 +71,13 @@ public class Vozac extends Korisnik {
         this.automobil = automobil;
     }
 
-    protected void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
+    public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
         for (Voznja voznja : vozac.getListaVoznji()) {
             System.out.println(voznja.toString());
         }
     }
 
-    protected void prikazVoznjiPutemAplikacije(ArrayList<Voznja> listaVoznji) {
+    public void prikazVoznjiPutemAplikacije(ArrayList<Voznja> listaVoznji) {
 //        todo prihvatanje/odbijanje voznje
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine() == "putem aplikacije") {
@@ -86,26 +86,26 @@ public class Vozac extends Korisnik {
         }
     }
 
-    protected void prikazVoznjiPutemTelefona() {
+    public void prikazVoznjiPutemTelefona() {
     }
 
-    protected boolean krajVoznje(double predjeniKilometri, double trajanjeVoznje) {
+    public boolean krajVoznje(double predjeniKilometri, double trajanjeVoznje) {
         return false;
     }
 
-    protected void dnevniIzvestaj() {
+    public void dnevniIzvestaj() {
     }
 
-    protected void nedeljniIzvestaj() {
+    public void nedeljniIzvestaj() {
     }
 
-    protected void mesecniIzvestaj() {
+    public void mesecniIzvestaj() {
     }
 
-    protected void godisnjiIzvestaj() {
+    public void godisnjiIzvestaj() {
     }
 
-    protected void aukcija(int minutaDoDolaska) {
+    public void aukcija(int minutaDoDolaska) {
     }
 
     public static Vozac pronadjiPoJMBG(Long JMBG) {
@@ -118,7 +118,7 @@ public class Vozac extends Korisnik {
         return null;
     }
 
-    protected static void nedeljniIzvestaj(Vozac vozac) {
+    public static void nedeljniIzvestaj(Vozac vozac) {
         List<Voznja> listaVoznji = voznjePrethodnihNedeljuDana(vozac);
         for (Voznja voznja : listaVoznji
         ) {
@@ -126,7 +126,7 @@ public class Vozac extends Korisnik {
         }
     }
 
-    protected static List<Voznja> voznjePrethodnihNedeljuDana(Vozac vozac) {
+    public static List<Voznja> voznjePrethodnihNedeljuDana(Vozac vozac) {
         List<Voznja> listaVoznji = vozac.getListaVoznji();
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -7);
@@ -149,7 +149,7 @@ public class Vozac extends Korisnik {
         return retVal;
     }
 
-    protected static ArrayList<Vozac> ucitajSveVozace() {
+    public static ArrayList<Vozac> ucitajSveVozace() {
         // TODO dodati listu voznji
         ArrayList<Vozac> vozaci = new ArrayList<>();
         String red;

@@ -50,7 +50,7 @@ public class Dispecer extends Korisnik {
         return "dispecer,"+super.korisnikUString() + "," + plata + "," + brojTelefonskeLinije + "," + odeljenjeRada;
     }
 
-    protected static TaksiSluzba preuzmiPodatkeOTaksiSluzbi() {
+    public static TaksiSluzba preuzmiPodatkeOTaksiSluzbi() {
         TaksiSluzba taksiSluzba = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/Data/taksiSluzba.csv"));
@@ -95,7 +95,7 @@ public class Dispecer extends Korisnik {
         sacuvajPodatkeUFajl(taksiSluzba);
     }
 
-    protected static void sacuvajPodatkeUFajl(TaksiSluzba taksiSluzba) throws IOException {
+    public static void sacuvajPodatkeUFajl(TaksiSluzba taksiSluzba) throws IOException {
         File file = new File("src/Data/taksiSluzba.csv");
         FileWriter fileWriter = new FileWriter(file, false);
         fileWriter.write(taksiSluzba.stringToSave());
@@ -103,7 +103,7 @@ public class Dispecer extends Korisnik {
         System.out.println("Uspesno ste izmenili podatke o taksi sluzbi.");
     }
 
-    protected static void izmeniSvePodatkeTaksiSluzbe(TaksiSluzba taksiSluzba) {
+    public static void izmeniSvePodatkeTaksiSluzbe(TaksiSluzba taksiSluzba) {
         izmeniPIB(taksiSluzba);
         izmeniNaziv(taksiSluzba);
         izmeniAdresu(taksiSluzba);
