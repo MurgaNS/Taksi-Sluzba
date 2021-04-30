@@ -148,7 +148,6 @@ public abstract class Korisnik {
         }
         return null;
     }
-
     public long getJMBG() {
         return JMBG;
     }

@@ -17,7 +17,6 @@ public class Automobil {
 
     public Automobil() {
     }
-
     public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Long vozac) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
