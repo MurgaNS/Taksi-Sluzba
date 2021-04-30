@@ -1,11 +1,12 @@
 package Model;
 
-import java.sql.Timestamp;
+
+import java.util.Date;
 
 public class Voznja {
 
     protected long id;
-    protected Timestamp datumPorudzbine;
+    protected Date datumPorudzbine;
     protected String adresaPolaska;
     protected String adresaDestinacije;
     protected double brojPredjenihKilometara;
@@ -18,7 +19,7 @@ public class Voznja {
     public Voznja() {
     }
 
-    public Voznja(long id, Timestamp datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Vozac vozac, Musterija musterija) {
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Vozac vozac, Musterija musterija) {
         this.id = id;
         this.datumPorudzbine = datumPorudzbine;
         this.adresaPolaska = adresaPolaska;
@@ -39,11 +40,11 @@ public class Voznja {
         this.id = id;
     }
 
-    public Timestamp getDatumPorudzbine() {
+    public Date getDatumPorudzbine() {
         return datumPorudzbine;
     }
 
-    public void setDatumPorudzbine(Timestamp datumPorudzbine) {
+    public void setDatumPorudzbine(Date datumPorudzbine) {
         this.datumPorudzbine = datumPorudzbine;
     }
 

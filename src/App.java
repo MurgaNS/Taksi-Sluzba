@@ -32,7 +32,6 @@ class App {
                         case "musterija":
                             korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
                             break;
-
                         case "vozac":
                             korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
                             break;
@@ -57,10 +56,7 @@ class App {
             System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
         }
 
-
-//        dispecer
-
-        if(korisnik instanceof Dispecer){
+        if (korisnik instanceof Dispecer) {
             Scanner sc = new Scanner(System.in);
             try {
                 while (true) {
@@ -72,6 +68,8 @@ class App {
                         case 1 -> Dispecer.prikazPodatakaOTaksiSluzbi();
                         case 2 -> Dispecer.izmenaPodatakaTaksiSluzbe();
 //                        case 3 -> Dispecer.prikaziVozace(); #todo
+                        case 7 -> Dispecer.dodajAutomobil();
+                        case 8 -> Dispecer.prikaziAutomobile();
 
 
                     }
@@ -79,31 +77,10 @@ class App {
             } catch (IllegalStateException | NoSuchElementException | IOException e) {
                 System.out.println("Doslo je do greske! System.in je zatvoren.");
             }
-        }
-        else if(korisnik instanceof Musterija){
+        } else if (korisnik instanceof Musterija) {
+
+        } else if (korisnik instanceof Vozac) {
 
         }
-        else if(korisnik instanceof  Vozac){
-
-        }
-        /*
-        Scanner sc = new Scanner(System.in);
-        try {
-            while (true) {
-                System.out.print("Unesi opciju: ");
-                String line = sc.nextLine();
-                switch (Integer.parseInt(line)) {
-                    case 1 -> Dispecer.prikazPodatakaOTaksiSluzbi();
-                    case 2 -> Dispecer.izmenaPodatakaTaksiSluzbe();
-//                    case 3 -> Dispecer.prikaziAutomobile();
-                }
-            }
-        } catch (IllegalStateException | NoSuchElementException | IOException e) {
-            System.out.println("Doslo je do greske! System.in je zatvoren.");
-        }
-        */
-
-
-
     }
 }

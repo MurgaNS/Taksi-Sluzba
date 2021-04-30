@@ -1,9 +1,6 @@
 package Model;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +12,12 @@ public class Automobil {
     protected int godProizvodnje;
     protected String brRegistarskeOznake;
     protected String vrsta;
-    protected Vozac vozac;
+    protected Long vozac;
 
     public Automobil() {
     }
 
-    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Vozac vozac) {
+    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Long vozac) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
         this.proizvodjac = proizvodjac;
@@ -28,6 +25,15 @@ public class Automobil {
         this.brRegistarskeOznake = brRegistarskeOznake;
         this.vrsta = vrsta;
         this.vozac = vozac;
+    }
+
+    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta) {
+        this.brTaksiVozila = brTaksiVozila;
+        this.model = model;
+        this.proizvodjac = proizvodjac;
+        this.godProizvodnje = godProizvodnje;
+        this.brRegistarskeOznake = brRegistarskeOznake;
+        this.vrsta = vrsta;
     }
 
     public String getBrTaksiVozila() {
@@ -78,31 +84,46 @@ public class Automobil {
         this.vrsta = vrsta;
     }
 
-    public Vozac getVozac() {
-        return vozac;
-    }
-
-    public void setVozac(Vozac vozac) {
+    public void setVozac(Long vozac) {
         this.vozac = vozac;
     }
 
-    protected static List<Automobil> ucitajSveAutomobile() {
-        List<Automobil> automobili = new ArrayList<>();
+    public Long getVozac() {
+        return vozac;
+    }
+
+    protected static ArrayList<Automobil> ucitajSveAutomobile() {
+        ArrayList<Automobil> automobili = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/automobili.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
-                Vozac vozac = Vozac.pronadjiPoJMBG(tmp[6]);
-                vozac.setAutomobil(null);
-                vozac.setListaVoznji(null);
-                Automobil automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5], vozac);
+                Automobil automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5], Long.parseLong(tmp[6]));
                 automobili.add(automobil);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return automobili;
+    }
+
+    public static Automobil pronadjiPoBrojuTaksiVozila(String brTaksiVozila) {
+        ArrayList<Automobil> automobili = ucitajSveAutomobile();
+        for (Automobil automobil :
+                automobili) {
+            if (automobil.getBrTaksiVozila().equals(brTaksiVozila)) {
+                return automobil;
+            }
+        }
+        return null;
+    }
+
+    protected static void sacuvajAutomobilUFajl(Automobil automobil) throws IOException {
+        File file = new File("src/Data/automobili.csv");
+        FileWriter fileWriter = new FileWriter(file, false);
+        fileWriter.write(automobil.stringToSave());
+        fileWriter.close();
     }
 
     @Override
@@ -116,5 +137,9 @@ public class Automobil {
                 ", vrsta='" + vrsta + '\'' +
                 ", vozac=" + vozac +
                 '}';
+    }
+
+    public String stringToSave() {
+        return brTaksiVozila + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + vozac;
     }
 }

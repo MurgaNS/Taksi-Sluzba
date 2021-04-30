@@ -5,19 +5,23 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.spi.CalendarNameProvider;
 
 public class Vozac extends Korisnik {
 
     protected double plata;
     protected int brojClanskeKarte;
-    protected Set<Voznja> listaVoznji;
+    protected List<Voznja> listaVoznji;
     protected Automobil automobil;
 
     public Vozac() {
     }
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte, Set<Voznja> listaVoznji, Automobil automobil) {
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Automobil automobil) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
@@ -47,11 +51,11 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
     }
 
-    public Set<Voznja> getListaVoznji() {
+    public List<Voznja> getListaVoznji() {
         return listaVoznji;
     }
 
-    public void setListaVoznji(Set<Voznja> listaVoznji) {
+    public void setListaVoznji(List<Voznja> listaVoznji) {
         this.listaVoznji = listaVoznji;
     }
 
@@ -101,17 +105,56 @@ public class Vozac extends Korisnik {
         return null;
     }
 
-    protected static List<Vozac> ucitajSveVozace() {
-        // bitno je da na prvom mestu u fajlu bude uloga
-        // TODO dodati listu voznji i automobil
-        List<Vozac> vozaci = new ArrayList<>();
+    protected static void nedeljniIzvestaj(Vozac vozac) {
+        List<Voznja> listaVoznji = voznjePrethodnihNedeljuDana(vozac);
+        for (Voznja voznja : listaVoznji
+        ) {
+            System.out.println(voznja.toString());
+        }
+    }
+
+    protected static List<Voznja> voznjePrethodnihNedeljuDana(Vozac vozac) {
+        List<Voznja> listaVoznji = vozac.getListaVoznji();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -7);
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getDatumPorudzbine().after(cal.getTime())) {
+                listaVoznji.add(voznja);
+            }
+        }
+        return listaVoznji;
+    }
+
+    public static ArrayList<Vozac> vozaciBezAutomobila() {
+        ArrayList<Vozac> vozaci = ucitajSveVozace();
+        ArrayList<Vozac> retVal = new ArrayList<>();
+        for (Vozac vozac : vozaci) {
+            if (vozac.getAutomobil() == null) {
+                retVal.add(vozac);
+            }
+        }
+        return retVal;
+    }
+
+    protected static ArrayList<Vozac> ucitajSveVozace() {
+        // TODO dodati listu voznji
+        ArrayList<Vozac> vozaci = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
                 if (tmp[0].equals("vozac")) {
-                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7], tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]));
+                    Automobil automobil = null;
+                    try {
+                        if (Automobil.pronadjiPoBrojuTaksiVozila(tmp[11]) != null) {
+                            automobil = Automobil.pronadjiPoBrojuTaksiVozila(tmp[11]);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        break;
+                    }
+                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7], tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, automobil);
+                    vozac.setListaVoznji(ucitajListuVoznji(vozac));
                     vozaci.add(vozac);
                 }
             }
@@ -119,6 +162,28 @@ public class Vozac extends Korisnik {
             e.printStackTrace();
         }
         return vozaci;
+    }
+
+    protected static List<Voznja> ucitajListuVoznji(Vozac vozac) {
+        List<Voznja> listaVoznji = null;
+        String red;
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
+            while ((red = bf.readLine()) != null) {
+                String[] tmp = red.split(",");
+                if (tmp[8].equals(vozac.getJMBG())) {
+                    DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+                    Date date = (Date) formatter.parse(tmp[1]);
+                    Musterija musterija = new Musterija();
+                    vozac = null;
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], vozac, musterija);
+                    listaVoznji.add(voznja);
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return listaVoznji;
     }
 
     @Override
