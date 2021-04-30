@@ -72,6 +72,8 @@ class App {
                         case 8 -> Dispecer.prikaziAutomobile();
                         case 11 -> Voznja.prikaziSveVoznje();
 
+                        case 13 -> Dispecer.kombinovanaPretragaVozaca();
+
 
                     }
                 }

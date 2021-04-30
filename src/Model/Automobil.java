@@ -36,6 +36,62 @@ public class Automobil {
         this.vrsta = vrsta;
     }
 
+    public String getBrTaksiVozila() {
+        return brTaksiVozila;
+    }
+
+    public void setBrTaksiVozila(String brTaksiVozila) {
+        this.brTaksiVozila = brTaksiVozila;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getProizvodjac() {
+        return proizvodjac;
+    }
+
+    public void setProizvodjac(String proizvodjac) {
+        this.proizvodjac = proizvodjac;
+    }
+
+    public int getGodProizvodnje() {
+        return godProizvodnje;
+    }
+
+    public void setGodProizvodnje(int godProizvodnje) {
+        this.godProizvodnje = godProizvodnje;
+    }
+
+    public String getBrRegistarskeOznake() {
+        return brRegistarskeOznake;
+    }
+
+    public void setBrRegistarskeOznake(String brRegistarskeOznake) {
+        this.brRegistarskeOznake = brRegistarskeOznake;
+    }
+
+    public String getVrsta() {
+        return vrsta;
+    }
+
+    public void setVrsta(String vrsta) {
+        this.vrsta = vrsta;
+    }
+
+    public void setVozac(Long vozac) {
+        this.vozac = vozac;
+    }
+
+    public Long getVozac() {
+        return vozac;
+    }
+
     protected static List<Automobil> ucitajSveAutomobile() {
         List<Automobil> automobili = new ArrayList<>();
         String red;
