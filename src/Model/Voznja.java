@@ -44,86 +44,17 @@ public class Voznja {
         this.vozac = vozac;
         this.musterija = musterija;
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine) {
         this.id = id;
-    }
-
-    public Date getDatumPorudzbine() {
-        return datumPorudzbine;
-    }
-
-    public void setDatumPorudzbine(Date datumPorudzbine) {
         this.datumPorudzbine = datumPorudzbine;
-    }
-
-    public String getAdresaPolaska() {
-        return adresaPolaska;
-    }
-
-    public void setAdresaPolaska(String adresaPolaska) {
         this.adresaPolaska = adresaPolaska;
-    }
-
-    public String getAdresaDestinacije() {
-        return adresaDestinacije;
-    }
-
-    public void setAdresaDestinacije(String adresaDestinacije) {
         this.adresaDestinacije = adresaDestinacije;
-    }
-
-    public double getBrojPredjenihKilometara() {
-        return brojPredjenihKilometara;
-    }
-
-    public void setBrojPredjenihKilometara(double brojPredjenihKilometara) {
         this.brojPredjenihKilometara = brojPredjenihKilometara;
-    }
-
-    public double getTrajanjeVoznjeUMinutama() {
-        return trajanjeVoznjeUMinutama;
-    }
-
-    public void setTrajanjeVoznjeUMinutama(double trajanjeVoznjeUMinutama) {
         this.trajanjeVoznjeUMinutama = trajanjeVoznjeUMinutama;
-    }
-
-    public String getStatusVoznje() {
-        return statusVoznje;
-    }
-
-    public void setStatusVoznje(String statusVoznje) {
         this.statusVoznje = statusVoznje;
-    }
-
-    public String getNacinPorudzbine() {
-        return nacinPorudzbine;
-    }
-
-    public void setNacinPorudzbine(String nacinPorudzbine) {
         this.nacinPorudzbine = nacinPorudzbine;
     }
 
-    public Vozac getVozac() {
-        return vozac;
-    }
-
-    public void setVozac(Vozac vozac) {
-        this.vozac = vozac;
-    }
-
-    public Musterija getMusterija() {
-        return musterija;
-    }
-
-    public void setMusterija(Musterija musterija) {
-        this.musterija = musterija;
-    }
 
     @Override
     public String toString() {
@@ -141,15 +72,15 @@ public class Voznja {
                 '}';
     }
 
-    public static void prikaziSveVoznje(){
+    public static void prikaziSveVoznje() {
         List<Voznja> voznje = ucitajSveVoznje();
-        for(Voznja voznja : voznje){
+        for (Voznja voznja : voznje) {
             System.out.println(voznja);
         }
     }
 
 
-    public static List<Voznja> ucitajSveVoznje(){
+    public static List<Voznja> ucitajSveVoznje() {
         List<Voznja> sveVoznje = new ArrayList<>();
         File file = new File("src\\Data\\voznje.csv");
         try {
@@ -165,12 +96,9 @@ public class Voznja {
                         lineParts[6], lineParts[7],
                         (Vozac) Korisnik.nadjiKorisnikaPrekoJMBG(jmbgVozaca),
                         (Musterija) Korisnik.nadjiKorisnikaPrekoJMBG(jmbgMusterije));
-
                 sveVoznje.add(voznja);
             }
-
             bufferedReader.close();
-
         } catch (FileNotFoundException exception) {
             System.out.println("Fajl nije pronadjen");
         } catch (IOException exception) {
@@ -180,7 +108,6 @@ public class Voznja {
             System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
         }
         return sveVoznje;
-
     }
 
     public long getId() {
@@ -262,4 +189,5 @@ public class Voznja {
     public void setMusterija(Musterija musterija) {
         this.musterija = musterija;
     }
+
 }

@@ -32,11 +32,16 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
     }
 
-    public String korisnikUString(){
-        return "vozac,"+super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
+    public String korisnikUString() {
+        return "vozac," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
     }
 
     public static void prikaziMeni() {
+        System.out.println("1. Prikaz istorije sopstvenih voznji");
+        System.out.println("2. Prikaz svih voznji zakazanih putem aplikacije");
+        System.out.println("3. Prikaz dodeljenih voznji");
+        System.out.println("4. Statistika");
+        System.out.println("5. Aukcija");
     }
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
@@ -45,7 +50,8 @@ public class Vozac extends Korisnik {
         }
     }
 
-    public void prikazVoznjiPutemAplikacije(ArrayList<Voznja> listaVoznji) {
+    public static void prikazVoznjiPutemAplikacije() {
+        List<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
 //        todo prihvatanje/odbijanje voznje
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine() == "putem aplikacije") {
@@ -145,8 +151,8 @@ public class Vozac extends Korisnik {
         return vozaci;
     }
 
-    public static ArrayList<Voznja> ucitajListuVoznji(Vozac vozac) {
-        ArrayList<Voznja> listaVoznji = null;
+    public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
+        List<Voznja> listaVoznji = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
@@ -155,9 +161,10 @@ public class Vozac extends Korisnik {
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
                     Date date = (Date) formatter.parse(tmp[1]);
-                    Musterija musterija = new Musterija();
-                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], null, musterija);
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7]);
                     listaVoznji.add(voznja);
+                } else {
+                    System.out.println("Ne postoje voznje za ovog korisnika.");
                 }
             }
         } catch (IOException | ParseException e) {
@@ -165,6 +172,31 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
+
+    public static void prikaziListuVoznji(List<Voznja> listaVoznji) {
+        for (Voznja voznja : listaVoznji) {
+            System.out.println(voznja.toString());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Vozac{" +
+                "JMBG=" + JMBG +
+                ", korisnickoIme='" + korisnickoIme + '\'' +
+                ", lozinka='" + lozinka + '\'' +
+                ", ime='" + ime + '\'' +
+                ", prezime='" + prezime + '\'' +
+                ", adresa='" + adresa + '\'' +
+                ", pol='" + pol + '\'' +
+                ", brojTelefona='" + brojTelefona + '\'' +
+                ", plata=" + plata +
+                ", brojClanskeKarte=" + brojClanskeKarte +
+                ", listaVoznji=" + listaVoznji +
+                ", automobil=" + automobil +
+                '}';
+    }
+
 
     public double getPlata() {
         return plata;
@@ -197,25 +229,5 @@ public class Vozac extends Korisnik {
     public void setAutomobil(Automobil automobil) {
         this.automobil = automobil;
     }
-
-
-    @Override
-    public String toString() {
-        return "Vozac{" +
-                "JMBG=" + JMBG +
-                ", korisnickoIme='" + korisnickoIme + '\'' +
-                ", lozinka='" + lozinka + '\'' +
-                ", ime='" + ime + '\'' +
-                ", prezime='" + prezime + '\'' +
-                ", adresa='" + adresa + '\'' +
-                ", pol='" + pol + '\'' +
-                ", brojTelefona='" + brojTelefona + '\'' +
-                ", plata=" + plata +
-                ", brojClanskeKarte=" + brojClanskeKarte +
-                ", listaVoznji=" + listaVoznji +
-                ", automobil=" + automobil +
-                '}';
-    }
-
 
 }

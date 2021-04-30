@@ -28,16 +28,18 @@ public abstract class Korisnik {
         this.pol = pol;
         this.brojTelefona = brojTelefona;
     }
-    public static Korisnik nadjiKorisnikaPrekoJMBG(long JMBG){
+
+    public static Korisnik nadjiKorisnikaPrekoJMBG(long JMBG) {
         List<Korisnik> korisnici = ucitajSveKorisnike();
-        for(Korisnik korisnik : korisnici){
-            if(korisnik.getJMBG() == JMBG){
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
                 return korisnik;
             }
         }
         return null;
     }
-    public static List<Korisnik> ucitajSveKorisnike(){
+
+    public static List<Korisnik> ucitajSveKorisnike() {
         List<Korisnik> sviKorisnici = new ArrayList<>();
         File file = new File("src\\Data\\korisnici.csv");
         try {
@@ -47,20 +49,20 @@ public abstract class Korisnik {
                 Korisnik korisnik = null;
                 String[] lineParts = line.split(",");
 //                System.out.println(lineParts.toString());
-                    switch (lineParts[0]) {
-                        case "musterija":
-                            korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
-                            break;
+                switch (lineParts[0]) {
+                    case "musterija":
+                        korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
+                        break;
 
-                        case "vozac":
-                            korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
-                            break;
+                    case "vozac":
+                        korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
+                        break;
 
-                        case "dispecer":
-                            korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
-                            break;
+                    case "dispecer":
+                        korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
+                        break;
 
-                    }
+                }
                 sviKorisnici.add(korisnik);
             }
 
@@ -77,21 +79,21 @@ public abstract class Korisnik {
         return sviKorisnici;
 
     }
-    
-    public static void upisiSveKorisnike(List<Korisnik> korisnici){
+
+    public static void upisiSveKorisnike(List<Korisnik> korisnici) {
         File file = new File("src\\Data\\korisnici.csv");
         try {
             PrintWriter writer = new PrintWriter(file);
-            for(Korisnik korisnik : korisnici) {
-                writer.write(korisnik.korisnikUString()+"\n");
+            for (Korisnik korisnik : korisnici) {
+                writer.write(korisnik.korisnikUString() + "\n");
             }
             writer.flush();
             writer.close();
-        }
-        catch (FileNotFoundException exception){
+        } catch (FileNotFoundException exception) {
             System.out.println("Nepostojeći fajl");
         }
     }
+
 
     public String korisnikUString() {
         return JMBG +
@@ -136,6 +138,16 @@ public abstract class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
+    public static Korisnik pronadjiPoJMBG(String JMBG) {
+        List<Korisnik> listaKorisnika = Korisnik.ucitajSveKorisnike();
+        for (Korisnik korisnik : listaKorisnika) {
+            if (korisnik.getJMBG() == Long.parseLong(JMBG)) {
+                return korisnik;
+            }
+        }
+        return null;
+    }
+
     public long getJMBG() {
         return JMBG;
     }
@@ -168,13 +180,4 @@ public abstract class Korisnik {
         this.ime = ime;
     }
 
-    public static Korisnik pronadjiPoJMBG(String JMBG) {
-        List<Korisnik> listaKorisnika = Korisnik.ucitajSveKorisnike();
-        for (Korisnik korisnik : listaKorisnika) {
-            if (korisnik.getJMBG() == Long.parseLong(JMBG)) {
-                return korisnik;
-            }
-        }
-        return null;
-    }
 }
