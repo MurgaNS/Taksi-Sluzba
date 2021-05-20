@@ -68,16 +68,16 @@ public class Automobil {
         return null;
     }
 
-    public static Automobil nadjiPoBrRegistarskeOznake(String brRegistarskeOznake){
-        List<Automobil> automobili = ucitajSveAutomobile();
-        for(Automobil automobil : automobili){
-            if(automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)){
-                return automobil;
-            }
-        }
-        return null;
-
-    }
+//    public static Automobil nadjiPoBrRegistarskeOznake(String brRegistarskeOznake){
+//        List<Automobil> automobili = ucitajSveAutomobile();
+//        for(Automobil automobil : automobili){
+//            if(automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)){
+//                return automobil;
+//            }
+//        }
+//        return null;
+//
+//    }
 
 
     public static void ispisiSvaSlobodnaVozila(){

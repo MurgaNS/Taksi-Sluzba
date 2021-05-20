@@ -1,3 +1,4 @@
+import Gui.IzmenaTaksiSluzbeProzor;
 import Model.*;
 
 import java.io.*;
@@ -62,8 +63,8 @@ class App {
                     String line = sc.nextLine();
                     switch (Integer.parseInt(line)) {
 
-                        case 1 -> Dispecer.prikazPodatakaOTaksiSluzbi();
-                        case 2 -> Dispecer.izmenaPodatakaTaksiSluzbe();
+                        case 1 -> TaksiSluzba.prikazPodatakaOTaksiSluzbi();
+                        case 2 -> TaksiSluzba.izmenaPodatakaTaksiSluzbe();
                         case 3 -> Dispecer.prikaziVozace();
                         case 4 -> Dispecer.dodajVozaca();
                         case 5 -> Dispecer.izmeniVozaca();
