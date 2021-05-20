@@ -110,6 +110,35 @@ public class Voznja {
         return sveVoznje;
     }
 
+    public static void upisiVoznje(List<Voznja> voznje){
+        File file = new File("src\\Data\\voznje.csv");
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (Voznja voznja : voznje) {
+                writer.write(voznja.stringToSave()+"\n");
+            }
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Nepostojeći fajl");
+        }
+    }
+
+    public String stringToSave(){
+        long vozacJMBG = 0;
+        long musterijaJMBG = 0;
+        if(vozac != null){
+            vozacJMBG = vozac.getJMBG();
+        }
+        if(musterija != null){
+            musterijaJMBG = musterija.getJMBG();
+        }
+        return id + "," + datumPorudzbine + "," + adresaPolaska + "," +
+                adresaDestinacije + "," + brojPredjenihKilometara + "," +
+                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
+                + vozacJMBG + "," + musterijaJMBG;
+    }
+
     public long getId() {
         return id;
     }

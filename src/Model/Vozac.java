@@ -82,7 +82,7 @@ public class Vozac extends Korisnik {
     public void aukcija(int minutaDoDolaska) {
     }
 
-    public static Vozac pronadjiPoJMBG(Long JMBG) {
+    public static Vozac pronadjiPoJMBG(long JMBG) {
         List<Vozac> vozaci = ucitajSveVozace();
         for (Vozac vozac : vozaci) {
             if (vozac.getJMBG() == JMBG) {
@@ -91,7 +91,21 @@ public class Vozac extends Korisnik {
         }
         return null;
     }
+    public static List<Vozac> nadjiVozaceZaProizvodjaca(String proizvodjac){
+        List<Vozac> vozaci = new ArrayList<>();
+        List<Automobil> automobili = Automobil.ucitajSveAutomobile();
+        for(Automobil automobil : automobili){
+            if(automobil.getVozac()!=null && automobil.getProizvodjac().equals(proizvodjac)){
+                long jmbg = automobil.getVozac();
+                Vozac vozac = pronadjiPoJMBG(jmbg);
+                if(vozac != null) {
+                    vozaci.add(vozac);
+                }
 
+            }
+        }
+        return vozaci;
+    }
     public static void nedeljniIzvestaj(Vozac vozac) {
         List<Voznja> listaVoznji = voznjePrethodnihNedeljuDana(vozac);
         for (Voznja voznja : listaVoznji

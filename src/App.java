@@ -71,7 +71,7 @@ class App {
                         case 7 -> Dispecer.dodajAutomobil();
                         case 8 -> Dispecer.prikaziAutomobile();
                         case 11 -> Voznja.prikaziSveVoznje();
-
+                        case 12 -> Dispecer.dodeljivanjeVoznjiKreiranihTelefonom();
                         case 13 -> Dispecer.kombinovanaPretragaVozaca();
 
 

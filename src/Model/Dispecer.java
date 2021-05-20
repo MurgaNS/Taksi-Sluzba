@@ -134,6 +134,7 @@ public class Dispecer extends Korisnik {
         System.out.println("9. Izmena automobila");
         System.out.println("10. Brisanje automobila");
         System.out.println("11. Prikaz voznji");
+        System.out.println("12. Prikaz voznji dodeljenih putem telefona");
         System.out.println("13. Kombinovana pretraga vozaca");
 
 
@@ -175,6 +176,20 @@ public class Dispecer extends Korisnik {
         double plata = scanner.nextDouble();
         System.out.println("Unesi broj članske karte");
         int brojClanskeKarte = scanner.nextInt();
+
+        Automobil.ispisiSvaSlobodnaVozila();
+        System.out.println("Odaberi vozilo(unesi broj registarske oznake): ");
+
+        String brRegistarskeOznake = scanner.next();
+
+        List<Automobil> automobili = Automobil.ucitajSveAutomobile();
+        for(Automobil automobil : automobili){
+            if(automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)){
+                automobil.setVozac(JMBG);
+                break;
+            }
+        }
+        Automobil.upisiSveAutomobileUFajl(automobili);
 
         Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, plata, brojClanskeKarte);
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
@@ -313,21 +328,18 @@ public class Dispecer extends Korisnik {
         System.out.println("Max platu");
         double maxPlata = scanner.nextDouble();
 
-        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
+        System.out.println("Unesi proizvodjac automobila : ");
+        String proizvodjac = scanner.next();
 
-        for(Korisnik korisnik : sviKorisnici){
-            if(korisnik instanceof Vozac){
-                if(korisnik.getIme().equalsIgnoreCase(ime) && korisnik.getPrezime().equalsIgnoreCase(prezime)
-                        && ((Vozac) korisnik).getPlata() >= minPlata && ((Vozac) korisnik).getPlata() <= maxPlata){
-                    System.out.println(korisnik);
-                }else {
-                    System.out.println("Uneli ste informacije za vozaca koji ne postoji!");
+        List<Vozac> sviKorisnici = Vozac.nadjiVozaceZaProizvodjaca(proizvodjac);
+
+        for(Vozac vozac : sviKorisnici){
+                if(vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
+                        && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata){
+                    System.out.println(vozac);
                 }
-            }
         }
-
     }
-
 
     public static void prikaziAutomobile() throws IOException {
         List<Automobil> automobili = Automobil.ucitajSveAutomobile();
@@ -378,6 +390,47 @@ public class Dispecer extends Korisnik {
             automobil.setVozac(null);
             System.out.println("Vozac ne postoji.");
         }
+    }
+
+    // 2.2.5
+    public static void dodeljivanjeVoznjiKreiranihTelefonom(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        for(Voznja voznja : voznje){
+            if(voznja.getNacinPorudzbine().equals("TELEFONOM")) {
+                System.out.println(voznja);
+            }
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Unesi id vožnje");
+        long idVoznje = scanner.nextLong();
+
+        Voznja voznja = null;
+        for(Voznja voznja2 : voznje){
+            if(voznja2.getId() == idVoznje) {
+                voznja = voznja2;
+            }
+        }
+
+        System.out.println("Unesi jmbg vozača: ");
+        long jmbg = scanner.nextLong();
+        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+
+        Vozac vozac = null;
+        for(Korisnik korisnik : korisnici){
+            if(korisnik.getJMBG() == jmbg){
+                vozac = (Vozac) korisnik;
+            }
+        }
+        System.out.println(vozac);
+
+        voznja.setVozac(vozac);
+        voznja.setStatusVoznje("DODELJENA");
+        Voznja.upisiVoznje(voznje);
+
+        System.out.println("Uspešno dodeljena vožnja");
+
     }
 
 

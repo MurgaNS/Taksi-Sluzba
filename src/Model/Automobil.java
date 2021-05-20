@@ -68,11 +68,46 @@ public class Automobil {
         return null;
     }
 
+    public static Automobil nadjiPoBrRegistarskeOznake(String brRegistarskeOznake){
+        List<Automobil> automobili = ucitajSveAutomobile();
+        for(Automobil automobil : automobili){
+            if(automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)){
+                return automobil;
+            }
+        }
+        return null;
+
+    }
+
+
+    public static void ispisiSvaSlobodnaVozila(){
+        List<Automobil> automobili = ucitajSveAutomobile();
+        for(Automobil automobil : automobili){
+            if(automobil.getVozac() == null){
+                System.out.println(automobil.getProizvodjac() + " " +  automobil.getModel() + " " + automobil.getBrRegistarskeOznake());
+            }
+        }
+    }
+
     public static void sacuvajAutomobilUFajl(Automobil automobil) throws IOException {
         File file = new File("src/Data/automobili.csv");
         FileWriter fileWriter = new FileWriter(file, true);
         fileWriter.write(automobil.stringToSave());
         fileWriter.close();
+    }
+
+    public static void upisiSveAutomobileUFajl(List<Automobil> automobili){
+        File file = new File("src\\Data\\automobili.csv");
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (Automobil automobil : automobili) {
+                writer.write(automobil.stringToSave());
+            }
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Nepostojeći fajl");
+        }
     }
 
     @Override
