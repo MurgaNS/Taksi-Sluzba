@@ -18,22 +18,24 @@ public class Automobil {
     public Automobil() {
     }
 
-    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Long vozac) {
+    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Boolean obrisan, Long vozac) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
         this.proizvodjac = proizvodjac;
         this.godProizvodnje = godProizvodnje;
         this.brRegistarskeOznake = brRegistarskeOznake;
         this.vrsta = vrsta;
+        this.obrisan = obrisan;
         this.vozac = vozac;
     }
 
-    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta) {
+    public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Boolean obrisan) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
         this.proizvodjac = proizvodjac;
         this.godProizvodnje = godProizvodnje;
         this.brRegistarskeOznake = brRegistarskeOznake;
+        this.obrisan = obrisan;
         this.vrsta = vrsta;
     }
 
@@ -44,7 +46,9 @@ public class Automobil {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/automobili.csv"));
             while ((red = bf.readLine()) != null) {
                 Automobil automobil = automobilDTO(red);
-                automobili.add(automobil);
+                if (!automobil.isObrisan()) {
+                    automobili.add(automobil);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,9 +60,9 @@ public class Automobil {
         String[] wordsList = automobilString.split(",");
         Automobil automobil;
         try {
-            automobil = new Automobil(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5], Long.parseLong(wordsList[6]));
+            automobil = new Automobil(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5], Boolean.parseBoolean(wordsList[6]), Long.parseLong(wordsList[7]));
         } catch (NumberFormatException e) {
-            automobil = new Automobil(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5]);
+            automobil = new Automobil(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5], Boolean.parseBoolean(wordsList[6]));
 
         }
         return automobil;
@@ -74,18 +78,6 @@ public class Automobil {
         }
         return null;
     }
-
-//    public static Automobil nadjiPoBrRegistarskeOznake(String brRegistarskeOznake){
-//        List<Automobil> automobili = ucitajSveAutomobile();
-//        for(Automobil automobil : automobili){
-//            if(automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)){
-//                return automobil;
-//            }
-//        }
-//        return null;
-//
-//    }
-
 
     public static void ispisiSvaSlobodnaVozila() {
         List<Automobil> automobili = ucitajSveAutomobile();
@@ -117,6 +109,20 @@ public class Automobil {
         }
     }
 
+    public static void izbrisiAutomobil(Automobil automobilZaBrisanje) {
+        List<Automobil> automobili = ucitajSveAutomobile();
+        System.out.println("Ucitani automobili");
+        for (Automobil automobil : automobili) {
+            System.out.println(automobil.toString());
+            if (automobil.getBrTaksiVozila().equals(automobilZaBrisanje.getBrTaksiVozila())) {
+                System.out.println("Izbrisan");
+                automobil.setObrisan(true);
+                break;
+            }
+        }
+        sacuvajListuAutomobilaUFajl(automobili);
+    }
+
 
     @Override
     public String toString() {
@@ -132,7 +138,15 @@ public class Automobil {
     }
 
     public String stringToSave() {
-        return brTaksiVozila + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + vozac + '\n';
+        return brTaksiVozila + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + obrisan + ',' + vozac + '\n';
+    }
+
+    public boolean isObrisan() {
+        return obrisan;
+    }
+
+    public void setObrisan(boolean obrisan) {
+        this.obrisan = obrisan;
     }
 
     public String getBrTaksiVozila() {

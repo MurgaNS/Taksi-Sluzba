@@ -26,7 +26,6 @@ public class Dispecer extends Korisnik {
     }
 
 
-
     public static void prikaziMeni() {
         System.out.println("1. Prikaz podataka taksi službe");
         System.out.println("2. Izmena podataka o taksi službi");
@@ -88,8 +87,8 @@ public class Dispecer extends Korisnik {
         String brRegistarskeOznake = scanner.next();
 
         List<Automobil> automobili = Automobil.ucitajSveAutomobile();
-        for(Automobil automobil : automobili){
-            if(automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)){
+        for (Automobil automobil : automobili) {
+            if (automobil.getBrRegistarskeOznake().equals(brRegistarskeOznake)) {
                 automobil.setVozac(JMBG);
                 break;
             }
@@ -103,6 +102,14 @@ public class Dispecer extends Korisnik {
         System.out.println("Uspešno upisan vozač");
     }
 
+    public static void izbrisiAutomobil() throws IOException {
+        prikaziAutomobile();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Izaberi broj taksi vozila: ");
+        String brTaksiVozila = sc.nextLine();
+        Automobil automobil = Automobil.pronadjiPoBrojuTaksiVozila(brTaksiVozila);
+        Automobil.izbrisiAutomobil(automobil);
+    }
 
     public static void izmeniVozaca() {
         System.out.println("Unesi JMBG vozaca kojeg zelite da izmenite");
@@ -221,7 +228,7 @@ public class Dispecer extends Korisnik {
         System.out.println("Uspešno ste obrisali vozača!");
     }
 
-    public static void kombinovanaPretragaVozaca(){
+    public static void kombinovanaPretragaVozaca() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Unesi ime");
         String ime = scanner.next();
@@ -237,11 +244,11 @@ public class Dispecer extends Korisnik {
 
         List<Vozac> sviKorisnici = Vozac.nadjiVozaceZaProizvodjaca(proizvodjac);
 
-        for(Vozac vozac : sviKorisnici){
-                if(vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
-                        && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata){
-                    System.out.println(vozac);
-                }
+        for (Vozac vozac : sviKorisnici) {
+            if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
+                    && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
+                System.out.println(vozac);
+            }
         }
     }
 
@@ -266,7 +273,7 @@ public class Dispecer extends Korisnik {
         String regOznaka = sc.nextLine();
         System.out.println("Vrsta: ");
         String vrsta = sc.nextLine();
-        Automobil automobil = new Automobil(brTaksiVozila, model, proizvodjac, godinaProizvodnje, regOznaka, vrsta);
+        Automobil automobil = new Automobil(brTaksiVozila, model, proizvodjac, godinaProizvodnje, regOznaka, vrsta, false);
         System.out.println("Da li zelite da dodate vozaca ovom automobilu? [Y/N]");
         if (sc.nextLine().equals("Y")) {
             dodajAutomobiluVozaca(automobil);
@@ -297,10 +304,10 @@ public class Dispecer extends Korisnik {
     }
 
     // 2.2.5
-    public static void dodeljivanjeVoznjiKreiranihTelefonom(){
+    public static void dodeljivanjeVoznjiKreiranihTelefonom() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
-        for(Voznja voznja : voznje){
-            if(voznja.getNacinPorudzbine().equals("TELEFONOM")) {
+        for (Voznja voznja : voznje) {
+            if (voznja.getNacinPorudzbine().equals("TELEFONOM")) {
                 System.out.println(voznja);
             }
         }
@@ -311,8 +318,8 @@ public class Dispecer extends Korisnik {
         long idVoznje = scanner.nextLong();
 
         Voznja voznja = null;
-        for(Voznja voznja2 : voznje){
-            if(voznja2.getId() == idVoznje) {
+        for (Voznja voznja2 : voznje) {
+            if (voznja2.getId() == idVoznje) {
                 voznja = voznja2;
             }
         }
@@ -322,8 +329,8 @@ public class Dispecer extends Korisnik {
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
 
         Vozac vozac = null;
-        for(Korisnik korisnik : korisnici){
-            if(korisnik.getJMBG() == jmbg){
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == jmbg) {
                 vozac = (Vozac) korisnik;
             }
         }
