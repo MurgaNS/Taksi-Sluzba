@@ -94,7 +94,7 @@ public class Dispecer extends Korisnik {
                 break;
             }
         }
-        Automobil.upisiSveAutomobileUFajl(automobili);
+        Automobil.sacuvajListuAutomobilaUFajl(automobili);
 
         Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, plata, brojClanskeKarte);
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();

@@ -17,6 +17,7 @@ public class Automobil {
 
     public Automobil() {
     }
+
     public Automobil(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Long vozac) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
@@ -42,19 +43,25 @@ public class Automobil {
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/automobili.csv"));
             while ((red = bf.readLine()) != null) {
-                String[] tmp = red.split(",");
-                Automobil automobil = null;
-                try {
-                    automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5], Long.parseLong(tmp[6]));
-                } catch (NumberFormatException e) {
-                    automobil = new Automobil(tmp[0], tmp[1], tmp[2], Integer.parseInt(tmp[3]), tmp[4], tmp[5]);
-                }
+                Automobil automobil = automobilDTO(red);
                 automobili.add(automobil);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return automobili;
+    }
+
+    public static Automobil automobilDTO(String automobilString) {
+        String[] wordsList = automobilString.split(",");
+        Automobil automobil;
+        try {
+            automobil = new Automobil(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5], Long.parseLong(wordsList[6]));
+        } catch (NumberFormatException e) {
+            automobil = new Automobil(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5]);
+
+        }
+        return automobil;
     }
 
     public static Automobil pronadjiPoBrojuTaksiVozila(String brTaksiVozila) {
@@ -80,11 +87,11 @@ public class Automobil {
 //    }
 
 
-    public static void ispisiSvaSlobodnaVozila(){
+    public static void ispisiSvaSlobodnaVozila() {
         List<Automobil> automobili = ucitajSveAutomobile();
-        for(Automobil automobil : automobili){
-            if(automobil.getVozac() == null){
-                System.out.println(automobil.getProizvodjac() + " " +  automobil.getModel() + " " + automobil.getBrRegistarskeOznake());
+        for (Automobil automobil : automobili) {
+            if (automobil.getVozac() == null) {
+                System.out.println(automobil.getProizvodjac() + " " + automobil.getModel() + " " + automobil.getBrRegistarskeOznake());
             }
         }
     }
@@ -96,7 +103,7 @@ public class Automobil {
         fileWriter.close();
     }
 
-    public static void upisiSveAutomobileUFajl(List<Automobil> automobili){
+    public static void sacuvajListuAutomobilaUFajl(List<Automobil> automobili) {
         File file = new File("src\\Data\\automobili.csv");
         try {
             PrintWriter writer = new PrintWriter(file);
@@ -109,6 +116,7 @@ public class Automobil {
             System.out.println("Nepostojeći fajl");
         }
     }
+
 
     @Override
     public String toString() {
