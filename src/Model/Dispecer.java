@@ -255,7 +255,9 @@ public class Dispecer extends Korisnik {
     public static void prikaziAutomobile() throws IOException {
         List<Automobil> automobili = Automobil.ucitajSveAutomobile();
         for (Automobil automobil : automobili) {
-            System.out.println(automobil.toString());
+            if (!automobil.isObrisan()) {
+                System.out.println(automobil);
+            }
         }
     }
 

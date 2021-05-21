@@ -46,9 +46,7 @@ public class Automobil {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/automobili.csv"));
             while ((red = bf.readLine()) != null) {
                 Automobil automobil = automobilDTO(red);
-                if (!automobil.isObrisan()) {
-                    automobili.add(automobil);
-                }
+                automobili.add(automobil);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,16 +109,16 @@ public class Automobil {
 
     public static void izbrisiAutomobil(Automobil automobilZaBrisanje) {
         List<Automobil> automobili = ucitajSveAutomobile();
-        System.out.println("Ucitani automobili");
         for (Automobil automobil : automobili) {
-            System.out.println(automobil.toString());
-            if (automobil.getBrTaksiVozila().equals(automobilZaBrisanje.getBrTaksiVozila())) {
-                System.out.println("Izbrisan");
-                automobil.setObrisan(true);
-                break;
+            if (automobil.getVozac() != null && !automobil.isObrisan()) {
+                if (automobil.getBrTaksiVozila().equals(automobilZaBrisanje.getBrTaksiVozila())) {
+                    System.out.println("Izbrisan");
+                    automobil.setObrisan(true);
+                    sacuvajListuAutomobilaUFajl(automobili);
+                    break;
+                }
             }
         }
-        sacuvajListuAutomobilaUFajl(automobili);
     }
 
 
