@@ -186,7 +186,6 @@ public class Dispecer extends Korisnik {
         System.out.println("Uspešno upisan korisnik");
     }
 
-
     public static void upisiVozaca(Vozac vozac) {
         File file = new File("src\\Data\\korisnici.csv");
         try {
