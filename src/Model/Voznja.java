@@ -5,14 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.*;
-import java.util.ArrayList;
-import java.io.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,13 +20,10 @@ public class Voznja {
     private double trajanjeVoznjeUMinutama;
     private String statusVoznje;
     private String nacinPorudzbine;
-    private Vozac vozac;
-    private Musterija musterija;
+    private Long vozacId;
+    private Long musterijaId;
 
-    public Voznja() {
-    }
-
-    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Vozac vozac, Musterija musterija) {
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Long vozacId, Long musterijaId) {
         this.id = id;
         this.datumPorudzbine = datumPorudzbine;
         this.adresaPolaska = adresaPolaska;
@@ -41,8 +32,8 @@ public class Voznja {
         this.trajanjeVoznjeUMinutama = trajanjeVoznjeUMinutama;
         this.statusVoznje = statusVoznje;
         this.nacinPorudzbine = nacinPorudzbine;
-        this.vozac = vozac;
-        this.musterija = musterija;
+        this.vozacId = vozacId;
+        this.musterijaId = musterijaId;
     }
     public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine) {
         this.id = id;
@@ -67,8 +58,8 @@ public class Voznja {
                 ", trajanjeVoznjeUMinutama=" + trajanjeVoznjeUMinutama +
                 ", statusVoznje='" + statusVoznje + '\'' +
                 ", nacinPorudzbine='" + nacinPorudzbine + '\'' +
-                ", vozac=" + vozac +
-                ", musterija=" + musterija +
+                ", vozac=" + vozacId +
+                ", musterija=" + musterijaId +
                 '}';
     }
 
@@ -89,13 +80,11 @@ public class Voznja {
             while ((line = bufferedReader.readLine()) != null) {
                 Voznja voznja = null;
                 String[] lineParts = line.split(",");
-                long jmbgVozaca = Long.parseLong(lineParts[8]);
-                long jmbgMusterije = Long.parseLong(lineParts[9]);
                 voznja = new Voznja(Long.parseLong(lineParts[0]), new Date(), lineParts[2], lineParts[3], Double.parseDouble(lineParts[4]),
                         Double.parseDouble(lineParts[5]),
                         lineParts[6], lineParts[7],
-                        (Vozac) Korisnik.nadjiKorisnikaPrekoJMBG(jmbgVozaca),
-                        (Musterija) Korisnik.nadjiKorisnikaPrekoJMBG(jmbgMusterije));
+                        Long.parseLong(lineParts[8]),
+                        Long.parseLong(lineParts[9]));
                 sveVoznje.add(voznja);
             }
             bufferedReader.close();
@@ -123,20 +112,21 @@ public class Voznja {
             System.out.println("Nepostojeći fajl");
         }
     }
-
+// @murga
     public String stringToSave(){
-        long vozacJMBG = 0;
-        long musterijaJMBG = 0;
-        if(vozac != null){
-            vozacJMBG = vozac.getJMBG();
-        }
-        if(musterija != null){
-            musterijaJMBG = musterija.getJMBG();
-        }
-        return id + "," + datumPorudzbine + "," + adresaPolaska + "," +
-                adresaDestinacije + "," + brojPredjenihKilometara + "," +
-                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
-                + vozacJMBG + "," + musterijaJMBG;
+//        long vozacJMBG = 0;
+//        long musterijaJMBG = 0;
+//        if(vozac != null){
+//            vozacJMBG = vozac.getJMBG();
+//        }
+//        if(musterija != null){
+//            musterijaJMBG = musterija.getJMBG();
+//        }
+//        return id + "," + datumPorudzbine + "," + adresaPolaska + "," +
+//                adresaDestinacije + "," + brojPredjenihKilometara + "," +
+//                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
+//                + vozacJMBG + "," + musterijaJMBG;
+        return "";
     }
 
     public long getId() {
@@ -203,20 +193,20 @@ public class Voznja {
         this.nacinPorudzbine = nacinPorudzbine;
     }
 
-    public Vozac getVozac() {
-        return vozac;
+    public Long getVozacId() {
+        return vozacId;
     }
 
-    public void setVozac(Vozac vozac) {
-        this.vozac = vozac;
+    public void setVozacId(Long vozacId) {
+        this.vozacId = vozacId;
     }
 
-    public Musterija getMusterija() {
-        return musterija;
+    public Long getMusterijaId() {
+        return musterijaId;
     }
 
-    public void setMusterija(Musterija musterija) {
-        this.musterija = musterija;
+    public void setMusterijaId(Long musterijaId) {
+        this.musterijaId = musterijaId;
     }
 
 }

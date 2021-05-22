@@ -16,9 +16,6 @@ public abstract class Korisnik {
     protected String brojTelefona;
     protected boolean obrisan;
 
-    public Korisnik() {
-    }
-
     public Korisnik(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona) {
         this.JMBG = JMBG;
         this.korisnickoIme = korisnickoIme;

@@ -11,9 +11,6 @@ public class TaksiSluzba {
     private double cenaStarta;
     private double cenaPoKilometru;
 
-    public TaksiSluzba() {
-    }
-
     public TaksiSluzba(long PIB, String naziv, String adresa, double cenaStarta, double cenaPoKilometru) {
         this.PIB = PIB;
         this.naziv = naziv;

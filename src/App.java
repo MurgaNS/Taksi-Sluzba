@@ -1,4 +1,3 @@
-import Gui.IzmenaTaksiSluzbeProzor;
 import Model.*;
 
 import java.io.*;
@@ -16,7 +15,7 @@ class App {
         String lozinka = scanner.nextLine();
 
         Login l = new Login();
-        Korisnik korisnik = l.login(korisnickoIme,lozinka);
+        Korisnik korisnik = l.login(korisnickoIme, lozinka);
 
         if (korisnik instanceof Dispecer) {
             Scanner sc = new Scanner(System.in);
@@ -28,17 +27,17 @@ class App {
                     switch (Integer.parseInt(line)) {
                         case 1 -> TaksiSluzba.prikazPodatakaOTaksiSluzbi();
                         case 2 -> TaksiSluzba.izmenaPodatakaTaksiSluzbe();
-                        case 3 -> Dispecer.prikaziVozace();
-                        case 4 -> Dispecer.dodajVozaca();
-                        case 5 -> Dispecer.izmeniVozaca();
-                        case 6 -> Dispecer.izbrisiVozaca();
-                        case 7 -> Dispecer.dodajAutomobil();
-                        case 8 -> Automobil.prikaziAutomobile();
-                        case 9 -> Automobil.izmeniAutomobil();
-                        case 10 -> Dispecer.izbrisiAutomobil();
+                        case 3 -> Vozac.prikaziVozace();
+                        case 4 -> Vozac.dodajVozaca();
+                        case 5 -> Vozac.izmeniVozaca();
+                        case 6 -> Vozac.izbrisiVozaca();
+                        case 7 -> Vozilo.dodajAutomobil();
+                        case 8 -> Vozilo.prikaziAutomobile();
+                        case 9 -> Vozilo.izmeniAutomobil();
+                        case 10 -> Vozilo.izbrisiAutomobil();
                         case 11 -> Voznja.prikaziSveVoznje();
                         case 12 -> Dispecer.dodeljivanjeVoznjiKreiranihTelefonom();
-                        case 13 -> Dispecer.kombinovanaPretragaVozaca();
+                        case 13 -> Vozac.kombinovanaPretragaVozaca();
                         case 14 -> Dispecer.izvestaj();
 
 

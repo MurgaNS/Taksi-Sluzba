@@ -1,8 +1,6 @@
 package Model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,17 +11,14 @@ public class Vozac extends Korisnik {
     private double plata;
     private int brojClanskeKarte;
     private List<Voznja> listaVoznji;
-    private Automobil automobil;
+    private Long regOznakaVozila;
 
-    public Vozac() {
-    }
-
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Automobil automobil) {
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
         this.listaVoznji = listaVoznji;
-        this.automobil = automobil;
+        this.regOznakaVozila = regOznakaVozila;
     }
 
     public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte) {
@@ -43,6 +38,200 @@ public class Vozac extends Korisnik {
         System.out.println("4. Statistika");
         System.out.println("5. Aukcija");
     }
+
+    public static void prikaziVozace() {
+        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
+        for (Korisnik korisnik : sviKorisnici) {
+            if (korisnik instanceof Vozac) {
+                System.out.println("JMBG:" + korisnik.getJMBG() + " " + "Korisnicko ime:" + korisnik.getKorisnickoIme() + " " +
+                        "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " " + "Prezime:" +
+                        korisnik.getPrezime() + " " + "Adresa: " + korisnik.getAdresa() + " " + "Pol:" + korisnik.getPol() + " " +
+                        "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
+                        "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
+            }
+        }
+    }
+
+    public static void dodajVozaca() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Unesi JMBG");
+        long JMBG = scanner.nextLong();
+        System.out.println("Unesi korisnicko ime");
+        String korisnickoIme = scanner.next();
+        System.out.println("Unesi lozinku");
+        String lozinka = scanner.next();
+        System.out.println("Unesi ime: ");
+        String ime = scanner.next();
+        System.out.println("Unesi prezime:");
+        String prezime = scanner.next();
+        System.out.println("Unesi adresu");
+        String adresa = scanner.next();
+        System.out.println("Unesi pol");
+        String pol = scanner.next();
+        System.out.println("Broj telefona");
+        String brojTelefona = scanner.next();
+        System.out.println("Unesi platu");
+        double plata = scanner.nextDouble();
+        System.out.println("Unesi broj članske karte");
+        int brojClanskeKarte = scanner.nextInt();
+
+        Vozilo.ispisiSvaSlobodnaVozila();
+        System.out.println("Odaberi vozilo(unesi broj registarske oznake): ");
+
+        String brRegistarskeOznake = scanner.next();
+
+        List<Vozilo> automobili = Vozilo.ucitajSveAutomobile();
+        for (Vozilo vozilo : automobili) {
+            if (vozilo.getBrRegistarskeOznake().equals(brRegistarskeOznake)) {
+                vozilo.setVozacId(JMBG);
+                break;
+            }
+        }
+        Vozilo.sacuvajListuAutomobilaUFajl(automobili);
+
+        Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, plata, brojClanskeKarte);
+        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+        korisnici.add(vozac);
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno upisan vozač");
+    }
+
+    public static void izmeniVozaca() {
+        System.out.println("Unesi JMBG vozaca kojeg zelite da izmenite");
+        Scanner scanner = new Scanner(System.in);
+        long JMBG = scanner.nextLong();
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        Vozac vozac = null;
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
+                vozac = (Vozac) korisnik;
+            }
+        }
+        if (vozac == null) {
+            return;
+        }
+        System.out.println("1. Izmena korisnickog imena" +
+                "\n2. Izmena sifre" +
+                "\n3. Izmena imena" +
+                "\n4. Izmena prezimena" +
+                "\n5. Izmena adrese" +
+                "\n6. Izmena pola" +
+                "\n7. Izmena broja telefona" +
+                "\n8. Izmena plate" +
+                "\n9. Izmena clanske karte");
+        System.out.println("Odaberi opciju");
+        int opcija = scanner.nextInt();
+        switch (opcija) {
+            case 1 -> {
+                System.out.println("Unesi korisnicko ime: ");
+                String korisnickoIme = scanner.next();
+                vozac.setKorisnickoIme(korisnickoIme);
+            }
+            case 2 -> {
+                System.out.println("Unesi lozinku: ");
+                String lozinka = scanner.next();
+                vozac.setLozinka(lozinka);
+            }
+            case 3 -> {
+                System.out.println("Unesi ime: ");
+                String ime = scanner.next();
+                vozac.setIme(ime);
+            }
+            case 4 -> {
+                System.out.println("Unesi prezime: ");
+                String prezime = scanner.next();
+                vozac.setPrezime(prezime);
+            }
+            case 5 -> {
+                System.out.println("Unesite adresu: ");
+                String adresa = scanner.next();
+                vozac.setAdresa(adresa);
+            }
+            case 6 -> {
+                System.out.println("Unesite pol: ");
+                String pol = scanner.next();
+                vozac.setPol(pol);
+            }
+            case 7 -> {
+                System.out.println("Unesite broj telefona: ");
+                String brojTelefona = scanner.nextLine();
+                vozac.setBrojTelefona(brojTelefona);
+            }
+            case 8 -> {
+                System.out.println("Unesite platu: ");
+                double plata = scanner.nextDouble();
+                vozac.setPlata(plata);
+            }
+            case 9 -> {
+                System.out.println("Unesite broj clanske karte");
+                int brojClanskeKarte = scanner.nextInt();
+                vozac.setBrojClanskeKarte(brojClanskeKarte);
+            }
+        }
+
+
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno upisan korisnik");
+    }
+
+    public static void izbrisiVozaca() {
+        System.out.println("Unesi JMBG vozaca kojeg zelite da obrisete");
+        Scanner scanner = new Scanner(System.in);
+        long JMBG = scanner.nextLong();
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        Vozac vozac = null;
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
+                vozac = (Vozac) korisnik;
+            }
+        }
+        if (vozac == null) {
+            return;
+        }
+        korisnici.remove(vozac);
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno ste obrisali vozača!");
+    }
+
+    public static void upisiVozaca(Vozac vozac) {
+        File file = new File("src\\Data\\korisnici.csv");
+        try {
+            PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
+            writer.append("\nvozac," + vozac.getJMBG() + "," + vozac.getKorisnickoIme() + ","
+                    + vozac.getLozinka() + "," + vozac.getIme() + "," +
+                    vozac.getPrezime() + "," + vozac.getAdresa() + "," + vozac.getPol() + "," + vozac.getBrojTelefona() + "," +
+                    vozac.getPlata() + "," + vozac.getBrojClanskeKarte());
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Nepostojeći fajl");
+        }
+    }
+
+    public static void kombinovanaPretragaVozaca() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Unesi ime");
+        String ime = scanner.next();
+        System.out.println("Unesi prezime");
+        String prezime = scanner.next();
+        System.out.println("Min platu");
+        double minPlata = scanner.nextDouble();
+        System.out.println("Max platu");
+        double maxPlata = scanner.nextDouble();
+
+        System.out.println("Unesi proizvodjac automobila : ");
+        String proizvodjac = scanner.next();
+
+        List<Vozac> sviKorisnici = Vozac.nadjiVozaceZaProizvodjaca(proizvodjac);
+
+        for (Vozac vozac : sviKorisnici) {
+            if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
+                    && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
+                System.out.println(vozac);
+            }
+        }
+    }
+
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
         for (Voznja voznja : vozac.getListaVoznji()) {
@@ -91,14 +280,15 @@ public class Vozac extends Korisnik {
         }
         return null;
     }
-    public static List<Vozac> nadjiVozaceZaProizvodjaca(String proizvodjac){
+
+    public static List<Vozac> nadjiVozaceZaProizvodjaca(String proizvodjac) {
         List<Vozac> vozaci = new ArrayList<>();
-        List<Automobil> automobili = Automobil.ucitajSveAutomobile();
-        for(Automobil automobil : automobili){
-            if(automobil.getVozac()!=null && automobil.getProizvodjac().equals(proizvodjac)){
-                long jmbg = automobil.getVozac();
+        List<Vozilo> automobili = Vozilo.ucitajSveAutomobile();
+        for (Vozilo vozilo : automobili) {
+            if (vozilo.getVozacId() != null && vozilo.getProizvodjac().equals(proizvodjac)) {
+                long jmbg = vozilo.getVozacId();
                 Vozac vozac = pronadjiPoJMBG(jmbg);
-                if(vozac != null) {
+                if (vozac != null) {
                     vozaci.add(vozac);
                 }
 
@@ -106,6 +296,7 @@ public class Vozac extends Korisnik {
         }
         return vozaci;
     }
+
     public static void nedeljniIzvestaj(Vozac vozac) {
         List<Voznja> listaVoznji = voznjePrethodnihNedeljuDana(vozac);
         for (Voznja voznja : listaVoznji
@@ -130,7 +321,7 @@ public class Vozac extends Korisnik {
         ArrayList<Vozac> vozaci = ucitajSveVozace();
         ArrayList<Vozac> retVal = new ArrayList<>();
         for (Vozac vozac : vozaci) {
-            if (vozac.getAutomobil() == null) {
+            if (vozac.getRegOznakaVozila() == null) {
                 retVal.add(vozac);
             }
         }
@@ -146,15 +337,15 @@ public class Vozac extends Korisnik {
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
                 if (tmp[0].equals("vozac")) {
-                    Automobil automobil = null;
+                    Vozilo vozilo = null;
                     try {
-                        if (Automobil.pronadjiPoBrojuTaksiVozila(tmp[11]) != null) {
-                            automobil = Automobil.pronadjiPoBrojuTaksiVozila(tmp[11]);
+                        if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11]) != null) {
+                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11]);
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
-                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7], tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, automobil);
+                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7], tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, Long.parseLong(vozilo.getBrTaksiVozila()));
                     vozac.setListaVoznji(ucitajListuVoznji(vozac));
                     vozaci.add(vozac);
                 }
@@ -207,7 +398,7 @@ public class Vozac extends Korisnik {
                 ", plata=" + plata +
                 ", brojClanskeKarte=" + brojClanskeKarte +
                 ", listaVoznji=" + listaVoznji +
-                ", automobil=" + automobil +
+                ", automobil=" + regOznakaVozila +
                 '}';
     }
 
@@ -236,12 +427,12 @@ public class Vozac extends Korisnik {
         this.listaVoznji = listaVoznji;
     }
 
-    public Automobil getAutomobil() {
-        return automobil;
+    public Long getRegOznakaVozila() {
+        return regOznakaVozila;
     }
 
-    public void setAutomobil(Automobil automobil) {
-        this.automobil = automobil;
+    public void setRegOznakaVozila(Long regOznakaVozila) {
+        this.regOznakaVozila = regOznakaVozila;
     }
 
 }

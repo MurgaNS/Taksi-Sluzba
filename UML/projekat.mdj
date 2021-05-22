@@ -916,7 +916,7 @@
 											"top": 580,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "+dodajAutomobil(automobil: Automobil): void",
+											"text": "+dodajAutomobil(vozilo: Automobil): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -933,7 +933,7 @@
 											"top": 595,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "+izmeniAutomobil(automobil: Automobil): void",
+											"text": "+izmeniAutomobil(vozilo: Automobil): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -950,7 +950,7 @@
 											"top": 610,
 											"width": 379.0185546875,
 											"height": 13,
-											"text": "+izbrisiAutomobil(automobil: Automobil): void",
+											"text": "+izbrisiAutomobil(vozilo: Automobil): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1854,7 +1854,7 @@
 											"top": 982,
 											"width": 270.60693359375,
 											"height": 13,
-											"text": "+sacuvajAutomobil(automobil: Automobil): void",
+											"text": "+sacuvajAutomobil(vozilo: Automobil): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -2514,7 +2514,7 @@
 										"$ref": "AAAAAAF4xvMlDUgbVs8="
 									},
 									"edgePosition": 2,
-									"text": "-automobil"
+									"text": "-vozilo"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5111,7 +5111,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxDGn0P1eJE="
 									},
-									"name": "automobil",
+									"name": "vozilo",
 									"type": {
 										"$ref": "AAAAAAF4xtO0cDX4d0E="
 									}
@@ -5141,7 +5141,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxEd7ER/pzY="
 									},
-									"name": "automobil",
+									"name": "vozilo",
 									"type": {
 										"$ref": "AAAAAAF4xtO0cDX4d0E="
 									}
@@ -5171,7 +5171,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF4xxFRvkT2E/k="
 									},
-									"name": "automobil",
+									"name": "vozilo",
 									"type": {
 										"$ref": "AAAAAAF4xtO0cDX4d0E="
 									}
@@ -5809,7 +5809,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF4xvMlDUgXguI="
 								},
-								"name": "automobil",
+								"name": "vozilo",
 								"reference": {
 									"$ref": "AAAAAAF4xtO0cDX4d0E="
 								},
@@ -5964,7 +5964,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF5I30ns0scfzI="
 									},
-									"name": "automobil",
+									"name": "vozilo",
 									"type": {
 										"$ref": "AAAAAAF4xtO0cDX4d0E="
 									}
