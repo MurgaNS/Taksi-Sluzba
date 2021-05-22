@@ -106,7 +106,7 @@ public class Dispecer extends Korisnik {
     }
 
     public static void izbrisiAutomobil() throws IOException {
-        prikaziAutomobile();
+        Automobil.prikaziAutomobile();
         Scanner sc = new Scanner(System.in);
         System.out.println("Izaberi broj taksi vozila: ");
         String brTaksiVozila = sc.nextLine();
@@ -255,14 +255,6 @@ public class Dispecer extends Korisnik {
         }
     }
 
-    public static void prikaziAutomobile() throws IOException {
-        List<Automobil> automobili = Automobil.ucitajSveAutomobile();
-        for (Automobil automobil : automobili) {
-            if (!automobil.isObrisan()) {
-                System.out.println(automobil);
-            }
-        }
-    }
 
     public static void dodajAutomobil() throws IOException {
         Scanner sc = new Scanner(System.in);

@@ -33,7 +33,8 @@ class App {
                         case 5 -> Dispecer.izmeniVozaca();
                         case 6 -> Dispecer.izbrisiVozaca();
                         case 7 -> Dispecer.dodajAutomobil();
-                        case 8 -> Dispecer.prikaziAutomobile();
+                        case 8 -> Automobil.prikaziAutomobile();
+                        case 9 -> Automobil.izmeniAutomobil();
                         case 10 -> Dispecer.izbrisiAutomobil();
                         case 11 -> Voznja.prikaziSveVoznje();
                         case 12 -> Dispecer.dodeljivanjeVoznjiKreiranihTelefonom();

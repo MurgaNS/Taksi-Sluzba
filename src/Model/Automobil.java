@@ -3,6 +3,7 @@ package Model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Automobil {
 
@@ -37,6 +38,13 @@ public class Automobil {
         this.brRegistarskeOznake = brRegistarskeOznake;
         this.obrisan = obrisan;
         this.vrsta = vrsta;
+    }
+
+    public static void izmeniBrojRegistarskeOznake(Automobil automobil) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Novi registarski broj vozila:");
+        String noviRegBroj = sc.nextLine();
+        automobil.setBrRegistarskeOznake(noviRegBroj);
     }
 
     protected static List<Automobil> ucitajSveAutomobile() {
@@ -93,6 +101,15 @@ public class Automobil {
         fileWriter.close();
     }
 
+    public static void prikaziAutomobile() throws IOException {
+        List<Automobil> automobili = Automobil.ucitajSveAutomobile();
+        for (Automobil automobil : automobili) {
+            if (!automobil.isObrisan()) {
+                System.out.println(automobil);
+            }
+        }
+    }
+
     public static void sacuvajListuAutomobilaUFajl(List<Automobil> automobili) {
         File file = new File("src\\Data\\automobili.csv");
         try {
@@ -119,6 +136,30 @@ public class Automobil {
                 }
             }
         }
+    }
+
+    public static Automobil izaberiAutomobil() {
+        try {
+            prikaziAutomobile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Izaberite broj taksi vozila: ");
+        Automobil automobil = pronadjiPoBrojuTaksiVozila(sc.nextLine());
+        return automobil;
+    }
+
+    public static void izmeniAutomobil() throws IOException {
+        Automobil automobil = izaberiAutomobil();
+        izmeniBrojRegistarskeOznake(automobil);
+        List<Automobil> automobili = ucitajSveAutomobile();
+        for (Automobil a : automobili) {
+            if (a.getBrTaksiVozila().equals(automobil.getBrTaksiVozila())) {
+                a.setBrRegistarskeOznake(automobil.getBrRegistarskeOznake());
+            }
+        }
+        sacuvajListuAutomobilaUFajl(automobili);
     }
 
 
