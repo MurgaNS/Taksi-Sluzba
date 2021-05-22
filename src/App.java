@@ -26,7 +26,6 @@ class App {
                     System.out.print("Unesi opciju: ");
                     String line = sc.nextLine();
                     switch (Integer.parseInt(line)) {
-
                         case 1 -> TaksiSluzba.prikazPodatakaOTaksiSluzbi();
                         case 2 -> TaksiSluzba.izmenaPodatakaTaksiSluzbe();
                         case 3 -> Dispecer.prikaziVozace();
@@ -39,6 +38,7 @@ class App {
                         case 11 -> Voznja.prikaziSveVoznje();
                         case 12 -> Dispecer.dodeljivanjeVoznjiKreiranihTelefonom();
                         case 13 -> Dispecer.kombinovanaPretragaVozaca();
+                        case 14 -> Dispecer.izvestaj();
 
 
                     }

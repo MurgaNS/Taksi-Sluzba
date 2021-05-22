@@ -1,6 +1,8 @@
 package Model;
 
 import java.io.*;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 
@@ -40,6 +42,7 @@ public class Dispecer extends Korisnik {
         System.out.println("11. Prikaz voznji");
         System.out.println("12. Prikaz voznji dodeljenih putem telefona");
         System.out.println("13. Kombinovana pretraga vozaca");
+        System.out.println("14. Izveštaj");
 
 
     }
@@ -281,6 +284,125 @@ public class Dispecer extends Korisnik {
             dodajAutomobiluVozaca(automobil);
         }
         Automobil.sacuvajAutomobilUFajl(automobil);
+    }
+
+    public static void izvestaj(){
+        System.out.println("1. Dnevni izveštaj");
+        System.out.println("2. Nedeljni izveštaj");
+        System.out.println("3. Mesečni izveštaj");
+        System.out.println("4. Godišnji izveštaj");
+        Scanner scanner = new Scanner(System.in);
+        int izbor = scanner.nextInt();
+        switch (izbor){
+            case 1:
+                dnevniIzvestaj();
+                break;
+            default:
+                System.out.println("Nepostojeća komanda");
+                break;
+        }
+
+
+
+    }
+
+    public static List<Voznja> nedeljneVoznje(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        List<Voznja> nedeljneVoznje = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+        c.setFirstDayOfWeek(Calendar.MONDAY);
+
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        Date monday = c.getTime();
+
+        Date nextMonday= new Date(monday.getTime()+7*24*60*60*1000);
+        for(Voznja voznja : voznje){
+            if(voznja.getDatumPorudzbine().after(monday) && voznja.getDatumPorudzbine().before(nextMonday)){
+                nedeljneVoznje.add(voznja);
+            }
+        }
+
+        return nedeljneVoznje;
+
+
+    }
+
+    public static List<Voznja> danasnjeVoznje(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        Date danasnjiDatum = new Date();
+        Instant instant2 = danasnjiDatum.toInstant().truncatedTo(ChronoUnit.DAYS);
+        List<Voznja> danasnjeVoznje = new ArrayList<>();
+        for(Voznja voznja : voznje){
+            Instant instant1 = voznja.getDatumPorudzbine().toInstant().truncatedTo(ChronoUnit.DAYS);
+            if(instant1.equals(instant2)){
+                danasnjeVoznje.add(voznja);
+            }
+        }
+        return danasnjeVoznje;
+    }
+
+
+    public static void dnevniIzvestaj(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        Date danasnjiDatum = new Date();
+        Instant instant2 = danasnjiDatum.toInstant().truncatedTo(ChronoUnit.DAYS);
+        List<Voznja> danasnjeVoznje = new ArrayList<>();
+        for(Voznja voznja : voznje){
+            Instant instant1 = voznja.getDatumPorudzbine().toInstant().truncatedTo(ChronoUnit.DAYS);
+            if(instant1.equals(instant2)){
+                danasnjeVoznje.add(voznja);
+            }
+        }
+        System.out.println("Ukupan broj vožnji: " + danasnjeVoznje.size());
+        int brojVoznjiPorucenihAplikacijom = 0;
+        int brojVoznjiPorucenihTelefonom = 0;
+        int brojAktivnihVozaca = 0;
+        double ukupnoTrajanjeVoznji = 0;
+        double ukupanBrojPredjenihKilometara = 0;
+        double ukupnaZarada = 0;
+        TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
+
+        for(Voznja voznja : danasnjeVoznje){
+            if(voznja.getNacinPorudzbine().equals("APLIKACIJOM")){
+                brojVoznjiPorucenihAplikacijom++;
+            }
+            if(voznja.getNacinPorudzbine().equals("TELEFONOM")){
+                brojVoznjiPorucenihTelefonom++;
+            }
+            if(voznja.getVozac() != null){
+                brojAktivnihVozaca++;
+            }
+            ukupnoTrajanjeVoznji += voznja.getTrajanjeVoznjeUMinutama();
+            ukupanBrojPredjenihKilometara += voznja.getBrojPredjenihKilometara();
+            ukupnaZarada += taksiSluzba.getCenaStarta() + voznja.getBrojPredjenihKilometara()*taksiSluzba.getCenaPoKilometru();
+
+        }
+        System.out.println("Broj vožnji poručenih aplikacijom: " + brojVoznjiPorucenihAplikacijom);
+        System.out.println("Broj vožnji poručenih telefonom: " + brojVoznjiPorucenihTelefonom);
+        System.out.println("Broj aktivnih vozača: " + brojAktivnihVozaca);
+
+        double prosecnoTrajanjeVoznji = ukupnoTrajanjeVoznji / voznje.size();
+        double prosecanBrojPredjenihKilometara = ukupanBrojPredjenihKilometara / voznje.size();
+        System.out.println("Prosečno trajanje vožnji: " + prosecnoTrajanjeVoznji);
+        System.out.println("Prosečan broj pređenih kilometara: " + prosecanBrojPredjenihKilometara);
+
+        System.out.println("Ukupna zarada za sve vožnje " + ukupnaZarada);
+
+        double prosecnaZarada = ukupnaZarada / voznje.size();
+
+        System.out.println("Prosečna zarada po vožnji: " + prosecnaZarada);
+
+
+
+
+
+
+
     }
 
     private static void dodajAutomobiluVozaca(Automobil automobil) {
