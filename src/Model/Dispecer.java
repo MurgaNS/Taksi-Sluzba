@@ -54,6 +54,15 @@ public class Dispecer extends Korisnik {
             case 1:
                 dnevniIzvestaj();
                 break;
+            case 2:
+                nedeljniIzvestaj();
+                break;
+            case 3:
+                mesecniIzvestaj();
+                break;
+            case 4:
+                godisnjiIzvestaj();
+                break;
             default:
                 System.out.println("Nepostojeća komanda");
                 break;
@@ -62,7 +71,39 @@ public class Dispecer extends Korisnik {
 
     }
 
-    public static List<Voznja> nedeljneVoznje() {
+    public static void godisnjiIzvestaj(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        List<Voznja> godisnjeVoznje = new ArrayList<>();
+
+        Date date = new Date();
+        for(Voznja voznja:voznje){
+            if((voznja.getDatumPorudzbine().getYear() == date.getYear())){
+                godisnjeVoznje.add(voznja);
+            }
+        }
+
+        ispisiIzvestaj(godisnjeVoznje);
+    }
+
+
+    public static void mesecniIzvestaj(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        List<Voznja> mesecneVoznje = new ArrayList<>();
+
+        Date date = new Date();
+        for(Voznja voznja:voznje){
+            if((voznja.getDatumPorudzbine().getYear() == date.getYear()) && (voznja.getDatumPorudzbine().getMonth() == date.getMonth())){
+                mesecneVoznje.add(voznja);
+            }
+        }
+
+        ispisiIzvestaj(mesecneVoznje);
+
+
+
+    }
+
+    public static void nedeljniIzvestaj() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         List<Voznja> nedeljneVoznje = new ArrayList<>();
         Calendar c = Calendar.getInstance();
@@ -83,25 +124,10 @@ public class Dispecer extends Korisnik {
             }
         }
 
-        return nedeljneVoznje;
+        ispisiIzvestaj(nedeljneVoznje);
 
 
     }
-
-    public static List<Voznja> danasnjeVoznje() {
-        List<Voznja> voznje = Voznja.ucitajSveVoznje();
-        Date danasnjiDatum = new Date();
-        Instant instant2 = danasnjiDatum.toInstant().truncatedTo(ChronoUnit.DAYS);
-        List<Voznja> danasnjeVoznje = new ArrayList<>();
-        for (Voznja voznja : voznje) {
-            Instant instant1 = voznja.getDatumPorudzbine().toInstant().truncatedTo(ChronoUnit.DAYS);
-            if (instant1.equals(instant2)) {
-                danasnjeVoznje.add(voznja);
-            }
-        }
-        return danasnjeVoznje;
-    }
-
 
     public static void dnevniIzvestaj() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
@@ -114,7 +140,12 @@ public class Dispecer extends Korisnik {
                 danasnjeVoznje.add(voznja);
             }
         }
-        System.out.println("Ukupan broj vožnji: " + danasnjeVoznje.size());
+        ispisiIzvestaj(danasnjeVoznje);
+    }
+
+
+    public static void ispisiIzvestaj(List<Voznja> voznje) {
+        System.out.println("Ukupan broj vožnji: " + voznje.size());
         int brojVoznjiPorucenihAplikacijom = 0;
         int brojVoznjiPorucenihTelefonom = 0;
         int brojAktivnihVozaca = 0;
@@ -123,7 +154,7 @@ public class Dispecer extends Korisnik {
         double ukupnaZarada = 0;
         TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
 
-        for (Voznja voznja : danasnjeVoznje) {
+        for (Voznja voznja : voznje) {
             if (voznja.getNacinPorudzbine().equals("APLIKACIJOM")) {
                 brojVoznjiPorucenihAplikacijom++;
             }

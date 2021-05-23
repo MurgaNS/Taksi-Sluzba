@@ -5,8 +5,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +83,12 @@ public class Voznja {
             while ((line = bufferedReader.readLine()) != null) {
                 Voznja voznja = null;
                 String[] lineParts = line.split(",");
-                voznja = new Voznja(Long.parseLong(lineParts[0]), new Date(), lineParts[2], lineParts[3], Double.parseDouble(lineParts[4]),
+
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+                Date date = simpleDateFormat.parse(lineParts[1]);
+                voznja = new Voznja(Long.parseLong(lineParts[0]), date, lineParts[2], lineParts[3], Double.parseDouble(lineParts[4]),
                         Double.parseDouble(lineParts[5]),
                         lineParts[6], lineParts[7],
                         Long.parseLong(lineParts[8]),
@@ -114,19 +122,14 @@ public class Voznja {
     }
 // @murga
     public String stringToSave(){
-//        long vozacJMBG = 0;
-//        long musterijaJMBG = 0;
-//        if(vozac != null){
-//            vozacJMBG = vozac.getJMBG();
-//        }
-//        if(musterija != null){
-//            musterijaJMBG = musterija.getJMBG();
-//        }
-//        return id + "," + datumPorudzbine + "," + adresaPolaska + "," +
-//                adresaDestinacije + "," + brojPredjenihKilometara + "," +
-//                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
-//                + vozacJMBG + "," + musterijaJMBG;
-        return "";
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String strDate = dateFormat.format(date);
+
+        return id + "," + strDate + "," + adresaPolaska + "," +
+                adresaDestinacije + "," + brojPredjenihKilometara + "," +
+                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
+                + vozacId + "," + musterijaId;
     }
 
     public long getId() {

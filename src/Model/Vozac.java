@@ -222,12 +222,18 @@ public class Vozac extends Korisnik {
         System.out.println("Unesi proizvodjac automobila : ");
         String proizvodjac = scanner.next();
 
-        List<Vozac> sviKorisnici = Vozac.nadjiVozaceZaProizvodjaca(proizvodjac);
+        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
 
-        for (Vozac vozac : sviKorisnici) {
-            if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
-                    && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
-                System.out.println(vozac);
+        for (Korisnik vozac : sviKorisnici) {
+            if (vozac instanceof Vozac) {
+                if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
+                        && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
+                    String regOznaka = String.valueOf(((Vozac)vozac).getRegOznakaVozila());
+                    Vozilo vozilo = Vozilo.nadjiPoBrojuRegistarskeOznake(regOznaka);
+                    if (vozilo!= null && vozilo.getProizvodjac().equals(proizvodjac)) {
+                        System.out.println(vozac);
+                    }
+                }
             }
         }
     }

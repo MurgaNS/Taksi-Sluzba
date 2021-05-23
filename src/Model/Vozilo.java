@@ -116,6 +116,17 @@ public class Vozilo {
         }
     }
 
+    public static Vozilo nadjiPoBrojuRegistarskeOznake(String brojRegistarskeOznake){
+        List<Vozilo> vozila = Vozilo.ucitajSveAutomobile();
+        for(Vozilo vozilo : vozila){
+            if(vozilo.getBrRegistarskeOznake().equals(brojRegistarskeOznake)){
+                return vozilo;
+            }
+        }
+        return null;
+
+    }
+
     public static void sacuvajListuAutomobilaUFajl(List<Vozilo> automobili) {
         File file = new File("src\\Data\\vozila.csv");
         try {
