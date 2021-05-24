@@ -1,11 +1,20 @@
+import Gui.LoginProzor;
 import Model.*;
 
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+
+
 class App {
     public static void main(String[] args) {
+
+        //***
+        LoginProzor lp = new LoginProzor();
+        lp.setVisible(true);
+        //***
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Unesite korisnicko ime: ");

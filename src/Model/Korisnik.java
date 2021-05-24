@@ -27,6 +27,17 @@ public abstract class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
+    public static Boolean postojiKorisnik(String korisnickoIme, String lozinka){
+        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+        for (Korisnik k : korisnici) {
+            if (k.getKorisnickoIme().equals(korisnickoIme) && k.getLozinka().equals(lozinka)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public static Korisnik nadjiKorisnikaPrekoJMBG(long JMBG) {
         List<Korisnik> korisnici = ucitajSveKorisnike();
         for (Korisnik korisnik : korisnici) {
@@ -136,15 +147,6 @@ public abstract class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
-    public static Korisnik pronadjiPoJMBG(String JMBG) {
-        List<Korisnik> listaKorisnika = Korisnik.ucitajSveKorisnike();
-        for (Korisnik korisnik : listaKorisnika) {
-            if (korisnik.getJMBG() == Long.parseLong(JMBG)) {
-                return korisnik;
-            }
-        }
-        return null;
-    }
     public long getJMBG() {
         return JMBG;
     }
