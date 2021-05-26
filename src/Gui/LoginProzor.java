@@ -1,5 +1,6 @@
 package Gui;
 
+import Model.Dispecer;
 import Model.Korisnik;
 import net.miginfocom.swing.MigLayout;
 
@@ -17,6 +18,8 @@ public class LoginProzor extends JFrame {
     private JPasswordField pfPassword = new JPasswordField(20);
     private JButton btnOk = new JButton("Ok");
     private JButton btnCancel = new JButton("Cancel");
+
+//    private Dispecer dispecer;
 
 
     public LoginProzor() {

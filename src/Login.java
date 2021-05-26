@@ -30,6 +30,7 @@ public class Login {
         } catch (Exception e) {
             System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
         }
+        Vozac.prijavljeniKorisnik = korisnik;
         return korisnik;
     }
 }

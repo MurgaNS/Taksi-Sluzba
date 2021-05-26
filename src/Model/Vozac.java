@@ -8,6 +8,9 @@ import java.util.*;
 
 public class Vozac extends Korisnik {
 
+
+
+    public static Korisnik prijavljeniKorisnik = null;
     private double plata;
     private int brojClanskeKarte;
     private List<Voznja> listaVoznji;
@@ -230,14 +233,27 @@ public class Vozac extends Korisnik {
                         && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
                     String regOznaka = String.valueOf(((Vozac)vozac).getRegOznakaVozila());
                     Vozilo vozilo = Vozilo.nadjiPoBrojuRegistarskeOznake(regOznaka);
-                    if (vozilo!= null && vozilo.getProizvodjac().equals(proizvodjac)) {
-                        System.out.println(vozac);
-                    }
+                    System.out.println(vozac);
+
                 }
             }
         }
     }
 
+    public static void prikazDodeljenihVoznji(){
+
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        for(Voznja voznja : voznje){
+            if(voznja.getNacinPorudzbine().equals("TELEFONOM") && voznja.getStatusVoznje().equals("DODELJENA")){
+                long vozacJMBG = voznja.getVozacId();
+                if(prijavljeniKorisnik.getJMBG() == vozacJMBG){
+                    System.out.println(voznja);
+                }
+
+
+            }
+        }
+    }
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
         for (Voznja voznja : vozac.getListaVoznji()) {
@@ -370,7 +386,7 @@ public class Vozac extends Korisnik {
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
-                    DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+                    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     Date date = (Date) formatter.parse(tmp[1]);
                     Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7]);
                     listaVoznji.add(voznja);
