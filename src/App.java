@@ -1,3 +1,4 @@
+import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
 import Gui.LoginProzor;
 import Model.*;
 
@@ -13,7 +14,6 @@ class App {
         LoginProzor lp = new LoginProzor();
         lp.setVisible(true);
         //***
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Unesite korisnicko ime: ");

@@ -1,34 +1,24 @@
-package Gui;
+package Gui.FormeZaPrikaz;
 
+import Gui.FormeZaDodavanjeIIzmenu.TaksiSluzbaForma;
 import Model.TaksiSluzba;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IzmenaTaksiSluzbeProzor extends JFrame {
-   private JFrame jFrame = new JFrame();
-
-    private JLabel lblPIB = new JLabel("PIB");
-    private JTextField txtPIB = new JTextField(20);
-    private JLabel lblNaziv = new JLabel("Naziv");
-    private JTextField txtNaziv = new JTextField(20);
-    private JLabel lblAdresa = new JLabel("Adresa");
-    private JTextField txtAdresa = new JTextField(20);
-    private JLabel lblCenaStarta = new JLabel("Cena starta");
-    private JTextField txtCenaStarta = new JTextField(20);
-    private JLabel lblCenaPoKm = new JLabel("Cena po kilometru");
-    private JTextField txtCenaPoKm = new JTextField(20);
-    private JButton btnOk = new JButton("OK");
-    private JButton btnCancel = new JButton("Cancel");
-
-    private DefaultTableModel tableModel;
+public class TaksiSluzbaProzor extends JFrame {
+    private JToolBar glavniToolBar = new JToolBar();
+    private JButton dugmeIzmena = new JButton("Izmena");
+    private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
     private TaksiSluzba taksiSluzba;
 
-    public IzmenaTaksiSluzbeProzor() {
+    public TaksiSluzbaProzor() {
         this.taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         setTitle("Izmena podataka taksi sluzbe");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -36,10 +26,11 @@ public class IzmenaTaksiSluzbeProzor extends JFrame {
         setSize(500, 300);
         initGUI();
         initActions();
-        pack();
     }
 
     public void initGUI() {
+        glavniToolBar.add(dugmeIzmena);
+        add(glavniToolBar, BorderLayout.NORTH);
         List<TaksiSluzba> taksiSluzbaList = new ArrayList<>();
         taksiSluzbaList.add(taksiSluzba);
         System.out.println(taksiSluzba);
@@ -50,20 +41,33 @@ public class IzmenaTaksiSluzbeProzor extends JFrame {
         sadrzaj[0][2] = taksiSluzba.getAdresa();
         sadrzaj[0][3] = taksiSluzba.getCenaStarta();
         sadrzaj[0][4] = taksiSluzba.getCenaPoKilometru();
-        tableModel = new DefaultTableModel(sadrzaj, zaglavlja);
-        tabelaPodataka = new JTable(tableModel);
-        tabelaPodataka.setBounds(30,40,200,300);
+        tabelaModel = new DefaultTableModel(sadrzaj, zaglavlja);
+        tabelaPodataka = new JTable(tabelaModel);
+        tabelaPodataka.setBounds(30, 40, 200, 300);
         JScrollPane scrollPane = new JScrollPane(tabelaPodataka);
-        jFrame.add(scrollPane);
-        jFrame.setSize(300,400);
+        add(scrollPane);
+        setSize(300, 400);
         tabelaPodataka.setRowSelectionAllowed(true);
         tabelaPodataka.setColumnSelectionAllowed(false);
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
-        jFrame.setVisible(true);
+        setVisible(true);
     }
 
     public void initActions() {
+        dugmeIzmena.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = tabelaPodataka.getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
+                    TaksiSluzbaForma taksiSluzbaForma = new TaksiSluzbaForma(taksiSluzba);
+                    taksiSluzbaForma.setVisible(true);
+                }
+            }
+        });
     }
 }
