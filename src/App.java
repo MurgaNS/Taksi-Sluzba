@@ -1,4 +1,5 @@
 import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
+import Gui.GlavniProzor;
 import Gui.LoginProzor;
 import Model.*;
 
@@ -24,6 +25,9 @@ class App {
 
         Login l = new Login();
         Korisnik korisnik = l.login(korisnickoIme, lozinka);
+
+        GlavniProzor glavniProzor = new GlavniProzor(korisnik);
+
 
         if (korisnik instanceof Dispecer) {
             Scanner sc = new Scanner(System.in);
