@@ -12,11 +12,16 @@ public abstract class Korisnik {
     protected String ime;
     protected String prezime;
     protected String adresa;
-    protected String pol;
+    protected Pol pol;
     protected String brojTelefona;
     protected boolean obrisan;
 
-    public Korisnik(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona) {
+    public enum Pol {
+        MUSKI,
+        ZENSKI
+    }
+
+    public Korisnik(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona) {
         this.JMBG = JMBG;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -27,7 +32,7 @@ public abstract class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
-    public static Korisnik postojiKorisnik(String korisnickoIme, String lozinka){
+    public static Korisnik postojiKorisnik(String korisnickoIme, String lozinka) {
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
         for (Korisnik k : korisnici) {
             if (k.getKorisnickoIme().equals(korisnickoIme) && k.getLozinka().equals(lozinka)) {
@@ -57,18 +62,23 @@ public abstract class Korisnik {
             while ((line = bufferedReader.readLine()) != null) {
                 Korisnik korisnik = null;
                 String[] lineParts = line.split(",");
-//                System.out.println(lineParts.toString());
+                Pol pol;
+                if (lineParts[7].trim().equals("MUSKI")) {
+                    pol = Pol.MUSKI;
+                } else {
+                    pol = Pol.ZENSKI;
+                }
                 switch (lineParts[0]) {
                     case "musterija":
-                        korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
+                        korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8]);
                         break;
 
                     case "vozac":
-                        korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
+                        korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
                         break;
 
                     case "dispecer":
-                        korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
+                        korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
                         break;
 
                 }
@@ -106,13 +116,13 @@ public abstract class Korisnik {
 
     public String korisnikUString() {
         return JMBG +
-                "," + korisnickoIme +
-                "," + lozinka +
-                "," + ime +
-                "," + prezime +
-                "," + adresa +
-                "," + pol +
-                "," + brojTelefona;
+               "," + korisnickoIme +
+               "," + lozinka +
+               "," + ime +
+               "," + prezime +
+               "," + adresa +
+               "," + pol +
+               "," + brojTelefona;
     }
 
     public String getPrezime() {
@@ -131,11 +141,11 @@ public abstract class Korisnik {
         this.adresa = adresa;
     }
 
-    public String getPol() {
+    public Pol getPol() {
         return pol;
     }
 
-    public void setPol(String pol) {
+    public void setPol(Pol pol) {
         this.pol = pol;
     }
 

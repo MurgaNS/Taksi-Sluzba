@@ -1,5 +1,6 @@
-2,b7,passat,2013,BG549432,putnicko vozilo,false,12312312
-1,b6,paat,2006,BG332112,putnicko vozilo,false,1546841324851
-3,b8,passat,2018,221,putnicko vozilo,true,null
-4,Corolla,Toyota,1998,BG332112,putnicko vozilo,false,123123123
-6,5,Golf,2007,BG1233,putnicko vozilo,false,122212121
+2,b7,passat,2013,BG549432,KOMBI,false,12312312
+1,b6,paat,2006,BG332112,AUTOMOBIL,false,1546841324851
+3,b8,passat,2018,221,AUTOMOBIL,true,null
+4,Corolla,Toyota,1998,BG332112,AUTOMOBIL,false,123123123
+6,5,Golf,2007,BG1233,KOMBI,false,122212121
+123,123,123,123,132,KOMBI,false,12312312

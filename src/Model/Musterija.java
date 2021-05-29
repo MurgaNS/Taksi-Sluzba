@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class Musterija extends Korisnik {
 
-    public Musterija(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona) {
+    public Musterija(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
     }
 

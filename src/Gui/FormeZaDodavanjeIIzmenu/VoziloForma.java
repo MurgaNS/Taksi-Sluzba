@@ -84,7 +84,13 @@ public class VoziloForma extends JFrame {
                     String model = txtModel.getText().trim();
                     String godProizvodnje = txtGodProizvodnje.getText().trim();
                     String brRegOznake = txtBrRegOznake.getText().trim();
-                    String vrsta = txtVrsta.getText().trim();
+                    String vrstaTxt = txtVrsta.getText().trim();
+                    Vozilo.VrstaVozila vrsta;
+                    if (vrstaTxt == "AUTOMOBIL") {
+                        vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
+                    } else {
+                        vrsta = Vozilo.VrstaVozila.KOMBI;
+                    }
                     String vozac = txtVozac.getText().trim();
                     if (vozilo == null) {
                         Vozilo novoVozilo = new Vozilo(brTaksiVozila, model, proizvodjac, Integer.parseInt(godProizvodnje), brRegOznake, vrsta, false, Long.parseLong(vozac));
@@ -167,7 +173,11 @@ public class VoziloForma extends JFrame {
         txtModel.setText(vozilo.getModel());
         txtGodProizvodnje.setText(String.valueOf(vozilo.getGodProizvodnje()));
         txtBrRegOznake.setText(vozilo.getBrRegistarskeOznake());
-        txtVrsta.setText(vozilo.getVrsta());
+        if (vozilo.getVrsta() == Vozilo.VrstaVozila.AUTOMOBIL) {
+            txtVrsta.setText("AUTOMOBIL");
+        } else {
+            txtVrsta.setText("KOMBI");
+        }
         txtVozac.setText(String.valueOf(vozilo.getVozacId()));
     }
 

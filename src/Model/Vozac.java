@@ -16,7 +16,7 @@ public class Vozac extends Korisnik {
     private Long regOznakaVozila;
 
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
@@ -24,7 +24,7 @@ public class Vozac extends Korisnik {
         this.regOznakaVozila = regOznakaVozila;
     }
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte) {
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, int brojClanskeKarte) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
@@ -70,7 +70,13 @@ public class Vozac extends Korisnik {
         System.out.println("Unesi adresu");
         String adresa = scanner.next();
         System.out.println("Unesi pol");
-        String pol = scanner.next();
+        String polTxt = scanner.next();
+        Pol pol;
+        if (polTxt.trim().equals("MUSKI")) {
+            pol = Pol.MUSKI;
+        } else {
+            pol = Pol.ZENSKI;
+        }
         System.out.println("Broj telefona");
         String brojTelefona = scanner.next();
         System.out.println("Unesi platu");
@@ -151,9 +157,13 @@ public class Vozac extends Korisnik {
                 vozac.setAdresa(adresa);
             }
             case 6 -> {
-                System.out.println("Unesite pol: ");
+                System.out.println("Unesite pol [MUSKI/ZENSKI]: ");
                 String pol = scanner.next();
-                vozac.setPol(pol);
+                if (pol.trim().equals("MUSKI")) {
+                    vozac.setPol(Pol.MUSKI);
+                } else {
+                    vozac.setPol(Pol.ZENSKI);
+                }
             }
             case 7 -> {
                 System.out.println("Unesite broj telefona: ");
@@ -359,16 +369,22 @@ public class Vozac extends Korisnik {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
+                Pol pol;
+                if (tmp[7].trim().equals("MUSKI")) {
+                    pol = Pol.MUSKI;
+                } else {
+                    pol = Pol.ZENSKI;
+                }
                 if (tmp[0].equals("vozac")) {
                     Vozilo vozilo = null;
                     try {
-                        if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11],listaVozila) != null) {
-                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11],listaVozila);
+                        if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11], listaVozila) != null) {
+                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11], listaVozila);
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
-                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7], tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, Long.parseLong(vozilo.getBrTaksiVozila()));
+                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], pol, tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, Long.parseLong(vozilo.getBrTaksiVozila()));
                     vozac.setListaVoznji(ucitajListuVoznji(vozac));
                     vozaci.add(vozac);
                 }

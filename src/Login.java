@@ -12,10 +12,16 @@ public class Login {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineParts = line.split(",");
                 if (korisnickoIme.equals(lineParts[2]) && lozinka.equals(lineParts[3])) {
+                    Korisnik.Pol pol;
+                    if (lineParts[7].trim().equals("MUSKI")) {
+                        pol = Korisnik.Pol.MUSKI;
+                    } else {
+                        pol = Korisnik.Pol.ZENSKI;
+                    }
                     switch (lineParts[0]) {
-                        case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8]);
-                        case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
-                        case "dispecer" -> korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], lineParts[7], lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
+                        case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8]);
+                        case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
+                        case "dispecer" -> korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], lineParts[11]);
                     }
                     System.out.println("Uspesno ste se ulogovali");
                 }

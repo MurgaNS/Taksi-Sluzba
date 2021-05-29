@@ -12,11 +12,16 @@ public class Vozilo {
     private String proizvodjac;
     private int godProizvodnje;
     private String brRegistarskeOznake;
-    private String vrsta;
+    private VrstaVozila vrsta;
     private Long vozacId;
     private boolean obrisan;
 
-    public Vozilo(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Boolean obrisan, Long vozacId) {
+    public enum VrstaVozila {
+        AUTOMOBIL,
+        KOMBI
+    }
+
+    public Vozilo(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, VrstaVozila vrsta, Boolean obrisan, Long vozacId) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
         this.proizvodjac = proizvodjac;
@@ -27,7 +32,7 @@ public class Vozilo {
         this.vozacId = vozacId;
     }
 
-    public Vozilo(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, String vrsta, Boolean obrisan) {
+    public Vozilo(String brTaksiVozila, String model, String proizvodjac, int godProizvodnje, String brRegistarskeOznake, VrstaVozila vrsta, Boolean obrisan) {
         this.brTaksiVozila = brTaksiVozila;
         this.model = model;
         this.proizvodjac = proizvodjac;
@@ -36,6 +41,7 @@ public class Vozilo {
         this.obrisan = obrisan;
         this.vrsta = vrsta;
     }
+
     public static void izmeniBrojRegistarskeOznake(Vozilo vozilo) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Novi registarski broj vozila:");
@@ -79,10 +85,17 @@ public class Vozilo {
     public static Vozilo automobilDTO(String automobilString) {
         String[] wordsList = automobilString.split(",");
         Vozilo vozilo;
+        VrstaVozila vrsta;
+        if (wordsList[5].trim().equals("AUTOMOBIL")) {
+            vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
+        } else {
+            vrsta = Vozilo.VrstaVozila.KOMBI;
+        }
+
         try {
-            vozilo = new Vozilo(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5], Boolean.parseBoolean(wordsList[6]), Long.parseLong(wordsList[7]));
+            vozilo = new Vozilo(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], vrsta, Boolean.parseBoolean(wordsList[6]), Long.parseLong(wordsList[7]));
         } catch (NumberFormatException e) {
-            vozilo = new Vozilo(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], wordsList[5], Boolean.parseBoolean(wordsList[6]));
+            vozilo = new Vozilo(wordsList[0], wordsList[1], wordsList[2], Integer.parseInt(wordsList[3]), wordsList[4], vrsta, Boolean.parseBoolean(wordsList[6]));
 
         }
         return vozilo;
@@ -172,7 +185,7 @@ public class Vozilo {
         Scanner sc = new Scanner(System.in);
         System.out.println("Izaberi broj taksi vozila: ");
         String brTaksiVozila = sc.nextLine();
-        Vozilo voziloZaBrisanje = Vozilo.pronadjiPoBrojuTaksiVozila(brTaksiVozila,listaVozila);
+        Vozilo voziloZaBrisanje = Vozilo.pronadjiPoBrojuTaksiVozila(brTaksiVozila, listaVozila);
         List<Vozilo> automobili = ucitajSveAutomobile();
         for (Vozilo a : automobili) {
             if (voziloZaBrisanje != null && a.getVozacId() == null && !a.isObrisan() && a.getBrTaksiVozila().equals(voziloZaBrisanje.getBrTaksiVozila())) {
@@ -191,7 +204,7 @@ public class Vozilo {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Izaberite broj taksi vozila: ");
-        Vozilo vozilo = pronadjiPoBrojuTaksiVozila(sc.nextLine(),listaVozila);
+        Vozilo vozilo = pronadjiPoBrojuTaksiVozila(sc.nextLine(), listaVozila);
         return vozilo;
     }
 
@@ -242,7 +255,13 @@ public class Vozilo {
         System.out.println("Registarska oznaka: ");
         String regOznaka = sc.nextLine();
         System.out.println("Vrsta: ");
-        String vrsta = sc.nextLine();
+        String vrstaTxt = sc.nextLine();
+        VrstaVozila vrsta;
+        if (vrstaTxt.trim().equals("AUTOMOBIL")) {
+            vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
+        } else {
+            vrsta = Vozilo.VrstaVozila.KOMBI;
+        }
         Vozilo vozilo = new Vozilo(brTaksiVozila, model, proizvodjac, godinaProizvodnje, regOznaka, vrsta, false);
         System.out.println("Da li zelite da dodate vozaca ovom automobilu? [Y/N]");
         if (sc.nextLine().equals("Y")) {
@@ -316,11 +335,11 @@ public class Vozilo {
         this.brRegistarskeOznake = brRegistarskeOznake;
     }
 
-    public String getVrsta() {
+    public VrstaVozila getVrsta() {
         return vrsta;
     }
 
-    public void setVrsta(String vrsta) {
+    public void setVrsta(VrstaVozila vrsta) {
         this.vrsta = vrsta;
     }
 

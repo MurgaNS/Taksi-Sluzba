@@ -11,7 +11,7 @@ public class Dispecer extends Korisnik {
     private String brojTelefonskeLinije;
     private String odeljenjeRada;
     
-    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, String brojTelefonskeLinije, String odeljenjeRada) {
+    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, String brojTelefonskeLinije, String odeljenjeRada) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
         this.brojTelefonskeLinije = brojTelefonskeLinije;
