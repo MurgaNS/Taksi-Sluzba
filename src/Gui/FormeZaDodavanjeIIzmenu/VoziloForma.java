@@ -93,7 +93,13 @@ public class VoziloForma extends JFrame {
                     }
                     String vozac = txtVozac.getText().trim();
                     if (vozilo == null) {
-                        Vozilo novoVozilo = new Vozilo(brTaksiVozila, model, proizvodjac, Integer.parseInt(godProizvodnje), brRegOznake, vrsta, false, Long.parseLong(vozac));
+                        Long vozacId;
+                        try {
+                            vozacId = Long.parseLong(vozac);
+                        } catch (NumberFormatException numberFormatException) {
+                            vozacId = null;
+                        }
+                        Vozilo novoVozilo = new Vozilo(brTaksiVozila, model, proizvodjac, Integer.parseInt(godProizvodnje), brRegOznake, vrsta, false, vozacId);
                         listaVozila.add(novoVozilo);
                     } else {
                         vozilo.setBrTaksiVozila(brTaksiVozila);
@@ -102,7 +108,11 @@ public class VoziloForma extends JFrame {
                         vozilo.setGodProizvodnje(Integer.parseInt(godProizvodnje));
                         vozilo.setBrRegistarskeOznake(brRegOznake);
                         vozilo.setVrsta(vrsta);
-                        vozilo.setVozacId(Long.parseLong(vozac));
+                        try {
+                            vozilo.setVozacId(Long.parseLong(vozac));
+                        } catch (NumberFormatException numberFormatException) {
+                            vozilo.setVozacId(null);
+                        }
                     }
                     Vozilo.sacuvajListuAutomobilaUFajl(listaVozila);
                     VoziloForma.this.dispose();
@@ -133,12 +143,6 @@ public class VoziloForma extends JFrame {
             Double.parseDouble(txtGodProizvodnje.getText().trim());
         } catch (NumberFormatException e) {
             poruka += "- Godina proizvodnje mora biti broj\n";
-            ok = false;
-        }
-        try {
-            Long.parseLong(txtVozac.getText().trim());
-        } catch (NumberFormatException e) {
-            poruka += "- Polje vozac popunjavate sa JMBG-om vozaca\n";
             ok = false;
         }
 

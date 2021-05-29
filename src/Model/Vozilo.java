@@ -130,8 +130,11 @@ public class Vozilo {
                 v.setVrsta(vozilo.getVrsta());
                 v.setObrisan(vozilo.isObrisan());
                 v.setVozacId(vozilo.getVozacId());
+                sacuvajListuAutomobilaUFajl(vozila);
+                break;
             }
         }
+        vozila.add(vozilo);
         sacuvajListuAutomobilaUFajl(vozila);
     }
 
@@ -208,6 +211,7 @@ public class Vozilo {
         return vozilo;
     }
 
+//    moguce menjanje samo registarske oznake
     public static void izmeniAutomobil() throws IOException {
         Vozilo vozilo = izaberiAutomobil();
         izmeniBrojRegistarskeOznake(vozilo);
