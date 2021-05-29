@@ -291,7 +291,34 @@ public class Vozac extends Korisnik {
         }
         Voznja.upisiVoznje(voznje);
     }
-    // zavrsavanje voznje
+
+    // 2.3.4 - završavanje vožnje funkcionalnost  @jovan
+    public static void zavrsavanjeVoznje(){
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        Vozac vozac = (Vozac)Vozac.prijavljeniKorisnik;
+        Voznja voznjaZavrsavanje = null;
+        for(Voznja voznja : voznje){
+            if(voznja.getVozacId() == vozac.getJMBG() &&  voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
+                voznjaZavrsavanje = voznja;
+                break;
+            }
+        }
+        if(voznjaZavrsavanje == null){
+            System.out.println("Nemate vožnji za završavanje.");
+            return;
+        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Unesi trajanje vožnje:");
+        double trajanje = scanner.nextDouble();
+        System.out.println("Unesi broj pređenih km:");
+        double brojKm = scanner.nextDouble();
+        voznjaZavrsavanje.setTrajanjeVoznjeUMinutama(trajanje);
+        voznjaZavrsavanje.setBrojPredjenihKilometara(brojKm);
+        Voznja.upisiVoznje(voznje);
+        System.out.println("Uspešno završena vožnja!");
+    }
+
+
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
         for (Voznja voznja : vozac.getListaVoznji()) {
