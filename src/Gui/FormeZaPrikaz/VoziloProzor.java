@@ -69,7 +69,7 @@ public class VoziloProzor extends JFrame {
                     JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
                 } else {
                     String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId);
+                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId,listaVozila);
                     int izbor = JOptionPane.showConfirmDialog(null,
                             "Da li ste sigurni da zelite da obrisete vozilo?",
                             vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
@@ -86,13 +86,13 @@ public class VoziloProzor extends JFrame {
             }
         });
 
-//        btnAdd.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                KnjigeForma kf = new KnjigeForma(prodavnica, null);
-//                kf.setVisible(true);
-//            }
-//        });
+        dugmeDodaj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VoziloForma vf = new VoziloForma(null);
+                vf.setVisible(true);
+            }
+        });
         dugmeIzmena.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,7 +101,7 @@ public class VoziloProzor extends JFrame {
                     JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
                 } else {
                     String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId);
+                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId,listaVozila);
                     VoziloForma voziloForma = new VoziloForma(vozilo);
                     voziloForma.setVisible(true);
                 }

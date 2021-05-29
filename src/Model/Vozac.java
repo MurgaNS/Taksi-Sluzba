@@ -15,6 +15,7 @@ public class Vozac extends Korisnik {
     private List<Voznja> listaVoznji;
     private Long regOznakaVozila;
 
+
     public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, String pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
@@ -223,7 +224,6 @@ public class Vozac extends Korisnik {
 
         System.out.println("Unesi proizvodjac automobila : ");
         String proizvodjac = scanner.next();
-
         List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
 
         for (Korisnik vozac : sviKorisnici) {
@@ -231,7 +231,7 @@ public class Vozac extends Korisnik {
                 if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
                     && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
                     String regOznaka = String.valueOf(((Vozac) vozac).getRegOznakaVozila());
-                    Vozilo vozilo = Vozilo.nadjiPoBrojuRegistarskeOznake(regOznaka);
+                    Vozilo vozilo = Vozilo.pronadjiPoBrojuRegistarskeOznake(regOznaka);
                     System.out.println(vozac);
 
                 }
@@ -352,6 +352,8 @@ public class Vozac extends Korisnik {
     public static ArrayList<Vozac> ucitajSveVozace() {
         // TODO dodati listu voznji
         ArrayList<Vozac> vozaci = new ArrayList<>();
+        List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
@@ -360,8 +362,8 @@ public class Vozac extends Korisnik {
                 if (tmp[0].equals("vozac")) {
                     Vozilo vozilo = null;
                     try {
-                        if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11]) != null) {
-                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11]);
+                        if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11],listaVozila) != null) {
+                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11],listaVozila);
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;

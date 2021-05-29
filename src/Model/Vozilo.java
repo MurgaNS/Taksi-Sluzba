@@ -36,10 +36,6 @@ public class Vozilo {
         this.obrisan = obrisan;
         this.vrsta = vrsta;
     }
-
-    public Vozilo(Vozilo vozilo) {
-    }
-
     public static void izmeniBrojRegistarskeOznake(Vozilo vozilo) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Novi registarski broj vozila:");
@@ -92,10 +88,9 @@ public class Vozilo {
         return vozilo;
     }
 
-    public static Vozilo pronadjiPoBrojuTaksiVozila(String brTaksiVozila) {
-        List<Vozilo> automobili = ucitajSveAutomobile();
+    public static Vozilo pronadjiPoBrojuTaksiVozila(String brTaksiVozila, List<Vozilo> listaVozila) {
         for (Vozilo vozilo :
-                automobili) {
+                listaVozila) {
             if (vozilo.getBrTaksiVozila().equals(brTaksiVozila)) {
                 return vozilo;
             }
@@ -145,7 +140,7 @@ public class Vozilo {
         }
     }
 
-    public static Vozilo nadjiPoBrojuRegistarskeOznake(String brojRegistarskeOznake) {
+    public static Vozilo pronadjiPoBrojuRegistarskeOznake(String brojRegistarskeOznake) {
         List<Vozilo> vozila = Vozilo.ucitajSveAutomobile();
         for (Vozilo vozilo : vozila) {
             if (vozilo.getBrRegistarskeOznake().equals(brojRegistarskeOznake)) {
@@ -172,10 +167,12 @@ public class Vozilo {
 
     public static void izbrisiAutomobil() throws IOException {
         prikaziAutomobileBezVozaca();
+        List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Izaberi broj taksi vozila: ");
         String brTaksiVozila = sc.nextLine();
-        Vozilo voziloZaBrisanje = Vozilo.pronadjiPoBrojuTaksiVozila(brTaksiVozila);
+        Vozilo voziloZaBrisanje = Vozilo.pronadjiPoBrojuTaksiVozila(brTaksiVozila,listaVozila);
         List<Vozilo> automobili = ucitajSveAutomobile();
         for (Vozilo a : automobili) {
             if (voziloZaBrisanje != null && a.getVozacId() == null && !a.isObrisan() && a.getBrTaksiVozila().equals(voziloZaBrisanje.getBrTaksiVozila())) {
@@ -190,9 +187,11 @@ public class Vozilo {
 
     public static Vozilo izaberiAutomobil() {
         prikaziAutomobile();
+        List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Izaberite broj taksi vozila: ");
-        Vozilo vozilo = pronadjiPoBrojuTaksiVozila(sc.nextLine());
+        Vozilo vozilo = pronadjiPoBrojuTaksiVozila(sc.nextLine(),listaVozila);
         return vozilo;
     }
 
