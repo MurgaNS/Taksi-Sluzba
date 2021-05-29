@@ -4,6 +4,9 @@ import Model.TaksiSluzba;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class TaksiSluzbaForma extends JFrame {
     private JLabel lblPIB = new JLabel("PIB");
@@ -47,11 +50,35 @@ public class TaksiSluzbaForma extends JFrame {
         add(lblCenaStarta);
         add(txtCenaStarta);
         add(new JLabel());
-        add(dugmeOk,"split 2");
+        add(dugmeOk, "split 2");
         add(dugmePonisti);
     }
 
     public void initActions() {
+        dugmeOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Long PIB = Long.parseLong(txtPIB.getText().trim());
+                String naziv = txtNaziv.getText().trim();
+                String adresa = txtAdresa.getText().trim();
+                Double cenaPoKm = Double.parseDouble(txtCenaPoKilometru.getText().trim());
+                Double cenaStarta = Double.parseDouble(txtCenaStarta.getText().trim());
+
+                taksiSluzba.setPIB(PIB);
+                taksiSluzba.setNaziv(naziv);
+                taksiSluzba.setAdresa(adresa);
+                taksiSluzba.setCenaStarta(cenaStarta);
+                taksiSluzba.setCenaPoKilometru(cenaPoKm);
+
+                try {
+                    TaksiSluzba.sacuvajPodatkeUFajl(taksiSluzba);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                TaksiSluzbaForma.this.dispose();
+                TaksiSluzbaForma.this.setVisible(false);
+            }
+        });
     }
 
     private void popuniPolja() {
