@@ -44,7 +44,7 @@ public class Vozilo {
         vozilo.setBrRegistarskeOznake(noviRegBroj);
     }
 
-    protected static List<Vozilo> ucitajSveAutomobile() {
+    public static List<Vozilo> ucitajSveAutomobile() {
         List<Vozilo> automobili = new ArrayList<>();
         String red;
         try {
@@ -116,10 +116,10 @@ public class Vozilo {
         }
     }
 
-    public static Vozilo nadjiPoBrojuRegistarskeOznake(String brojRegistarskeOznake){
+    public static Vozilo nadjiPoBrojuRegistarskeOznake(String brojRegistarskeOznake) {
         List<Vozilo> vozila = Vozilo.ucitajSveAutomobile();
-        for(Vozilo vozilo : vozila){
-            if(vozilo.getBrRegistarskeOznake().equals(brojRegistarskeOznake)){
+        for (Vozilo vozilo : vozila) {
+            if (vozilo.getBrRegistarskeOznake().equals(brojRegistarskeOznake)) {
                 return vozilo;
             }
         }
@@ -226,14 +226,14 @@ public class Vozilo {
     @Override
     public String toString() {
         return "Vozilo{" +
-                "brTaksiVozila='" + brTaksiVozila + '\'' +
-                ", model='" + model + '\'' +
-                ", proizvodjac='" + proizvodjac + '\'' +
-                ", godProizvodnje=" + godProizvodnje +
-                ", brRegistarskeOznake='" + brRegistarskeOznake + '\'' +
-                ", vrsta='" + vrsta + '\'' +
-                ", vozac=" + vozacId +
-                '}';
+               "brTaksiVozila='" + brTaksiVozila + '\'' +
+               ", model='" + model + '\'' +
+               ", proizvodjac='" + proizvodjac + '\'' +
+               ", godProizvodnje=" + godProizvodnje +
+               ", brRegistarskeOznake='" + brRegistarskeOznake + '\'' +
+               ", vrsta='" + vrsta + '\'' +
+               ", vozac=" + vozacId +
+               '}';
     }
 
     public String stringToSave() {

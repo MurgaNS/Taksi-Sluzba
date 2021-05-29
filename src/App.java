@@ -51,8 +51,6 @@ class App {
                         case 12 -> Dispecer.dodeljivanjeVoznjiKreiranihTelefonom();
                         case 13 -> Vozac.kombinovanaPretragaVozaca();
                         case 14 -> Dispecer.izvestaj();
-
-
                     }
                 }
             } catch (IllegalStateException | NoSuchElementException | IOException e) {

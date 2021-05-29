@@ -9,7 +9,6 @@ import java.util.*;
 public class Vozac extends Korisnik {
 
 
-
     public static Korisnik prijavljeniKorisnik = null;
     private double plata;
     private int brojClanskeKarte;
@@ -47,10 +46,10 @@ public class Vozac extends Korisnik {
         for (Korisnik korisnik : sviKorisnici) {
             if (korisnik instanceof Vozac) {
                 System.out.println("JMBG:" + korisnik.getJMBG() + " " + "Korisnicko ime:" + korisnik.getKorisnickoIme() + " " +
-                        "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " " + "Prezime:" +
-                        korisnik.getPrezime() + " " + "Adresa: " + korisnik.getAdresa() + " " + "Pol:" + korisnik.getPol() + " " +
-                        "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
-                        "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
+                                   "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " " + "Prezime:" +
+                                   korisnik.getPrezime() + " " + "Adresa: " + korisnik.getAdresa() + " " + "Pol:" + korisnik.getPol() + " " +
+                                   "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
+                                   "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
             }
         }
     }
@@ -114,14 +113,14 @@ public class Vozac extends Korisnik {
             return;
         }
         System.out.println("1. Izmena korisnickog imena" +
-                "\n2. Izmena sifre" +
-                "\n3. Izmena imena" +
-                "\n4. Izmena prezimena" +
-                "\n5. Izmena adrese" +
-                "\n6. Izmena pola" +
-                "\n7. Izmena broja telefona" +
-                "\n8. Izmena plate" +
-                "\n9. Izmena clanske karte");
+                           "\n2. Izmena sifre" +
+                           "\n3. Izmena imena" +
+                           "\n4. Izmena prezimena" +
+                           "\n5. Izmena adrese" +
+                           "\n6. Izmena pola" +
+                           "\n7. Izmena broja telefona" +
+                           "\n8. Izmena plate" +
+                           "\n9. Izmena clanske karte");
         System.out.println("Odaberi opciju");
         int opcija = scanner.nextInt();
         switch (opcija) {
@@ -201,9 +200,9 @@ public class Vozac extends Korisnik {
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
             writer.append("\nvozac," + vozac.getJMBG() + "," + vozac.getKorisnickoIme() + ","
-                    + vozac.getLozinka() + "," + vozac.getIme() + "," +
-                    vozac.getPrezime() + "," + vozac.getAdresa() + "," + vozac.getPol() + "," + vozac.getBrojTelefona() + "," +
-                    vozac.getPlata() + "," + vozac.getBrojClanskeKarte());
+                          + vozac.getLozinka() + "," + vozac.getIme() + "," +
+                          vozac.getPrezime() + "," + vozac.getAdresa() + "," + vozac.getPol() + "," + vozac.getBrojTelefona() + "," +
+                          vozac.getPlata() + "," + vozac.getBrojClanskeKarte());
             writer.flush();
             writer.close();
         } catch (FileNotFoundException exception) {
@@ -230,8 +229,8 @@ public class Vozac extends Korisnik {
         for (Korisnik vozac : sviKorisnici) {
             if (vozac instanceof Vozac) {
                 if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
-                        && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
-                    String regOznaka = String.valueOf(((Vozac)vozac).getRegOznakaVozila());
+                    && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
+                    String regOznaka = String.valueOf(((Vozac) vozac).getRegOznakaVozila());
                     Vozilo vozilo = Vozilo.nadjiPoBrojuRegistarskeOznake(regOznaka);
                     System.out.println(vozac);
 
@@ -240,13 +239,13 @@ public class Vozac extends Korisnik {
         }
     }
 
-    public static void prikazDodeljenihVoznji(){
+    public static void prikazDodeljenihVoznji() {
 
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
-        for(Voznja voznja : voznje){
-            if(voznja.getNacinPorudzbine().equals("TELEFONOM") && voznja.getStatusVoznje().equals("DODELJENA")){
+        for (Voznja voznja : voznje) {
+            if (voznja.getNacinPorudzbine().equals("TELEFONOM") && voznja.getStatusVoznje().equals("DODELJENA")) {
                 long vozacJMBG = voznja.getVozacId();
-                if(prijavljeniKorisnik.getJMBG() == vozacJMBG){
+                if (prijavljeniKorisnik.getJMBG() == vozacJMBG) {
                     System.out.println(voznja);
                 }
 
@@ -388,7 +387,7 @@ public class Vozac extends Korisnik {
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     Date date = (Date) formatter.parse(tmp[1]);
-                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7]);
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], Long.parseLong(tmp[8]), Long.parseLong(tmp[9]));
                     listaVoznji.add(voznja);
                 } else {
                     System.out.println("Ne postoje voznje za ovog korisnika.");
@@ -409,19 +408,19 @@ public class Vozac extends Korisnik {
     @Override
     public String toString() {
         return "Vozac{" +
-                "JMBG=" + JMBG +
-                ", korisnickoIme='" + korisnickoIme + '\'' +
-                ", lozinka='" + lozinka + '\'' +
-                ", ime='" + ime + '\'' +
-                ", prezime='" + prezime + '\'' +
-                ", adresa='" + adresa + '\'' +
-                ", pol='" + pol + '\'' +
-                ", brojTelefona='" + brojTelefona + '\'' +
-                ", plata=" + plata +
-                ", brojClanskeKarte=" + brojClanskeKarte +
-                ", listaVoznji=" + listaVoznji +
-                ", automobil=" + regOznakaVozila +
-                '}';
+               "JMBG=" + JMBG +
+               ", korisnickoIme='" + korisnickoIme + '\'' +
+               ", lozinka='" + lozinka + '\'' +
+               ", ime='" + ime + '\'' +
+               ", prezime='" + prezime + '\'' +
+               ", adresa='" + adresa + '\'' +
+               ", pol='" + pol + '\'' +
+               ", brojTelefona='" + brojTelefona + '\'' +
+               ", plata=" + plata +
+               ", brojClanskeKarte=" + brojClanskeKarte +
+               ", listaVoznji=" + listaVoznji +
+               ", automobil=" + regOznakaVozila +
+               '}';
     }
 
 

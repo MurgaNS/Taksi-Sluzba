@@ -1,48 +1,53 @@
 package Gui.FormeZaPrikaz;
 
-import Gui.FormeZaDodavanjeIIzmenu.TaksiSluzbaForma;
-import Model.TaksiSluzba;
+import Gui.FormeZaDodavanjeIIzmenu.VoziloForma;
+import Model.Vozilo;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
-public class TaksiSluzbaProzor extends JFrame {
+public class VoziloProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();
     private JButton dugmeIzmena = new JButton("Izmena");
+    private JButton dugmeDodaj = new JButton("Dodaj");
+    private JButton dugmeIzbrisi = new JButton("Izbrisi");
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
-    private TaksiSluzba taksiSluzba;
+    private List<Vozilo> listaVozila;
 
-    public TaksiSluzbaProzor() {
-        this.taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
-        setTitle("Taksi sluzba");
+    public VoziloProzor() {
+        listaVozila = Vozilo.ucitajSveAutomobile();
+        setTitle("Vozila");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(700, 400);
-        initGUI();
-        initActions();
+        setSize(500, 300);
+        initGui();
     }
 
-    public void initGUI() {
+    public void initGui() {
+        glavniToolBar.add(dugmeDodaj);
         glavniToolBar.add(dugmeIzmena);
+        glavniToolBar.add(dugmeIzbrisi);
         add(glavniToolBar, BorderLayout.NORTH);
-        List<TaksiSluzba> taksiSluzbaList = new ArrayList<>();
-        taksiSluzbaList.add(taksiSluzba);
-        String[] zaglavlja = new String[]{"PIB", "Naziv", "Adresa", "Cena starta", "Cena po kilometru"};
-        Object[][] sadrzaj = new Object[taksiSluzbaList.size()][zaglavlja.length];
-        sadrzaj[0][0] = taksiSluzba.getPIB();
-        sadrzaj[0][1] = taksiSluzba.getNaziv();
-        sadrzaj[0][2] = taksiSluzba.getAdresa();
-        sadrzaj[0][3] = taksiSluzba.getCenaStarta();
-        sadrzaj[0][4] = taksiSluzba.getCenaPoKilometru();
+        String[] zaglavlja = new String[]{"Br. vozila", "Proizvodjac", "Model", "God. proizvodnje", "Br. Reg. Oznake", "Vrsta", "Vozac"};
+        Object[][] sadrzaj = new Object[listaVozila.size()][zaglavlja.length];
+        for (int i = 0; i < listaVozila.size(); i++) {
+            Vozilo vozilo = listaVozila.get(i);
+            sadrzaj[i][0] = vozilo.getBrTaksiVozila();
+            sadrzaj[i][1] = vozilo.getProizvodjac();
+            sadrzaj[i][2] = vozilo.getModel();
+            sadrzaj[i][3] = vozilo.getGodProizvodnje();
+            sadrzaj[i][4] = vozilo.getBrRegistarskeOznake();
+            sadrzaj[i][5] = vozilo.getVrsta();
+            sadrzaj[i][6] = vozilo.getVozacId();
+        }
         tabelaModel = new DefaultTableModel(sadrzaj, zaglavlja);
         tabelaPodataka = new JTable(tabelaModel);
-        tabelaPodataka.setBounds(30, 40, 200, 300);
+        tabelaPodataka.setBounds(30, 40, 500, 500);
         JScrollPane scrollPane = new JScrollPane(tabelaPodataka);
         add(scrollPane);
         tabelaPodataka.setRowSelectionAllowed(true);
@@ -61,9 +66,10 @@ public class TaksiSluzbaProzor extends JFrame {
                 if (red == -1) {
                     JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
-                    TaksiSluzbaForma taksiSluzbaForma = new TaksiSluzbaForma(taksiSluzba);
-                    taksiSluzbaForma.setVisible(true);
+                    String voziloId = tabelaModel.getValueAt(red, 0).toString();
+                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId);
+                    VoziloForma voziloForma = new VoziloForma(vozilo);
+                    voziloForma.setVisible(true);
                 }
             }
         });

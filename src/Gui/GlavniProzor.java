@@ -1,6 +1,7 @@
 package Gui;
 
 import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
+import Gui.FormeZaPrikaz.VoziloProzor;
 import Model.*;
 
 import javax.swing.*;
@@ -83,6 +84,13 @@ public class GlavniProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TaksiSluzbaProzor taksiSluzbaProzor = new TaksiSluzbaProzor();
                 taksiSluzbaProzor.setVisible(true);
+            }
+        });
+        otvoriVozilaProzor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VoziloProzor vozilaProzor = new VoziloProzor();
+                vozilaProzor.setVisible(true);
             }
         });
     }
