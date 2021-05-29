@@ -37,6 +37,9 @@ public class Vozilo {
         this.vrsta = vrsta;
     }
 
+    public Vozilo(Vozilo vozilo) {
+    }
+
     public static void izmeniBrojRegistarskeOznake(Vozilo vozilo) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Novi registarski broj vozila:");
@@ -110,10 +113,18 @@ public class Vozilo {
     }
 
     public static void sacuvajAutomobilUFajl(Vozilo vozilo) throws IOException {
-        File file = new File("src/Data/vozila.csv");
-        FileWriter fileWriter = new FileWriter(file, true);
-        fileWriter.write(vozilo.stringToSave());
-        fileWriter.close();
+        List<Vozilo> vozila = ucitajSveAutomobile();
+        for (Vozilo v : vozila) {
+            if (v.getBrTaksiVozila().equals(vozilo.getBrTaksiVozila())) {
+                v.setBrRegistarskeOznake(vozilo.getBrRegistarskeOznake());
+                v.setProizvodjac(vozilo.getProizvodjac());
+                v.setModel(vozilo.getModel());
+                v.setVrsta(vozilo.getVrsta());
+                v.setObrisan(vozilo.isObrisan());
+                v.setVozacId(vozilo.getVozacId());
+            }
+        }
+        sacuvajListuAutomobilaUFajl(vozila);
     }
 
     public static void prikaziAutomobile() {

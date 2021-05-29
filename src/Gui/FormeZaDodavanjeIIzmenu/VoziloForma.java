@@ -6,8 +6,6 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 
 public class VoziloForma extends JFrame {
-    private JLabel lblBrTaksiVozila = new JLabel("Br. taksi vozila");
-    private JTextField txtBrTaksiVozila = new JTextField(20);
     private JLabel lblProizvodjac = new JLabel("Proizvodjac");
     private JTextField txtProizvodjac = new JTextField(20);
     private JLabel lblModel = new JLabel("Model");
@@ -40,8 +38,6 @@ public class VoziloForma extends JFrame {
         MigLayout layout = new MigLayout("wrap 2", "[][]", "[][][][][][]20[]");
         setLayout(layout);
         popuniPolja();
-        add(lblBrTaksiVozila);
-        add(txtBrTaksiVozila);
         add(lblProizvodjac);
         add(txtProizvodjac);
         add(lblModel);
@@ -63,7 +59,6 @@ public class VoziloForma extends JFrame {
     }
 
     private void popuniPolja() {
-        txtBrTaksiVozila.setText(vozilo.getBrTaksiVozila());
         txtProizvodjac.setText(vozilo.getProizvodjac());
         txtModel.setText(vozilo.getModel());
         txtGodProizvodnje.setText(String.valueOf(vozilo.getGodProizvodnje()));

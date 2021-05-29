@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 public class VoziloProzor extends JFrame {
@@ -26,6 +27,7 @@ public class VoziloProzor extends JFrame {
         setLocationRelativeTo(null);
         setSize(500, 300);
         initGui();
+        initActions();
     }
 
     public void initGui() {
@@ -59,6 +61,38 @@ public class VoziloProzor extends JFrame {
     }
 
     public void initActions() {
+        dugmeIzbrisi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = tabelaPodataka.getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    String voziloId = tabelaModel.getValueAt(red, 0).toString();
+                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId);
+                    int izbor = JOptionPane.showConfirmDialog(null,
+                            "Da li ste sigurni da zelite da obrisete vozilo?",
+                            vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
+                    if (izbor == JOptionPane.YES_OPTION) {
+                        vozilo.setObrisan(true);
+                        tabelaModel.removeRow(red);
+                        try {
+                            Vozilo.sacuvajAutomobilUFajl(vozilo);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+//        btnAdd.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                KnjigeForma kf = new KnjigeForma(prodavnica, null);
+//                kf.setVisible(true);
+//            }
+//        });
         dugmeIzmena.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
