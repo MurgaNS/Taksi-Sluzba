@@ -9,9 +9,14 @@ public class Dispecer extends Korisnik {
 
     private double plata;
     private String brojTelefonskeLinije;
-    private String odeljenjeRada;
-    
-    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, String brojTelefonskeLinije, String odeljenjeRada) {
+    private OdeljenjeRada odeljenjeRada;
+
+    public enum OdeljenjeRada {
+        PRIJEM_VOZNJE,
+        REKLAMACIJE
+    }
+
+    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, String brojTelefonskeLinije, OdeljenjeRada odeljenjeRada) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
         this.plata = plata;
         this.brojTelefonskeLinije = brojTelefonskeLinije;
@@ -245,11 +250,11 @@ public class Dispecer extends Korisnik {
         this.brojTelefonskeLinije = brojTelefonskeLinije;
     }
 
-    public String getOdeljenjeRada() {
+    public OdeljenjeRada getOdeljenjeRada() {
         return odeljenjeRada;
     }
 
-    public void setOdeljenjeRada(String odeljenjeRada) {
+    public void setOdeljenjeRada(OdeljenjeRada odeljenjeRada) {
         this.odeljenjeRada = odeljenjeRada;
     }
 
