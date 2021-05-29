@@ -64,8 +64,12 @@ public class LoginProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String korisnickoIme = txtKorisnickoIme.getText().trim();
                 String sifra = new String(pfPassword.getPassword()).trim();
-                if (Korisnik.postojiKorisnik(korisnickoIme,sifra)) {
-                    JOptionPane.showMessageDialog(null,"Uspesna prijava","Prijava",JOptionPane.INFORMATION_MESSAGE);
+                Korisnik korisnik = Korisnik.postojiKorisnik(korisnickoIme,sifra);
+                if (korisnik != null) {
+                    LoginProzor.this.dispose();
+                    LoginProzor.this.setVisible(false);
+                    GlavniProzor glavniProzor = new GlavniProzor(korisnik);
+                    glavniProzor.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null,"Korisnicko ime ili lozinka su pogresni.","Prijava",JOptionPane.WARNING_MESSAGE);
                 }

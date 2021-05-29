@@ -27,14 +27,14 @@ public abstract class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
-    public static Boolean postojiKorisnik(String korisnickoIme, String lozinka){
+    public static Korisnik postojiKorisnik(String korisnickoIme, String lozinka){
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
         for (Korisnik k : korisnici) {
             if (k.getKorisnickoIme().equals(korisnickoIme) && k.getLozinka().equals(lozinka)) {
-                return true;
+                return k;
             }
         }
-        return false;
+        return null;
     }
 
 

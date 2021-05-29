@@ -83,6 +83,7 @@ class App {
                     switch (Integer.parseInt(line)) {
                         case 1 -> Vozac.prikaziListuVoznji(Vozac.ucitajListuVoznji(vozac));
                         case 2 -> Vozac.prikazVoznjiPutemAplikacije();
+//                        case 3 -> Vozac.prikazDodeljenihVoznji();
                     }
                 }
             } catch (IllegalStateException | NoSuchElementException e) {
