@@ -253,7 +253,7 @@ public class Vozac extends Korisnik {
 
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         for (Voznja voznja : voznje) {
-            if (voznja.getNacinPorudzbine().equals("TELEFONOM") && voznja.getStatusVoznje().equals("DODELJENA")) {
+            if (voznja.getNacinPorudzbine() == Voznja.NacinPorudzbine.TELEFONOM && voznja.getStatusVoznje() == Voznja.StatusVoznje.DODELJENA) {
                 long vozacJMBG = voznja.getVozacId();
                 if (prijavljeniKorisnik.getJMBG() == vozacJMBG) {
                     System.out.println(voznja);
@@ -262,7 +262,36 @@ public class Vozac extends Korisnik {
 
             }
         }
+        Scanner skener = new Scanner(System.in);
+        System.out.println("Unesi id vožnje");
+        long idVoznje = skener.nextLong();
+        Voznja voznjaIzmena = null;
+        for(Voznja voznja : voznje) {
+            if(voznja.getId() == idVoznje){
+                voznjaIzmena = voznja;
+                break;
+            }
+        }
+        if(voznjaIzmena == null){
+            System.out.println("Nema vožnje sa tim id-em");
+            return;
+        }
+        System.out.println("Da li želite da prihvatite ili odbijete vožnju(Y/N)?");
+        String izbor = skener.next();
+        if(izbor.equals("Y")){
+            voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.PRIHVACENA);
+            System.out.println("Uspešno prihvaćena vožnja!");
+        }
+        else if(izbor.equals("N")){
+            voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.ODBIJENA);
+            System.out.println("Uspešno odbijena vožnja!");
+        }
+        else{
+            System.out.println("Nepostojeca opcija.");
+        }
+        Voznja.upisiVoznje(voznje);
     }
+    // zavrsavanje voznje
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
         for (Voznja voznja : vozac.getListaVoznji()) {

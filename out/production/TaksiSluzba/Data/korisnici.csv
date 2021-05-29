@@ -1,4 +1,6 @@
-dispecer,410001700020,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,60000.0,021,PRIJEM_VOZNJI
-vozac,1546841324851,mitarm,12345,Mitar,Miric,Kosovska 33/A Beograd,ZENSKI,064123123,60000.0,1001
-vozac,1546841324851,mitarm,12345,Mitar,Miric,Kosovska 33/A Beograd,MUSKI,064123123,60000.0,1001
-musterija,51829199919,nikolan,12345,Nikola,Nikolic,Gogoljeva 41 Subotica,MUSKI,061233211
+dispecer,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,30000.0,011110110,REKLAMACIJE
+dispecer,42451855821,elenas,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,35000.0,011110111,PRIJEM_VOZNJE
+vozac,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,25000.0,1001
+vozac,55508144142,natasan,12345,Natasa,Nastasic,Grobljanska 0 Beograd,ZENSKI,064321543,25000.0,1002
+musterija,27515550443,nikolan,12345,Nikola,Nikolic,Gogoljeva 41 Pancevo,MUSKI,061233211
+musterija,27518210443,marijam,12345,Marija,Milic,Nikole Tesle 5 Novi Beograd,ZENSKI,063221122

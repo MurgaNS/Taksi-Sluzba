@@ -153,9 +153,8 @@ public class Voznja {
 
     // @murga
     public String stringToSave() {
-        Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String strDate = dateFormat.format(date);
+        String strDate = dateFormat.format(datumPorudzbine);
 
         return id + "," + strDate + "," + adresaPolaska + "," +
                adresaDestinacije + "," + brojPredjenihKilometara + "," +

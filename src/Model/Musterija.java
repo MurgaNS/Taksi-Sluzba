@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
 public class Musterija extends Korisnik {
 
@@ -16,8 +18,18 @@ public class Musterija extends Korisnik {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
     }
 
-    public static boolean narucivanjePutemTelefona() {
-        return false;
+    public static void narucivanjePutemTelefona() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Adresa polaska:");
+        String adresaPolaska = scanner.nextLine();
+        System.out.println("Adresa destinacije");
+        String adresaDestinacije = scanner.nextLine();
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        long idNoveVoznje = voznje.get(voznje.size() - 1).getId() + 1;
+        Voznja voznja = new Voznja(idNoveVoznje, new Date(), adresaPolaska, adresaDestinacije, 0, 0, Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM, Vozac.prijavljeniKorisnik.getJMBG(), (long)-1);
+        voznje.add(voznja);
+        Voznja.upisiVoznje(voznje);
+        System.out.println("Vožnja je uspešno naručena!");
     }
 
     public static boolean narucivanjePutemAplikacije() {
