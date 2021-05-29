@@ -274,8 +274,8 @@ public class Vozac extends Korisnik {
         List<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
 //        todo prihvatanje/odbijanje voznje
         for (Voznja voznja : listaVoznji) {
-            if (voznja.getNacinPorudzbine() == "putem aplikacije") {
-                System.out.println(voznja.toString());
+            if (voznja.getNacinPorudzbine() == Voznja.NacinPorudzbine.APLIKACIJOM) {
+                System.out.println(voznja);
             }
         }
     }
@@ -402,10 +402,16 @@ public class Vozac extends Korisnik {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
+                Voznja.NacinPorudzbine nacinPorudzbine;
+                if (tmp[7].trim().equals("APLIKACIJOM")) {
+                    nacinPorudzbine = Voznja.NacinPorudzbine.APLIKACIJOM;
+                } else {
+                    nacinPorudzbine = Voznja.NacinPorudzbine.TELEFONOM;
+                }
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     Date date = (Date) formatter.parse(tmp[1]);
-                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], tmp[7], Long.parseLong(tmp[8]), Long.parseLong(tmp[9]));
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], nacinPorudzbine, Long.parseLong(tmp[8]), Long.parseLong(tmp[9]));
                     listaVoznji.add(voznja);
                 } else {
                     System.out.println("Ne postoje voznje za ovog korisnika.");

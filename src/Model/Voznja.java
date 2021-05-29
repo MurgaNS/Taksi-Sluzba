@@ -22,11 +22,15 @@ public class Voznja {
     private double brojPredjenihKilometara;
     private double trajanjeVoznjeUMinutama;
     private String statusVoznje;
-    private String nacinPorudzbine;
+    private NacinPorudzbine nacinPorudzbine;
     private Long vozacId;
     private Long musterijaId;
 
-    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, String nacinPorudzbine, Long vozacId, Long musterijaId) {
+    public enum NacinPorudzbine {
+        APLIKACIJOM,
+        TELEFONOM
+    }
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, String statusVoznje, NacinPorudzbine nacinPorudzbine, Long vozacId, Long musterijaId) {
         this.id = id;
         this.datumPorudzbine = datumPorudzbine;
         this.adresaPolaska = adresaPolaska;
@@ -71,15 +75,20 @@ public class Voznja {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 Voznja voznja = null;
+                NacinPorudzbine nacinPorudzbine;
                 String[] lineParts = line.split(",");
-
+                if(lineParts[7].trim().equals("APLIKACIJOM")){
+                    nacinPorudzbine = NacinPorudzbine.APLIKACIJOM;
+                }else{
+                    nacinPorudzbine = NacinPorudzbine.TELEFONOM;
+                }
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
                 Date date = simpleDateFormat.parse(lineParts[1]);
                 voznja = new Voznja(Long.parseLong(lineParts[0]), date, lineParts[2], lineParts[3], Double.parseDouble(lineParts[4]),
                         Double.parseDouble(lineParts[5]),
-                        lineParts[6], lineParts[7],
+                        lineParts[6],nacinPorudzbine,
                         Long.parseLong(lineParts[8]),
                         Long.parseLong(lineParts[9]));
                 sveVoznje.add(voznja);
@@ -177,11 +186,11 @@ public class Voznja {
         this.statusVoznje = statusVoznje;
     }
 
-    public String getNacinPorudzbine() {
+    public NacinPorudzbine getNacinPorudzbine() {
         return nacinPorudzbine;
     }
 
-    public void setNacinPorudzbine(String nacinPorudzbine) {
+    public void setNacinPorudzbine(NacinPorudzbine nacinPorudzbine) {
         this.nacinPorudzbine = nacinPorudzbine;
     }
 
