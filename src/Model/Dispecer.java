@@ -76,13 +76,13 @@ public class Dispecer extends Korisnik {
 
     }
 
-    public static void godisnjiIzvestaj(){
+    public static void godisnjiIzvestaj() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         List<Voznja> godisnjeVoznje = new ArrayList<>();
 
         Date date = new Date();
-        for(Voznja voznja:voznje){
-            if((voznja.getDatumPorudzbine().getYear() == date.getYear())){
+        for (Voznja voznja : voznje) {
+            if ((voznja.getDatumPorudzbine().getYear() == date.getYear())) {
                 godisnjeVoznje.add(voznja);
             }
         }
@@ -91,19 +91,18 @@ public class Dispecer extends Korisnik {
     }
 
 
-    public static void mesecniIzvestaj(){
+    public static void mesecniIzvestaj() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         List<Voznja> mesecneVoznje = new ArrayList<>();
 
         Date date = new Date();
-        for(Voznja voznja:voznje){
-            if((voznja.getDatumPorudzbine().getYear() == date.getYear()) && (voznja.getDatumPorudzbine().getMonth() == date.getMonth())){
+        for (Voznja voznja : voznje) {
+            if ((voznja.getDatumPorudzbine().getYear() == date.getYear()) && (voznja.getDatumPorudzbine().getMonth() == date.getMonth())) {
                 mesecneVoznje.add(voznja);
             }
         }
 
         ispisiIzvestaj(mesecneVoznje);
-
 
 
     }
@@ -226,7 +225,7 @@ public class Dispecer extends Korisnik {
 //        @murga
 //        bilo je setvozacId(vozac), dodao sam .getJMBG jer se sad prosledjuje Long
         voznja.setVozacId(vozac.getJMBG());
-        voznja.setStatusVoznje("DODELJENA");
+        voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
         Voznja.upisiVoznje(voznje);
 
         System.out.println("Uspešno dodeljena vožnja");
