@@ -20,20 +20,33 @@ public class Musterija extends Korisnik {
 
     public static void narucivanjePutemTelefona() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Adresa polaska:");
+        System.out.println("Adresa polaska: ");
         String adresaPolaska = scanner.nextLine();
-        System.out.println("Adresa destinacije");
+        System.out.println("Adresa destinacije: ");
         String adresaDestinacije = scanner.nextLine();
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         long idNoveVoznje = voznje.get(voznje.size() - 1).getId() + 1;
         Voznja voznja = new Voznja(idNoveVoznje, new Date(), adresaPolaska, adresaDestinacije, 0, 0, Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM, Vozac.prijavljeniKorisnik.getJMBG(), (long)-1);
         voznje.add(voznja);
         Voznja.upisiVoznje(voznje);
-        System.out.println("Vožnja je uspešno naručena!");
+        System.out.println("Vožnja putem telefona je uspešno naručena!");
     }
 
-    public static boolean narucivanjePutemAplikacije() {
-        return false;
+    public static void narucivanjePutemAplikacije() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Adresa polaska: ");
+        String adresaPolaska = scanner.nextLine();
+        System.out.println("Adresa destinacije: ");
+        String adresaDestinacije = scanner.nextLine();
+        System.out.println("Napomena: ");
+        String napomena = scanner.nextLine();
+        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+        long idNoveVoznje = voznje.get(voznje.size()-1).getId() + 1;
+        Voznja voznja = new Voznja(idNoveVoznje,new Date(), adresaPolaska, adresaDestinacije, 0,0, Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM,Vozac.prijavljeniKorisnik.getJMBG(),(long) -1);
+        voznje.add(voznja);
+        Voznja.upisiVoznje(voznje);
+        System.out.println("Voznja putem aplikacije je uspesno narucena.");
+
     }
 
     public static void prikazIstorijeVoznji() {
