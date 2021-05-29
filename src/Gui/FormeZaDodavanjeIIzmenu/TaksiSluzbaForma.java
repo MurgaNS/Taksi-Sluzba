@@ -23,7 +23,7 @@ public class TaksiSluzbaForma extends JFrame {
 
     public TaksiSluzbaForma(TaksiSluzba taksiSluzba) {
         this.taksiSluzba = taksiSluzba;
-        setTitle("Izmena podataka - " + taksiSluzba.getNaziv());
+        setTitle("Izmena podataka taksi sluzbe " + taksiSluzba.getNaziv());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI();

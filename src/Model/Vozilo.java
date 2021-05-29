@@ -44,6 +44,24 @@ public class Vozilo {
         vozilo.setBrRegistarskeOznake(noviRegBroj);
     }
 
+    public static List<Vozilo> ucitajNeobrisaneAutomobile() {
+        List<Vozilo> automobili = new ArrayList<>();
+        String red;
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader("src/Data/vozila.csv"));
+            while ((red = bf.readLine()) != null) {
+                Vozilo vozilo = automobilDTO(red);
+                if (!vozilo.isObrisan()) {
+                    automobili.add(vozilo);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return automobili;
+    }
+
+
     public static List<Vozilo> ucitajSveAutomobile() {
         List<Vozilo> automobili = new ArrayList<>();
         String red;

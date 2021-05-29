@@ -27,7 +27,7 @@ public class VoziloForma extends JFrame {
 
     public VoziloForma(Vozilo v) {
         this.vozilo = v;
-        setTitle("Izmena podataka - " + vozilo.getBrRegistarskeOznake() + " " + vozilo.getProizvodjac() + " " + vozilo.getModel());
+        setTitle("Izmena podataka za vozilo " + vozilo.getBrRegistarskeOznake() + " " + vozilo.getProizvodjac() + " " + vozilo.getModel());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI();

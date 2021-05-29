@@ -25,7 +25,7 @@ public class GlavniProzor extends JFrame {
     public GlavniProzor(Korisnik korisnik) {
         this.taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         this.prijavljeniKorisnik = korisnik;
-        setTitle("Taksi sluzba" + taksiSluzba.getNaziv());
+        setTitle("Taksi sluzba " + taksiSluzba.getNaziv());
         setSize(500, 500);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -20,8 +20,8 @@ public class VoziloProzor extends JFrame {
     private List<Vozilo> listaVozila;
 
     public VoziloProzor() {
-        listaVozila = Vozilo.ucitajSveAutomobile();
-        setTitle("Vozila");
+        listaVozila = Vozilo.ucitajNeobrisaneAutomobile();
+        setTitle("Prikaz vozila");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(500, 300);
