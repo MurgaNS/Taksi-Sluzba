@@ -43,12 +43,10 @@ public class Musterija extends Korisnik {
             Date date = (Date) formatter.parse(tmp[1]);
             Vozac vozac = Vozac.pronadjiPoJMBG(Long.parseLong(tmp[8]));
             Voznja.NacinPorudzbine nacinPorudzbine;
-            if (tmp[7].trim().equals("APLIKACIJOM")) {
-                nacinPorudzbine = Voznja.NacinPorudzbine.APLIKACIJOM;
-            } else {
-                nacinPorudzbine = Voznja.NacinPorudzbine.TELEFONOM;
-            }
-            Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), tmp[6], nacinPorudzbine, null, null);
+            Voznja.StatusVoznje statusVoznje;
+            statusVoznje = Voznja.ucitajStatusVoznje(tmp[6]);
+            nacinPorudzbine = Voznja.ucitajNacinPorudzbine(tmp[7]);
+            Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, null, null);
         }
         return listaVoznji;
     }
