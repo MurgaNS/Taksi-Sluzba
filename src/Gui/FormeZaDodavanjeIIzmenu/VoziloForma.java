@@ -107,7 +107,58 @@ public class VoziloForma extends JFrame {
     }
 
     private Boolean validacija() {
-        return true;
+        boolean ok = true;
+        String poruka = "Molimo popravite sledece greske u unosu:\n";
+
+        if (txtBrTaksiVozila.getText().trim().equals("")) {
+            poruka += "- Morate uneti ID\n";
+            ok = false;
+        } else if (vozilo == null) {
+            String id = txtBrTaksiVozila.getText().trim();
+            List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+            Vozilo postojiVozilo = Vozilo.pronadjiPoBrojuTaksiVozila(id, listaVozila);
+            if (postojiVozilo != null) {
+                poruka += "- Vozilo sa unetim ID vec postoji\n";
+                ok = false;
+            }
+        }
+
+        try {
+            Double.parseDouble(txtGodProizvodnje.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- Godina proizvodnje mora biti broj\n";
+            ok = false;
+        }
+        try {
+            Long.parseLong(txtVozac.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- Polje vozac popunjavate sa JMBG-om vozaca\n";
+            ok = false;
+        }
+
+        if (txtProizvodjac.getText().trim().equals("")) {
+            poruka += "- Morate uneti proizvodjaca\n";
+            ok = false;
+        }
+
+        if (txtModel.getText().trim().equals("")) {
+            poruka += "- Morate uneti model\n";
+            ok = false;
+        }
+
+        if (txtBrRegOznake.getText().trim().equals("")) {
+            poruka += "- Morate uneti broj registarske oznake\n";
+            ok = false;
+        }
+        if (txtVrsta.getText().trim().equals("")) {
+            poruka += "- Morate uneti vrstu vozila\n";
+            ok = false;
+        }
+
+        if (ok == false) {
+            JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
+        }
+        return ok;
     }
 
     private void popuniPolja() {
