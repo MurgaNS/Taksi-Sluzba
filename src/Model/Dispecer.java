@@ -56,21 +56,11 @@ public class Dispecer extends Korisnik {
         Scanner scanner = new Scanner(System.in);
         int izbor = scanner.nextInt();
         switch (izbor) {
-            case 1:
-                dnevniIzvestaj();
-                break;
-            case 2:
-                nedeljniIzvestaj();
-                break;
-            case 3:
-                mesecniIzvestaj();
-                break;
-            case 4:
-                godisnjiIzvestaj();
-                break;
-            default:
-                System.out.println("Nepostojeća komanda");
-                break;
+            case 1 -> dnevniIzvestaj();
+            case 2 -> nedeljniIzvestaj();
+            case 3 -> mesecniIzvestaj();
+            case 4 -> godisnjiIzvestaj();
+            default -> System.out.println("Nepostojeća komanda");
         }
 
 
@@ -222,8 +212,6 @@ public class Dispecer extends Korisnik {
             }
         }
         System.out.println(vozac);
-//        @murga
-//        bilo je setvozacId(vozac), dodao sam .getJMBG jer se sad prosledjuje Long
         voznja.setVozacId(vozac.getJMBG());
         voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
         Voznja.upisiVoznje(voznje);
