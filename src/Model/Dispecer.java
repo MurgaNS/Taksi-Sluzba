@@ -16,8 +16,8 @@ public class Dispecer extends Korisnik {
         REKLAMACIJE
     }
 
-    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, String brojTelefonskeLinije, OdeljenjeRada odeljenjeRada) {
-        super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
+    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, String brojTelefonskeLinije, OdeljenjeRada odeljenjeRada) {
+        super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.plata = plata;
         this.brojTelefonskeLinije = brojTelefonskeLinije;
         this.odeljenjeRada = odeljenjeRada;
@@ -43,6 +43,14 @@ public class Dispecer extends Korisnik {
         System.out.println("12. Prikaz voznji dodeljenih putem telefona");
         System.out.println("13. Kombinovana pretraga vozaca");
         System.out.println("14. Izveštaj");
+        System.out.println("15. Prikazi musteriju");
+        System.out.println("16. Dodaj musteriju");
+        System.out.println("17. Izmeni musteriju");
+        System.out.println("18. Izbrisi musteriju");
+        System.out.println("19. Prikazi dispecera");
+        System.out.println("20. Dodaj dispecera");
+        System.out.println("21. Izmeni dispecera");
+        System.out.println("22. Izbrisi dispecera");
 
 
     }

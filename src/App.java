@@ -51,6 +51,10 @@ class App {
                         case 12 -> Dispecer.dodeljivanjeVoznjiKreiranihTelefonom();
                         case 13 -> Vozac.kombinovanaPretragaVozaca();
                         case 14 -> Dispecer.izvestaj();
+                        case 15 -> Musterija.prikaziMusterije();
+                        case 16 -> Musterija.dodajMusteriju();
+                        case 17 -> Musterija.izmeniMusteriju();
+                        case 18 -> Musterija.izbrisiMusteriju();
                     }
                 }
             } catch (IllegalStateException | NoSuchElementException | IOException e) {

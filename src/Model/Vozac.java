@@ -16,16 +16,16 @@ public class Vozac extends Korisnik {
     private Long regOznakaVozila;
 
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
-        super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
+        super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
         this.listaVoznji = listaVoznji;
         this.regOznakaVozila = regOznakaVozila;
     }
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, double plata, int brojClanskeKarte) {
-        super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona);
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte) {
+        super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
     }
@@ -98,7 +98,7 @@ public class Vozac extends Korisnik {
         }
         Vozilo.sacuvajListuAutomobilaUFajl(automobili);
 
-        Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, plata, brojClanskeKarte);
+        Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, false, plata, brojClanskeKarte);
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
         korisnici.add(vozac);
         Korisnik.upisiSveKorisnike(korisnici);
@@ -266,44 +266,42 @@ public class Vozac extends Korisnik {
         System.out.println("Unesi id vožnje");
         long idVoznje = skener.nextLong();
         Voznja voznjaIzmena = null;
-        for(Voznja voznja : voznje) {
-            if(voznja.getId() == idVoznje){
+        for (Voznja voznja : voznje) {
+            if (voznja.getId() == idVoznje) {
                 voznjaIzmena = voznja;
                 break;
             }
         }
-        if(voznjaIzmena == null){
+        if (voznjaIzmena == null) {
             System.out.println("Nema vožnje sa tim id-em");
             return;
         }
         System.out.println("Da li želite da prihvatite ili odbijete vožnju(Y/N)?");
         String izbor = skener.next();
-        if(izbor.equals("Y")){
+        if (izbor.equals("Y")) {
             voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.PRIHVACENA);
             System.out.println("Uspešno prihvaćena vožnja!");
-        }
-        else if(izbor.equals("N")){
+        } else if (izbor.equals("N")) {
             voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.ODBIJENA);
             System.out.println("Uspešno odbijena vožnja!");
-        }
-        else{
+        } else {
             System.out.println("Nepostojeca opcija.");
         }
         Voznja.upisiVoznje(voznje);
     }
 
     // 2.3.4 - završavanje vožnje funkcionalnost  @jovan
-    public static void zavrsavanjeVoznje(){
+    public static void zavrsavanjeVoznje() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
-        Vozac vozac = (Vozac)Vozac.prijavljeniKorisnik;
+        Vozac vozac = (Vozac) Vozac.prijavljeniKorisnik;
         Voznja voznjaZavrsavanje = null;
-        for(Voznja voznja : voznje){
-            if(voznja.getVozacId() == vozac.getJMBG() &&  voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
+        for (Voznja voznja : voznje) {
+            if (voznja.getVozacId() == vozac.getJMBG() && voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
                 voznjaZavrsavanje = voznja;
                 break;
             }
         }
-        if(voznjaZavrsavanje == null){
+        if (voznjaZavrsavanje == null) {
             System.out.println("Nemate vožnji za završavanje.");
             return;
         }
@@ -317,7 +315,6 @@ public class Vozac extends Korisnik {
         Voznja.upisiVoznje(voznje);
         System.out.println("Uspešno završena vožnja!");
     }
-
 
 
     public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
@@ -440,7 +437,7 @@ public class Vozac extends Korisnik {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
-                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], pol, tmp[8], Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, Long.parseLong(vozilo.getBrTaksiVozila()));
+                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], pol, tmp[8], false, Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, Long.parseLong(vozilo.getBrTaksiVozila()));
                     vozac.setListaVoznji(ucitajListuVoznji(vozac));
                     vozaci.add(vozac);
                 }

@@ -21,7 +21,7 @@ public abstract class Korisnik {
         ZENSKI
     }
 
-    public Korisnik(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona) {
+    public Korisnik(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, Boolean obrisan) {
         this.JMBG = JMBG;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -30,6 +30,7 @@ public abstract class Korisnik {
         this.adresa = adresa;
         this.pol = pol;
         this.brojTelefona = brojTelefona;
+        this.obrisan = obrisan;
     }
 
     public static Korisnik postojiKorisnik(String korisnickoIme, String lozinka) {
@@ -69,8 +70,8 @@ public abstract class Korisnik {
                     pol = Pol.ZENSKI;
                 }
                 switch (lineParts[0]) {
-                    case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8]);
-                    case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Double.parseDouble(lineParts[9]), Integer.parseInt(lineParts[10]));
+                    case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]));
+                    case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), Integer.parseInt(lineParts[11]));
                     case "dispecer" -> {
                         Dispecer.OdeljenjeRada odeljenjeRada;
                         if (lineParts[11].trim().equals("PRIJEM_VOZNJE")) {
@@ -78,7 +79,7 @@ public abstract class Korisnik {
                         } else {
                             odeljenjeRada = Dispecer.OdeljenjeRada.REKLAMACIJE;
                         }
-                        korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Double.parseDouble(lineParts[9]), lineParts[10], odeljenjeRada);
+                        korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), lineParts[11], odeljenjeRada);
                     }
                 }
                 sviKorisnici.add(korisnik);
@@ -91,8 +92,6 @@ public abstract class Korisnik {
         } catch (IOException exception) {
             exception.printStackTrace();
             System.out.println("Greska pri citanju datoteke");
-        } catch (Exception e) {
-            System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
         }
         return sviKorisnici;
 
@@ -121,7 +120,8 @@ public abstract class Korisnik {
                "," + prezime +
                "," + adresa +
                "," + pol +
-               "," + brojTelefona;
+               "," + brojTelefona +
+               "," + obrisan;
     }
 
     public String getPrezime() {
