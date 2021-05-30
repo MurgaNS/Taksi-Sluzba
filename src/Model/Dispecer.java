@@ -55,6 +55,188 @@ public class Dispecer extends Korisnik {
 
     }
 
+    public static void prikaziDispecere() {
+        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
+        for (Korisnik korisnik : sviKorisnici) {
+            if (korisnik instanceof Dispecer && !korisnik.isObrisan()) {
+                System.out.println(korisnik);
+            }
+        }
+    }
+
+    public static void dodajDispecera() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Unesi JMBG: ");
+        long JMBG = Long.parseLong(scanner.nextLine());
+        System.out.println("Unesi korisnicko ime: ");
+        String korisnickoIme = scanner.nextLine();
+        System.out.println("Unesi lozinku: ");
+        String lozinka = scanner.nextLine();
+        System.out.println("Unesi ime: ");
+        String ime = scanner.nextLine();
+        System.out.println("Unesi prezime: ");
+        String prezime = scanner.nextLine();
+        System.out.println("Unesi adresu: ");
+        String adresa = scanner.nextLine();
+
+        System.out.println("Unesi pol: ");
+        String polTxt = scanner.nextLine();
+        Pol pol;
+        if (polTxt.trim().equals("MUSKI")) {
+            pol = Pol.MUSKI;
+        } else {
+            pol = Pol.ZENSKI;
+        }
+        System.out.println("Broj telefona");
+        String brojTelefona = scanner.nextLine();
+        System.out.println("Unesite platu: ");
+        Double plata = Double.parseDouble(scanner.nextLine());
+        System.out.println("Unesite broj telefonske linije");
+        String brojTelefonskeLinije = scanner.nextLine();
+
+        System.out.println("Unesite odeljenje rada[PRIJEM_VOZNJE/REKLAMACIJE]: ");
+        String odeljenjeRadaTxt = scanner.nextLine();
+        OdeljenjeRada odeljenjeRada;
+        if (odeljenjeRadaTxt.trim().equals("PRIJEM_VOZNJE")) {
+            odeljenjeRada = OdeljenjeRada.PRIJEM_VOZNJE;
+        } else {
+            odeljenjeRada = OdeljenjeRada.REKLAMACIJE;
+        }
+
+        Dispecer dispecer = new Dispecer(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, false, plata, brojTelefonskeLinije, odeljenjeRada);
+        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+        korisnici.add(dispecer);
+        Korisnik.upisiSveKorisnike(korisnici);
+    }
+
+    public static void izmeniDispecera() {
+        System.out.println("Unesi JMBG dispecera kojeg zelite da izmenite");
+        Scanner scanner = new Scanner(System.in);
+        long JMBG = scanner.nextLong();
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        Dispecer dispecer = null;
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
+                dispecer = (Dispecer) korisnik;
+            }
+        }
+        if (dispecer == null) {
+            return;
+        }
+        System.out.println("1. Izmena korisnickog imena" +
+                "\n2. Izmena sifre" +
+                "\n3. Izmena imena" +
+                "\n4. Izmena prezimena" +
+                "\n5. Izmena adrese" +
+                "\n6. Izmena pola" +
+                "\n7. Izmena broja telefona"+
+                "\n8. Izmena plate" +
+                "\n9. Izmena broja telefonske linije" +
+                "\n10. Izmena odeljenja rada");
+
+        System.out.println("Odaberi opciju");
+        int opcija = scanner.nextInt();
+        switch (opcija) {
+            case 1 -> {
+                System.out.println("Unesi korisnicko ime: ");
+                String korisnickoIme = scanner.next();
+                dispecer.setKorisnickoIme(korisnickoIme);
+            }
+            case 2 -> {
+                System.out.println("Unesi lozinku: ");
+                String lozinka = scanner.next();
+                dispecer.setLozinka(lozinka);
+            }
+            case 3 -> {
+                System.out.println("Unesi ime: ");
+                String ime = scanner.next();
+                dispecer.setIme(ime);
+            }
+            case 4 -> {
+                System.out.println("Unesi prezime: ");
+                String prezime = scanner.next();
+                dispecer.setPrezime(prezime);
+            }
+            case 5 -> {
+                System.out.println("Unesite adresu: ");
+                String adresa = scanner.next();
+                dispecer.setAdresa(adresa);
+            }
+            case 6 -> {
+                System.out.println("Unesite pol [MUSKI/ZENSKI]: ");
+                String pol = scanner.next();
+                if (pol.trim().equals("MUSKI")) {
+                    dispecer.setPol(Pol.MUSKI);
+                } else {
+                    dispecer.setPol(Pol.ZENSKI);
+                }
+            }
+            case 7 -> {
+                System.out.println("Unesite broj telefona: ");
+                String brojTelefona = scanner.nextLine();
+                dispecer.setBrojTelefona(brojTelefona);
+            }
+            case 8 -> {
+                System.out.println("Unesite platu: ");
+                Double plata = scanner.nextDouble();
+                dispecer.setPlata(plata);
+            }
+            case 9 -> {
+                System.out.println("Unesite broj telefonske linije");
+                String brojTelefonskeLinije = scanner.nextLine();
+                dispecer.setBrojTelefonskeLinije(brojTelefonskeLinije);
+            }
+            case 10 -> {
+                System.out.println("Unesite odeljenje rada[PRIJEM_VOZNJE/REKLAMACIJE]: ");
+                String odeljenjeRadaTxt = scanner.nextLine();
+                OdeljenjeRada odeljenjeRada;
+                if (odeljenjeRadaTxt.trim().equals("PRIJEM_VOZNJE")) {
+                    dispecer.setOdeljenjeRada(OdeljenjeRada.PRIJEM_VOZNJE);
+                } else {
+                    dispecer.setOdeljenjeRada(OdeljenjeRada.REKLAMACIJE);
+                }
+            }
+        }
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno izmenjen dispecer!");
+    }
+    public static void izbrisiDispecera() {
+        System.out.println("Unesi JMBG dispecera kojeg zelite da obrisete");
+        Scanner scanner = new Scanner(System.in);
+        long JMBG = scanner.nextLong();
+        List<Korisnik> korisnici = ucitajSveKorisnike();
+        Dispecer dispecer = null;
+        for (Korisnik korisnik : korisnici) {
+            if (korisnik.getJMBG() == JMBG) {
+                dispecer = (Dispecer) korisnik;
+            }
+        }
+        if (dispecer == null) {
+            return;
+        }
+        dispecer.setObrisan(true);
+        Korisnik.upisiSveKorisnike(korisnici);
+        System.out.println("Uspešno ste obrisali dispecera!");
+    }
+
+
+    @Override
+    public String toString() {
+        return "Dispecer{" +
+                "JMBG=" + JMBG +
+                ", korisnickoIme='" + korisnickoIme + '\'' +
+                ", lozinka='" + lozinka + '\'' +
+                ", ime='" + ime + '\'' +
+                ", prezime='" + prezime + '\'' +
+                ", adresa='" + adresa + '\'' +
+                ", pol=" + pol +
+                ", brojTelefona='" + brojTelefona + '\'' +
+                ", obrisan=" + obrisan +
+                ", plata=" + plata +
+                ", brojTelefonskeLinije='" + brojTelefonskeLinije + '\'' +
+                ", odeljenjeRada=" + odeljenjeRada +
+                '}';
+    }
 
     public static void izvestaj() {
         System.out.println("1. Dnevni izveštaj");

@@ -55,6 +55,10 @@ class App {
                         case 16 -> Musterija.dodajMusteriju();
                         case 17 -> Musterija.izmeniMusteriju();
                         case 18 -> Musterija.izbrisiMusteriju();
+                        case 19 -> Dispecer.prikaziDispecere();
+                        case 20 -> Dispecer.dodajDispecera();
+                        case 21 -> Dispecer.izmeniDispecera();
+                        case 22 -> Dispecer.izbrisiDispecera();
                     }
                 }
             } catch (IllegalStateException | NoSuchElementException | IOException e) {
