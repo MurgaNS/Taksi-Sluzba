@@ -57,20 +57,20 @@ public class Vozac extends Korisnik {
 
     public static void dodajVozaca() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Unesi JMBG");
-        long JMBG = scanner.nextLong();
-        System.out.println("Unesi korisnicko ime");
-        String korisnickoIme = scanner.next();
-        System.out.println("Unesi lozinku");
-        String lozinka = scanner.next();
+        System.out.println("Unesi JMBG: ");
+        long JMBG = Long.parseLong(scanner.nextLine());
+        System.out.println("Unesi korisnicko ime: ");
+        String korisnickoIme = scanner.nextLine();
+        System.out.println("Unesi lozinku: ");
+        String lozinka = scanner.nextLine();
         System.out.println("Unesi ime: ");
-        String ime = scanner.next();
-        System.out.println("Unesi prezime:");
-        String prezime = scanner.next();
-        System.out.println("Unesi adresu");
-        String adresa = scanner.next();
-        System.out.println("Unesi pol");
-        String polTxt = scanner.next();
+        String ime = scanner.nextLine();
+        System.out.println("Unesi prezime: ");
+        String prezime = scanner.nextLine();
+        System.out.println("Unesi adresu: ");
+        String adresa = scanner.nextLine();
+        System.out.println("Unesi pol: ");
+        String polTxt = scanner.nextLine();
         Pol pol;
         if (polTxt.trim().equals("MUSKI")) {
             pol = Pol.MUSKI;
@@ -78,7 +78,7 @@ public class Vozac extends Korisnik {
             pol = Pol.ZENSKI;
         }
         System.out.println("Broj telefona");
-        String brojTelefona = scanner.next();
+        String brojTelefona = scanner.nextLine();
         System.out.println("Unesi platu");
         double plata = scanner.nextDouble();
         System.out.println("Unesi broj članske karte");
