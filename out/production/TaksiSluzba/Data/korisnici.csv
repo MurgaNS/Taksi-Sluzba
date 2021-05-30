@@ -1,10 +1,10 @@
-dispecer,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,30000.0,011110110,REKLAMACIJE
-dispecer,42451855821,elenas,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,35000.0,011110111,PRIJEM_VOZNJE
-vozac,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,25000.0,1001
-vozac,55508144142,natasan,12345,Natasa,Nastasic,Grobljanska 0 Beograd,ZENSKI,064321543,25000.0,1002
-musterija,27515550443,nikolan,12345,Nikola,Nikolic,Gogoljeva 41 Pancevo,MUSKI,061233211
-musterija,27518210443,marijam,12345,Marija,Milic,Nikole Tesle 5 Novi Beograd,ZENSKI,063221122
-vozac,1112222,milan,1234,milan,milanovic,milanova1,MUSKI,12211133,40000.0,1122
-vozac,99911888,milan,12345,milan,milakoviccc,Milakoviceva,MUSKI,8883331,50000.0,3311
-vozac,909911,testtest,12345,Testiram,Testiprezime,Nemanja,ZENSKI,MUSKI,5000.0,1123
-vozac,123123123,nemanjacar,murgapro123,Nemanja,Murgaski,Nemanjina 123,MUSKI,77711233,50000.0,6111
+dispecer,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,false,30000.0,011110110,REKLAMACIJE
+dispecer,42451855821,elenas,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
+vozac,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
+vozac,55508144142,natasan,12345,Natasa,Nastasic,Grobljanska 0 Beograd,ZENSKI,064321543,false,25000.0,1002
+vozac,1112222,milan,1234,milan,milanovic,milanova1,MUSKI,12211133,false,40000.0,1122
+vozac,99911888,milan,12345,milan,milakoviccc,Milakoviceva,MUSKI,8883331,false,50000.0,3311
+vozac,909911,testtest,12345,Testiram,Testiprezime,Nemanja,ZENSKI,MUSKI,false,5000.0,1123
+vozac,123123123,izmenakorimena,izmenasifre,Nemanja,Murgaski,Nemanjina 123,MUSKI,77711233,false,50000.0,6111
+vozac,123123123,eptttp,asdasd,asdsad,asdsad,asdasd asd asd 42,MUSKI,5050505,false,404.0,12
+musterija,123123,paojsd,]p[oajsd,poiajsd,apsiojdd,poiajisd j23,ZENSKI,123123,true
