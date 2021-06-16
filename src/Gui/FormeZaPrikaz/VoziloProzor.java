@@ -70,17 +70,21 @@ public class VoziloProzor extends JFrame {
                 } else {
                     String voziloId = tabelaModel.getValueAt(red, 0).toString();
                     Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId,listaVozila);
-                    int izbor = JOptionPane.showConfirmDialog(null,
-                            "Da li ste sigurni da zelite da obrisete vozilo?",
-                            vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
-                    if (izbor == JOptionPane.YES_OPTION) {
-                        vozilo.setObrisan(true);
-                        tabelaModel.removeRow(red);
-                        try {
-                            Vozilo.sacuvajAutomobilUFajl(vozilo);
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
+                    if(vozilo.getVozacId() == null) {
+                        int izbor = JOptionPane.showConfirmDialog(null,
+                                "Da li ste sigurni da zelite da obrisete vozilo?",
+                                vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
+                        if (izbor == JOptionPane.YES_OPTION) {
+                            vozilo.setObrisan(true);
+                            tabelaModel.removeRow(red);
+                            try {
+                                Vozilo.sacuvajAutomobilUFajl(vozilo);
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
                         }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Nije moguce izbrisati vozilo koje je dodeljeno vozacu.","Greska",0);
                     }
                 }
             }
