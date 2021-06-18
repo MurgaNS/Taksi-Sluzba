@@ -1,5 +1,6 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
+import Gui.FormeZaPrikaz.VoziloProzor;
 import Model.Vozilo;
 import net.miginfocom.swing.MigLayout;
 
@@ -119,6 +120,8 @@ public class VoziloForma extends JFrame {
                     Vozilo.sacuvajListuAutomobilaUFajl(listaVozila);
                     VoziloForma.this.dispose();
                     VoziloForma.this.setVisible(false);
+                    VoziloProzor vp = new VoziloProzor();
+                    vp.setVisible(true);
                 }
             }
         });
@@ -127,7 +130,10 @@ public class VoziloForma extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VoziloForma.this.dispose();
                 VoziloForma.this.setVisible(false);
+                VoziloProzor vp = new VoziloProzor();
+                vp.setVisible(true);
             }
+
         });
     }
 

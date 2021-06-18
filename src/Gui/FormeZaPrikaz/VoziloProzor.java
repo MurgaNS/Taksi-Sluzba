@@ -95,6 +95,8 @@ public class VoziloProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VoziloForma vf = new VoziloForma(null);
                 vf.setVisible(true);
+                VoziloProzor.this.setVisible(false);
+                VoziloProzor.this.dispose();
             }
         });
         dugmeIzmena.addActionListener(new ActionListener() {
@@ -108,6 +110,8 @@ public class VoziloProzor extends JFrame {
                     Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId,listaVozila);
                     VoziloForma voziloForma = new VoziloForma(vozilo);
                     voziloForma.setVisible(true);
+                    VoziloProzor.this.setVisible(false);
+                    VoziloProzor.this.dispose();
                 }
             }
         });

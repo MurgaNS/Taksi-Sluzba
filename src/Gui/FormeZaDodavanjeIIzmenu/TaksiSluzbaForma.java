@@ -1,5 +1,6 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
+import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
 import Model.TaksiSluzba;
 import net.miginfocom.swing.MigLayout;
 
@@ -77,6 +78,8 @@ public class TaksiSluzbaForma extends JFrame {
                 }
                 TaksiSluzbaForma.this.dispose();
                 TaksiSluzbaForma.this.setVisible(false);
+                TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
+                tsp.setVisible(true);
             }
         });
         dugmePonisti.addActionListener(new ActionListener() {
@@ -84,6 +87,8 @@ public class TaksiSluzbaForma extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TaksiSluzbaForma.this.dispose();
                 TaksiSluzbaForma.this.setVisible(false);
+                TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
+                tsp.setVisible(true);
             }
         });
     }

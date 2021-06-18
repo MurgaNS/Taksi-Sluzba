@@ -64,6 +64,8 @@ public class TaksiSluzbaProzor extends JFrame {
                     TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
                     TaksiSluzbaForma taksiSluzbaForma = new TaksiSluzbaForma(taksiSluzba);
                     taksiSluzbaForma.setVisible(true);
+                    TaksiSluzbaProzor.this.setVisible(false);
+                    TaksiSluzbaProzor.this.dispose();
                 }
             }
         });
