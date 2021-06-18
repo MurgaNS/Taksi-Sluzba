@@ -19,7 +19,6 @@ public class LoginProzor extends JFrame {
     private JButton btnOk = new JButton("Ok");
     private JButton btnCancel = new JButton("Cancel");
 
-//    private Dispecer dispecer;
 
 
     public LoginProzor() {

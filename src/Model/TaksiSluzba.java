@@ -10,6 +10,7 @@ public class TaksiSluzba {
     private String adresa;
     private double cenaStarta;
     private double cenaPoKilometru;
+    public final double RADNOVREMEUMINUTAMA = 720;
 
     public TaksiSluzba(long PIB, String naziv, String adresa, double cenaStarta, double cenaPoKilometru) {
         this.PIB = PIB;
@@ -172,4 +173,7 @@ public class TaksiSluzba {
         this.cenaPoKilometru = cenaPoKilometru;
     }
 
+    public double getRADNOVREMEUMINUTAMA() {
+        return RADNOVREMEUMINUTAMA;
+    }
 }

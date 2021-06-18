@@ -26,7 +26,7 @@ public class Musterija extends Korisnik {
         String adresaDestinacije = scanner.nextLine();
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         long idNoveVoznje = voznje.get(voznje.size() - 1).getId() + 1;
-        Voznja voznja = new Voznja(idNoveVoznje, new Date(), adresaPolaska, adresaDestinacije, 0, 0, Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM, Vozac.prijavljeniKorisnik.getJMBG(), (long) -1);
+        Voznja voznja = new Voznja(idNoveVoznje, new Date(), adresaPolaska, adresaDestinacije, 0, 0, Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM, Vozac.prijavljeniKorisnik.getJMBG(), (long) -1, 0);
         voznje.add(voznja);
         Voznja.upisiVoznje(voznje);
         System.out.println("Vožnja putem telefona je uspešno naručena!");
@@ -42,7 +42,7 @@ public class Musterija extends Korisnik {
         String napomena = scanner.nextLine();
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         long idNoveVoznje = voznje.get(voznje.size() - 1).getId() + 1;
-        Voznja voznja = new Voznja(idNoveVoznje, new Date(), adresaPolaska, adresaDestinacije, 0, 0, Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM, Vozac.prijavljeniKorisnik.getJMBG(), (long) -1);
+        Voznja voznja = new Voznja(idNoveVoznje, new Date(), adresaPolaska, adresaDestinacije, 0, 0, Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM, Vozac.prijavljeniKorisnik.getJMBG(), (long) -1, 0);
         voznje.add(voznja);
         Voznja.upisiVoznje(voznje);
         System.out.println("Voznja putem aplikacije je uspesno narucena.");
@@ -212,7 +212,7 @@ public class Musterija extends Korisnik {
             Voznja.StatusVoznje statusVoznje;
             statusVoznje = Voznja.ucitajStatusVoznje(tmp[6]);
             nacinPorudzbine = Voznja.ucitajNacinPorudzbine(tmp[7]);
-            Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, null, null);
+            Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, null, null, Double.parseDouble(tmp[10]));
         }
         return listaVoznji;
     }

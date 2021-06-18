@@ -79,6 +79,13 @@ public class TaksiSluzbaForma extends JFrame {
                 TaksiSluzbaForma.this.setVisible(false);
             }
         });
+        dugmePonisti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TaksiSluzbaForma.this.dispose();
+                TaksiSluzbaForma.this.setVisible(false);
+            }
+        });
     }
 
     private void popuniPolja() {

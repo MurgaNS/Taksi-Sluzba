@@ -430,6 +430,7 @@ public class Vozac extends Korisnik {
                 }
                 if (tmp[0].equals("vozac")) {
                     Vozilo vozilo = null;
+                    Long voziloId;
                     try {
                         if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11], listaVozila) != null) {
                             vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11], listaVozila);
@@ -437,7 +438,12 @@ public class Vozac extends Korisnik {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
-                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], pol, tmp[8], false, Double.parseDouble(tmp[9]), Integer.parseInt(tmp[10]), null, Long.parseLong(vozilo.getBrTaksiVozila()));
+                    try {
+                        voziloId = Long.parseLong(vozilo.getBrTaksiVozila());
+                    } catch (NullPointerException e) {
+                        voziloId = null;
+                    }
+                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], pol, tmp[8], Boolean.parseBoolean(tmp[9]), Double.parseDouble(tmp[10]), Integer.parseInt(tmp[11]), null, voziloId);
                     vozac.setListaVoznji(ucitajListuVoznji(vozac));
                     vozaci.add(vozac);
                 }
@@ -463,10 +469,8 @@ public class Vozac extends Korisnik {
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     Date date = (Date) formatter.parse(tmp[1]);
 
-                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, Long.parseLong(tmp[8]), Long.parseLong(tmp[9]));
+                    Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, Long.parseLong(tmp[8]), Long.parseLong(tmp[9]), Double.parseDouble(tmp[10]));
                     listaVoznji.add(voznja);
-                } else {
-                    System.out.println("Ne postoje voznje za ovog korisnika.");
                 }
             }
         } catch (IOException | ParseException e) {

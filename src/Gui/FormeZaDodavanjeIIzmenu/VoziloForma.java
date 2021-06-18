@@ -21,7 +21,9 @@ public class VoziloForma extends JFrame {
     private JLabel lblBrRegOznake = new JLabel("Br. reg. oznake");
     private JTextField txtBrRegOznake = new JTextField(20);
     private JLabel lblVrsta = new JLabel("Vrsta");
-    private JTextField txtVrsta = new JTextField(20);
+    //    private JTextField txtVrsta = new JTextField(20);
+    String[] vrste = {"AUTOMOBIL", "KOMBI"};
+    private JComboBox<String> txtVrsta = new JComboBox<String>(vrste);
     private JLabel lblVozac = new JLabel("VozacId");
     private JTextField txtVozac = new JTextField(20);
     private JButton dugmeOk = new JButton("Sacuvaj");
@@ -84,9 +86,9 @@ public class VoziloForma extends JFrame {
                     String model = txtModel.getText().trim();
                     String godProizvodnje = txtGodProizvodnje.getText().trim();
                     String brRegOznake = txtBrRegOznake.getText().trim();
-                    String vrstaTxt = txtVrsta.getText().trim();
+                    String vrstaTxt = txtVrsta.getSelectedItem().toString();
                     Vozilo.VrstaVozila vrsta;
-                    if (vrstaTxt == "AUTOMOBIL") {
+                    if (vrstaTxt.equalsIgnoreCase("AUTOMOBIL")) {
                         vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
                     } else {
                         vrsta = Vozilo.VrstaVozila.KOMBI;
@@ -118,6 +120,13 @@ public class VoziloForma extends JFrame {
                     VoziloForma.this.dispose();
                     VoziloForma.this.setVisible(false);
                 }
+            }
+        });
+        dugmePonisti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VoziloForma.this.dispose();
+                VoziloForma.this.setVisible(false);
             }
         });
     }
@@ -160,10 +169,6 @@ public class VoziloForma extends JFrame {
             poruka += "- Morate uneti broj registarske oznake\n";
             ok = false;
         }
-        if (txtVrsta.getText().trim().equals("")) {
-            poruka += "- Morate uneti vrstu vozila\n";
-            ok = false;
-        }
 
         if (ok == false) {
             JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
@@ -178,9 +183,9 @@ public class VoziloForma extends JFrame {
         txtGodProizvodnje.setText(String.valueOf(vozilo.getGodProizvodnje()));
         txtBrRegOznake.setText(vozilo.getBrRegistarskeOznake());
         if (vozilo.getVrsta() == Vozilo.VrstaVozila.AUTOMOBIL) {
-            txtVrsta.setText("AUTOMOBIL");
+            txtVrsta.setSelectedIndex(0);
         } else {
-            txtVrsta.setText("KOMBI");
+            txtVrsta.setSelectedIndex(1);
         }
         txtVozac.setText(String.valueOf(vozilo.getVozacId()));
     }
