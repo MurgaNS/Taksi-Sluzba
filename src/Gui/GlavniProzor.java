@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
-    private Korisnik prijavljeniKorisnik;
+    public static Korisnik prijavljeniKorisnik;
     private TaksiSluzba taksiSluzba;
 
 
@@ -133,4 +133,7 @@ public class GlavniProzor extends JFrame {
 
     }
 
+    public static Korisnik getPrijavljeniKorisnik() {
+        return prijavljeniKorisnik;
+    }
 }

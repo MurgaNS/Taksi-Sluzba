@@ -25,7 +25,7 @@ public class VoziloProzor extends JFrame {
         setTitle("Prikaz vozila");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(500, 300);
+        setSize(600, 300);
         initGui();
         initActions();
     }

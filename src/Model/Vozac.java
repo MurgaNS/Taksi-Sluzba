@@ -340,18 +340,6 @@ public class Vozac extends Korisnik {
         return false;
     }
 
-    public void dnevniIzvestaj() {
-    }
-
-    public void nedeljniIzvestaj() {
-    }
-
-    public void mesecniIzvestaj() {
-    }
-
-    public void godisnjiIzvestaj() {
-    }
-
     public void aukcija(int minutaDoDolaska) {
     }
 
@@ -363,22 +351,6 @@ public class Vozac extends Korisnik {
             }
         }
         return null;
-    }
-
-    public static List<Vozac> nadjiVozaceZaProizvodjaca(String proizvodjac) {
-        List<Vozac> vozaci = new ArrayList<>();
-        List<Vozilo> automobili = Vozilo.ucitajSveAutomobile();
-        for (Vozilo vozilo : automobili) {
-            if (vozilo.getVozacId() != null && vozilo.getProizvodjac().equals(proizvodjac)) {
-                long jmbg = vozilo.getVozacId();
-                Vozac vozac = pronadjiPoJMBG(jmbg);
-                if (vozac != null) {
-                    vozaci.add(vozac);
-                }
-
-            }
-        }
-        return vozaci;
     }
 
     public static void nedeljniIzvestaj(Vozac vozac) {

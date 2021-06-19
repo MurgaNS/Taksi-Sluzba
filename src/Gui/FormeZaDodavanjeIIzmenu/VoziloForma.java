@@ -22,7 +22,6 @@ public class VoziloForma extends JFrame {
     private JLabel lblBrRegOznake = new JLabel("Br. reg. oznake");
     private JTextField txtBrRegOznake = new JTextField(20);
     private JLabel lblVrsta = new JLabel("Vrsta");
-    //    private JTextField txtVrsta = new JTextField(20);
     String[] vrste = {"AUTOMOBIL", "KOMBI"};
     private JComboBox<String> txtVrsta = new JComboBox<String>(vrste);
     private JLabel lblVozac = new JLabel("VozacId");
@@ -46,8 +45,8 @@ public class VoziloForma extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI();
+        setSize(600, 300);
         initActions();
-        setResizable(false);
         pack();
     }
 

@@ -1,16 +1,11 @@
 package Model;
 
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.Array;
+import java.io.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.io.*;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -71,13 +66,6 @@ public class Voznja {
                ", musterijaId=" + musterijaId +
                ", naplacenIznos=" + naplacenIznos +
                '}';
-    }
-
-    public static void prikaziSveVoznje() {
-        List<Voznja> voznje = ucitajSveVoznje();
-        for (Voznja voznja : voznje) {
-            System.out.println(voznja);
-        }
     }
 
     public static StatusVoznje ucitajStatusVoznje(String statusVoznje) {
@@ -214,38 +202,41 @@ public class Voznja {
         return brVoznji;
     }
 
+
     public static List<Voznja> ucitajSveVoznje() {
         List<Voznja> sveVoznje = new ArrayList<>();
-        File file = new File("src\\Data\\voznje.csv");
+        File file = new File("src//Data//voznje.csv");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                Voznja voznja = null;
-                NacinPorudzbine nacinPorudzbine = NacinPorudzbine.APLIKACIJOM;
                 String[] lineParts = line.split(",");
-                StatusVoznje statusVoznje = ucitajStatusVoznje(lineParts[6]);
-                nacinPorudzbine = ucitajNacinPorudzbine(lineParts[7]);
-
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Long id = Long.parseLong(lineParts[0]);
+                Date datumPorudzbine = simpleDateFormat.parse(lineParts[1]);
+                String adresaPolaska = lineParts[2];
+                String adresaDestinacije = lineParts[3];
+                Double brojPredjenihKilometara = Double.parseDouble(lineParts[4]);
+                Double trajanjeVoznjeUMin = Double.parseDouble(lineParts[5]);
+                StatusVoznje statusVoznje = ucitajStatusVoznje(lineParts[6]);
+                NacinPorudzbine nacinPorudzbine = ucitajNacinPorudzbine(lineParts[7]);
+                Long vozacId = null;
+                try {
+                    vozacId = Long.parseLong(lineParts[8]);
+                } catch (NumberFormatException e) {
 
-                Date date = simpleDateFormat.parse(lineParts[1]);
-                voznja = new Voznja(Long.parseLong(lineParts[0]), date, lineParts[2], lineParts[3], Double.parseDouble(lineParts[4]),
-                        Double.parseDouble(lineParts[5]),
-                        statusVoznje, nacinPorudzbine,
-                        Long.parseLong(lineParts[8]),
-                        Long.parseLong(lineParts[9]),
-                        Double.parseDouble(lineParts[10]));
+                }
+                Long musterijaId = Long.parseLong(lineParts[9]);
+                double naplacenIznos = Double.parseDouble(lineParts[10]);
+                Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos);
                 sveVoznje.add(voznja);
             }
             bufferedReader.close();
         } catch (FileNotFoundException exception) {
             System.out.println("Fajl nije pronadjen");
-        } catch (IOException exception) {
+        } catch (IOException | ParseException exception) {
             exception.printStackTrace();
             System.out.println("Greska pri citanju datoteke");
-        } catch (Exception e) {
-            System.out.println("Niste uneli tacne podatke, molimo Vas pokusajte ponovo.");
         }
         return sveVoznje;
     }
@@ -262,6 +253,19 @@ public class Voznja {
         } catch (FileNotFoundException exception) {
             System.out.println("Nepostojeći fajl");
         }
+    }
+
+    public static Long preuzmiPoslednjiId() {
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        Long id = listaVoznji.get(listaVoznji.size() - 1).getId();
+        System.out.println(id);
+        return id;
+    }
+
+    public static void sacuvajVoznju(Voznja voznja) {
+        List<Voznja> voznje = ucitajSveVoznje();
+        voznje.add(voznja);
+        upisiVoznje(voznje);
     }
 
     public String stringToSave() {

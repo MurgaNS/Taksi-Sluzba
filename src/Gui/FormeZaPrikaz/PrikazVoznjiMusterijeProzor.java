@@ -9,7 +9,7 @@ public class PrikazVoznjiMusterijeProzor extends JFrame {
         setTitle("Prikaz voznji");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(this);
-        setSize(400, 600);
+        setSize(600, 600);
         initGui();
         initActions();
     }
