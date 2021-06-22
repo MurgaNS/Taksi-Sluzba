@@ -52,9 +52,11 @@ public class VoziloForma extends JFrame {
     public void initGUI() {
         MigLayout layout = new MigLayout("wrap 2", "[][]", "[][][][][][]20[]");
         setLayout(layout);
+        txtBrTaksiVozila.setEnabled(false);
         if (vozilo != null) {
             popuniPolja();
-            txtBrTaksiVozila.setEnabled(false);
+        } else {
+            txtBrTaksiVozila.setText(String.valueOf(Vozilo.generisiIdVozila()));
         }
         add(lblBrTaksiVozila);
         add(txtBrTaksiVozila);

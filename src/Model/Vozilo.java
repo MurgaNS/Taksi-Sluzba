@@ -59,12 +59,8 @@ public class Vozilo {
     }
 
     public static long generisiIdVozila() {
-        long brojac = 0;
         List<Vozilo> vozila = ucitajSvaVozila();
-        for (Vozilo vozilo : vozila) {
-            brojac++;
-        }
-        return brojac;
+        return vozila.get(vozila.size() - 1).getBrTaksiVozila() + 1;
     }
 
     public static List<Vozilo> ucitajSvaVozila() {
@@ -183,7 +179,7 @@ public class Vozilo {
     }
 
     public String stringToSave() {
-        return brTaksiVozila + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + obrisan + ',' + vozacId + '\n';
+        return String.valueOf(brTaksiVozila) + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + obrisan + ',' + vozacId + '\n';
     }
 //    private static void dodajAutomobiluVozaca(Vozilo vozilo) {
 //        Scanner sc = new Scanner(System.in);
