@@ -55,40 +55,34 @@ public class TaksiSluzbaForma extends JFrame {
     }
 
     public void initActions() {
-        dugmeOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Long PIB = Long.parseLong(txtPIB.getText().trim());
-                String naziv = txtNaziv.getText().trim();
-                String adresa = txtAdresa.getText().trim();
-                Double cenaPoKm = Double.parseDouble(txtCenaPoKilometru.getText().trim());
-                Double cenaStarta = Double.parseDouble(txtCenaStarta.getText().trim());
+        dugmeOk.addActionListener(e -> {
+            long PIB = Long.parseLong(txtPIB.getText().trim());
+            String naziv = txtNaziv.getText().trim();
+            String adresa = txtAdresa.getText().trim();
+            double cenaPoKm = Double.parseDouble(txtCenaPoKilometru.getText().trim());
+            double cenaStarta = Double.parseDouble(txtCenaStarta.getText().trim());
 
-                taksiSluzba.setPIB(PIB);
-                taksiSluzba.setNaziv(naziv);
-                taksiSluzba.setAdresa(adresa);
-                taksiSluzba.setCenaStarta(cenaStarta);
-                taksiSluzba.setCenaPoKilometru(cenaPoKm);
+            taksiSluzba.setPIB(PIB);
+            taksiSluzba.setNaziv(naziv);
+            taksiSluzba.setAdresa(adresa);
+            taksiSluzba.setCenaStarta(cenaStarta);
+            taksiSluzba.setCenaPoKilometru(cenaPoKm);
 
-                try {
-                    TaksiSluzba.sacuvajPodatkeUFajl(taksiSluzba);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                TaksiSluzbaForma.this.dispose();
-                TaksiSluzbaForma.this.setVisible(false);
-                TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
-                tsp.setVisible(true);
+            try {
+                TaksiSluzba.sacuvajPodatkeUFajl(taksiSluzba);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
+            TaksiSluzbaForma.this.dispose();
+            TaksiSluzbaForma.this.setVisible(false);
+            TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
+            tsp.setVisible(true);
         });
-        dugmePonisti.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TaksiSluzbaForma.this.dispose();
-                TaksiSluzbaForma.this.setVisible(false);
-                TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
-                tsp.setVisible(true);
-            }
+        dugmePonisti.addActionListener(e -> {
+            TaksiSluzbaForma.this.dispose();
+            TaksiSluzbaForma.this.setVisible(false);
+            TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
+            tsp.setVisible(true);
         });
     }
 

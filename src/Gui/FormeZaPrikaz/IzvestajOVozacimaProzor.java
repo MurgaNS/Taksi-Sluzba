@@ -1,6 +1,5 @@
 package Gui.FormeZaPrikaz;
 
-import Gui.GlavniProzor;
 import Model.Vozac;
 import Model.Voznja;
 

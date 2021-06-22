@@ -1,13 +1,9 @@
 package Gui;
 
-import Model.Dispecer;
 import Model.Korisnik;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 public class LoginProzor extends JFrame {
 
@@ -18,7 +14,6 @@ public class LoginProzor extends JFrame {
     private JPasswordField pfPassword = new JPasswordField(20);
     private JButton btnOk = new JButton("Ok");
     private JButton btnCancel = new JButton("Cancel");
-
 
 
     public LoginProzor() {
@@ -44,34 +39,27 @@ public class LoginProzor extends JFrame {
         add(btnOk, "split 2");
         add(btnCancel);
 
-        // default dugme (kad lupimo enter unutar prozora)
         getRootPane().setDefaultButton(btnOk);
 
     }
 
     public void initActions() {
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoginProzor.this.dispose();  // da se oslobode memorijski resursi
-                LoginProzor.this.setVisible(false);
-            }
+        btnCancel.addActionListener(e -> {
+            LoginProzor.this.dispose();
+            LoginProzor.this.setVisible(false);
         });
 
-        btnOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String korisnickoIme = txtKorisnickoIme.getText().trim();
-                String sifra = new String(pfPassword.getPassword()).trim();
-                Korisnik korisnik = Korisnik.postojiKorisnik(korisnickoIme,sifra);
-                if (korisnik != null) {
-                    LoginProzor.this.dispose();
-                    LoginProzor.this.setVisible(false);
-                    GlavniProzor glavniProzor = new GlavniProzor(korisnik);
-                    glavniProzor.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null,"Korisnicko ime ili lozinka su pogresni.","Prijava",JOptionPane.WARNING_MESSAGE);
-                }
+        btnOk.addActionListener(e -> {
+            String korisnickoIme = txtKorisnickoIme.getText().trim();
+            String sifra = new String(pfPassword.getPassword()).trim();
+            Korisnik korisnik = Korisnik.postojiKorisnik(korisnickoIme, sifra);
+            if (korisnik != null) {
+                LoginProzor.this.dispose();
+                LoginProzor.this.setVisible(false);
+                GlavniProzor glavniProzor = new GlavniProzor(korisnik);
+                glavniProzor.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Korisnicko ime ili lozinka su pogresni.", "Prijava", JOptionPane.WARNING_MESSAGE);
             }
         });
     }

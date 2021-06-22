@@ -2,7 +2,6 @@ package Gui.FormeZaPrikaz;
 
 import Gui.GlavniProzor;
 import Model.Vozac;
-import Model.Vozilo;
 import Model.Voznja;
 
 import javax.swing.*;
@@ -18,7 +17,6 @@ public class PrikazIzvestajaVoznjiProzor extends JFrame {
     private JButton dugmeIzvestajGodinuDana = new JButton("Godinu dana");
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
-    private List<Voznja> listaVoznji;
     private Vozac vozac;
 
     public PrikazIzvestajaVoznjiProzor() {

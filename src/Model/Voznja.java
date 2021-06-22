@@ -3,7 +3,6 @@ package Model;
 
 import javax.swing.*;
 import java.io.*;
-import java.sql.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -269,7 +268,6 @@ public class Voznja {
 
     public static Date vratiDatum(BrojDana brDana) {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         switch (brDana) {
             case JEDAN_DAN -> cal.add(Calendar.DAY_OF_YEAR, -1);
             case SEDAM_DANA -> cal.add(Calendar.DAY_OF_YEAR, -6);

@@ -72,12 +72,7 @@ public abstract class Korisnik {
             while ((line = bufferedReader.readLine()) != null) {
                 Korisnik korisnik = null;
                 String[] lineParts = line.split(",");
-                Pol pol;
-                if (lineParts[7].trim().equals("MUSKI")) {
-                    pol = Pol.MUSKI;
-                } else {
-                    pol = Pol.ZENSKI;
-                }
+                Pol pol = ucitajPol(lineParts[7]);
                 switch (lineParts[0]) {
                     case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]));
                     case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), Integer.parseInt(lineParts[11]));
@@ -100,21 +95,6 @@ public abstract class Korisnik {
         return sviKorisnici;
 
     }
-
-    public static void upisiSveKorisnike(List<Korisnik> korisnici) {
-        File file = new File("src\\Data\\korisnici.csv");
-        try {
-            PrintWriter writer = new PrintWriter(file);
-            for (Korisnik korisnik : korisnici) {
-                writer.write(korisnik.korisnikUString() + "\n");
-            }
-            writer.flush();
-            writer.close();
-        } catch (FileNotFoundException exception) {
-            System.out.println("Nepostojeći fajl");
-        }
-    }
-
 
     public String korisnikUString() {
         return JMBG +

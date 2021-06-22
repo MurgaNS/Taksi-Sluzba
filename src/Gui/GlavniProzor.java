@@ -7,17 +7,14 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
     public static Korisnik prijavljeniKorisnik;
-    private TaksiSluzba taksiSluzba;
 
 
     public GlavniProzor(Korisnik korisnik) {
-        this.taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
+        TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         prijavljeniKorisnik = korisnik;
         setTitle("Taksi sluzba " + taksiSluzba.getNaziv());
         setSize(1000, 500);
@@ -106,7 +103,6 @@ public class GlavniProzor extends JFrame {
         });
         prikazVoznjiDugme.addActionListener(e -> {
             PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
-            prikazVoznjiProzor.setVisible(true);
         });
 
 

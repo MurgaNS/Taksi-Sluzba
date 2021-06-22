@@ -19,6 +19,7 @@ public class PrikazSopstvenihVoznjiProzor extends JFrame {
             setTitle("Prikaz voznji");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setLocationRelativeTo(this);
+            setVisible(true);
             setSize(600, 600);
             initGui();
         }
