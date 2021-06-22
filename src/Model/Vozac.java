@@ -89,14 +89,14 @@ public class Vozac extends Korisnik {
 
         String brRegistarskeOznake = scanner.next();
 
-        List<Vozilo> automobili = Vozilo.ucitajSveAutomobile();
-        for (Vozilo vozilo : automobili) {
+        List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
+        for (Vozilo vozilo : vozila) {
             if (vozilo.getBrRegistarskeOznake().equals(brRegistarskeOznake)) {
                 vozilo.setVozacId(JMBG);
                 break;
             }
         }
-        Vozilo.sacuvajListuAutomobilaUFajl(automobili);
+        Vozilo.sacuvajListuVozilaUFajl(vozila);
 
         Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, false, plata, brojClanskeKarte);
         List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
@@ -388,7 +388,7 @@ public class Vozac extends Korisnik {
     public static ArrayList<Vozac> ucitajSveVozace() {
         // TODO dodati listu voznji
         ArrayList<Vozac> vozaci = new ArrayList<>();
-        List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+        List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
 
         String red;
         try {
@@ -405,14 +405,14 @@ public class Vozac extends Korisnik {
                     Vozilo vozilo = null;
                     Long voziloId;
                     try {
-                        if (Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11], listaVozila) != null) {
-                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(tmp[11], listaVozila);
+                        if (Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(tmp[11]), listaVozila) != null) {
+                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(tmp[11]), listaVozila);
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
                     try {
-                        voziloId = Long.parseLong(vozilo.getBrTaksiVozila());
+                        voziloId = vozilo.getBrTaksiVozila();
                     } catch (NullPointerException e) {
                         voziloId = null;
                     }

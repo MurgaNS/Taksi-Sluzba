@@ -21,7 +21,7 @@ public class VoziloProzor extends JFrame {
     private List<Vozilo> listaVozila;
 
     public VoziloProzor() {
-        listaVozila = Vozilo.ucitajNeobrisaneAutomobile();
+        listaVozila = Vozilo.ucitajNeobrisanaVozila();
         setTitle("Prikaz vozila");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -61,58 +61,49 @@ public class VoziloProzor extends JFrame {
     }
 
     public void initActions() {
-        dugmeIzbrisi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int red = tabelaPodataka.getSelectedRow();
-                if (red == -1) {
-                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId,listaVozila);
-                    if(vozilo.getVozacId() == null) {
-                        int izbor = JOptionPane.showConfirmDialog(null,
-                                "Da li ste sigurni da zelite da obrisete vozilo?",
-                                vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
-                        if (izbor == JOptionPane.YES_OPTION) {
-                            vozilo.setObrisan(true);
-                            tabelaModel.removeRow(red);
-                            try {
-                                Vozilo.sacuvajAutomobilUFajl(vozilo);
-                            } catch (IOException ioException) {
-                                ioException.printStackTrace();
-                            }
+        dugmeIzbrisi.addActionListener(e -> {
+            int red = tabelaPodataka.getSelectedRow();
+            if (red == -1) {
+                JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+            } else {
+                String voziloId = tabelaModel.getValueAt(red, 0).toString();
+                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId),listaVozila);
+                if(vozilo.getVozacId() == null) {
+                    int izbor = JOptionPane.showConfirmDialog(null,
+                            "Da li ste sigurni da zelite da obrisete vozilo?",
+                            vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
+                    if (izbor == JOptionPane.YES_OPTION) {
+                        vozilo.setObrisan(true);
+                        tabelaModel.removeRow(red);
+                        try {
+                            Vozilo.sacuvajVoziloUFajl(vozilo);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
                         }
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Nije moguce izbrisati vozilo koje je dodeljeno vozacu.","Greska",0);
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Nije moguce izbrisati vozilo koje je dodeljeno vozacu.","Greska",0);
                 }
             }
         });
 
-        dugmeDodaj.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VoziloForma vf = new VoziloForma(null);
-                vf.setVisible(true);
+        dugmeDodaj.addActionListener(e -> {
+            VoziloForma vf = new VoziloForma(null);
+            vf.setVisible(true);
+            VoziloProzor.this.setVisible(false);
+            VoziloProzor.this.dispose();
+        });
+        dugmeIzmena.addActionListener(e -> {
+            int red = tabelaPodataka.getSelectedRow();
+            if (red == -1) {
+                JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+            } else {
+                String voziloId = tabelaModel.getValueAt(red, 0).toString();
+                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId),listaVozila);
+                VoziloForma voziloForma = new VoziloForma(vozilo);
+                voziloForma.setVisible(true);
                 VoziloProzor.this.setVisible(false);
                 VoziloProzor.this.dispose();
-            }
-        });
-        dugmeIzmena.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int red = tabelaPodataka.getSelectedRow();
-                if (red == -1) {
-                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                    Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(voziloId,listaVozila);
-                    VoziloForma voziloForma = new VoziloForma(vozilo);
-                    voziloForma.setVisible(true);
-                    VoziloProzor.this.setVisible(false);
-                    VoziloProzor.this.dispose();
-                }
             }
         });
     }

@@ -7,7 +7,6 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.List;
 
 public class VoziloForma extends JFrame {
@@ -23,19 +22,19 @@ public class VoziloForma extends JFrame {
     private JTextField txtBrRegOznake = new JTextField(20);
     private JLabel lblVrsta = new JLabel("Vrsta");
     String[] vrste = {"AUTOMOBIL", "KOMBI"};
-    private JComboBox<String> txtVrsta = new JComboBox<String>(vrste);
+    private JComboBox<String> txtVrsta = new JComboBox<>(vrste);
     private JLabel lblVozac = new JLabel("VozacId");
     private JTextField txtVozac = new JTextField(20);
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
 
     private Vozilo vozilo;
-    List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+    List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
 
     public VoziloForma(Vozilo v) {
         try {
             vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(v.getBrTaksiVozila(), listaVozila);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
         if (vozilo == null) {
             setTitle("Dodavanje vozila");
@@ -77,62 +76,55 @@ public class VoziloForma extends JFrame {
     }
 
     public void initActions() {
-        dugmeOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (validacija()) {
-                    String brTaksiVozila = txtBrTaksiVozila.getText().trim();
-                    String proizvodjac = txtProizvodjac.getText().trim();
-                    String model = txtModel.getText().trim();
-                    String godProizvodnje = txtGodProizvodnje.getText().trim();
-                    String brRegOznake = txtBrRegOznake.getText().trim();
-                    String vrstaTxt = txtVrsta.getSelectedItem().toString();
-                    Vozilo.VrstaVozila vrsta;
-                    if (vrstaTxt.equalsIgnoreCase("AUTOMOBIL")) {
-                        vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
-                    } else {
-                        vrsta = Vozilo.VrstaVozila.KOMBI;
-                    }
-                    String vozac = txtVozac.getText().trim();
-                    if (vozilo == null) {
-                        Long vozacId;
-                        try {
-                            vozacId = Long.parseLong(vozac);
-                        } catch (NumberFormatException numberFormatException) {
-                            vozacId = null;
-                        }
-                        Vozilo novoVozilo = new Vozilo(brTaksiVozila, model, proizvodjac, Integer.parseInt(godProizvodnje), brRegOznake, vrsta, false, vozacId);
-                        listaVozila.add(novoVozilo);
-                    } else {
-                        vozilo.setBrTaksiVozila(brTaksiVozila);
-                        vozilo.setProizvodjac(proizvodjac);
-                        vozilo.setModel(model);
-                        vozilo.setGodProizvodnje(Integer.parseInt(godProizvodnje));
-                        vozilo.setBrRegistarskeOznake(brRegOznake);
-                        vozilo.setVrsta(vrsta);
-                        try {
-                            vozilo.setVozacId(Long.parseLong(vozac));
-                        } catch (NumberFormatException numberFormatException) {
-                            vozilo.setVozacId(null);
-                        }
-                    }
-                    Vozilo.sacuvajListuAutomobilaUFajl(listaVozila);
-                    VoziloForma.this.dispose();
-                    VoziloForma.this.setVisible(false);
-                    VoziloProzor vp = new VoziloProzor();
-                    vp.setVisible(true);
+        dugmeOk.addActionListener(e -> {
+            if (validacija()) {
+                Long brTaksiVozila = Long.parseLong(txtBrTaksiVozila.getText().trim());
+                String proizvodjac = txtProizvodjac.getText().trim();
+                String model = txtModel.getText().trim();
+                String godProizvodnje = txtGodProizvodnje.getText().trim();
+                String brRegOznake = txtBrRegOznake.getText().trim();
+                String vrstaTxt = txtVrsta.getSelectedItem().toString();
+                Vozilo.VrstaVozila vrsta;
+                if (vrstaTxt.equalsIgnoreCase("AUTOMOBIL")) {
+                    vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
+                } else {
+                    vrsta = Vozilo.VrstaVozila.KOMBI;
                 }
-            }
-        });
-        dugmePonisti.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                String vozac = txtVozac.getText().trim();
+                if (vozilo == null) {
+                    Long vozacId;
+                    try {
+                        vozacId = Long.parseLong(vozac);
+                    } catch (NumberFormatException numberFormatException) {
+                        vozacId = null;
+                    }
+                    Vozilo novoVozilo = new Vozilo(brTaksiVozila, model, proizvodjac, Integer.parseInt(godProizvodnje), brRegOznake, vrsta, false, vozacId);
+                    listaVozila.add(novoVozilo);
+                } else {
+                    vozilo.setBrTaksiVozila(brTaksiVozila);
+                    vozilo.setProizvodjac(proizvodjac);
+                    vozilo.setModel(model);
+                    vozilo.setGodProizvodnje(Integer.parseInt(godProizvodnje));
+                    vozilo.setBrRegistarskeOznake(brRegOznake);
+                    vozilo.setVrsta(vrsta);
+                    try {
+                        vozilo.setVozacId(Long.parseLong(vozac));
+                    } catch (NumberFormatException numberFormatException) {
+                        vozilo.setVozacId(null);
+                    }
+                }
+                Vozilo.sacuvajListuVozilaUFajl(listaVozila);
                 VoziloForma.this.dispose();
                 VoziloForma.this.setVisible(false);
                 VoziloProzor vp = new VoziloProzor();
                 vp.setVisible(true);
             }
-
+        });
+        dugmePonisti.addActionListener(e -> {
+            VoziloForma.this.dispose();
+            VoziloForma.this.setVisible(false);
+            VoziloProzor vp = new VoziloProzor();
+            vp.setVisible(true);
         });
     }
 
@@ -144,8 +136,8 @@ public class VoziloForma extends JFrame {
             poruka += "- Morate uneti ID\n";
             ok = false;
         } else if (vozilo == null) {
-            String id = txtBrTaksiVozila.getText().trim();
-            List<Vozilo> listaVozila = Vozilo.ucitajSveAutomobile();
+            Long id = Long.parseLong(txtBrTaksiVozila.getText().trim());
+            List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
             Vozilo postojiVozilo = Vozilo.pronadjiPoBrojuTaksiVozila(id, listaVozila);
             if (postojiVozilo != null) {
                 poruka += "- Vozilo sa unetim ID vec postoji\n";
@@ -175,14 +167,14 @@ public class VoziloForma extends JFrame {
             ok = false;
         }
 
-        if (ok == false) {
+        if (!ok) {
             JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
         }
         return ok;
     }
 
     private void popuniPolja() {
-        txtBrTaksiVozila.setText(vozilo.getBrTaksiVozila());
+        txtBrTaksiVozila.setText(String.valueOf(vozilo.getBrTaksiVozila()));
         txtProizvodjac.setText(vozilo.getProizvodjac());
         txtModel.setText(vozilo.getModel());
         txtGodProizvodnje.setText(String.valueOf(vozilo.getGodProizvodnje()));
