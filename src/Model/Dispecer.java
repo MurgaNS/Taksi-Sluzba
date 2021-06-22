@@ -122,10 +122,10 @@ public class Dispecer extends Korisnik {
 //                nedeljneVoznje.add(voznja);
 //            }
 //        }
-//
+
 //        ispisiIzvestaj(nedeljneVoznje);
-//
-//
+
+
 //    }
 //
 //    public static void dnevniIzvestaj() {

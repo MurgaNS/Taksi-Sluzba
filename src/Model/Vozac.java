@@ -33,77 +33,77 @@ public class Vozac extends Korisnik {
     public String korisnikUString() {
         return "vozac," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
     }
+//
+//    public static void prikaziMeni() {
+//        System.out.println("1. Prikaz istorije sopstvenih voznji");
+//        System.out.println("2. Prikaz svih voznji zakazanih putem aplikacije");
+//        System.out.println("3. Prikaz dodeljenih voznji");
+//        System.out.println("4. Statistika");
+//        System.out.println("5. Aukcija");
+//    }
 
-    public static void prikaziMeni() {
-        System.out.println("1. Prikaz istorije sopstvenih voznji");
-        System.out.println("2. Prikaz svih voznji zakazanih putem aplikacije");
-        System.out.println("3. Prikaz dodeljenih voznji");
-        System.out.println("4. Statistika");
-        System.out.println("5. Aukcija");
-    }
+//    public static void prikaziVozace() {
+//        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
+//        for (Korisnik korisnik : sviKorisnici) {
+//            if (korisnik instanceof Vozac) {
+//                System.out.println("JMBG:" + korisnik.getJMBG() + " " + "Korisnicko ime:" + korisnik.getKorisnickoIme() + " " +
+//                                   "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " " + "Prezime:" +
+//                                   korisnik.getPrezime() + " " + "Adresa: " + korisnik.getAdresa() + " " + "Pol:" + korisnik.getPol() + " " +
+//                                   "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
+//                                   "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
+//            }
+//        }
+//    }
 
-    public static void prikaziVozace() {
-        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
-        for (Korisnik korisnik : sviKorisnici) {
-            if (korisnik instanceof Vozac) {
-                System.out.println("JMBG:" + korisnik.getJMBG() + " " + "Korisnicko ime:" + korisnik.getKorisnickoIme() + " " +
-                                   "Lozinka:" + korisnik.getLozinka() + " " + "Ime:" + korisnik.getIme() + " " + "Prezime:" +
-                                   korisnik.getPrezime() + " " + "Adresa: " + korisnik.getAdresa() + " " + "Pol:" + korisnik.getPol() + " " +
-                                   "Broj telefona:" + korisnik.getBrojTelefona() + " " + "Plata:" + ((Vozac) korisnik).getPlata() + " " +
-                                   "Broj clanske karte:" + ((Vozac) korisnik).getBrojClanskeKarte());
-            }
-        }
-    }
-
-    public static void dodajVozaca() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Unesi JMBG: ");
-        long JMBG = Long.parseLong(scanner.nextLine());
-        System.out.println("Unesi korisnicko ime: ");
-        String korisnickoIme = scanner.nextLine();
-        System.out.println("Unesi lozinku: ");
-        String lozinka = scanner.nextLine();
-        System.out.println("Unesi ime: ");
-        String ime = scanner.nextLine();
-        System.out.println("Unesi prezime: ");
-        String prezime = scanner.nextLine();
-        System.out.println("Unesi adresu: ");
-        String adresa = scanner.nextLine();
-        System.out.println("Unesi pol: ");
-        String polTxt = scanner.nextLine();
-        Pol pol;
-        if (polTxt.trim().equals("MUSKI")) {
-            pol = Pol.MUSKI;
-        } else {
-            pol = Pol.ZENSKI;
-        }
-        System.out.println("Broj telefona");
-        String brojTelefona = scanner.nextLine();
-        System.out.println("Unesi platu");
-        double plata = scanner.nextDouble();
-        System.out.println("Unesi broj članske karte");
-        int brojClanskeKarte = scanner.nextInt();
-
-        Vozilo.ispisiSvaSlobodnaVozila();
-        System.out.println("Odaberi vozilo(unesi broj registarske oznake): ");
-
-        String brRegistarskeOznake = scanner.next();
-
-        List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
-        for (Vozilo vozilo : vozila) {
-            if (vozilo.getBrRegistarskeOznake().equals(brRegistarskeOznake)) {
-                vozilo.setVozacId(JMBG);
-                break;
-            }
-        }
-        Vozilo.sacuvajListuVozilaUFajl(vozila);
-
-        Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, false, plata, brojClanskeKarte);
-        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
-        korisnici.add(vozac);
-        Korisnik.upisiSveKorisnike(korisnici);
-        System.out.println("Uspešno upisan vozač");
-    }
+//    public static void dodajVozaca() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Unesi JMBG: ");
+//        long JMBG = Long.parseLong(scanner.nextLine());
+//        System.out.println("Unesi korisnicko ime: ");
+//        String korisnickoIme = scanner.nextLine();
+//        System.out.println("Unesi lozinku: ");
+//        String lozinka = scanner.nextLine();
+//        System.out.println("Unesi ime: ");
+//        String ime = scanner.nextLine();
+//        System.out.println("Unesi prezime: ");
+//        String prezime = scanner.nextLine();
+//        System.out.println("Unesi adresu: ");
+//        String adresa = scanner.nextLine();
+//        System.out.println("Unesi pol: ");
+//        String polTxt = scanner.nextLine();
+//        Pol pol;
+//        if (polTxt.trim().equals("MUSKI")) {
+//            pol = Pol.MUSKI;
+//        } else {
+//            pol = Pol.ZENSKI;
+//        }
+//        System.out.println("Broj telefona");
+//        String brojTelefona = scanner.nextLine();
+//        System.out.println("Unesi platu");
+//        double plata = scanner.nextDouble();
+//        System.out.println("Unesi broj članske karte");
+//        int brojClanskeKarte = scanner.nextInt();
+//
+//        Vozilo.ispisiSvaSlobodnaVozila();
+//        System.out.println("Odaberi vozilo(unesi broj registarske oznake): ");
+//
+//        String brRegistarskeOznake = scanner.next();
+//
+//        List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
+//        for (Vozilo vozilo : vozila) {
+//            if (vozilo.getBrRegistarskeOznake().equals(brRegistarskeOznake)) {
+//                vozilo.setVozacId(JMBG);
+//                break;
+//            }
+//        }
+//        Vozilo.sacuvajListuVozilaUFajl(vozila);
+//
+//        Vozac vozac = new Vozac(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, false, plata, brojClanskeKarte);
+//        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+//        korisnici.add(vozac);
+//        Korisnik.upisiSveKorisnike(korisnici);
+//        System.out.println("Uspešno upisan vozač");
+//    }
 
 //    public static void izmeniVozaca() {
 //        System.out.println("Unesi JMBG vozaca kojeg zelite da izmenite");
@@ -221,74 +221,74 @@ public class Vozac extends Korisnik {
         }
     }
 
-    public static void kombinovanaPretragaVozaca() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Unesi ime");
-        String ime = scanner.next();
-        System.out.println("Unesi prezime");
-        String prezime = scanner.next();
-        System.out.println("Min platu");
-        double minPlata = scanner.nextDouble();
-        System.out.println("Max platu");
-        double maxPlata = scanner.nextDouble();
+//    public static void kombinovanaPretragaVozaca() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Unesi ime");
+//        String ime = scanner.next();
+//        System.out.println("Unesi prezime");
+//        String prezime = scanner.next();
+//        System.out.println("Min platu");
+//        double minPlata = scanner.nextDouble();
+//        System.out.println("Max platu");
+//        double maxPlata = scanner.nextDouble();
+//
+//        System.out.println("Unesi proizvodjac automobila : ");
+//        String proizvodjac = scanner.next();
+//        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
+//
+//        for (Korisnik vozac : sviKorisnici) {
+//            if (vozac instanceof Vozac) {
+//                if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
+//                    && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
+//                    String regOznaka = String.valueOf(((Vozac) vozac).getRegOznakaVozila());
+//                    Vozilo vozilo = Vozilo.pronadjiPoBrojuRegistarskeOznake(regOznaka);
+//                    System.out.println(vozac);
+//
+//                }
+//            }
+//        }
+//    }
 
-        System.out.println("Unesi proizvodjac automobila : ");
-        String proizvodjac = scanner.next();
-        List<Korisnik> sviKorisnici = Korisnik.ucitajSveKorisnike();
-
-        for (Korisnik vozac : sviKorisnici) {
-            if (vozac instanceof Vozac) {
-                if (vozac.getIme().equalsIgnoreCase(ime) && vozac.getPrezime().equalsIgnoreCase(prezime)
-                    && ((Vozac) vozac).getPlata() >= minPlata && ((Vozac) vozac).getPlata() <= maxPlata) {
-                    String regOznaka = String.valueOf(((Vozac) vozac).getRegOznakaVozila());
-                    Vozilo vozilo = Vozilo.pronadjiPoBrojuRegistarskeOznake(regOznaka);
-                    System.out.println(vozac);
-
-                }
-            }
-        }
-    }
-
-    public static void prikazDodeljenihVoznji() {
-
-        List<Voznja> voznje = Voznja.ucitajSveVoznje();
-        for (Voznja voznja : voznje) {
-            if (voznja.getNacinPorudzbine() == Voznja.NacinPorudzbine.TELEFONOM && voznja.getStatusVoznje() == Voznja.StatusVoznje.DODELJENA) {
-                long vozacJMBG = voznja.getVozacJMBG();
-                if (prijavljeniKorisnik.getJMBG() == vozacJMBG) {
-                    System.out.println(voznja);
-                }
-
-
-            }
-        }
-        Scanner skener = new Scanner(System.in);
-        System.out.println("Unesi id vožnje");
-        long idVoznje = skener.nextLong();
-        Voznja voznjaIzmena = null;
-        for (Voznja voznja : voznje) {
-            if (voznja.getId() == idVoznje) {
-                voznjaIzmena = voznja;
-                break;
-            }
-        }
-        if (voznjaIzmena == null) {
-            System.out.println("Nema vožnje sa tim id-em");
-            return;
-        }
-        System.out.println("Da li želite da prihvatite ili odbijete vožnju(Y/N)?");
-        String izbor = skener.next();
-        if (izbor.equals("Y")) {
-            voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.PRIHVACENA);
-            System.out.println("Uspešno prihvaćena vožnja!");
-        } else if (izbor.equals("N")) {
-            voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.ODBIJENA);
-            System.out.println("Uspešno odbijena vožnja!");
-        } else {
-            System.out.println("Nepostojeca opcija.");
-        }
-        Voznja.upisiVoznje(voznje);
-    }
+//    public static void prikazDodeljenihVoznji() {
+//
+//        List<Voznja> voznje = Voznja.ucitajSveVoznje();
+//        for (Voznja voznja : voznje) {
+//            if (voznja.getNacinPorudzbine() == Voznja.NacinPorudzbine.TELEFONOM && voznja.getStatusVoznje() == Voznja.StatusVoznje.DODELJENA) {
+//                long vozacJMBG = voznja.getVozacJMBG();
+//                if (prijavljeniKorisnik.getJMBG() == vozacJMBG) {
+//                    System.out.println(voznja);
+//                }
+//
+//
+//            }
+//        }
+//        Scanner skener = new Scanner(System.in);
+//        System.out.println("Unesi id vožnje");
+//        long idVoznje = skener.nextLong();
+//        Voznja voznjaIzmena = null;
+//        for (Voznja voznja : voznje) {
+//            if (voznja.getId() == idVoznje) {
+//                voznjaIzmena = voznja;
+//                break;
+//            }
+//        }
+//        if (voznjaIzmena == null) {
+//            System.out.println("Nema vožnje sa tim id-em");
+//            return;
+//        }
+//        System.out.println("Da li želite da prihvatite ili odbijete vožnju(Y/N)?");
+//        String izbor = skener.next();
+//        if (izbor.equals("Y")) {
+//            voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.PRIHVACENA);
+//            System.out.println("Uspešno prihvaćena vožnja!");
+//        } else if (izbor.equals("N")) {
+//            voznjaIzmena.setStatusVoznje(Voznja.StatusVoznje.ODBIJENA);
+//            System.out.println("Uspešno odbijena vožnja!");
+//        } else {
+//            System.out.println("Nepostojeca opcija.");
+//        }
+//        Voznja.upisiVoznje(voznje);
+//    }
 
     // 2.3.4 - završavanje vožnje funkcionalnost
     public static void zavrsavanjeVoznje() {
@@ -296,7 +296,7 @@ public class Vozac extends Korisnik {
         Vozac vozac = (Vozac) Vozac.prijavljeniKorisnik;
         Voznja voznjaZavrsavanje = null;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG() == vozac.getJMBG() && voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
                 voznjaZavrsavanje = voznja;
                 break;
             }
@@ -315,26 +315,6 @@ public class Vozac extends Korisnik {
         voznjaZavrsavanje.setStatusVoznje(Voznja.StatusVoznje.ZAVRSENA);
         Voznja.upisiVoznje(voznje);
         System.out.println("Uspešno završena vožnja!");
-    }
-
-
-    public void prikazIstorijeSpostvenihVoznji(Vozac vozac) {
-        for (Voznja voznja : vozac.getListaVoznji()) {
-            System.out.println(voznja.toString());
-        }
-    }
-
-    public static void prikazVoznjiPutemAplikacije() {
-        List<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
-//        todo prihvatanje/odbijanje voznje
-        for (Voznja voznja : listaVoznji) {
-            if (voznja.getNacinPorudzbine() == Voznja.NacinPorudzbine.APLIKACIJOM) {
-                System.out.println(voznja);
-            }
-        }
-    }
-
-    public void prikazVoznjiPutemTelefona() {
     }
 
     public boolean krajVoznje(double predjeniKilometri, double trajanjeVoznje) {
@@ -373,7 +353,39 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
-
+    public static List<Voznja> voznjeDanas(Vozac vozac) {
+        List<Voznja> listaVoznji = vozac.getListaVoznji();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getDatumPorudzbine().after(cal.getTime())) {
+                listaVoznji.add(voznja);
+            }
+        }
+        return listaVoznji;
+    }
+    public static List<Voznja> voznjePrethodnihMesecDana(Vozac vozac) {
+        List<Voznja> listaVoznji = vozac.getListaVoznji();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -31);
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getDatumPorudzbine().after(cal.getTime())) {
+                listaVoznji.add(voznja);
+            }
+        }
+        return listaVoznji;
+    }
+    public static List<Voznja> voznjePrethodnihGodinuDana(Vozac vozac) {
+        List<Voznja> listaVoznji = vozac.getListaVoznji();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -365);
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getDatumPorudzbine().after(cal.getTime())) {
+                listaVoznji.add(voznja);
+            }
+        }
+        return listaVoznji;
+    }
     public static ArrayList<Vozac> vozaciBezAutomobila() {
         ArrayList<Vozac> vozaci = ucitajSveVozace();
         ArrayList<Vozac> retVal = new ArrayList<>();

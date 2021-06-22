@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,13 @@ public class Voznja {
         PRIHVACENA,
         ZAVRSENA,
         ODBIJENA
+    }
+
+    public enum BrojDana {
+        JEDAN_DAN,
+        SEDAM_DANA,
+        MESEC_DANA,
+        GODINU_DANA
     }
 
     public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine, Long vozacJMBG, Long musterijaJMBG, double naplacenIznos) {
@@ -129,121 +137,162 @@ public class Voznja {
 
     public static List<Voznja> ucitajListuVoznji(Korisnik korisnik) {
         List<Voznja> voznje = ucitajSveVoznje();
-        List<Voznja> vozaceveVoznje = new ArrayList<>();
+        List<Voznja> listaVoznji = new ArrayList<>();
         try {
             for (Voznja voznja : voznje) {
                 if (korisnik instanceof Musterija) {
                     if (voznja.getMusterijaJMBG().equals(korisnik.getJMBG())) {
-                        vozaceveVoznje.add(voznja);
+                        listaVoznji.add(voznja);
                     }
                 } else if (korisnik instanceof Vozac) {
                     if (voznja.getVozacJMBG().equals(korisnik.getJMBG())) {
-                        vozaceveVoznje.add(voznja);
+                        listaVoznji.add(voznja);
                     }
                 }
 
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
+        }
+        if (listaVoznji.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ne postoji lista voznji za ovog korisnika", "Greska", JOptionPane.WARNING_MESSAGE);
         }
-        return vozaceveVoznje;
+        return listaVoznji;
     }
 
-    public static double brojPredjenihKilometara(Vozac vozac) {
+    public static double brojPredjenihKilometara(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double brKilometara = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                brKilometara = brKilometara + voznja.getBrojPredjenihKilometara();
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    brKilometara += voznja.getBrojPredjenihKilometara();
+                }
             }
+
+        } catch (NullPointerException ignored) {
         }
         return brKilometara;
+
     }
 
-    public static double prosecanBrojKilometaraPoVoznji(Vozac vozac) {
+    public static double prosecanBrojKilometaraPoVoznji(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double brKilometara = 0;
         int brojac = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                brKilometara = brKilometara + voznja.getBrojPredjenihKilometara();
-                brojac += 1;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    brKilometara += voznja.getBrojPredjenihKilometara();
+                    brojac += 1;
+                }
             }
+        } catch (NullPointerException ignored) {
         }
         return brKilometara / brojac;
     }
 
-    public static double prosecnoTrajanjeVoznje(Vozac vozac) {
+    public static double prosecnoTrajanjeVoznje(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double trajanjeVoznje = 0;
         int brojac = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                trajanjeVoznje = trajanjeVoznje + voznja.getTrajanjeVoznjeUMinutama();
-                brojac += 1;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    trajanjeVoznje = trajanjeVoznje + voznja.getTrajanjeVoznjeUMinutama();
+                    brojac += 1;
+                }
             }
+        } catch (NullPointerException ignored) {
         }
         return trajanjeVoznje / brojac;
     }
 
-    public static double ukupnaZarada(Vozac vozac) {
+    public static double ukupnaZarada(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                zarada += voznja.getNaplacenIznos();
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    zarada += voznja.getNaplacenIznos();
+                }
             }
+        } catch (NullPointerException ignored) {
         }
         return zarada;
     }
 
-    public static double prosecnoVremeBezVoznje(Vozac vozac) {
+    public static double prosecnoVremeBezVoznje(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double radnoVreme = 0;
         double trajanjeVoznji = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                radnoVreme += TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getRADNOVREMEUMINUTAMA();
-                trajanjeVoznji += voznja.getTrajanjeVoznjeUMinutama();
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    radnoVreme += TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getRADNOVREMEUMINUTAMA();
+                    trajanjeVoznji += voznja.getTrajanjeVoznjeUMinutama();
+                }
             }
+        } catch (NullPointerException ignored) {
         }
         return radnoVreme - trajanjeVoznji;
     }
 
-    public static double prosecnaZaradaPoVoznji(Vozac vozac) {
+    public static double prosecnaZaradaPoVoznji(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
         int brojac = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                zarada += voznja.getNaplacenIznos();
-                brojac += 1;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    zarada += voznja.getNaplacenIznos();
+                    brojac += 1;
+                }
             }
+        } catch (NullPointerException ignored) {
         }
         return zarada / brojac;
     }
 
-    public static double ukupnoTrajanjeVoznji(Vozac vozac) {
+    public static double ukupnoTrajanjeVoznji(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double ukupnoTrajanjeVoznji = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                ukupnoTrajanjeVoznji = ukupnoTrajanjeVoznji + voznja.getTrajanjeVoznjeUMinutama();
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    ukupnoTrajanjeVoznji = ukupnoTrajanjeVoznji + voznja.getTrajanjeVoznjeUMinutama();
+                }
             }
+        } catch (NullPointerException ignored) {
         }
         return ukupnoTrajanjeVoznji;
     }
 
-
-    public static int brojVoznji(Vozac vozac) {
-        List<Voznja> voznje = ucitajSveVoznje();
-        int brVoznji = 0;
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                brVoznji = brVoznji + 1;
-            }
+    public static Date vratiDatum(BrojDana brDana) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        switch (brDana) {
+            case JEDAN_DAN -> cal.add(Calendar.DAY_OF_YEAR, -1);
+            case SEDAM_DANA -> cal.add(Calendar.DAY_OF_YEAR, -6);
+            case MESEC_DANA -> cal.add(Calendar.MONTH, -1);
+            case GODINU_DANA -> cal.add(Calendar.YEAR, -1);
         }
-        return brVoznji;
+
+        return cal.getTime();
+    }
+
+    public static int brojVoznji(Vozac vozac, BrojDana brojDana) {
+        try {
+            List<Voznja> voznje = ucitajSveVoznje();
+            int brVoznji = 0;
+            for (Voznja voznja : voznje) {
+                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    brVoznji = brVoznji + 1;
+                }
+            }
+            return brVoznji;
+        } catch (NullPointerException ignored) {
+        }
+        return 0;
     }
 
 
@@ -276,12 +325,7 @@ public class Voznja {
                 sveVoznje.add(voznja);
             }
             bufferedReader.close();
-        } catch (FileNotFoundException exception) {
-            System.out.println("Fajl nije pronadjen");
-            System.out.println("Fajl nije pronadjen");
-        } catch (IOException | ParseException exception) {
-            exception.printStackTrace();
-            System.out.println("Greska pri citanju datoteke");
+        } catch (IOException | ParseException | NumberFormatException ignored) {
         }
         return sveVoznje;
     }
@@ -300,10 +344,13 @@ public class Voznja {
         }
     }
 
-    public static Long preuzmiPoslednjiId() {
-        List<Voznja> listaVoznji = ucitajSveVoznje();
-        Long id = listaVoznji.get(listaVoznji.size() - 1).getId();
-        System.out.println(id);
+    public static long preuzmiPoslednjiId() {
+        long id = 0;
+        try {
+            List<Voznja> listaVoznji = ucitajSveVoznje();
+            id = listaVoznji.get(listaVoznji.size() - 1).getId();
+        } catch (NumberFormatException | IndexOutOfBoundsException ignored) {
+        }
         return id;
     }
 

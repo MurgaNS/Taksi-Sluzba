@@ -1,12 +1,10 @@
 package Gui.FormeZaPrikaz;
 
 import Gui.GlavniProzor;
-import Model.Musterija;
 import Model.Voznja;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.util.List;
 
 public class PrikazSopstvenihVoznjiProzor extends JFrame {

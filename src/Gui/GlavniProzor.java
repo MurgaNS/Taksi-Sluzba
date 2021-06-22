@@ -9,8 +9,8 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
@@ -135,7 +135,10 @@ public class GlavniProzor extends JFrame {
             PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
         });
         prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> {
-            PrikazVoznjiPutemAplikacije prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacije();
+            PrikazVoznjiPutemAplikacijeProzor prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacijeProzor();
+        });
+        statistikaDugme.addActionListener(e -> {
+            PrikazIzvestajaVoznjiProzor prikazIzvestaja = new PrikazIzvestajaVoznjiProzor();
         });
     }
 

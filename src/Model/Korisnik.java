@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class Korisnik {
 
-    protected long JMBG;
+    protected Long JMBG;
     protected String korisnickoIme;
     protected String lozinka;
     protected String ime;
@@ -21,7 +21,7 @@ public abstract class Korisnik {
         ZENSKI
     }
 
-    public Korisnik(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, Boolean obrisan) {
+    public Korisnik(Long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, Boolean obrisan) {
         this.JMBG = JMBG;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -44,10 +44,10 @@ public abstract class Korisnik {
     }
 
 
-    public static Korisnik nadjiKorisnikaPrekoJMBG(long JMBG) {
+    public static Korisnik nadjiKorisnikaPrekoJMBG(Long JMBG) {
         List<Korisnik> korisnici = ucitajSveKorisnike();
         for (Korisnik korisnik : korisnici) {
-            if (korisnik.getJMBG() == JMBG) {
+            if (korisnik.getJMBG().equals(JMBG)) {
                 return korisnik;
             }
         }
@@ -151,11 +151,11 @@ public abstract class Korisnik {
         this.brojTelefona = brojTelefona;
     }
 
-    public long getJMBG() {
+    public Long getJMBG() {
         return JMBG;
     }
 
-    public void setJMBG(long JMBG) {
+    public void setJMBG(Long JMBG) {
         this.JMBG = JMBG;
     }
 

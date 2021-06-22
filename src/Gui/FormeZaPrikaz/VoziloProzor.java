@@ -6,8 +6,6 @@ import Model.Vozilo;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
@@ -82,7 +80,7 @@ public class VoziloProzor extends JFrame {
                         }
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,"Nije moguce izbrisati vozilo koje je dodeljeno vozacu.","Greska",0);
+                    JOptionPane.showMessageDialog(null,"Nije moguce izbrisati vozilo koje je dodeljeno vozacu.","Greska",JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

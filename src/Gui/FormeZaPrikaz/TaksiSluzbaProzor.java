@@ -31,10 +31,8 @@ public class TaksiSluzbaProzor extends JFrame {
     public void initGUI() {
         glavniToolBar.add(dugmeIzmena);
         add(glavniToolBar, BorderLayout.NORTH);
-        List<TaksiSluzba> taksiSluzbaList = new ArrayList<>();
-        taksiSluzbaList.add(taksiSluzba);
         String[] zaglavlja = new String[]{"PIB", "Naziv", "Adresa", "Cena starta", "Cena po kilometru"};
-        Object[][] sadrzaj = new Object[taksiSluzbaList.size()][zaglavlja.length];
+        Object[][] sadrzaj = new Object[1][zaglavlja.length];
         sadrzaj[0][0] = taksiSluzba.getPIB();
         sadrzaj[0][1] = taksiSluzba.getNaziv();
         sadrzaj[0][2] = taksiSluzba.getAdresa();
@@ -54,19 +52,16 @@ public class TaksiSluzbaProzor extends JFrame {
     }
 
     public void initActions() {
-        dugmeIzmena.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int red = tabelaPodataka.getSelectedRow();
-                if (red == -1) {
-                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
-                    TaksiSluzbaForma taksiSluzbaForma = new TaksiSluzbaForma(taksiSluzba);
-                    taksiSluzbaForma.setVisible(true);
-                    TaksiSluzbaProzor.this.setVisible(false);
-                    TaksiSluzbaProzor.this.dispose();
-                }
+        dugmeIzmena.addActionListener(e -> {
+            int red = tabelaPodataka.getSelectedRow();
+            if (red == -1) {
+                JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+            } else {
+                TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
+                TaksiSluzbaForma taksiSluzbaForma = new TaksiSluzbaForma(taksiSluzba);
+                taksiSluzbaForma.setVisible(true);
+                TaksiSluzbaProzor.this.setVisible(false);
+                TaksiSluzbaProzor.this.dispose();
             }
         });
     }

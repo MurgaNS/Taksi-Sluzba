@@ -1,7 +1,6 @@
 package Gui.FormeZaPrikaz;
 
 import Gui.GlavniProzor;
-import Model.Vozilo;
 import Model.Voznja;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class PrikazVoznjiPutemAplikacije extends JFrame {
+public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();
     private JButton dugmePrihvati = new JButton("Prihvati");
     private JButton dugmeOdbij = new JButton("Odbij");
@@ -17,7 +16,7 @@ public class PrikazVoznjiPutemAplikacije extends JFrame {
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
 
-    public PrikazVoznjiPutemAplikacije() {
+    public PrikazVoznjiPutemAplikacijeProzor() {
         listaVoznji = Voznja.voznjeNarucenePutemAplikacije();
         setTitle("Prikaz voznji putem aplikacije");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -64,9 +63,9 @@ public class PrikazVoznjiPutemAplikacije extends JFrame {
                 voznja.setStatusVoznje(Voznja.StatusVoznje.PRIHVACENA);
                 voznja.setVozacJMBG(GlavniProzor.getPrijavljeniKorisnik().getJMBG());
                 Voznja.izmeniStatusVoznje(voznja);
-                PrikazVoznjiPutemAplikacije.this.dispose();
-                PrikazVoznjiPutemAplikacije.this.setVisible(false);
-                PrikazVoznjiPutemAplikacije prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacije();
+                PrikazVoznjiPutemAplikacijeProzor.this.dispose();
+                PrikazVoznjiPutemAplikacijeProzor.this.setVisible(false);
+                PrikazVoznjiPutemAplikacijeProzor prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacijeProzor();
             }
         });
         dugmeOdbij.addActionListener(e -> {
@@ -79,9 +78,9 @@ public class PrikazVoznjiPutemAplikacije extends JFrame {
                 voznja.setStatusVoznje(Voznja.StatusVoznje.ODBIJENA);
                 voznja.setVozacJMBG(GlavniProzor.getPrijavljeniKorisnik().getJMBG());
                 Voznja.izmeniStatusVoznje(voznja);
-                PrikazVoznjiPutemAplikacije.this.dispose();
-                PrikazVoznjiPutemAplikacije.this.setVisible(false);
-                PrikazVoznjiPutemAplikacije prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacije();
+                PrikazVoznjiPutemAplikacijeProzor.this.dispose();
+                PrikazVoznjiPutemAplikacijeProzor.this.setVisible(false);
+                PrikazVoznjiPutemAplikacijeProzor prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacijeProzor();
             }
         });
     }
