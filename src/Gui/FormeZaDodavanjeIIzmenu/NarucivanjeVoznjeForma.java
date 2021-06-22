@@ -18,6 +18,9 @@ public class NarucivanjeVoznjeForma extends JFrame {
     private JTextField txtAdresaDolaska = new JTextField(30);
     private JLabel lblDatum = new JLabel("Datum");
     private JFormattedTextField txtDatum = new JFormattedTextField("yyyy-MM-dd");
+    private JLabel lblNapomena = new JLabel("Napomena");
+    private JTextField txtNapomena = new JTextField(50);
+
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
 
@@ -39,9 +42,10 @@ public class NarucivanjeVoznjeForma extends JFrame {
         add(txtAdresaDolaska);
         add(lblDatum);
         add(txtDatum);
+        add(lblNapomena);
+        add(txtNapomena);
         add(dugmeOk);
         add(dugmePonisti);
-
     }
 
     private void initActions() {
@@ -49,14 +53,19 @@ public class NarucivanjeVoznjeForma extends JFrame {
             Date date = java.util.Calendar.getInstance().getTime();
             String adresaPolaska = txtAdresaPolaska.getText().trim();
             String adresaDolaska = txtAdresaDolaska.getText().trim();
+            String napomena = txtNapomena.getText().trim();
             Voznja.StatusVoznje statusVoznje = Voznja.StatusVoznje.KREIRANA_NA_CEKANJU;
             Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.APLIKACIJOM;
             Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
-            Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0);
+            Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0, napomena);
             Voznja.sacuvajVoznju(voznja);
             NarucivanjeVoznjeForma.this.dispose();
             NarucivanjeVoznjeForma.this.setVisible(false);
-            JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju.","Uspesno porucivanje",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju.", "Uspesno porucivanje", JOptionPane.INFORMATION_MESSAGE);
+        });
+        dugmePonisti.addActionListener(e -> {
+            NarucivanjeVoznjeForma.this.dispose();
+            NarucivanjeVoznjeForma.this.setVisible(false);
         });
     }
 }

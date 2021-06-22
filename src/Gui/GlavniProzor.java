@@ -1,10 +1,8 @@
 package Gui;
 
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeForma;
-import Gui.FormeZaPrikaz.IzvestajOVozacimaProzor;
-import Gui.FormeZaPrikaz.PrikazVoznjiMusterijeProzor;
-import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
-import Gui.FormeZaPrikaz.VoziloProzor;
+import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeTelefonomForma;
+import Gui.FormeZaPrikaz.*;
 import Model.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -20,7 +18,7 @@ public class GlavniProzor extends JFrame {
 
     public GlavniProzor(Korisnik korisnik) {
         this.taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
-        this.prijavljeniKorisnik = korisnik;
+        prijavljeniKorisnik = korisnik;
         setTitle("Taksi sluzba " + taksiSluzba.getNaziv());
         setSize(1000, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,10 +91,14 @@ public class GlavniProzor extends JFrame {
         setLayout(mig);
         JButton narucivanjeVoznjeDugme = new JButton("Naruci voznju putem aplikacije");
         narucivanjeVoznjeDugme.setBounds(50, 100, 95, 30);
+        JButton narucivanjeVoznjeTelefonomDugme = new JButton("Naruci voznju putem telefona");
+        narucivanjeVoznjeDugme.setBounds(50, 100, 95, 30);
+
         JButton prikazVoznjiDugme = new JButton("Prikaz sopstvenih voznji");
         prikazVoznjiDugme.setBounds(50, 100, 95, 30);
         this.add(prikazVoznjiDugme);
         this.add(narucivanjeVoznjeDugme);
+        this.add(narucivanjeVoznjeTelefonomDugme);
 
         narucivanjeVoznjeDugme.addActionListener(e -> {
             NarucivanjeVoznjeForma narucivanjeVoznje = new NarucivanjeVoznjeForma();
@@ -108,13 +110,10 @@ public class GlavniProzor extends JFrame {
         });
 
 
-        narucivanjeVoznjeTelefonomDugme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                NarucivanjeVoznjeTelefonomForma narucivanjeVoznjeTelefonom = new NarucivanjeVoznjeTelefonomForma();
-                narucivanjeVoznjeTelefonom.setVisible(true);
+        narucivanjeVoznjeTelefonomDugme.addActionListener(e -> {
+            NarucivanjeVoznjeTelefonomForma narucivanjeVoznjeTelefonom = new NarucivanjeVoznjeTelefonomForma();
+            narucivanjeVoznjeTelefonom.setVisible(true);
 
-            }
         });
     }
 

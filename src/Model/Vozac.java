@@ -353,6 +353,7 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
+
     public static List<Voznja> voznjeDanas(Vozac vozac) {
         List<Voznja> listaVoznji = vozac.getListaVoznji();
         Calendar cal = Calendar.getInstance();
@@ -364,6 +365,7 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
+
     public static List<Voznja> voznjePrethodnihMesecDana(Vozac vozac) {
         List<Voznja> listaVoznji = vozac.getListaVoznji();
         Calendar cal = Calendar.getInstance();
@@ -375,6 +377,7 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
+
     public static List<Voznja> voznjePrethodnihGodinuDana(Vozac vozac) {
         List<Voznja> listaVoznji = vozac.getListaVoznji();
         Calendar cal = Calendar.getInstance();
@@ -386,6 +389,7 @@ public class Vozac extends Korisnik {
         }
         return listaVoznji;
     }
+
     public static ArrayList<Vozac> vozaciBezAutomobila() {
         ArrayList<Vozac> vozaci = ucitajSveVozace();
         ArrayList<Vozac> retVal = new ArrayList<>();
@@ -398,21 +402,14 @@ public class Vozac extends Korisnik {
     }
 
     public static ArrayList<Vozac> ucitajSveVozace() {
-        // TODO dodati listu voznji
         ArrayList<Vozac> vozaci = new ArrayList<>();
         List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
-
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
             while ((red = bf.readLine()) != null) {
                 String[] tmp = red.split(",");
-                Pol pol;
-                if (tmp[7].trim().equals("MUSKI")) {
-                    pol = Pol.MUSKI;
-                } else {
-                    pol = Pol.ZENSKI;
-                }
+                Pol pol = ucitajPol(tmp[7]);
                 if (tmp[0].equals("vozac")) {
                     Vozilo vozilo = null;
                     Long voziloId;

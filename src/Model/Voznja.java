@@ -321,7 +321,15 @@ public class Voznja {
                 }
                 Long musterijaId = Long.parseLong(lineParts[9]);
                 double naplacenIznos = Double.parseDouble(lineParts[10]);
-                Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos);
+                String napomena;
+                try {
+                    napomena = lineParts[11];
+                }catch (ArrayIndexOutOfBoundsException e){
+                    Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos);
+                    sveVoznje.add(voznja);
+                    return sveVoznje;
+                }
+                Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos,napomena);
                 sveVoznje.add(voznja);
             }
             bufferedReader.close();
@@ -335,12 +343,17 @@ public class Voznja {
         try {
             PrintWriter writer = new PrintWriter(file);
             for (Voznja voznja : voznje) {
-                writer.write(voznja.stringToSave() + "\n");
+                if (!voznja.getNapomena().isEmpty() || voznja.getNapomena() != null) {
+                    writer.write(voznja.stringZaCuvanjeSaNapomenom());
+                } else {
+                    writer.write(voznja.stringZaCuvanje());
+                }
             }
             writer.flush();
             writer.close();
         } catch (FileNotFoundException exception) {
             System.out.println("Nepostojeći fajl");
+        } catch (NullPointerException ignore) {
         }
     }
 
@@ -372,14 +385,24 @@ public class Voznja {
         upisiVoznje(voznje);
     }
 
-    public String stringToSave() {
+    public String stringZaCuvanje() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String strDate = dateFormat.format(datumPorudzbine);
 
         return id + "," + strDate + "," + adresaPolaska + "," +
                adresaDestinacije + "," + brojPredjenihKilometara + "," +
                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
-               + vozacJMBG + "," + musterijaJMBG + "," + naplacenIznos;
+               + vozacJMBG + "," + musterijaJMBG + "," + naplacenIznos + "\n";
+    }
+
+    public String stringZaCuvanjeSaNapomenom() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String strDate = dateFormat.format(datumPorudzbine);
+
+        return id + "," + strDate + "," + adresaPolaska + "," +
+               adresaDestinacije + "," + brojPredjenihKilometara + "," +
+               trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
+               + vozacJMBG + "," + musterijaJMBG + "," + naplacenIznos + "," + napomena + "\n";
     }
 
     public long getId() {
@@ -396,6 +419,14 @@ public class Voznja {
 
     public void setDatumPorudzbine(Date datumPorudzbine) {
         this.datumPorudzbine = datumPorudzbine;
+    }
+
+    public String getNapomena() {
+        return napomena;
+    }
+
+    public void setNapomena(String napomena) {
+        this.napomena = napomena;
     }
 
     public String getAdresaPolaska() {

@@ -43,6 +43,15 @@ public abstract class Korisnik {
         return null;
     }
 
+    public static Pol ucitajPol(String pol) {
+        if (pol.trim().equals("MUSKI")) {
+            return Pol.MUSKI;
+        } else if (pol.trim().equals("ZENSKI")) {
+            return Pol.ZENSKI;
+        } else {
+            return null;
+        }
+    }
 
     public static Korisnik nadjiKorisnikaPrekoJMBG(Long JMBG) {
         List<Korisnik> korisnici = ucitajSveKorisnike();

@@ -44,22 +44,20 @@ public class NarucivanjeVoznjeTelefonomForma extends JFrame {
 
     }
 
+    // TODO: 6/23/2021 desava se da se iz voznja fajla izbrisu sve voznje prilikom dodavanja
     private void initActions() {
-        dugmeOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Date date = java.util.Calendar.getInstance().getTime();
-                String adresaPolaska = txtAdresaPolaska.getText().trim();
-                String adresaDolaska = txtAdresaDolaska.getText().trim();
-                Voznja.StatusVoznje statusVoznje = Voznja.StatusVoznje.KREIRANA;
-                Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.TELEFONOM;
-                Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
-                Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0);
-                Voznja.sacuvajVoznju(voznja);
-                NarucivanjeVoznjeTelefonomForma.this.dispose();
-                NarucivanjeVoznjeTelefonomForma.this.setVisible(false);
-                JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju putem telefona.");
-            }
+        dugmeOk.addActionListener(e -> {
+            Date date = java.util.Calendar.getInstance().getTime();
+            String adresaPolaska = txtAdresaPolaska.getText().trim();
+            String adresaDolaska = txtAdresaDolaska.getText().trim();
+            Voznja.StatusVoznje statusVoznje = Voznja.StatusVoznje.KREIRANA;
+            Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.TELEFONOM;
+            Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
+            Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0);
+            Voznja.sacuvajVoznju(voznja);
+            NarucivanjeVoznjeTelefonomForma.this.dispose();
+            NarucivanjeVoznjeTelefonomForma.this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju putem telefona.");
         });
     }
 }
