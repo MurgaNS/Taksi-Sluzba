@@ -1,6 +1,7 @@
 package Gui;
 
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeForma;
+import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeTelefonomForma;
 import Gui.FormeZaPrikaz.IzvestajOVozacimaProzor;
 import Gui.FormeZaPrikaz.PrikazVoznjiMusterijeProzor;
 import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
@@ -106,8 +107,12 @@ public class GlavniProzor extends JFrame {
         narucivanjeVoznjeDugme.setBounds(50, 100, 95, 30);
         JButton prikazVoznjiDugme = new JButton("Prikaz sopstvenih voznji");
         prikazVoznjiDugme.setBounds(50, 100, 95, 30);
+        JButton narucivanjeVoznjeTelefonomDugme = new JButton("Naruci voznju telefonom");
+        narucivanjeVoznjeTelefonomDugme.setBounds(50,100,95,30);
+
         this.add(prikazVoznjiDugme);
         this.add(narucivanjeVoznjeDugme);
+        this.add(narucivanjeVoznjeTelefonomDugme);
 
         narucivanjeVoznjeDugme.addActionListener(new ActionListener() {
             @Override
@@ -121,6 +126,16 @@ public class GlavniProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 PrikazVoznjiMusterijeProzor prikazVoznjiProzor = new PrikazVoznjiMusterijeProzor();
                 prikazVoznjiProzor.setVisible(true);
+            }
+        });
+
+
+        narucivanjeVoznjeTelefonomDugme.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NarucivanjeVoznjeTelefonomForma narucivanjeVoznjeTelefonom = new NarucivanjeVoznjeTelefonomForma();
+                narucivanjeVoznjeTelefonom.setVisible(true);
+
             }
         });
     }

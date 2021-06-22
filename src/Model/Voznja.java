@@ -234,6 +234,7 @@ public class Voznja {
             bufferedReader.close();
         } catch (FileNotFoundException exception) {
             System.out.println("Fajl nije pronadjen");
+            System.out.println("Fajl nije pronadjen");
         } catch (IOException | ParseException exception) {
             exception.printStackTrace();
             System.out.println("Greska pri citanju datoteke");

@@ -20,13 +20,13 @@ class App {
 //
 //        System.out.println("Unesite lozinku: ");
 //        String lozinka = scanner.nextLine();
-
+//
 //        Login l = new Login();
 //        Korisnik korisnik = l.login(korisnickoIme, lozinka);
 //
 //        GlavniProzor glavniProzor = new GlavniProzor(korisnik);
-
-
+//
+//
 //        if (korisnik instanceof Dispecer) {
 //            Scanner sc = new Scanner(System.in);
 //            try {

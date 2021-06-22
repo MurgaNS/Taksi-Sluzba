@@ -290,7 +290,7 @@ public class Vozac extends Korisnik {
         Voznja.upisiVoznje(voznje);
     }
 
-    // 2.3.4 - završavanje vožnje funkcionalnost  @jovan
+    // 2.3.4 - završavanje vožnje funkcionalnost
     public static void zavrsavanjeVoznje() {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         Vozac vozac = (Vozac) Vozac.prijavljeniKorisnik;
@@ -312,6 +312,7 @@ public class Vozac extends Korisnik {
         double brojKm = scanner.nextDouble();
         voznjaZavrsavanje.setTrajanjeVoznjeUMinutama(trajanje);
         voznjaZavrsavanje.setBrojPredjenihKilometara(brojKm);
+        voznjaZavrsavanje.setStatusVoznje(Voznja.StatusVoznje.ZAVRSENA);
         Voznja.upisiVoznje(voznje);
         System.out.println("Uspešno završena vožnja!");
     }
