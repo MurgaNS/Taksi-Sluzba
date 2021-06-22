@@ -9,19 +9,21 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class PrikazVoznjiMusterijeProzor extends JFrame {
+public class PrikazSopstvenihVoznjiProzor extends JFrame {
 
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
     private List<Voznja> listaVoznji;
 
-    public PrikazVoznjiMusterijeProzor() {
-        listaVoznji = Voznja.ucitajListuVoznji((Musterija) GlavniProzor.getPrijavljeniKorisnik());
-        setTitle("Prikaz voznji");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(this);
-        setSize(600, 600);
-        initGui();
+    public PrikazSopstvenihVoznjiProzor() {
+        listaVoznji = Voznja.ucitajListuVoznji(GlavniProzor.getPrijavljeniKorisnik());
+        if (!listaVoznji.isEmpty()) {
+            setTitle("Prikaz voznji");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(this);
+            setSize(600, 600);
+            initGui();
+        }
     }
 
     private void initGui() {

@@ -1,7 +1,9 @@
 package Model;
 
 
+import javax.swing.*;
 import java.io.*;
+import java.sql.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +24,7 @@ public class Voznja {
     private Long vozacJMBG;
     private Long musterijaJMBG;
     private double naplacenIznos;
+    private String napomena;
 
     public enum NacinPorudzbine {
         APLIKACIJOM,
@@ -49,6 +52,21 @@ public class Voznja {
         this.vozacJMBG = vozacJMBG;
         this.musterijaJMBG = musterijaJMBG;
         this.naplacenIznos = naplacenIznos;
+    }
+
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine, Long vozacJMBG, Long musterijaJMBG, double naplacenIznos, String napomena) {
+        this.id = id;
+        this.datumPorudzbine = datumPorudzbine;
+        this.adresaPolaska = adresaPolaska;
+        this.adresaDestinacije = adresaDestinacije;
+        this.brojPredjenihKilometara = brojPredjenihKilometara;
+        this.trajanjeVoznjeUMinutama = trajanjeVoznjeUMinutama;
+        this.statusVoznje = statusVoznje;
+        this.nacinPorudzbine = nacinPorudzbine;
+        this.vozacJMBG = vozacJMBG;
+        this.musterijaJMBG = musterijaJMBG;
+        this.naplacenIznos = naplacenIznos;
+        this.napomena = napomena;
     }
 
     @Override
@@ -80,6 +98,26 @@ public class Voznja {
         };
     }
 
+    public static Voznja pronadjiPoId(long id) {
+        for (Voznja voznja : ucitajSveVoznje()) {
+            if (voznja.getId() == id) {
+                return voznja;
+            }
+        }
+        return null;
+    }
+
+    public static List<Voznja> voznjeNarucenePutemAplikacije() {
+        List<Voznja> voznjePutemAplikacije = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA_NA_CEKANJU) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM)) {
+                voznjePutemAplikacije.add(voznja);
+            }
+        }
+        return voznjePutemAplikacije;
+    }
+
     public static NacinPorudzbine ucitajNacinPorudzbine(String nacinPorudzbine) {
         if (nacinPorudzbine.trim().equals("TELEFONOM")) {
             return NacinPorudzbine.TELEFONOM;
@@ -89,24 +127,24 @@ public class Voznja {
         return null;
     }
 
-    public static List<Voznja> ucitajListuVoznji(Musterija musterija) {
+    public static List<Voznja> ucitajListuVoznji(Korisnik korisnik) {
         List<Voznja> voznje = ucitajSveVoznje();
         List<Voznja> vozaceveVoznje = new ArrayList<>();
-        for (Voznja voznja : voznje) {
-            if (voznja.getMusterijaJMBG().equals(musterija.getJMBG())) {
-                vozaceveVoznje.add(voznja);
-            }
-        }
-        return vozaceveVoznje;
-    }
+        try {
+            for (Voznja voznja : voznje) {
+                if (korisnik instanceof Musterija) {
+                    if (voznja.getMusterijaJMBG().equals(korisnik.getJMBG())) {
+                        vozaceveVoznje.add(voznja);
+                    }
+                } else if (korisnik instanceof Vozac) {
+                    if (voznja.getVozacJMBG().equals(korisnik.getJMBG())) {
+                        vozaceveVoznje.add(voznja);
+                    }
+                }
 
-    public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
-        List<Voznja> voznje = ucitajSveVoznje();
-        List<Voznja> vozaceveVoznje = new ArrayList<>();
-        for (Voznja voznja : voznje) {
-            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                vozaceveVoznje.add(voznja);
             }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Ne postoji lista voznji za ovog korisnika", "Greska", JOptionPane.WARNING_MESSAGE);
         }
         return vozaceveVoznje;
     }
@@ -267,6 +305,18 @@ public class Voznja {
         Long id = listaVoznji.get(listaVoznji.size() - 1).getId();
         System.out.println(id);
         return id;
+    }
+
+    public static void izmeniStatusVoznje(Voznja voznja) {
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja v : listaVoznji) {
+            if (v.getId() == voznja.getId()) {
+                v.setStatusVoznje(voznja.getStatusVoznje());
+                v.setVozacJMBG(voznja.getVozacJMBG());
+                break;
+            }
+        }
+        upisiVoznje(listaVoznji);
     }
 
     public static void sacuvajVoznju(Voznja voznja) {

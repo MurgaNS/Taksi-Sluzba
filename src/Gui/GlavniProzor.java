@@ -1,7 +1,6 @@
 package Gui;
 
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeForma;
-import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeTelefonomForma;
 import Gui.FormeZaPrikaz.IzvestajOVozacimaProzor;
 import Gui.FormeZaPrikaz.PrikazVoznjiMusterijeProzor;
 import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
@@ -32,13 +31,11 @@ public class GlavniProzor extends JFrame {
     }
 
     public void init() {
-        if (this.prijavljeniKorisnik instanceof Dispecer) {
+        if (prijavljeniKorisnik instanceof Dispecer) {
             dispecerMenuAndActions();
-
-        } else if (this.prijavljeniKorisnik instanceof Vozac) {
-            vozacMenu();
-            vozacActions();
-        } else if (this.prijavljeniKorisnik instanceof Musterija) {
+        } else if (prijavljeniKorisnik instanceof Vozac) {
+            vozacMenuAndActions();
+        } else if (prijavljeniKorisnik instanceof Musterija) {
             musterijaMenuAndActions();
         }
     }
@@ -76,26 +73,17 @@ public class GlavniProzor extends JFrame {
         mainMenu.add(voznjaMenu);
         mainMenu.add(izvestajMenu);
 
-        otvoriTaksiSluzbaProzor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TaksiSluzbaProzor taksiSluzbaProzor = new TaksiSluzbaProzor();
-                taksiSluzbaProzor.setVisible(true);
-            }
+        otvoriTaksiSluzbaProzor.addActionListener(e -> {
+            TaksiSluzbaProzor taksiSluzbaProzor = new TaksiSluzbaProzor();
+            taksiSluzbaProzor.setVisible(true);
         });
-        otvoriVozilaProzor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VoziloProzor vozilaProzor = new VoziloProzor();
-                vozilaProzor.setVisible(true);
-            }
+        otvoriVozilaProzor.addActionListener(e -> {
+            VoziloProzor vozilaProzor = new VoziloProzor();
+            vozilaProzor.setVisible(true);
         });
-        otvoriIzvestajOVozacimaProzor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                IzvestajOVozacimaProzor izvestajOVozacimaProzor = new IzvestajOVozacimaProzor();
-                izvestajOVozacimaProzor.setVisible(true);
-            }
+        otvoriIzvestajOVozacimaProzor.addActionListener(e -> {
+            IzvestajOVozacimaProzor izvestajOVozacimaProzor = new IzvestajOVozacimaProzor();
+            izvestajOVozacimaProzor.setVisible(true);
         });
     }
 
@@ -103,30 +91,20 @@ public class GlavniProzor extends JFrame {
     public void musterijaMenuAndActions() {
         MigLayout mig = new MigLayout();
         setLayout(mig);
-        JButton narucivanjeVoznjeDugme = new JButton("Naruci voznju");
+        JButton narucivanjeVoznjeDugme = new JButton("Naruci voznju putem aplikacije");
         narucivanjeVoznjeDugme.setBounds(50, 100, 95, 30);
         JButton prikazVoznjiDugme = new JButton("Prikaz sopstvenih voznji");
         prikazVoznjiDugme.setBounds(50, 100, 95, 30);
-        JButton narucivanjeVoznjeTelefonomDugme = new JButton("Naruci voznju telefonom");
-        narucivanjeVoznjeTelefonomDugme.setBounds(50,100,95,30);
-
         this.add(prikazVoznjiDugme);
         this.add(narucivanjeVoznjeDugme);
-        this.add(narucivanjeVoznjeTelefonomDugme);
 
-        narucivanjeVoznjeDugme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                NarucivanjeVoznjeForma narucivanjeVoznje = new NarucivanjeVoznjeForma();
-                narucivanjeVoznje.setVisible(true);
-            }
+        narucivanjeVoznjeDugme.addActionListener(e -> {
+            NarucivanjeVoznjeForma narucivanjeVoznje = new NarucivanjeVoznjeForma();
+            narucivanjeVoznje.setVisible(true);
         });
-        prikazVoznjiDugme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                PrikazVoznjiMusterijeProzor prikazVoznjiProzor = new PrikazVoznjiMusterijeProzor();
-                prikazVoznjiProzor.setVisible(true);
-            }
+        prikazVoznjiDugme.addActionListener(e -> {
+            PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
+            prikazVoznjiProzor.setVisible(true);
         });
 
 
@@ -140,12 +118,25 @@ public class GlavniProzor extends JFrame {
         });
     }
 
-    public void vozacMenu() {
+    public void vozacMenuAndActions() {
+        MigLayout mig = new MigLayout();
+        setLayout(mig);
+        JButton prikazIstorijeVoznjiDugme = new JButton("Prikaz istorije sopstvenih voznji");
+        prikazIstorijeVoznjiDugme.setBounds(50, 100, 95, 30);
+        JButton statistikaDugme = new JButton("Statistika voznji");
+        statistikaDugme.setBounds(50, 100, 95, 30);
+        JButton prikazVoznjiPutemAplikacijeDugme = new JButton("Prikaz voznji putem aplikacije");
+        prikazVoznjiPutemAplikacijeDugme.setBounds(50, 100, 95, 30);
+        this.add(prikazIstorijeVoznjiDugme);
+        this.add(prikazVoznjiPutemAplikacijeDugme);
+        this.add(statistikaDugme);
 
-    }
-
-    public void vozacActions() {
-
+        prikazIstorijeVoznjiDugme.addActionListener(e -> {
+            PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
+        });
+        prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> {
+            PrikazVoznjiPutemAplikacije prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacije();
+        });
     }
 
     public static Korisnik getPrijavljeniKorisnik() {
