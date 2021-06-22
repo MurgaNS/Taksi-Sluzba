@@ -19,8 +19,8 @@ public class Voznja {
     private double trajanjeVoznjeUMinutama;
     private StatusVoznje statusVoznje;
     private NacinPorudzbine nacinPorudzbine;
-    private Long vozacId;
-    private Long musterijaId;
+    private Long vozacJMBG;
+    private Long musterijaJMBG;
     private double naplacenIznos;
 
     public enum NacinPorudzbine {
@@ -37,7 +37,7 @@ public class Voznja {
         ODBIJENA
     }
 
-    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine, Long vozacId, Long musterijaId, double naplacenIznos) {
+    public Voznja(long id, Date datumPorudzbine, String adresaPolaska, String adresaDestinacije, double brojPredjenihKilometara, double trajanjeVoznjeUMinutama, StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine, Long vozacJMBG, Long musterijaJMBG, double naplacenIznos) {
         this.id = id;
         this.datumPorudzbine = datumPorudzbine;
         this.adresaPolaska = adresaPolaska;
@@ -46,8 +46,8 @@ public class Voznja {
         this.trajanjeVoznjeUMinutama = trajanjeVoznjeUMinutama;
         this.statusVoznje = statusVoznje;
         this.nacinPorudzbine = nacinPorudzbine;
-        this.vozacId = vozacId;
-        this.musterijaId = musterijaId;
+        this.vozacJMBG = vozacJMBG;
+        this.musterijaJMBG = musterijaJMBG;
         this.naplacenIznos = naplacenIznos;
     }
 
@@ -62,27 +62,22 @@ public class Voznja {
                ", trajanjeVoznjeUMinutama=" + trajanjeVoznjeUMinutama +
                ", statusVoznje=" + statusVoznje +
                ", nacinPorudzbine=" + nacinPorudzbine +
-               ", vozacId=" + vozacId +
-               ", musterijaId=" + musterijaId +
+               ", vozacId=" + vozacJMBG +
+               ", musterijaId=" + musterijaJMBG +
                ", naplacenIznos=" + naplacenIznos +
                '}';
     }
 
     public static StatusVoznje ucitajStatusVoznje(String statusVoznje) {
-        if (statusVoznje.trim().equals("KREIRANA")) {
-            return StatusVoznje.KREIRANA;
-        } else if (statusVoznje.trim().equals("KREIRANA_NA_CEKANJU")) {
-            return StatusVoznje.KREIRANA_NA_CEKANJU;
-        } else if (statusVoznje.trim().equals("DODELJENA")) {
-            return StatusVoznje.DODELJENA;
-        } else if (statusVoznje.trim().equals("PRIHVACENA")) {
-            return StatusVoznje.PRIHVACENA;
-        } else if (statusVoznje.trim().equals("ZAVRSENA")) {
-            return StatusVoznje.ZAVRSENA;
-        } else if (statusVoznje.trim().equals("ODBIJENA")) {
-            return StatusVoznje.ODBIJENA;
-        }
-        return null;
+        return switch (statusVoznje.trim()) {
+            case "KREIRANA" -> StatusVoznje.KREIRANA;
+            case "KREIRANA_NA_CEKANJU" -> StatusVoznje.KREIRANA_NA_CEKANJU;
+            case "DODELJENA" -> StatusVoznje.DODELJENA;
+            case "PRIHVACENA" -> StatusVoznje.PRIHVACENA;
+            case "ZAVRSENA" -> StatusVoznje.ZAVRSENA;
+            case "ODBIJENA" -> StatusVoznje.ODBIJENA;
+            default -> null;
+        };
     }
 
     public static NacinPorudzbine ucitajNacinPorudzbine(String nacinPorudzbine) {
@@ -94,11 +89,22 @@ public class Voznja {
         return null;
     }
 
+    public static List<Voznja> ucitajListuVoznji(Musterija musterija) {
+        List<Voznja> voznje = ucitajSveVoznje();
+        List<Voznja> vozaceveVoznje = new ArrayList<>();
+        for (Voznja voznja : voznje) {
+            if (voznja.getMusterijaJMBG().equals(musterija.getJMBG())) {
+                vozaceveVoznje.add(voznja);
+            }
+        }
+        return vozaceveVoznje;
+    }
+
     public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
         List<Voznja> voznje = ucitajSveVoznje();
         List<Voznja> vozaceveVoznje = new ArrayList<>();
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 vozaceveVoznje.add(voznja);
             }
         }
@@ -109,7 +115,7 @@ public class Voznja {
         List<Voznja> voznje = ucitajSveVoznje();
         double brKilometara = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 brKilometara = brKilometara + voznja.getBrojPredjenihKilometara();
             }
         }
@@ -121,7 +127,7 @@ public class Voznja {
         double brKilometara = 0;
         int brojac = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 brKilometara = brKilometara + voznja.getBrojPredjenihKilometara();
                 brojac += 1;
             }
@@ -134,7 +140,7 @@ public class Voznja {
         double trajanjeVoznje = 0;
         int brojac = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 trajanjeVoznje = trajanjeVoznje + voznja.getTrajanjeVoznjeUMinutama();
                 brojac += 1;
             }
@@ -146,7 +152,7 @@ public class Voznja {
         List<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 zarada += voznja.getNaplacenIznos();
             }
         }
@@ -158,7 +164,7 @@ public class Voznja {
         double radnoVreme = 0;
         double trajanjeVoznji = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 radnoVreme += TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getRADNOVREMEUMINUTAMA();
                 trajanjeVoznji += voznja.getTrajanjeVoznjeUMinutama();
             }
@@ -171,7 +177,7 @@ public class Voznja {
         double zarada = 0;
         int brojac = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 zarada += voznja.getNaplacenIznos();
                 brojac += 1;
             }
@@ -183,7 +189,7 @@ public class Voznja {
         List<Voznja> voznje = ucitajSveVoznje();
         double ukupnoTrajanjeVoznji = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 ukupnoTrajanjeVoznji = ukupnoTrajanjeVoznji + voznja.getTrajanjeVoznjeUMinutama();
             }
         }
@@ -195,7 +201,7 @@ public class Voznja {
         List<Voznja> voznje = ucitajSveVoznje();
         int brVoznji = 0;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId().equals(vozac.getJMBG())) {
+            if (voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                 brVoznji = brVoznji + 1;
             }
         }
@@ -212,18 +218,18 @@ public class Voznja {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineParts = line.split(",");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Long id = Long.parseLong(lineParts[0]);
+                long id = Long.parseLong(lineParts[0]);
                 Date datumPorudzbine = simpleDateFormat.parse(lineParts[1]);
                 String adresaPolaska = lineParts[2];
                 String adresaDestinacije = lineParts[3];
-                Double brojPredjenihKilometara = Double.parseDouble(lineParts[4]);
-                Double trajanjeVoznjeUMin = Double.parseDouble(lineParts[5]);
+                double brojPredjenihKilometara = Double.parseDouble(lineParts[4]);
+                double trajanjeVoznjeUMin = Double.parseDouble(lineParts[5]);
                 StatusVoznje statusVoznje = ucitajStatusVoznje(lineParts[6]);
                 NacinPorudzbine nacinPorudzbine = ucitajNacinPorudzbine(lineParts[7]);
                 Long vozacId = null;
                 try {
                     vozacId = Long.parseLong(lineParts[8]);
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException ignored) {
 
                 }
                 Long musterijaId = Long.parseLong(lineParts[9]);
@@ -276,7 +282,7 @@ public class Voznja {
         return id + "," + strDate + "," + adresaPolaska + "," +
                adresaDestinacije + "," + brojPredjenihKilometara + "," +
                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
-               + vozacId + "," + musterijaId + "," + naplacenIznos;
+               + vozacJMBG + "," + musterijaJMBG + "," + naplacenIznos;
     }
 
     public long getId() {
@@ -343,20 +349,20 @@ public class Voznja {
         this.nacinPorudzbine = nacinPorudzbine;
     }
 
-    public Long getVozacId() {
-        return vozacId;
+    public Long getVozacJMBG() {
+        return vozacJMBG;
     }
 
-    public void setVozacId(Long vozacId) {
-        this.vozacId = vozacId;
+    public void setVozacJMBG(Long vozacJMBG) {
+        this.vozacJMBG = vozacJMBG;
     }
 
-    public Long getMusterijaId() {
-        return musterijaId;
+    public Long getMusterijaJMBG() {
+        return musterijaJMBG;
     }
 
-    public void setMusterijaId(Long musterijaId) {
-        this.musterijaId = musterijaId;
+    public void setMusterijaJMBG(Long musterijaJMBG) {
+        this.musterijaJMBG = musterijaJMBG;
     }
 
     public double getNaplacenIznos() {

@@ -73,12 +73,7 @@ public abstract class Korisnik {
                     case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]));
                     case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), Integer.parseInt(lineParts[11]));
                     case "dispecer" -> {
-                        Dispecer.OdeljenjeRada odeljenjeRada;
-                        if (lineParts[11].trim().equals("PRIJEM_VOZNJE")) {
-                            odeljenjeRada = Dispecer.OdeljenjeRada.PRIJEM_VOZNJE;
-                        } else {
-                            odeljenjeRada = Dispecer.OdeljenjeRada.REKLAMACIJE;
-                        }
+                        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[11]);
                         korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), lineParts[11], odeljenjeRada);
                     }
                 }

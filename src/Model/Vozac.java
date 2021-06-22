@@ -105,106 +105,106 @@ public class Vozac extends Korisnik {
         System.out.println("Uspešno upisan vozač");
     }
 
-    public static void izmeniVozaca() {
-        System.out.println("Unesi JMBG vozaca kojeg zelite da izmenite");
-        Scanner scanner = new Scanner(System.in);
-        long JMBG = scanner.nextLong();
-        List<Korisnik> korisnici = ucitajSveKorisnike();
-        Vozac vozac = null;
-        for (Korisnik korisnik : korisnici) {
-            if (korisnik.getJMBG() == JMBG) {
-                vozac = (Vozac) korisnik;
-            }
-        }
-        if (vozac == null) {
-            return;
-        }
-        System.out.println("1. Izmena korisnickog imena" +
-                           "\n2. Izmena sifre" +
-                           "\n3. Izmena imena" +
-                           "\n4. Izmena prezimena" +
-                           "\n5. Izmena adrese" +
-                           "\n6. Izmena pola" +
-                           "\n7. Izmena broja telefona" +
-                           "\n8. Izmena plate" +
-                           "\n9. Izmena clanske karte");
-        System.out.println("Odaberi opciju");
-        int opcija = scanner.nextInt();
-        switch (opcija) {
-            case 1 -> {
-                System.out.println("Unesi korisnicko ime: ");
-                String korisnickoIme = scanner.next();
-                vozac.setKorisnickoIme(korisnickoIme);
-            }
-            case 2 -> {
-                System.out.println("Unesi lozinku: ");
-                String lozinka = scanner.next();
-                vozac.setLozinka(lozinka);
-            }
-            case 3 -> {
-                System.out.println("Unesi ime: ");
-                String ime = scanner.next();
-                vozac.setIme(ime);
-            }
-            case 4 -> {
-                System.out.println("Unesi prezime: ");
-                String prezime = scanner.next();
-                vozac.setPrezime(prezime);
-            }
-            case 5 -> {
-                System.out.println("Unesite adresu: ");
-                String adresa = scanner.next();
-                vozac.setAdresa(adresa);
-            }
-            case 6 -> {
-                System.out.println("Unesite pol [MUSKI/ZENSKI]: ");
-                String pol = scanner.next();
-                if (pol.trim().equals("MUSKI")) {
-                    vozac.setPol(Pol.MUSKI);
-                } else {
-                    vozac.setPol(Pol.ZENSKI);
-                }
-            }
-            case 7 -> {
-                System.out.println("Unesite broj telefona: ");
-                String brojTelefona = scanner.nextLine();
-                vozac.setBrojTelefona(brojTelefona);
-            }
-            case 8 -> {
-                System.out.println("Unesite platu: ");
-                double plata = scanner.nextDouble();
-                vozac.setPlata(plata);
-            }
-            case 9 -> {
-                System.out.println("Unesite broj clanske karte");
-                int brojClanskeKarte = scanner.nextInt();
-                vozac.setBrojClanskeKarte(brojClanskeKarte);
-            }
-        }
+//    public static void izmeniVozaca() {
+//        System.out.println("Unesi JMBG vozaca kojeg zelite da izmenite");
+//        Scanner scanner = new Scanner(System.in);
+//        long JMBG = scanner.nextLong();
+//        List<Korisnik> korisnici = ucitajSveKorisnike();
+//        Vozac vozac = null;
+//        for (Korisnik korisnik : korisnici) {
+//            if (korisnik.getJMBG() == JMBG) {
+//                vozac = (Vozac) korisnik;
+//            }
+//        }
+//        if (vozac == null) {
+//            return;
+//        }
+//        System.out.println("1. Izmena korisnickog imena" +
+//                           "\n2. Izmena sifre" +
+//                           "\n3. Izmena imena" +
+//                           "\n4. Izmena prezimena" +
+//                           "\n5. Izmena adrese" +
+//                           "\n6. Izmena pola" +
+//                           "\n7. Izmena broja telefona" +
+//                           "\n8. Izmena plate" +
+//                           "\n9. Izmena clanske karte");
+//        System.out.println("Odaberi opciju");
+//        int opcija = scanner.nextInt();
+//        switch (opcija) {
+//            case 1 -> {
+//                System.out.println("Unesi korisnicko ime: ");
+//                String korisnickoIme = scanner.next();
+//                vozac.setKorisnickoIme(korisnickoIme);
+//            }
+//            case 2 -> {
+//                System.out.println("Unesi lozinku: ");
+//                String lozinka = scanner.next();
+//                vozac.setLozinka(lozinka);
+//            }
+//            case 3 -> {
+//                System.out.println("Unesi ime: ");
+//                String ime = scanner.next();
+//                vozac.setIme(ime);
+//            }
+//            case 4 -> {
+//                System.out.println("Unesi prezime: ");
+//                String prezime = scanner.next();
+//                vozac.setPrezime(prezime);
+//            }
+//            case 5 -> {
+//                System.out.println("Unesite adresu: ");
+//                String adresa = scanner.next();
+//                vozac.setAdresa(adresa);
+//            }
+//            case 6 -> {
+//                System.out.println("Unesite pol [MUSKI/ZENSKI]: ");
+//                String pol = scanner.next();
+//                if (pol.trim().equals("MUSKI")) {
+//                    vozac.setPol(Pol.MUSKI);
+//                } else {
+//                    vozac.setPol(Pol.ZENSKI);
+//                }
+//            }
+//            case 7 -> {
+//                System.out.println("Unesite broj telefona: ");
+//                String brojTelefona = scanner.nextLine();
+//                vozac.setBrojTelefona(brojTelefona);
+//            }
+//            case 8 -> {
+//                System.out.println("Unesite platu: ");
+//                double plata = scanner.nextDouble();
+//                vozac.setPlata(plata);
+//            }
+//            case 9 -> {
+//                System.out.println("Unesite broj clanske karte");
+//                int brojClanskeKarte = scanner.nextInt();
+//                vozac.setBrojClanskeKarte(brojClanskeKarte);
+//            }
+//        }
+//
+//
+//        Korisnik.upisiSveKorisnike(korisnici);
+//        System.out.println("Uspešno upisan korisnik");
+//    }
 
-
-        Korisnik.upisiSveKorisnike(korisnici);
-        System.out.println("Uspešno upisan korisnik");
-    }
-
-    public static void izbrisiVozaca() {
-        System.out.println("Unesi JMBG vozaca kojeg zelite da obrisete");
-        Scanner scanner = new Scanner(System.in);
-        long JMBG = scanner.nextLong();
-        List<Korisnik> korisnici = ucitajSveKorisnike();
-        Vozac vozac = null;
-        for (Korisnik korisnik : korisnici) {
-            if (korisnik.getJMBG() == JMBG) {
-                vozac = (Vozac) korisnik;
-            }
-        }
-        if (vozac == null) {
-            return;
-        }
-        korisnici.remove(vozac);
-        Korisnik.upisiSveKorisnike(korisnici);
-        System.out.println("Uspešno ste obrisali vozača!");
-    }
+//    public static void izbrisiVozaca() {
+//        System.out.println("Unesi JMBG vozaca kojeg zelite da obrisete");
+//        Scanner scanner = new Scanner(System.in);
+//        long JMBG = scanner.nextLong();
+//        List<Korisnik> korisnici = ucitajSveKorisnike();
+//        Vozac vozac = null;
+//        for (Korisnik korisnik : korisnici) {
+//            if (korisnik.getJMBG() == JMBG) {
+//                vozac = (Vozac) korisnik;
+//            }
+//        }
+//        if (vozac == null) {
+//            return;
+//        }
+//        korisnici.remove(vozac);
+//        Korisnik.upisiSveKorisnike(korisnici);
+//        System.out.println("Uspešno ste obrisali vozača!");
+//    }
 
     public static void upisiVozaca(Vozac vozac) {
         File file = new File("src\\Data\\korisnici.csv");
@@ -254,7 +254,7 @@ public class Vozac extends Korisnik {
         List<Voznja> voznje = Voznja.ucitajSveVoznje();
         for (Voznja voznja : voznje) {
             if (voznja.getNacinPorudzbine() == Voznja.NacinPorudzbine.TELEFONOM && voznja.getStatusVoznje() == Voznja.StatusVoznje.DODELJENA) {
-                long vozacJMBG = voznja.getVozacId();
+                long vozacJMBG = voznja.getVozacJMBG();
                 if (prijavljeniKorisnik.getJMBG() == vozacJMBG) {
                     System.out.println(voznja);
                 }
@@ -296,7 +296,7 @@ public class Vozac extends Korisnik {
         Vozac vozac = (Vozac) Vozac.prijavljeniKorisnik;
         Voznja voznjaZavrsavanje = null;
         for (Voznja voznja : voznje) {
-            if (voznja.getVozacId() == vozac.getJMBG() && voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
+            if (voznja.getVozacJMBG() == vozac.getJMBG() && voznja.getStatusVoznje() == Voznja.StatusVoznje.PRIHVACENA) {
                 voznjaZavrsavanje = voznja;
                 break;
             }
@@ -440,7 +440,7 @@ public class Vozac extends Korisnik {
                 statusVoznje = Voznja.ucitajStatusVoznje(tmp[6]);
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    Date date = (Date) formatter.parse(tmp[1]);
+                    Date date = formatter.parse(tmp[1]);
 
                     Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, Long.parseLong(tmp[8]), Long.parseLong(tmp[9]), Double.parseDouble(tmp[10]));
                     listaVoznji.add(voznja);
