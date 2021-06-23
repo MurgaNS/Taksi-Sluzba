@@ -13,8 +13,6 @@ public class NarucivanjeVoznjeForma extends JFrame {
     private JTextField txtAdresaPolaska = new JTextField(30);
     private JLabel lblAdresaDolaska = new JLabel("Adresa dolaska");
     private JTextField txtAdresaDolaska = new JTextField(30);
-    private JLabel lblDatum = new JLabel("Datum");
-    private JFormattedTextField txtDatum = new JFormattedTextField("yyyy-MM-dd");
     private JLabel lblNapomena = new JLabel("Napomena");
     private JTextField txtNapomena = new JTextField(50);
 
@@ -38,8 +36,6 @@ public class NarucivanjeVoznjeForma extends JFrame {
         add(txtAdresaPolaska);
         add(lblAdresaDolaska);
         add(txtAdresaDolaska);
-        add(lblDatum);
-        add(txtDatum);
         add(lblNapomena);
         add(txtNapomena);
         add(dugmeOk);
