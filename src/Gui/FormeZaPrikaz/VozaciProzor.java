@@ -34,6 +34,15 @@ public class VozaciProzor extends JFrame {
         initGUI();
         initActions();
     }
+    public VozaciProzor(List<Vozac> listaPronadjenihVozaca) {
+        listaVozaca = listaPronadjenihVozaca;
+        setTitle("Prikaz vozila");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setSize(600, 300);
+        initGUI();
+        initActions();
+    }
 
     public void initGUI() {
         glavniToolBar.add(dugmeIzmena);

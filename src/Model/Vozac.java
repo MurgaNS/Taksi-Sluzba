@@ -121,6 +121,40 @@ public class Vozac extends Korisnik {
         }
     }
 
+    public static List<Vozac> pretragaPoImenu(String ime) {
+        List<Vozac> listaVozaca = ucitajSveVozace();
+        List<Vozac> pronadjeniVozaci = new ArrayList<>();
+        for (Vozac vozac : listaVozaca) {
+            if (vozac.getIme().toLowerCase().contains(ime.toLowerCase())) {
+                pronadjeniVozaci.add(vozac);
+            }
+        }
+        return pronadjeniVozaci;
+    }
+
+    public static List<Vozac> pretragaPoPrezimenu(String prezime) {
+        List<Vozac> listaVozaca = ucitajSveVozace();
+        List<Vozac> pronadjeniVozaci = new ArrayList<>();
+        for (Vozac vozac : listaVozaca) {
+            if (vozac.getPrezime().toLowerCase().contains(prezime.toLowerCase())) {
+                pronadjeniVozaci.add(vozac);
+            }
+        }
+        return pronadjeniVozaci;
+    }
+
+    public static List<Vozac> pretragaPoPlati(double plata) {
+        List<Vozac> listaVozaca = ucitajSveVozace();
+        List<Vozac> pronadjeniVozaci = new ArrayList<>();
+        for (Vozac vozac : listaVozaca) {
+            if (vozac.getPlata() == plata) {
+                pronadjeniVozaci.add(vozac);
+            }
+        }
+        return pronadjeniVozaci;
+    }
+
+
 //        public static void sacuvajListuVozacaUFajl(List<Vozac> vozaci) {
 //        File file = new File("src\\Data\\korisnici.csv");
 //        try {

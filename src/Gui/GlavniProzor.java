@@ -1,5 +1,6 @@
 package Gui;
 
+import Gui.FormeZaDodavanjeIIzmenu.KombPretragaVozacaForma;
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeForma;
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeTelefonomForma;
 import Gui.FormeZaDodavanjeIIzmenu.PretragaVozilaForma;
@@ -46,10 +47,10 @@ public class GlavniProzor extends JFrame {
             vp.setVisible(true);
         });
 
-        kombPretragaVozacaProzor.addActionListener(e -> {
-        KombPretragaVozacaProzor pvp = new KombPretragaVozacaProzor();
-        pvp.setVisible(true);
-        });
+//        kombPretragaVozacaProzor.addActionListener(e -> {
+//        KombPretragaVozacaProzor pvp = new KombPretragaVozacaProzor();
+//        pvp.setVisible(true);
+//        });
 
         JMenuItem otvoriTaksiSluzbaProzor;
         JMenuItem otvoriVozilaProzor;
@@ -94,6 +95,9 @@ public class GlavniProzor extends JFrame {
         otvoriIzvestajOVozacimaProzor.addActionListener(e -> {
             IzvestajOVozacimaProzor izvestajOVozacimaProzor = new IzvestajOVozacimaProzor();
             izvestajOVozacimaProzor.setVisible(true);
+        });
+        kombPretragaVozacaProzor.addActionListener(e -> {
+            KombPretragaVozacaForma pretragaVozacaForma = new KombPretragaVozacaForma();
         });
     }
 
