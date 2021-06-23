@@ -2,6 +2,7 @@ package Gui;
 
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeForma;
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeTelefonomForma;
+import Gui.FormeZaDodavanjeIIzmenu.PretragaVozilaForma;
 import Gui.FormeZaPrikaz.*;
 import Model.*;
 import net.miginfocom.swing.MigLayout;
@@ -60,6 +61,7 @@ public class GlavniProzor extends JFrame {
         JMenuItem otvoriVozilaProzor;
         JMenuItem otvoriVoznjaProzor;
         JMenuItem otvoriIzvestajOVozacimaProzor;
+        JMenuItem otvoriPretragaProzor;
 
         JMenu taksiSluzbaMenu = new JMenu("Taksi sluzba");
         otvoriTaksiSluzbaProzor = new JMenuItem("Prikazi podatke");
@@ -71,7 +73,9 @@ public class GlavniProzor extends JFrame {
 
         JMenu vozilaMenu = new JMenu("Vozila");
         otvoriVozilaProzor = new JMenuItem("Lista svih vozila");
+        otvoriPretragaProzor = new JMenuItem("Pretraga vozila");
         vozilaMenu.add(otvoriVozilaProzor);
+        vozilaMenu.add(otvoriPretragaProzor);
 
         JMenu voznjaMenu = new JMenu("Voznje");
         otvoriVoznjaProzor = new JMenuItem("Prikazi podatke");
@@ -98,6 +102,9 @@ public class GlavniProzor extends JFrame {
         otvoriIzvestajOVozacimaProzor.addActionListener(e -> {
             IzvestajOVozacimaProzor izvestajOVozacimaProzor = new IzvestajOVozacimaProzor();
             izvestajOVozacimaProzor.setVisible(true);
+        });
+        otvoriPretragaProzor.addActionListener(e->{
+            PretragaVozilaForma pretragaVozilaForma = new PretragaVozilaForma();
         });
     }
 

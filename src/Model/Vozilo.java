@@ -145,6 +145,61 @@ public class Vozilo {
         }
     }
 
+    public static List<Vozilo> pretragaPoModelu(String model) {
+        List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
+        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        for (Vozilo vozilo : listaVozila) {
+            if (vozilo.getModel().toLowerCase().contains(model.toLowerCase())) {
+                pronadjenaVozila.add(vozilo);
+            }
+        }
+        return pronadjenaVozila;
+    }
+
+    public static List<Vozilo> pretragaPoProizvodjacu(String proizvodjac) {
+        List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
+        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        for (Vozilo vozilo : listaVozila) {
+            if (vozilo.getProizvodjac().toLowerCase().contains(proizvodjac.toLowerCase())) {
+                pronadjenaVozila.add(vozilo);
+            }
+        }
+        return pronadjenaVozila;
+    }
+
+    public static List<Vozilo> pretragaPoGodiniProizvodnje(int godinaProizvodnje) {
+        List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
+        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        for (Vozilo vozilo : listaVozila) {
+            if (vozilo.getGodProizvodnje() == godinaProizvodnje) {
+                pronadjenaVozila.add(vozilo);
+            }
+        }
+        return pronadjenaVozila;
+    }
+
+    public static List<Vozilo> pretragaPoBrojuRegOznake(String brojRegOznake) {
+        List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
+        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        for (Vozilo vozilo : listaVozila) {
+            if (vozilo.getBrRegistarskeOznake().toLowerCase().contains(brojRegOznake.toLowerCase())) {
+                pronadjenaVozila.add(vozilo);
+            }
+        }
+        return pronadjenaVozila;
+    }
+
+    public static List<Vozilo> pretragaPoBrojuTaksiVozila(Long brTaksiVozila) {
+        List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
+        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        for (Vozilo vozilo : listaVozila) {
+            if (vozilo.getBrTaksiVozila().equals(brTaksiVozila)) {
+                pronadjenaVozila.add(vozilo);
+            }
+        }
+        return pronadjenaVozila;
+    }
+
     @Override
     public String toString() {
         return "Vozilo{" +
@@ -161,6 +216,7 @@ public class Vozilo {
     public String stringToSave() {
         return String.valueOf(brTaksiVozila) + ',' + model + ',' + proizvodjac + ',' + godProizvodnje + ',' + brRegistarskeOznake + ',' + vrsta + ',' + obrisan + ',' + vozacId + '\n';
     }
+
     public boolean isObrisan() {
         return obrisan;
     }
