@@ -18,6 +18,7 @@ public class ZavrsiVoznjuForma extends JFrame {
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
     private Voznja voznja;
+    private List<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
 
     public ZavrsiVoznjuForma(String voznjaId) {
         voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId));
@@ -42,13 +43,17 @@ public class ZavrsiVoznjuForma extends JFrame {
 
     public void initActions() {
         dugmeOk.addActionListener(e -> {
-            voznja.setStatusVoznje(Voznja.StatusVoznje.ZAVRSENA);
-            double brojPredjenihKilometara = Double.parseDouble(txtBrojPredjenihKilometara.getText().trim());
-            double trajanjeVoznje = Double.parseDouble(txtTrajanjeVoznje.getText().trim());
-            voznja.setBrojPredjenihKilometara(brojPredjenihKilometara);
-            voznja.setTrajanjeVoznjeUMinutama(trajanjeVoznje);
-            voznja.setNaplacenIznos(TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getCenaStarta() + TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getCenaPoKilometru() * brojPredjenihKilometara);
-            Voznja.sacuvajVoznju(voznja);
+            for (Voznja v : listaVoznji) {
+                if (v.getId() == voznja.getId()) {
+                    v.setStatusVoznje(Voznja.StatusVoznje.ZAVRSENA);
+                    double brojPredjenihKilometara = Double.parseDouble(txtBrojPredjenihKilometara.getText().trim());
+                    double trajanjeVoznje = Double.parseDouble(txtTrajanjeVoznje.getText().trim());
+                    v.setBrojPredjenihKilometara(brojPredjenihKilometara);
+                    v.setTrajanjeVoznjeUMinutama(trajanjeVoznje);
+                    v.setNaplacenIznos(TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getCenaStarta() + TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getCenaPoKilometru() * brojPredjenihKilometara);
+                }
+            }
+            Voznja.upisiVoznje(listaVoznji);
             JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili voznju", "Voznja zavrsena", JOptionPane.INFORMATION_MESSAGE);
             ZavrsiVoznjuForma.this.dispose();
             ZavrsiVoznjuForma.this.setVisible(false);

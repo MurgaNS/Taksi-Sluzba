@@ -401,19 +401,9 @@ public class Voznja {
         upisiVoznje(listaVoznji);
     }
 
-    public static void sacuvajVoznju(Voznja voznjaZaCuvanje) {
+    public static void sacuvajVoznju(Voznja voznja) {
         List<Voznja> voznje = ucitajSveVoznje();
-        if (!voznje.isEmpty()) {
-            for (Voznja v : voznje) {
-                if (v.getId() == voznjaZaCuvanje.getId()) {
-                    v.setStatusVoznje(StatusVoznje.ZAVRSENA);
-                    v.setBrojPredjenihKilometara(voznjaZaCuvanje.brojPredjenihKilometara);
-                    v.setTrajanjeVoznjeUMinutama(voznjaZaCuvanje.getTrajanjeVoznjeUMinutama());
-                    v.setNaplacenIznos(voznjaZaCuvanje.getNaplacenIznos());
-                    break;
-                }
-            }
-        }
+        voznje.add(voznja);
         upisiVoznje(voznje);
 
     }
