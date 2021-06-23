@@ -81,14 +81,17 @@ public class PretragaVozilaForma extends JFrame {
             if (brojTaksiVozila != 0) {
                 listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuTaksiVozila(brojTaksiVozila));
             }
-            if (listaPronadjenihVozila != null) {
-                VoziloProzor voziloProzor = new VoziloProzor(listaPronadjenihVozila);
-                voziloProzor.setVisible(true);
+            if (!listaPronadjenihVozila.isEmpty()) {
+                PrikazPretrageVozilaProzor prikazPretrageVozilaProzor = new PrikazPretrageVozilaProzor(listaPronadjenihVozila);
+                prikazPretrageVozilaProzor.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Ne postoje rezultati pretrage.", "Greska!", JOptionPane.ERROR_MESSAGE);
             }
+            PretragaVozilaForma.this.dispose();
+            PretragaVozilaForma.this.setVisible(false);
         });
         dugmePonisti.addActionListener(e -> {
+            VoziloProzor voziloProzor = new VoziloProzor();
             PretragaVozilaForma.this.dispose();
             PretragaVozilaForma.this.setVisible(false);
         });

@@ -41,20 +41,14 @@ public class GlavniProzor extends JFrame {
     }
 
     public void dispecerMenuAndActions() {
-        otvoriVozacProzor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VozaciProzor vp = new VozaciProzor();
-                vp.setVisible(true);
-            }
+        otvoriVozacProzor.addActionListener(e -> {
+            VozaciProzor vp = new VozaciProzor();
+            vp.setVisible(true);
         });
 
-        kombPretragaVozacaProzor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            KombPretragaVozacaProzor pvp = new KombPretragaVozacaProzor();
-            pvp.setVisible(true);
-            }
+        kombPretragaVozacaProzor.addActionListener(e -> {
+        KombPretragaVozacaProzor pvp = new KombPretragaVozacaProzor();
+        pvp.setVisible(true);
         });
 
         JMenuItem otvoriTaksiSluzbaProzor;
@@ -73,9 +67,7 @@ public class GlavniProzor extends JFrame {
 
         JMenu vozilaMenu = new JMenu("Vozila");
         otvoriVozilaProzor = new JMenuItem("Lista svih vozila");
-        otvoriPretragaProzor = new JMenuItem("Pretraga vozila");
         vozilaMenu.add(otvoriVozilaProzor);
-        vozilaMenu.add(otvoriPretragaProzor);
 
         JMenu voznjaMenu = new JMenu("Voznje");
         otvoriVoznjaProzor = new JMenuItem("Prikazi podatke");
@@ -102,9 +94,6 @@ public class GlavniProzor extends JFrame {
         otvoriIzvestajOVozacimaProzor.addActionListener(e -> {
             IzvestajOVozacimaProzor izvestajOVozacimaProzor = new IzvestajOVozacimaProzor();
             izvestajOVozacimaProzor.setVisible(true);
-        });
-        otvoriPretragaProzor.addActionListener(e->{
-            PretragaVozilaForma pretragaVozilaForma = new PretragaVozilaForma();
         });
     }
 

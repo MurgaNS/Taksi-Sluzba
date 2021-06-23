@@ -1,5 +1,6 @@
 package Gui.FormeZaPrikaz;
 
+import Gui.FormeZaDodavanjeIIzmenu.PretragaVozilaForma;
 import Gui.FormeZaDodavanjeIIzmenu.VoziloForma;
 import Model.Vozilo;
 
@@ -14,6 +15,7 @@ public class VoziloProzor extends JFrame {
     private JButton dugmeIzmena = new JButton("Izmena");
     private JButton dugmeDodaj = new JButton("Dodaj");
     private JButton dugmeIzbrisi = new JButton("Izbrisi");
+    private JButton dugmePretraga = new JButton("Pretraga");
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
     private List<Vozilo> listaVozila;
@@ -27,19 +29,12 @@ public class VoziloProzor extends JFrame {
         initGui();
         initActions();
     }
-    public VoziloProzor(List<Vozilo> listaPronadjenihVozila) {
-        listaVozila = listaPronadjenihVozila;
-        setTitle("Prikaz vozila");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(600, 300);
-        initGui();
-        initActions();
-    }
+
     public void initGui() {
         glavniToolBar.add(dugmeDodaj);
         glavniToolBar.add(dugmeIzmena);
         glavniToolBar.add(dugmeIzbrisi);
+        glavniToolBar.add(dugmePretraga);
         add(glavniToolBar, BorderLayout.NORTH);
         String[] zaglavlja = new String[]{"Br. vozila", "Proizvodjac", "Model", "God. proizvodnje", "Br. Reg. Oznake", "Vrsta", "Vozac"};
         Object[][] sadrzaj = new Object[listaVozila.size()][zaglavlja.length];
@@ -67,14 +62,19 @@ public class VoziloProzor extends JFrame {
     }
 
     public void initActions() {
+        dugmePretraga.addActionListener(e -> {
+            PretragaVozilaForma pretragaVozilaForma = new PretragaVozilaForma();
+            VoziloProzor.this.dispose();
+            VoziloProzor.this.setVisible(false);
+        });
         dugmeIzbrisi.addActionListener(e -> {
             int red = tabelaPodataka.getSelectedRow();
             if (red == -1) {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId),listaVozila);
-                if(vozilo.getVozacId() == null) {
+                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId), listaVozila);
+                if (vozilo.getVozacId() == null) {
                     int izbor = JOptionPane.showConfirmDialog(null,
                             "Da li ste sigurni da zelite da obrisete vozilo?",
                             vozilo.getBrRegistarskeOznake() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
@@ -87,8 +87,8 @@ public class VoziloProzor extends JFrame {
                             ioException.printStackTrace();
                         }
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Nije moguce izbrisati vozilo koje je dodeljeno vozacu.","Greska",JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nije moguce izbrisati vozilo koje je dodeljeno vozacu.", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -105,7 +105,7 @@ public class VoziloProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId),listaVozila);
+                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId), listaVozila);
                 VoziloForma voziloForma = new VoziloForma(vozilo);
                 voziloForma.setVisible(true);
                 VoziloProzor.this.setVisible(false);
