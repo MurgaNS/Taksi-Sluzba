@@ -13,15 +13,15 @@ public class Vozac extends Korisnik {
     private double plata;
     private int brojClanskeKarte;
     private List<Voznja> listaVoznji;
-    private Long regOznakaVozila;
+    private Long brTaksiVozila;
 
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long regOznakaVozila) {
+    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long brTaksiVozila) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
         this.listaVoznji = listaVoznji;
-        this.regOznakaVozila = regOznakaVozila;
+        this.brTaksiVozila = brTaksiVozila;
     }
 
     public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte) {
@@ -38,7 +38,7 @@ public class Vozac extends Korisnik {
         ArrayList<Vozac> vozaci = ucitajSveVozace();
         ArrayList<Vozac> retVal = new ArrayList<>();
         for (Vozac vozac : vozaci) {
-            if (vozac.getRegOznakaVozila() == null) {
+            if (vozac.getBrTaksiVozila() == null) {
                 retVal.add(vozac);
             }
         }
@@ -135,7 +135,7 @@ public class Vozac extends Korisnik {
                ", plata=" + plata +
                ", brojClanskeKarte=" + brojClanskeKarte +
                ", listaVoznji=" + listaVoznji +
-               ", automobil=" + regOznakaVozila +
+               ", automobil=" + brTaksiVozila +
                '}';
     }
 
@@ -164,12 +164,12 @@ public class Vozac extends Korisnik {
         this.listaVoznji = listaVoznji;
     }
 
-    public Long getRegOznakaVozila() {
-        return regOznakaVozila;
+    public Long getBrTaksiVozila() {
+        return brTaksiVozila;
     }
 
-    public void setRegOznakaVozila(Long regOznakaVozila) {
-        this.regOznakaVozila = regOznakaVozila;
+    public void setBrTaksiVozila(Long brTaksiVozila) {
+        this.brTaksiVozila = brTaksiVozila;
     }
 
 }

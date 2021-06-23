@@ -3,16 +3,14 @@ package Gui.FormeZaDodavanjeIIzmenu;
 import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
 import Gui.FormeZaPrikaz.VozaciProzor;
 import Gui.FormeZaPrikaz.VoziloProzor;
-import Model.Korisnik;
-import Model.TaksiSluzba;
-import Model.Vozac;
-import Model.Vozilo;
+import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VozaciForma extends JFrame {
@@ -29,7 +27,7 @@ public class VozaciForma extends JFrame {
     private JLabel lblAdresa = new JLabel("Adresa");
     private JTextField txtAdresa = new JTextField(20);
     private JLabel lblPol = new JLabel("Pol");
-    private JTextField txtPol = new JTextField(20);
+    private JComboBox<Korisnik.Pol> cbPol = new JComboBox<Korisnik.Pol>();
     private JLabel lblBrojTelefona = new JLabel("Broj telefona");
     private JTextField txtBrojTelefona = new JTextField(20);
     private JLabel lblPlata = new JLabel("Plata");
@@ -38,9 +36,12 @@ public class VozaciForma extends JFrame {
     private JTextField txtBrojClanskeKarte = new JTextField(20);
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
+    private JLabel lblAuto = new JLabel("Automobil");
+    private JComboBox<Long> cbAutomobil = new JComboBox<Long>();
 
     private Vozac vozac;
     List<Vozac> listaVozaca = Vozac.ucitajSveVozace();
+    List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
 
     public VozaciForma(Vozac v) {
         try {
@@ -67,6 +68,11 @@ public class VozaciForma extends JFrame {
             popuniPolja();
             txtJMBG.setEnabled(false);
         }
+        cbPol.setModel(new DefaultComboBoxModel<>(Korisnik.Pol.values()));
+        for (Vozilo auto : listaVozila ) {
+            cbAutomobil.addItem(auto.getBrTaksiVozila());
+        }
+
         add(lblJMBG);
         add(txtJMBG);
         add(lblKorisnickoIme);
@@ -80,13 +86,15 @@ public class VozaciForma extends JFrame {
         add(lblAdresa);
         add(txtAdresa);
         add(lblPol);
-        add(txtPol);
+        add(cbPol);
         add(lblBrojTelefona);
         add(txtBrojTelefona);
         add(lblPlata);
         add(txtPlata);
         add(lblBrojClanskeKarte);
         add(txtBrojClanskeKarte);
+        add(lblAuto);
+        add(cbAutomobil);
         add(new JLabel());
         add(dugmeOk, "split 2");
         add(dugmePonisti);
@@ -101,57 +109,39 @@ public class VozaciForma extends JFrame {
                 String ime = txtIme.getText().trim();
                 String prezime = txtPrezime.getText().trim();
                 String adresa = txtAdresa.getText().trim();
-                String polTxt = txtPol.getSelectedText().toString();
-                Korisnik.Pol pol;
-                if (polTxt.equalsIgnoreCase("MUSKI")){
-                    pol = Korisnik.Pol.MUSKI;
-                } else {
-                    pol = Korisnik.Pol.ZENSKI;
-                }
+                Korisnik.Pol pol = Korisnik.Pol.valueOf(cbPol.getSelectedItem().toString());
                 String brojTelefona = txtBrojTelefona.getText().trim();
                 Double plata = Double.parseDouble(txtPlata.getText().trim());
+//                    Long automobil = (Long) cbAutomobil.getSelectedItem();
                 Integer brojClanskeKarte = Integer.parseInt(txtBrojClanskeKarte.getText().trim());
-
-
-
-
-
-
-//                String vozac = txtVozac.getText().trim();
-//                if (vozilo == null) {
-//                    Long vozacId;
-//                    try {
-//                        vozacId = Long.parseLong(vozac);
-//                    } catch (NumberFormatException numberFormatException) {
-//                        vozacId = null;
-//                    }
-//                    Vozac noviVozac = new Vozac()
-//                    listaVozila.add(novoVozilo);
-//                } else {
-//                    vozilo.setBrTaksiVozila(brTaksiVozila);
-//                    vozilo.setProizvodjac(proizvodjac);
-//                    vozilo.setModel(model);
-//                    vozilo.setGodProizvodnje(Integer.parseInt(godProizvodnje));
-//                    vozilo.setBrRegistarskeOznake(brRegOznake);
-//                    vozilo.setVrsta(vrsta);
-//                    try {
-//                        vozilo.setVozacId(Long.parseLong(vozac));
-//                    } catch (NumberFormatException numberFormatException) {
-//                        vozilo.setVozacId(null);
-//                    }
-//                }
-                Vozac.upisiVozaca((Vozac) listaVozaca);
+                if (vozac == null) {
+                    Vozac vozac = new Vozac(JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
+                    Vozac.upisiVozaca(vozac);
+                    JOptionPane.showMessageDialog(null, "Uspesno kreiran vozac!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    vozac.setJMBG(JMBG);
+                    vozac.setKorisnickoIme(korisnickoIme);
+                    vozac.setLozinka(lozinka);
+                    vozac.setIme(ime);
+                    vozac.setPrezime(prezime);
+                    vozac.setAdresa(adresa);
+                    vozac.setPol(pol);
+                    vozac.setBrojTelefona(brojTelefona);
+                    vozac.setPlata(plata);
+                    vozac.setBrojClanskeKarte(brojClanskeKarte);
+                    JOptionPane.showMessageDialog(null, "Izmene su sacuvane!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                }
                 VozaciForma.this.dispose();
                 VozaciForma.this.setVisible(false);
-                VozaciProzor vp = new VozaciProzor();
-                vp.setVisible(true);
+                Vozac.upisiVozaca(vozac);
             }
         });
-        dugmePonisti.addActionListener(e -> {
-            VozaciForma.this.dispose();
-            VozaciForma.this.setVisible(false);
-            VozaciProzor vp = new VozaciProzor();
-            vp.setVisible(true);
+        dugmePonisti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VozaciForma.this.dispose();
+                VozaciForma.this.setVisible(false);
+            }
         });
     }
 
@@ -165,11 +155,11 @@ public class VozaciForma extends JFrame {
         } else if (vozac == null) {
             String id = txtJMBG.getText().trim();
             List<Vozac> listaVozaca = Vozac.ucitajSveVozace();
-            Vozac postojiVozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG(vozac.getJMBG());
-            if (postojiVozac != null) {
-                poruka += "- Vozac sa unetim ID vec postoji\n";
-                ok = false;
-            }
+//            Vozac postojiVozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG(vozac.getJMBG());
+//            if (postojiVozac != null) {
+//                poruka += "- Vozac sa unetim ID vec postoji\n";
+//                ok = false;
+//            }
         }
 
 
@@ -193,10 +183,6 @@ public class VozaciForma extends JFrame {
         }
         if (txtAdresa.getText().trim().equals("")) {
             poruka += "- Morate uneti adresu\n";
-            ok = false;
-        }
-        if (txtPol.getText().trim().equals("")) {
-            poruka += "- Morate uneti pol\n";
             ok = false;
         }
         if (txtBrojTelefona.getText().trim().equals("")) {
@@ -229,10 +215,10 @@ public class VozaciForma extends JFrame {
         txtIme.setText(vozac.getIme());
         txtPrezime.setText(vozac.getPrezime());
         txtAdresa.setText(vozac.getAdresa());
-        txtPol.setText(String.valueOf(vozac.getPol()));
+        cbPol.setSelectedItem(vozac.getPol());
         txtBrojTelefona.setText(vozac.getBrojTelefona());
         txtPlata.setText(String.valueOf(vozac.getPlata()));
-        txtBrojClanskeKarte.setText(String.valueOf(vozac.getPlata()));
+        txtBrojClanskeKarte.setText(String.valueOf(vozac.getBrojClanskeKarte()));
 
 
     }

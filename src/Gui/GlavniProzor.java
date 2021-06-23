@@ -7,10 +7,13 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
     public static Korisnik prijavljeniKorisnik;
+    private JMenuItem otvoriVozacProzor = new JMenuItem("Prikazi podatke");
 
 
     public GlavniProzor(Korisnik korisnik) {
@@ -36,8 +39,15 @@ public class GlavniProzor extends JFrame {
     }
 
     public void dispecerMenuAndActions() {
+        otvoriVozacProzor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VozaciProzor vp = new VozaciProzor();
+                vp.setVisible(true);
+            }
+        });
+
         JMenuItem otvoriTaksiSluzbaProzor;
-        JMenuItem otvoriVozacProzor;
         JMenuItem otvoriVozilaProzor;
         JMenuItem otvoriVoznjaProzor;
         JMenuItem otvoriIzvestajOVozacimaProzor;
@@ -47,7 +57,6 @@ public class GlavniProzor extends JFrame {
         taksiSluzbaMenu.add(otvoriTaksiSluzbaProzor);
 
         JMenu vozaciMenu = new JMenu("Vozaci");
-        otvoriVozacProzor = new JMenuItem("Prikazi podatke");
         vozaciMenu.add(otvoriVozacProzor);
 
         JMenu vozilaMenu = new JMenu("Vozila");
