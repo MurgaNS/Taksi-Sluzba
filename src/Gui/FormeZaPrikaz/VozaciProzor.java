@@ -85,6 +85,7 @@ public class VozaciProzor extends JFrame {
                 if (izbor == JOptionPane.YES_OPTION) {
                     try {
                         vozac.setObrisan(true);
+                        // TODO: 23-Jun-21  treba ubaciti metodu sacuvajListuVozaca u fajl i proslediti listavozaca od gore
                         Vozac.upisiVozaca(vozac);
                         List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
                         try {

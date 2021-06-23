@@ -121,6 +121,26 @@ public class Vozac extends Korisnik {
         }
     }
 
+//        public static void sacuvajListuVozacaUFajl(List<Vozac> vozaci) {
+//        File file = new File("src\\Data\\korisnici.csv");
+//        try {
+//            PrintWriter writer = new PrintWriter(file);
+//            for (Vozac vozac : vozaci) {
+//                writer.write(vozac.stringToSave());
+//            }
+//            writer.flush();
+//            writer.close();
+//        } catch (FileNotFoundException exception) {
+//            System.out.println("Nepostojeći fajl");
+//        }
+//    }
+//
+//    public String stringToSave(){
+//        return  JMBG+ ',' + korisnickoIme+ ',' + lozinka+ ',' + ime+ ',' + prezime+ ',' +
+//                adresa+ ',' + pol+ ',' + brojTelefona+ ',' + obrisan+ ',' + plata+ ',' + brojClanskeKarte
+//                + ','  + brTaksiVozila + '\n';
+//    }
+
     @Override
     public String toString() {
         return "Vozac{" +

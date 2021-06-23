@@ -14,6 +14,7 @@ public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
     public static Korisnik prijavljeniKorisnik;
     private JMenuItem otvoriVozacProzor = new JMenuItem("Prikazi podatke");
+    private JMenuItem kombPretragaVozacaProzor = new JMenuItem("Kombinovana pretraga vozaca");
 
 
     public GlavniProzor(Korisnik korisnik) {
@@ -47,6 +48,14 @@ public class GlavniProzor extends JFrame {
             }
         });
 
+        kombPretragaVozacaProzor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            KombPretragaVozacaProzor pvp = new KombPretragaVozacaProzor();
+            pvp.setVisible(true);
+            }
+        });
+
         JMenuItem otvoriTaksiSluzbaProzor;
         JMenuItem otvoriVozilaProzor;
         JMenuItem otvoriVoznjaProzor;
@@ -58,6 +67,7 @@ public class GlavniProzor extends JFrame {
 
         JMenu vozaciMenu = new JMenu("Vozaci");
         vozaciMenu.add(otvoriVozacProzor);
+        vozaciMenu.add(kombPretragaVozacaProzor);
 
         JMenu vozilaMenu = new JMenu("Vozila");
         otvoriVozilaProzor = new JMenuItem("Lista svih vozila");

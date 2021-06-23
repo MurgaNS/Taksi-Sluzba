@@ -2,10 +2,9 @@ dispecer,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beogra
 dispecer,42451855821,elenas,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
 vozac,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
 vozac,55508144142,natasan,12345,Natasa,Nastasic,Grobljanska 0 Beograd,ZENSKI,064321543,false,25000.0,1002
-vozac,1112222,milan,1234,milan,milanovic,milanova1,MUSKI,12211133,false,40000.0,1122
-vozac,99911888,milan,12345,milan,milakoviccc,Milakoviceva,MUSKI,8883331,false,50000.0,3311
-vozac,909911,testtest,12345,Testiram,Testiprezime,Nemanja,ZENSKI,MUSKI,false,5000.0,1123
-vozac,123123123,izmenakorimena,izmenasifre,Nemanja,Murgaski,Nemanjina 123,MUSKI,77711233,false,50000.0,6111
+vozac,1112222,milan,1234,milan,milanovic,milanova1,MUSKI,0642211133,false,40000.0,1122
+vozac,99911888,milan,12345,milan,milakoviccc,Milakoviceva,MUSKI,06183331,false,50000.0,3311
+vozac,123123123,izmenakorimena,izmenasifre,Nemanja,Murgaski,Nemanjina 123,MUSKI,065711233,false,50000.0,6111
 musterija,123123,paojsd,]p[oajsd,poiajsd,apsiojdd,poiajisd j23,ZENSKI,123123,true
 musterija,12312312,nemanjaa,12345,Nemanja,Murgaski,Nemanjina 123,MUSKI,5412221,false
 dispecer,12312312321,dispecer,1234555,Dispecer,Dispecerovic,Dispecerova 123,MUSKI,66122,true,60000.0,2331,REKLAMACIJE
