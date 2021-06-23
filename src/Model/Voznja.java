@@ -137,6 +137,16 @@ public class Voznja {
         return voznjePutemTelefona;
     }
 
+    public static List<Voznja> ucitajPrihvaceneVoznje(Vozac vozac) {
+        List<Voznja> prihvaceneVoznje = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(StatusVoznje.PRIHVACENA)) {
+                prihvaceneVoznje.add(voznja);
+            }
+        }
+        return prihvaceneVoznje;
+    }
 
     public static NacinPorudzbine ucitajNacinPorudzbine(String nacinPorudzbine) {
         if (nacinPorudzbine.trim().equals("TELEFONOM")) {
@@ -335,12 +345,12 @@ public class Voznja {
                 String napomena;
                 try {
                     napomena = lineParts[11];
-                }catch (ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                     Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos);
                     sveVoznje.add(voznja);
                     return sveVoznje;
                 }
-                Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos,napomena);
+                Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos, napomena);
                 sveVoznje.add(voznja);
             }
             bufferedReader.close();
@@ -392,8 +402,19 @@ public class Voznja {
 
     public static void sacuvajVoznju(Voznja voznja) {
         List<Voznja> voznje = ucitajSveVoznje();
-        voznje.add(voznja);
-        upisiVoznje(voznje);
+        for (Voznja v : voznje) {
+            if (v.getId() == voznja.getId()) {
+                v.setStatusVoznje(StatusVoznje.ZAVRSENA);
+                v.setBrojPredjenihKilometara(voznja.brojPredjenihKilometara);
+                v.setTrajanjeVoznjeUMinutama(voznja.getTrajanjeVoznjeUMinutama());
+                v.setAdresaPolaska(voznja.getAdresaPolaska());
+                v.setAdresaDestinacije(voznja.getAdresaDestinacije());
+                v.setNaplacenIznos(voznja.getNaplacenIznos());
+            } else {
+                voznje.add(voznja);
+            }
+            upisiVoznje(voznje);
+        }
     }
 
     public String stringZaCuvanje() {

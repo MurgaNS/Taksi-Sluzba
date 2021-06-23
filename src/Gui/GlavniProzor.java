@@ -23,7 +23,7 @@ public class GlavniProzor extends JFrame {
         TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         prijavljeniKorisnik = korisnik;
         setTitle("Taksi sluzba " + taksiSluzba.getNaziv());
-        setSize(1000, 500);
+        setSize(500, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setJMenuBar(mainMenu);
@@ -56,7 +56,6 @@ public class GlavniProzor extends JFrame {
         JMenuItem otvoriVozilaProzor;
         JMenuItem otvoriVoznjaProzor;
         JMenuItem otvoriIzvestajOVozacimaProzor;
-        JMenuItem otvoriPretragaProzor;
 
         JMenu taksiSluzbaMenu = new JMenu("Taksi sluzba");
         otvoriTaksiSluzbaProzor = new JMenuItem("Prikazi podatke");
@@ -103,7 +102,7 @@ public class GlavniProzor extends JFrame {
 
 
     public void musterijaMenuAndActions() {
-        MigLayout mig = new MigLayout();
+        MigLayout mig = new MigLayout("wrap1");
         setLayout(mig);
         JButton narucivanjeVoznjeDugme = new JButton("Naruci voznju putem aplikacije");
         narucivanjeVoznjeDugme.setBounds(50, 100, 95, 30);
@@ -132,7 +131,7 @@ public class GlavniProzor extends JFrame {
     }
 
     public void vozacMenuAndActions() {
-        MigLayout mig = new MigLayout();
+        MigLayout mig = new MigLayout("wrap1");
         setLayout(mig);
         JButton prikazIstorijeVoznjiDugme = new JButton("Prikaz istorije sopstvenih voznji");
         prikazIstorijeVoznjiDugme.setBounds(50, 100, 95, 30);
@@ -142,12 +141,17 @@ public class GlavniProzor extends JFrame {
         prikazVoznjiPutemAplikacijeDugme.setBounds(50, 100, 95, 30);
         JButton prikazVoznjiPutemTelefonaDugme = new JButton("Prikaz voznji putem telefona");
         prikazVoznjiPutemTelefonaDugme.setBounds(50, 100, 95, 30);
+        JButton zavrsiVoznjuDugme = new JButton("Zavrsi voznju");
+        zavrsiVoznjuDugme.setBounds(50, 100, 95, 30);
         this.add(prikazIstorijeVoznjiDugme);
         this.add(prikazVoznjiPutemAplikacijeDugme);
         this.add(prikazVoznjiPutemTelefonaDugme);
+        this.add(zavrsiVoznjuDugme);
         this.add(statistikaDugme);
 
-
+        zavrsiVoznjuDugme.addActionListener(e -> {
+            ZavrsiVoznjuProzor zavrsiVoznjuProzor = new ZavrsiVoznjuProzor();
+        });
         prikazIstorijeVoznjiDugme.addActionListener(e -> {
             PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
         });
