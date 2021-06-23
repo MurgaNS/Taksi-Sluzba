@@ -115,16 +115,17 @@ public class Vozilo {
 
     public static void sacuvajVoziloUFajl(Vozilo vozilo) throws IOException {
         List<Vozilo> vozila = ucitajSvaVozila();
-        for (Vozilo v : vozila) {
-            if (v.getBrTaksiVozila().equals(vozilo.getBrTaksiVozila())) {
-                v.setBrRegistarskeOznake(vozilo.getBrRegistarskeOznake());
-                v.setProizvodjac(vozilo.getProizvodjac());
-                v.setModel(vozilo.getModel());
-                v.setVrsta(vozilo.getVrsta());
-                v.setObrisan(vozilo.isObrisan());
-                v.setVozacId(vozilo.getVozacId());
-                sacuvajListuVozilaUFajl(vozila);
-                break;
+        if (!vozila.isEmpty()) {
+            for (Vozilo v : vozila) {
+                if (v.getBrTaksiVozila().equals(vozilo.getBrTaksiVozila())) {
+                    v.setBrRegistarskeOznake(vozilo.getBrRegistarskeOznake());
+                    v.setProizvodjac(vozilo.getProizvodjac());
+                    v.setModel(vozilo.getModel());
+                    v.setVrsta(vozilo.getVrsta());
+                    v.setObrisan(vozilo.isObrisan());
+                    v.setVozacId(vozilo.getVozacId());
+                    break;
+                }
             }
         }
         vozila.add(vozilo);

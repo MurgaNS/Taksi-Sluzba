@@ -84,12 +84,7 @@ public class VoziloForma extends JFrame {
                 String godProizvodnje = txtGodProizvodnje.getText().trim();
                 String brRegOznake = txtBrRegOznake.getText().trim();
                 String vrstaTxt = txtVrsta.getSelectedItem().toString();
-                Vozilo.VrstaVozila vrsta;
-                if (vrstaTxt.equalsIgnoreCase("AUTOMOBIL")) {
-                    vrsta = Vozilo.VrstaVozila.AUTOMOBIL;
-                } else {
-                    vrsta = Vozilo.VrstaVozila.KOMBI;
-                }
+                Vozilo.VrstaVozila vrsta = Vozilo.ucitajVrstuVozila(vrstaTxt);
                 String vozac = txtVozac.getText().trim();
                 if (vozilo == null) {
                     Long vozacId;

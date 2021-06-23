@@ -33,6 +33,7 @@ public class NarucivanjeVoznjeForma extends JFrame {
     private void initGui() {
         MigLayout migLayout = new MigLayout("wrap 2");
         setLayout(migLayout);
+        txtNapomena.setText("nema");
         add(lblAdresaPolaska);
         add(txtAdresaPolaska);
         add(lblAdresaDolaska);
@@ -47,22 +48,30 @@ public class NarucivanjeVoznjeForma extends JFrame {
 
     private void initActions() {
         dugmeOk.addActionListener(e -> {
-            Date date = java.util.Calendar.getInstance().getTime();
-            String adresaPolaska = txtAdresaPolaska.getText().trim();
-            String adresaDolaska = txtAdresaDolaska.getText().trim();
-            String napomena = txtNapomena.getText().trim();
-            Voznja.StatusVoznje statusVoznje = Voznja.StatusVoznje.KREIRANA_NA_CEKANJU;
-            Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.APLIKACIJOM;
-            Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
-            Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0, napomena);
-            Voznja.sacuvajVoznju(voznja);
-            NarucivanjeVoznjeForma.this.dispose();
-            NarucivanjeVoznjeForma.this.setVisible(false);
-            JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju.", "Uspesno porucivanje", JOptionPane.INFORMATION_MESSAGE);
+            if (validacija()) {
+                Date date = java.util.Calendar.getInstance().getTime();
+                String adresaPolaska = txtAdresaPolaska.getText().trim();
+                String adresaDolaska = txtAdresaDolaska.getText().trim();
+                String napomena = txtNapomena.getText().trim();
+                Voznja.StatusVoznje statusVoznje = Voznja.StatusVoznje.KREIRANA_NA_CEKANJU;
+                Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.APLIKACIJOM;
+                Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
+                Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0, napomena);
+                Voznja.sacuvajVoznju(voznja);
+                NarucivanjeVoznjeForma.this.dispose();
+                NarucivanjeVoznjeForma.this.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju.", "Uspesno porucivanje", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null,"Validacija podataka nije uspela","Greska",JOptionPane.ERROR_MESSAGE);
+            }
         });
         dugmePonisti.addActionListener(e -> {
             NarucivanjeVoznjeForma.this.dispose();
             NarucivanjeVoznjeForma.this.setVisible(false);
         });
+    }
+
+    private boolean validacija() {
+        return !txtNapomena.getText().trim().isEmpty();
     }
 }

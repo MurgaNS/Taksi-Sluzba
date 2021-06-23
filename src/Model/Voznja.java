@@ -6,10 +6,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Voznja {
 
@@ -160,20 +157,24 @@ public class Voznja {
     public static List<Voznja> ucitajListuVoznji(Korisnik korisnik) {
         List<Voznja> voznje = ucitajSveVoznje();
         List<Voznja> listaVoznji = new ArrayList<>();
-        try {
-            for (Voznja voznja : voznje) {
-                if (korisnik instanceof Musterija) {
+        for (Voznja voznja : voznje) {
+            if (korisnik instanceof Musterija) {
+                try {
+
                     if (voznja.getMusterijaJMBG().equals(korisnik.getJMBG())) {
                         listaVoznji.add(voznja);
                     }
-                } else if (korisnik instanceof Vozac) {
+                } catch (NullPointerException ignored) {
+                }
+            } else if (korisnik instanceof Vozac) {
+                try {
                     if (voznja.getVozacJMBG().equals(korisnik.getJMBG())) {
                         listaVoznji.add(voznja);
                     }
+                } catch (NullPointerException ignored) {
                 }
-
             }
-        } catch (NullPointerException ignored) {
+
         }
         if (listaVoznji.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ne postoji lista voznji za ovog korisnika", "Greska", JOptionPane.WARNING_MESSAGE);
@@ -400,27 +401,26 @@ public class Voznja {
         upisiVoznje(listaVoznji);
     }
 
-    public static void sacuvajVoznju(Voznja voznja) {
+    public static void sacuvajVoznju(Voznja voznjaZaCuvanje) {
         List<Voznja> voznje = ucitajSveVoznje();
-        for (Voznja v : voznje) {
-            if (v.getId() == voznja.getId()) {
-                v.setStatusVoznje(StatusVoznje.ZAVRSENA);
-                v.setBrojPredjenihKilometara(voznja.brojPredjenihKilometara);
-                v.setTrajanjeVoznjeUMinutama(voznja.getTrajanjeVoznjeUMinutama());
-                v.setAdresaPolaska(voznja.getAdresaPolaska());
-                v.setAdresaDestinacije(voznja.getAdresaDestinacije());
-                v.setNaplacenIznos(voznja.getNaplacenIznos());
-            } else {
-                voznje.add(voznja);
+        if (!voznje.isEmpty()) {
+            for (Voznja v : voznje) {
+                if (v.getId() == voznjaZaCuvanje.getId()) {
+                    v.setStatusVoznje(StatusVoznje.ZAVRSENA);
+                    v.setBrojPredjenihKilometara(voznjaZaCuvanje.brojPredjenihKilometara);
+                    v.setTrajanjeVoznjeUMinutama(voznjaZaCuvanje.getTrajanjeVoznjeUMinutama());
+                    v.setNaplacenIznos(voznjaZaCuvanje.getNaplacenIznos());
+                    break;
+                }
             }
-            upisiVoznje(voznje);
         }
+        upisiVoznje(voznje);
+
     }
 
     public String stringZaCuvanje() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String strDate = dateFormat.format(datumPorudzbine);
-
         return id + "," + strDate + "," + adresaPolaska + "," +
                adresaDestinacije + "," + brojPredjenihKilometara + "," +
                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
