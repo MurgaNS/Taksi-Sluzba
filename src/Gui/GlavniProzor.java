@@ -105,7 +105,6 @@ public class GlavniProzor extends JFrame {
             PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
         });
 
-
         narucivanjeVoznjeTelefonomDugme.addActionListener(e -> {
             NarucivanjeVoznjeTelefonomForma narucivanjeVoznjeTelefonom = new NarucivanjeVoznjeTelefonomForma();
             narucivanjeVoznjeTelefonom.setVisible(true);
@@ -122,9 +121,13 @@ public class GlavniProzor extends JFrame {
         statistikaDugme.setBounds(50, 100, 95, 30);
         JButton prikazVoznjiPutemAplikacijeDugme = new JButton("Prikaz voznji putem aplikacije");
         prikazVoznjiPutemAplikacijeDugme.setBounds(50, 100, 95, 30);
+        JButton prikazVoznjiPutemTelefonaDugme = new JButton("Prikaz voznji putem telefona");
+        prikazVoznjiPutemTelefonaDugme.setBounds(50, 100, 95, 30);
         this.add(prikazIstorijeVoznjiDugme);
         this.add(prikazVoznjiPutemAplikacijeDugme);
+        this.add(prikazVoznjiPutemTelefonaDugme);
         this.add(statistikaDugme);
+
 
         prikazIstorijeVoznjiDugme.addActionListener(e -> {
             PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
@@ -132,8 +135,12 @@ public class GlavniProzor extends JFrame {
         prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> {
             PrikazVoznjiPutemAplikacijeProzor prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacijeProzor();
         });
+
         statistikaDugme.addActionListener(e -> {
             PrikazIzvestajaVoznjiProzor prikazIzvestaja = new PrikazIzvestajaVoznjiProzor();
+        });
+        prikazVoznjiPutemTelefonaDugme.addActionListener(e -> {
+            PrikazVoznjiPutemTelefonaProzor prikazVoznjiPutemTelefona = new PrikazVoznjiPutemTelefonaProzor();
         });
     }
 

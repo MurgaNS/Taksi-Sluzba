@@ -125,6 +125,19 @@ public class Voznja {
         return voznjePutemAplikacije;
     }
 
+    //
+    public static List<Voznja> voznjeNarucenePutemTelefona() {
+        List<Voznja> voznjePutemTelefona = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM)) {
+                voznjePutemTelefona.add(voznja);
+            }
+        }
+        return voznjePutemTelefona;
+    }
+
+
     public static NacinPorudzbine ucitajNacinPorudzbine(String nacinPorudzbine) {
         if (nacinPorudzbine.trim().equals("TELEFONOM")) {
             return NacinPorudzbine.TELEFONOM;

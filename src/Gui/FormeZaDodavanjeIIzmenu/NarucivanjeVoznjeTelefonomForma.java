@@ -57,5 +57,9 @@ public class NarucivanjeVoznjeTelefonomForma extends JFrame {
             NarucivanjeVoznjeTelefonomForma.this.setVisible(false);
             JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju putem telefona.");
         });
+        dugmePonisti.addActionListener(e -> {
+            NarucivanjeVoznjeTelefonomForma.this.dispose();
+            NarucivanjeVoznjeTelefonomForma.this.setVisible(false);
+        });
     }
 }
