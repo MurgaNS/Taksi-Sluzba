@@ -56,27 +56,29 @@ public class TaksiSluzbaForma extends JFrame {
 
     public void initActions() {
         dugmeOk.addActionListener(e -> {
-            long PIB = Long.parseLong(txtPIB.getText().trim());
-            String naziv = txtNaziv.getText().trim();
-            String adresa = txtAdresa.getText().trim();
-            double cenaPoKm = Double.parseDouble(txtCenaPoKilometru.getText().trim());
-            double cenaStarta = Double.parseDouble(txtCenaStarta.getText().trim());
+            if (validacija()) {
+                long PIB = Long.parseLong(txtPIB.getText().trim());
+                String naziv = txtNaziv.getText().trim();
+                String adresa = txtAdresa.getText().trim();
+                double cenaPoKm = Double.parseDouble(txtCenaPoKilometru.getText().trim());
+                double cenaStarta = Double.parseDouble(txtCenaStarta.getText().trim());
 
-            taksiSluzba.setPIB(PIB);
-            taksiSluzba.setNaziv(naziv);
-            taksiSluzba.setAdresa(adresa);
-            taksiSluzba.setCenaStarta(cenaStarta);
-            taksiSluzba.setCenaPoKilometru(cenaPoKm);
+                taksiSluzba.setPIB(PIB);
+                taksiSluzba.setNaziv(naziv);
+                taksiSluzba.setAdresa(adresa);
+                taksiSluzba.setCenaStarta(cenaStarta);
+                taksiSluzba.setCenaPoKilometru(cenaPoKm);
 
-            try {
-                TaksiSluzba.sacuvajPodatkeUFajl(taksiSluzba);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                try {
+                    TaksiSluzba.sacuvajPodatkeUFajl(taksiSluzba);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                TaksiSluzbaForma.this.dispose();
+                TaksiSluzbaForma.this.setVisible(false);
+                TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
+                tsp.setVisible(true);
             }
-            TaksiSluzbaForma.this.dispose();
-            TaksiSluzbaForma.this.setVisible(false);
-            TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
-            tsp.setVisible(true);
         });
         dugmePonisti.addActionListener(e -> {
             TaksiSluzbaForma.this.dispose();
@@ -84,6 +86,44 @@ public class TaksiSluzbaForma extends JFrame {
             TaksiSluzbaProzor tsp = new TaksiSluzbaProzor();
             tsp.setVisible(true);
         });
+    }
+
+    private Boolean validacija() {
+        boolean ok = true;
+        String poruka = "Molimo popravite sledece greske u unosu:\n";
+
+        try {
+            Double.parseDouble(txtCenaStarta.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- Cena starta voznje mora biti broj\n";
+            ok = false;
+        }
+        try {
+            Double.parseDouble(txtCenaPoKilometru.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- Cena po kilometru mora biti broj\n";
+            ok = false;
+        }
+        try {
+            Long.parseLong(txtPIB.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- PIB mora biti broj\n";
+            ok = false;
+        }
+        if (txtNaziv.getText().trim().equals("")) {
+            poruka += "- Morate uneti naziv taksi sluzbe\n";
+            ok = false;
+        }
+
+        if (txtAdresa.getText().trim().equals("")) {
+            poruka += "- Morate uneti adresu\n";
+            ok = false;
+        }
+
+        if (!ok) {
+            JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
+        }
+        return ok;
     }
 
     private void popuniPolja() {

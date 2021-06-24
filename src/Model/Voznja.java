@@ -114,15 +114,26 @@ public class Voznja {
         return listaId;
     }
 
-    public static List<Voznja> voznjeNarucenePutemAplikacije() {
+    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje,NacinPorudzbine nacinPorudzbine) {
         List<Voznja> voznjePutemAplikacije = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA_NA_CEKANJU) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM)) {
+            if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getNacinPorudzbine().equals(nacinPorudzbine)) {
                 voznjePutemAplikacije.add(voznja);
             }
         }
         return voznjePutemAplikacije;
+    }
+
+    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
+        List<Voznja> voznje = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(statusVoznje)) {
+                voznje.add(voznja);
+            }
+        }
+        return voznje;
     }
 
     public static List<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
@@ -159,16 +170,6 @@ public class Voznja {
         return voznjePutemTelefona;
     }
 
-    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
-        List<Voznja> voznje = new ArrayList<>();
-        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
-        for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(statusVoznje)) {
-                voznje.add(voznja);
-            }
-        }
-        return voznje;
-    }
 
     public static List<Voznja> ucitajVoznjuPoStatusu(StatusVoznje statusVoznje) {
         List<Voznja> voznje = new ArrayList<>();
@@ -313,20 +314,21 @@ public class Voznja {
         }
         return zarada;
     }
-    public static int brojAktivnihVozaca(BrojDana brojDana){
+
+    public static int brojAktivnihVozaca(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         List<Long> vozaciJmbg = new ArrayList<>();
-        for(Voznja voznja : voznje) {
-                if(voznja.getVozacJMBG() != null && !vozaciJmbg.contains(voznja.getVozacJMBG())
-                        &&  voznja.getDatumPorudzbine().after(vratiDatum(brojDana))){
+        for (Voznja voznja : voznje) {
+            if (voznja.getVozacJMBG() != null && !vozaciJmbg.contains(voznja.getVozacJMBG())
+                && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                 vozaciJmbg.add(voznja.getVozacJMBG());
             }
         }
         return vozaciJmbg.size();
 
 
-
     }
+
     public static double sumaUkupneZarade(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double sumaZarade = 0;
