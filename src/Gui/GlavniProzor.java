@@ -56,6 +56,7 @@ public class GlavniProzor extends JFrame {
         JMenuItem otvoriVozilaProzor;
         JMenuItem otvoriVoznjaProzor;
         JMenuItem otvoriIzvestajOVozacimaProzor;
+        JMenuItem otvoriSumiranIzvestajProzor;
 
         JMenu taksiSluzbaMenu = new JMenu("Taksi sluzba");
         otvoriTaksiSluzbaProzor = new JMenuItem("Prikazi podatke");
@@ -76,6 +77,8 @@ public class GlavniProzor extends JFrame {
         JMenu izvestajMenu = new JMenu("Izvestaji");
         otvoriIzvestajOVozacimaProzor = new JMenuItem("Prikaz izvestaja o vozacima");
         izvestajMenu.add(otvoriIzvestajOVozacimaProzor);
+        otvoriSumiranIzvestajProzor = new JMenuItem("Sumiran izvestaj");
+        izvestajMenu.add(otvoriSumiranIzvestajProzor);
 
         mainMenu.add(taksiSluzbaMenu);
         mainMenu.add(vozaciMenu);
@@ -97,6 +100,11 @@ public class GlavniProzor extends JFrame {
         });
         kombPretragaVozacaProzor.addActionListener(e -> {
             KombPretragaVozacaForma pretragaVozacaForma = new KombPretragaVozacaForma();
+        });
+
+        otvoriSumiranIzvestajProzor.addActionListener(e -> {
+            SumiranIzvestajOVozacimaProzor sumiranIzvestajOVozacimaProzor = new SumiranIzvestajOVozacimaProzor();
+            sumiranIzvestajOVozacimaProzor.setVisible(true);
         });
     }
 
@@ -161,6 +169,9 @@ public class GlavniProzor extends JFrame {
 
         statistikaDugme.addActionListener(e -> {
             PrikazIzvestajaVoznjiProzor prikazIzvestaja = new PrikazIzvestajaVoznjiProzor();
+        });
+        statistikaDugme.addActionListener(e -> {
+            SumiranPrikazIzvestajaVoznjiProzor sumiranPrikazIzvestaja = new SumiranPrikazIzvestajaVoznjiProzor();
         });
         prikazVoznjiPutemTelefonaDugme.addActionListener(e -> {
             PrikazVoznjiPutemTelefonaProzor prikazVoznjiPutemTelefona = new PrikazVoznjiPutemTelefonaProzor();

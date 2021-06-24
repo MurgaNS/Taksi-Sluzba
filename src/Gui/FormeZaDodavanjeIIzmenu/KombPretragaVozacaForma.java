@@ -17,7 +17,7 @@ public class KombPretragaVozacaForma extends JFrame {
     private JTextField txtPrezime = new JTextField(30);
     private JLabel lblPlata= new JLabel("Plata");
     private JTextField txtPlata = new JTextField(30);
-    private JLabel lblAutomobil= new JLabel("Automobil(broj reg oznake)");
+    private JLabel lblAutomobil= new JLabel("Automobil");
     private JTextField txtAutomobil = new JTextField(30);
 
     private JButton dugmeOk = new JButton("Pretrazi");
@@ -65,7 +65,7 @@ public class KombPretragaVozacaForma extends JFrame {
                 listaPronadjenihVozaca.addAll(Vozac.pretragaPoPlati(plata));
             }
 //            if (automobil != 0) {
-//                listaPronadjenihVozaca.addAll(Vozac.pretragaPoAutomobilu(automobil));
+//                listaPronadjenihVozaca.add(Vozac.pretragaPoAutomobilu(automobil));
 //            }
 
             if (listaPronadjenihVozaca != null) {

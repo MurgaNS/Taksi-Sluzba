@@ -159,6 +159,20 @@ public class Vozac extends Korisnik {
         return pronadjeniVozaci;
     }
 
+//    public static Vozac pretragaPoAutomobilu(long idAutomobila){
+//        List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
+//        List<Vozac> listaVozaca = ucitajSveVozace();
+//        Vozac pronadjeniVozac = null;
+//        for (Vozilo vozilo : vozila) {
+//            if(vozilo.getBrTaksiVozila() == idAutomobila){
+//                pronadjeniVozac = (Vozac) nadjiKorisnikaPrekoJMBG(vozilo.getVozacId());
+//                break;
+//            }
+//        }
+//        return pronadjeniVozac;
+//
+//    }
+
 
 //        public static void sacuvajListuVozacaUFajl(List<Vozac> vozaci) {
 //        File file = new File("src\\Data\\korisnici.csv");

@@ -121,6 +121,27 @@ public class Voznja {
         }
         return voznjePutemAplikacije;
     }
+//    @nemanja
+    public static List<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
+        List<Voznja> voznjePutemAplikacije = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA_NA_CEKANJU) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM)) {
+                voznjePutemAplikacije.add(voznja);
+            }
+        }
+        return voznjePutemAplikacije;
+    }
+    public static List<Voznja> sveVoznjeNarucenePutemTelefona(BrojDana brojDana) {
+        List<Voznja> voznjePutemTelefona = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM)) {
+                voznjePutemTelefona.add(voznja);
+            }
+        }
+        return voznjePutemTelefona;
+    }
 
     //
     public static List<Voznja> voznjeNarucenePutemTelefona() {
@@ -214,6 +235,24 @@ public class Voznja {
         return brKilometara / brojac;
     }
 
+//    @nem
+    public static double prosecanBrojPredjenihKilometara(BrojDana brojDana) {
+        List<Voznja> voznje = ucitajSveVoznje();
+        double prosecanBrKilometara = 0;
+        int brojac = 0;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    prosecanBrKilometara += voznja.getBrojPredjenihKilometara();
+                    brojac += 1;
+                }
+            }
+        } catch (NullPointerException ignored) {
+        }
+        return prosecanBrKilometara / brojac;
+    }
+
+
     public static double prosecnoTrajanjeVoznje(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double trajanjeVoznje = 0;
@@ -229,6 +268,23 @@ public class Voznja {
         }
         return trajanjeVoznje / brojac;
     }
+//@nem
+    public static double ukupnoProsecnoTrajanjeVoznje(BrojDana brojDana) {
+        List<Voznja> voznje = ucitajSveVoznje();
+        double trajanjeVoznje = 0;
+        int brojac = 0;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    trajanjeVoznje = trajanjeVoznje + voznja.getTrajanjeVoznjeUMinutama();
+                    brojac += 1;
+                }
+            }
+        } catch (NullPointerException ignored) {
+        }
+        return trajanjeVoznje / brojac;
+    }
+
 
     public static double ukupnaZarada(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
@@ -242,6 +298,22 @@ public class Voznja {
         } catch (NullPointerException ignored) {
         }
         return zarada;
+    }
+
+
+//@nem
+    public static double sumaUkupneZarade(BrojDana brojDana) {
+        List<Voznja> voznje = ucitajSveVoznje();
+        double sumaZarade = 0;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    sumaZarade += voznja.getNaplacenIznos();
+                }
+            }
+        } catch (NullPointerException ignored) {
+        }
+        return sumaZarade;
     }
 
     public static double prosecnoVremeBezVoznje(Vozac vozac, BrojDana brojDana) {
@@ -276,6 +348,23 @@ public class Voznja {
         return zarada / brojac;
     }
 
+//    @nem
+
+    public static double sumaProsecneZaradePoVoznji(BrojDana brojDana) {
+        List<Voznja> voznje = ucitajSveVoznje();
+        double zarada = 0;
+        int brojac = 0;
+        try {
+            for (Voznja voznja : voznje) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    zarada += voznja.getNaplacenIznos();
+                    brojac += 1;
+                }
+            }
+        } catch (NullPointerException ignored) {
+        }
+        return zarada / brojac;
+    }
     public static double ukupnoTrajanjeVoznji(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double ukupnoTrajanjeVoznji = 0;
@@ -312,6 +401,21 @@ public class Voznja {
                 }
             }
             return brVoznji;
+        } catch (NullPointerException ignored) {
+        }
+        return 0;
+    }
+//@nemanja
+    public static int ukupanBrojVoznji(BrojDana brojDana) {
+        try {
+            List<Voznja> voznje = ucitajSveVoznje();
+            int ukupanBrojVoznji = 0;
+            for (Voznja voznja : voznje) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                    ukupanBrojVoznji = ukupanBrojVoznji +1;
+                }
+            }
+            return ukupanBrojVoznji;
         } catch (NullPointerException ignored) {
         }
         return 0;
