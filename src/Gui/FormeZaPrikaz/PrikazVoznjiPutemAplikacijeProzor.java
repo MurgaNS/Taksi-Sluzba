@@ -4,6 +4,7 @@ import Gui.GlavniProzor;
 import Model.Voznja;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -20,8 +21,8 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
         listaVoznji = Voznja.voznjeNarucenePutemAplikacije();
         setTitle("Prikaz voznji putem aplikacije");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(this);
-        setSize(600, 600);
+        setLocationRelativeTo(null);
+        setSize(1000, 600);
         setVisible(true);
         initGui();
         initActions();
@@ -43,7 +44,6 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
         }
         tabelaModel = new DefaultTableModel(sadrzaj, zaglavlja);
         tabelaPodataka = new JTable(tabelaModel);
-        tabelaPodataka.setBounds(30, 40, 500, 500);
         JScrollPane scrollPane = new JScrollPane(tabelaPodataka);
         add(scrollPane);
         tabelaPodataka.setRowSelectionAllowed(true);
@@ -51,6 +51,14 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
         tabelaPodataka.setAutoCreateRowSorter(true);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for(int k=0; k<zaglavlja.length; k++) {
+            tabelaPodataka.getColumnModel().getColumn(k).setPreferredWidth(150);
+        }
+        for (int j = 0; j<tabelaPodataka.getColumnCount();j++) {
+            tabelaPodataka.getColumnModel().getColumn(j).setCellRenderer(centerRenderer);
+        }
     }
 
     public void initActions() {

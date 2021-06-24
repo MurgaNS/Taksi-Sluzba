@@ -31,6 +31,7 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
     }
 
+
     public String korisnikUString() {
         return "vozac," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
     }
@@ -128,6 +129,7 @@ public class Vozac extends Korisnik {
                 String[] lineParts = red.split(",");
                 if (lineParts[0].equals("vozac")) {
                     Vozac vozac = ucitajVozacaIzFajla(lineParts);
+                    ucitajVoziloVozacu(vozac);
                     vozaci.add(vozac);
                 }
             }
@@ -135,6 +137,15 @@ public class Vozac extends Korisnik {
             e.printStackTrace();
         }
         return vozaci;
+    }
+
+    public static Vozac ucitajVoziloVozacu(Vozac v) {
+        for (Vozilo vozilo : Vozilo.ucitajSvaVozila()) {
+            if (vozilo.getVozacId() != null && vozilo.getVozacId().equals(v.getJMBG())) {
+                v.setBrTaksiVozila(vozilo.getBrTaksiVozila());
+            }
+        }
+        return v;
     }
 
     public static List<Long> listaIdVozac() {

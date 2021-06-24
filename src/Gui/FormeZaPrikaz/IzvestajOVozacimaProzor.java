@@ -4,6 +4,7 @@ import Model.Vozac;
 import Model.Voznja;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -43,10 +44,8 @@ public class IzvestajOVozacimaProzor extends JFrame {
             sadrzaj[i][0] = vozac.getJMBG();
             sadrzaj[i][1] = vozac.getIme() + ' ' + vozac.getPrezime();
         }
-
         tabelaModel = new DefaultTableModel(sadrzaj, zaglavlja);
         tabelaPodataka = new JTable(tabelaModel);
-        tabelaPodataka.setBounds(100, 40, 1000, 500);
         JScrollPane scrollPane = new JScrollPane(tabelaPodataka);
         add(scrollPane);
         tabelaPodataka.setRowSelectionAllowed(true);
@@ -55,6 +54,15 @@ public class IzvestajOVozacimaProzor extends JFrame {
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
         tabelaPodataka.setAutoCreateRowSorter(true);
+        tabelaPodataka.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for(int k=0; k<zaglavlja.length; k++) {
+            tabelaPodataka.getColumnModel().getColumn(k).setPreferredWidth(150);
+        }
+        for (int j = 0; j<tabelaPodataka.getColumnCount();j++) {
+            tabelaPodataka.getColumnModel().getColumn(j).setCellRenderer(centerRenderer);
+        }
         setVisible(true);
     }
 

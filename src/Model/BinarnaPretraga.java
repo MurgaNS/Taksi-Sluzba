@@ -1,12 +1,17 @@
+package Model;
+
 import java.util.List;
 
 public class BinarnaPretraga {
+    public BinarnaPretraga() {
 
-    public static int find(List<Long> array, int target) {
+    }
+
+    public static int find(List<Long> array, long target) {
         return binarySearch(array, target, 0, array.size() - 1);
     }
 
-    public static int binarySearch(List<Long> array, int target, int low, int high) {
+    public static int binarySearch(List<Long> array, long target, int low, int high) {
         if (low > high) {
             return -1;
         }

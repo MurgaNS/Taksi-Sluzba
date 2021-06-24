@@ -5,6 +5,7 @@ import Gui.FormeZaDodavanjeIIzmenu.VoziloForma;
 import Model.Vozilo;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class VoziloProzor extends JFrame {
         setTitle("Prikaz vozila");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(600, 300);
+        setSize(1000, 300);
         initGui();
         initActions();
     }
@@ -36,7 +37,7 @@ public class VoziloProzor extends JFrame {
         setTitle("Prikaz vozila");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(600, 300);
+        setSize(1000, 300);
         initGui();
         initActions();
         dugmeDodaj.setVisible(false);
@@ -62,7 +63,6 @@ public class VoziloProzor extends JFrame {
         }
         tabelaModel = new DefaultTableModel(sadrzaj, zaglavlja);
         tabelaPodataka = new JTable(tabelaModel);
-        tabelaPodataka.setBounds(30, 40, 500, 500);
         JScrollPane scrollPane = new JScrollPane(tabelaPodataka);
         add(scrollPane);
         tabelaPodataka.setRowSelectionAllowed(true);
@@ -71,6 +71,14 @@ public class VoziloProzor extends JFrame {
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
         tabelaPodataka.setAutoCreateRowSorter(true);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for(int k=0; k<zaglavlja.length; k++) {
+            tabelaPodataka.getColumnModel().getColumn(k).setPreferredWidth(150);
+        }
+        for (int j = 0; j<tabelaPodataka.getColumnCount();j++) {
+            tabelaPodataka.getColumnModel().getColumn(j).setCellRenderer(centerRenderer);
+        }
         setVisible(true);
     }
 

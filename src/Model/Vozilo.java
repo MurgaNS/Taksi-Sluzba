@@ -141,6 +141,10 @@ public class Vozilo {
         return false;
     }
 
+    public static Vozilo pretraziPoId(Long id) {
+        return Vozilo.ucitajSvaVozila().get(BinarnaPretraga.find(Vozilo.listaIdVozila(), id));
+    }
+
     public static Vozilo pronadjiPoBrojuTaksiVozila(Long brTaksiVozila, List<Vozilo> listaVozila) {
         for (Vozilo vozilo :
                 listaVozila) {

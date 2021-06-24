@@ -103,12 +103,15 @@ public class Voznja {
     }
 
     public static Voznja pronadjiPoId(long id) {
+        return ucitajSveVoznje().get(BinarnaPretraga.find(ucitajVoznjaId(), id));
+    }
+
+    public static List<Long> ucitajVoznjaId() {
+        List<Long> listaId = new ArrayList<>();
         for (Voznja voznja : ucitajSveVoznje()) {
-            if (voznja.getId() == id) {
-                return voznja;
-            }
+            listaId.add(voznja.getId());
         }
-        return null;
+        return listaId;
     }
 
     public static List<Voznja> voznjeNarucenePutemAplikacije() {
@@ -156,15 +159,26 @@ public class Voznja {
         return voznjePutemTelefona;
     }
 
-    public static List<Voznja> ucitajPrihvaceneVoznje(Vozac vozac) {
-        List<Voznja> prihvaceneVoznje = new ArrayList<>();
+    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
+        List<Voznja> voznje = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
         for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(StatusVoznje.PRIHVACENA)) {
-                prihvaceneVoznje.add(voznja);
+            if (voznja.getStatusVoznje().equals(statusVoznje)) {
+                voznje.add(voznja);
             }
         }
-        return prihvaceneVoznje;
+        return voznje;
+    }
+
+    public static List<Voznja> ucitajVoznjuPoStatusu(StatusVoznje statusVoznje) {
+        List<Voznja> voznje = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(statusVoznje)) {
+                voznje.add(voznja);
+            }
+        }
+        return voznje;
     }
 
     public static NacinPorudzbine ucitajNacinPorudzbine(String nacinPorudzbine) {

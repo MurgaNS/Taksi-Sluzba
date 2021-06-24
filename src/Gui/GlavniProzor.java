@@ -8,6 +8,7 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.util.List;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
@@ -17,6 +18,7 @@ public class GlavniProzor extends JFrame {
 
 
     public GlavniProzor(Korisnik korisnik) {
+        System.out.println(korisnik);
         TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         prijavljeniKorisnik = korisnik;
         setTitle("Taksi sluzba " + taksiSluzba.getNaziv());
@@ -153,11 +155,14 @@ public class GlavniProzor extends JFrame {
         prikazVoznjiPutemTelefonaDugme.setBounds(50, 100, 95, 30);
         JButton zavrsiVoznjuDugme = new JButton("Zavrsi voznju");
         zavrsiVoznjuDugme.setBounds(50, 100, 95, 30);
+        JButton aukcijaDugme = new JButton("Aukcija");
+        zavrsiVoznjuDugme.setBounds(50, 100, 95, 30);
         this.add(prikazIstorijeVoznjiDugme);
         this.add(prikazVoznjiPutemAplikacijeDugme);
         this.add(prikazVoznjiPutemTelefonaDugme);
         this.add(zavrsiVoznjuDugme);
         this.add(statistikaDugme);
+        this.add(aukcijaDugme);
 
         zavrsiVoznjuDugme.addActionListener(e -> {
             ZavrsiVoznjuProzor zavrsiVoznjuProzor = new ZavrsiVoznjuProzor();
@@ -177,6 +182,12 @@ public class GlavniProzor extends JFrame {
         });
         prikazVoznjiPutemTelefonaDugme.addActionListener(e -> {
             PrikazVoznjiPutemTelefonaProzor prikazVoznjiPutemTelefona = new PrikazVoznjiPutemTelefonaProzor();
+        });
+        aukcijaDugme.addActionListener(e -> {
+            List<Voznja> listaVoznji = Voznja.ucitajVoznjuPoStatusu(Voznja.StatusVoznje.KREIRANA);
+            listaVoznji.addAll(Voznja.ucitajVoznjuPoStatusu(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU));
+
+            PrikazSopstvenihVoznjiProzor prikazSopstvenihVoznjiProzor = new PrikazSopstvenihVoznjiProzor(listaVoznji);
         });
     }
 

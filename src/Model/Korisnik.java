@@ -84,11 +84,13 @@ public abstract class Korisnik {
                 String brojTelefona = lineParts[9];
                 boolean obrisan = Boolean.parseBoolean(lineParts[10]);
                 switch (uloga) {
-                    case "musterija" -> korisnik = new Musterija(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+                    case "musterija" -> korisnik = new Musterija(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
                     case "vozac" -> {
                         double plata = Double.parseDouble(lineParts[11]);
                         int brClanskeKarte = Integer.parseInt(lineParts[12]);
-                        korisnik = new Vozac(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte);
+                        Long brTaksiVozila = null;
+                        korisnik = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, brTaksiVozila);
+                        Vozac.ucitajVoziloVozacu((Vozac) korisnik);
                     }
                     case "dispecer" -> {
                         double plata = Double.parseDouble(lineParts[11]);

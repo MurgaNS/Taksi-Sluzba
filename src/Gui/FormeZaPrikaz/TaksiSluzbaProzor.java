@@ -4,6 +4,7 @@ import Gui.FormeZaDodavanjeIIzmenu.TaksiSluzbaForma;
 import Model.TaksiSluzba;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
@@ -19,7 +20,7 @@ public class TaksiSluzbaProzor extends JFrame {
         setTitle("Informacije o taksi sluzbi " + taksiSluzba.getNaziv());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(700, 400);
+        setSize(1000, 400);
         initGUI();
         initActions();
     }
@@ -36,7 +37,6 @@ public class TaksiSluzbaProzor extends JFrame {
         sadrzaj[0][4] = taksiSluzba.getCenaPoKilometru();
         tabelaModel = new DefaultTableModel(sadrzaj, zaglavlja);
         tabelaPodataka = new JTable(tabelaModel);
-        tabelaPodataka.setBounds(30, 40, 200, 300);
         JScrollPane scrollPane = new JScrollPane(tabelaPodataka);
         add(scrollPane);
         tabelaPodataka.setRowSelectionAllowed(true);
@@ -44,6 +44,14 @@ public class TaksiSluzbaProzor extends JFrame {
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for(int k=0; k<zaglavlja.length; k++) {
+            tabelaPodataka.getColumnModel().getColumn(k).setPreferredWidth(150);
+        }
+        for (int j = 0; j<tabelaPodataka.getColumnCount();j++) {
+            tabelaPodataka.getColumnModel().getColumn(j).setCellRenderer(centerRenderer);
+        }
         setVisible(true);
     }
 
