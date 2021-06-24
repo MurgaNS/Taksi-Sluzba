@@ -83,16 +83,24 @@ public class VozaciProzor extends JFrame {
             } else {
                 String vozacId = tabelaModel.getValueAt(red, 0).toString();
 
-                Vozac vozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG(Long.parseLong(vozacId));
+                //Vozac vozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG(Long.parseLong(vozacId));
+                List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+                Vozac vozac = null;
+                for(Korisnik korisnik : korisnici) {
+                    if(korisnik.getJMBG() == Long.parseLong(vozacId)){
+                        vozac = (Vozac) korisnik;
+                        break;
+                    }
+                }
 
                 int izbor = JOptionPane.showConfirmDialog(null,
                         "Da li ste sigurni da zelite da obrisete vozaca?",
-                        vozac.getJMBG() + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
+                        vozacId + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
                 if (izbor == JOptionPane.YES_OPTION) {
                     try {
-                        vozac.setObrisan(true);
                         // TODO: 23-Jun-21  treba ubaciti metodu sacuvajListuVozaca u fajl i proslediti listavozaca od gore
-                        Vozac.upisiVozaca(vozac);
+                        vozac.setObrisan(true);
+                        Korisnik.upisiSveKorisnike(korisnici);
                         List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
                         try {
                             for (Vozilo vozilo : vozila) {

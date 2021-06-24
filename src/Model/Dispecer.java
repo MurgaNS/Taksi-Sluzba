@@ -24,7 +24,7 @@ public class Dispecer extends Korisnik {
     }
 
     public String korisnikUString() {
-        return "dispecer," + super.korisnikUString() + "," + plata + "," + brojTelefonskeLinije + "," + odeljenjeRada;
+        return "dispecer," + id + "," + super.korisnikUString() + "," + plata + "," + brojTelefonskeLinije + "," + odeljenjeRada;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class Vozac extends Korisnik {
 
 
     public String korisnikUString() {
-        return "vozac," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
+        return "vozac," + id + "," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
     }
 
 

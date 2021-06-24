@@ -122,6 +122,19 @@ public abstract class Korisnik {
                "," + brojTelefona +
                "," + obrisan;
     }
+    public static void upisiSveKorisnike(List<Korisnik> korisnici) {
+        File file = new File("src\\Data\\korisnici.csv");
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (Korisnik korisnik : korisnici) {
+                writer.write(korisnik.korisnikUString() + "\n");
+            }
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Nepostojeći fajl");
+        }
+    }
 
     public String getPrezime() {
         return prezime;

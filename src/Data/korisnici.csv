@@ -8,4 +8,5 @@ dispecer,7,42451855821,elenas7,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,06
 dispecer,8,42451855821,elenas8,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
 vozac,1,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
 vozac,2,123123,mitarma,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
+vozac,2,123123,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,true,25000.0,1001
 musterija,1,12312312,nemanjaa,12345,Nemanja,Murgaski,Nemanjina 123,MUSKI,5412221,false

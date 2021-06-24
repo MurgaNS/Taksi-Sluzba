@@ -129,7 +129,7 @@ public class Voznja {
         List<Voznja> sveVoznjePutemAplikacije = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA_NA_CEKANJU) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM)) {
+            if (voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM) && voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA)) {
                 sveVoznjePutemAplikacije.add(voznja);
             }
         }
@@ -140,7 +140,7 @@ public class Voznja {
         List<Voznja> voznjePutemTelefona = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM)) {
+            if (voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM) && voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA)) {
                 voznjePutemTelefona.add(voznja);
             }
         }
@@ -313,7 +313,20 @@ public class Voznja {
         }
         return zarada;
     }
+    public static int brojAktivnihVozaca(BrojDana brojDana){
+        List<Voznja> voznje = ucitajSveVoznje();
+        List<Long> vozaciJmbg = new ArrayList<>();
+        for(Voznja voznja : voznje) {
+                if(voznja.getVozacJMBG() != null && !vozaciJmbg.contains(voznja.getVozacJMBG())
+                        &&  voznja.getDatumPorudzbine().after(vratiDatum(brojDana))){
+                vozaciJmbg.add(voznja.getVozacJMBG());
+            }
+        }
+        return vozaciJmbg.size();
 
+
+
+    }
     public static double sumaUkupneZarade(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double sumaZarade = 0;

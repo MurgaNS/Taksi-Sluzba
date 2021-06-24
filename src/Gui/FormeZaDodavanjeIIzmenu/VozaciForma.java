@@ -104,6 +104,11 @@ public class VozaciForma extends JFrame {
         dugmeOk.addActionListener(e -> {
             if (validacija()) {
                 // TODO: 6/24/2021 ispravi ovaj id da se ucitava iz fajla posto sam dodao zbog binarne pretrage
+                List<Vozac> vozaci = Vozac.ucitajSveVozace();
+                long id = 1;
+                if(!vozaci.isEmpty()) {
+                    id = vozaci.get(vozaci.size() - 1).getId() + 1;
+                }
                 long JMBG = Long.parseLong(txtJMBG.getText().trim());
                 String korisnickoIme = txtKorisnickoIme.getText().trim();
                 String lozinka = txtLozinka.getText().trim();
@@ -116,8 +121,11 @@ public class VozaciForma extends JFrame {
 //                    Long automobil = (Long) cbAutomobil.getSelectedItem();
                 int brojClanskeKarte = Integer.parseInt(txtBrojClanskeKarte.getText().trim());
                 if (vozac == null) {
-                    Vozac vozac = new Vozac(0,JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
-                    Vozac.upisiVozaca(vozac);
+                    Vozac vozac = new Vozac(id,JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
+                    //Vozac.upisiVozaca(vozac);
+                    List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+                    korisnici.add(vozac);
+                    Korisnik.upisiSveKorisnike(korisnici);
                     JOptionPane.showMessageDialog(null, "Uspesno kreiran vozac!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     vozac.setJMBG(JMBG);

@@ -28,6 +28,11 @@ public class Musterija extends Korisnik {
         return id;
     }
 
+    public String korisnikUString() {
+        return "musterija," + id + "," + super.korisnikUString();
+    }
+
+
     public void setId(long id) {
         this.id = id;
     }
