@@ -187,7 +187,7 @@ public class Voznja {
         double brKilometara = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     brKilometara += voznja.getBrojPredjenihKilometara();
                 }
             }
@@ -204,7 +204,7 @@ public class Voznja {
         int brojac = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     brKilometara += voznja.getBrojPredjenihKilometara();
                     brojac += 1;
                 }
@@ -220,7 +220,7 @@ public class Voznja {
         int brojac = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     trajanjeVoznje = trajanjeVoznje + voznja.getTrajanjeVoznjeUMinutama();
                     brojac += 1;
                 }
@@ -235,7 +235,7 @@ public class Voznja {
         double zarada = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     zarada += voznja.getNaplacenIznos();
                 }
             }
@@ -250,7 +250,7 @@ public class Voznja {
         double trajanjeVoznji = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     radnoVreme += TaksiSluzba.preuzmiPodatkeOTaksiSluzbi().getRADNOVREMEUMINUTAMA();
                     trajanjeVoznji += voznja.getTrajanjeVoznjeUMinutama();
                 }
@@ -266,7 +266,7 @@ public class Voznja {
         int brojac = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     zarada += voznja.getNaplacenIznos();
                     brojac += 1;
                 }
@@ -281,7 +281,7 @@ public class Voznja {
         double ukupnoTrajanjeVoznji = 0;
         try {
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     ukupnoTrajanjeVoznji = ukupnoTrajanjeVoznji + voznja.getTrajanjeVoznjeUMinutama();
                 }
             }
@@ -307,7 +307,7 @@ public class Voznja {
             List<Voznja> voznje = ucitajSveVoznje();
             int brVoznji = 0;
             for (Voznja voznja : voznje) {
-                if (voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
+                if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
                     brVoznji = brVoznji + 1;
                 }
             }
