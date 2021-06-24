@@ -103,6 +103,11 @@ public class GlavniProzor extends JFrame {
             SumiranIzvestajOVozacimaProzor sumiranIzvestajOVozacimaProzor = new SumiranIzvestajOVozacimaProzor();
             sumiranIzvestajOVozacimaProzor.setVisible(true);
         });
+
+        otvoriVoznjaProzor.addActionListener(e -> {
+            VoznjaProzor voznjaProzor = new VoznjaProzor();
+            voznjaProzor.setVisible(true);
+        });
     }
 
 

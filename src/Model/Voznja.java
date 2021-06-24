@@ -123,14 +123,14 @@ public class Voznja {
     }
 
     public static List<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
-        List<Voznja> voznjePutemAplikacije = new ArrayList<>();
+        List<Voznja> sveVoznjePutemAplikacije = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA_NA_CEKANJU) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM)) {
-                voznjePutemAplikacije.add(voznja);
+                sveVoznjePutemAplikacije.add(voznja);
             }
         }
-        return voznjePutemAplikacije;
+        return sveVoznjePutemAplikacije;
     }
 
     public static List<Voznja> sveVoznjeNarucenePutemTelefona(BrojDana brojDana) {
