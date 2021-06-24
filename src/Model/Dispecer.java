@@ -1,6 +1,11 @@
 package Model;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Dispecer extends Korisnik {
+    private long id;
     private double plata;
     private String brojTelefonskeLinije;
     private OdeljenjeRada odeljenjeRada;
@@ -10,8 +15,9 @@ public class Dispecer extends Korisnik {
         REKLAMACIJE
     }
 
-    public Dispecer(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, String brojTelefonskeLinije, OdeljenjeRada odeljenjeRada) {
+    public Dispecer(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, String brojTelefonskeLinije, OdeljenjeRada odeljenjeRada) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+        this.id = id;
         this.plata = plata;
         this.brojTelefonskeLinije = brojTelefonskeLinije;
         this.odeljenjeRada = odeljenjeRada;
@@ -24,7 +30,11 @@ public class Dispecer extends Korisnik {
     @Override
     public String toString() {
         return "Dispecer{" +
-               "JMBG=" + JMBG +
+               "id=" + id +
+               ", plata=" + plata +
+               ", brojTelefonskeLinije='" + brojTelefonskeLinije + '\'' +
+               ", odeljenjeRada=" + odeljenjeRada +
+               ", JMBG=" + JMBG +
                ", korisnickoIme='" + korisnickoIme + '\'' +
                ", lozinka='" + lozinka + '\'' +
                ", ime='" + ime + '\'' +
@@ -33,9 +43,6 @@ public class Dispecer extends Korisnik {
                ", pol=" + pol +
                ", brojTelefona='" + brojTelefona + '\'' +
                ", obrisan=" + obrisan +
-               ", plata=" + plata +
-               ", brojTelefonskeLinije='" + brojTelefonskeLinije + '\'' +
-               ", odeljenjeRada=" + odeljenjeRada +
                '}';
     }
 
@@ -47,6 +54,65 @@ public class Dispecer extends Korisnik {
         } else {
             return null;
         }
+    }
+
+    public static Dispecer ucitajDispeceraIzFajla(String[] lineParts) {
+        long id = Long.parseLong(lineParts[1]);
+        long jmbg = Long.parseLong(lineParts[2]);
+        String korisnickoIme = lineParts[3];
+        String lozinka = lineParts[4];
+        String ime = lineParts[5];
+        String prezime = lineParts[6];
+        String adresa = lineParts[7];
+        Pol pol = ucitajPol(lineParts[8]);
+        String brojTelefona = lineParts[9];
+        boolean obrisan = Boolean.parseBoolean(lineParts[10]);
+        double plata = Double.parseDouble(lineParts[11]);
+        String brTelLinije = lineParts[12];
+        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[12]);
+        return new Dispecer(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brTelLinije, odeljenjeRada);
+
+    }
+
+    public static List<Dispecer> ucitajSveDispecere() {
+        List<Dispecer> listaDispecera = new ArrayList<>();
+        File file = new File("src\\Data\\korisnici.csv");
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] lineParts = line.split(",");
+                String uloga = lineParts[0];
+                if (uloga.equals("dispecer")) {
+                    listaDispecera.add(ucitajDispeceraIzFajla(lineParts));
+                }
+            }
+            bufferedReader.close();
+        } catch (
+                FileNotFoundException exception) {
+            System.out.println("Fajl nije pronadjen");
+        } catch (
+                IOException exception) {
+            exception.printStackTrace();
+            System.out.println("Greska pri citanju datoteke");
+        }
+        return listaDispecera;
+    }
+
+    public static List<Long> listaIdDispecer() {
+        List<Long> listaId = new ArrayList<>();
+        for (Dispecer d : ucitajSveDispecere()) {
+            listaId.add(d.getId());
+        }
+        return listaId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public double getPlata() {

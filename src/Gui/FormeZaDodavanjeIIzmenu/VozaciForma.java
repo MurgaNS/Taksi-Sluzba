@@ -27,7 +27,7 @@ public class VozaciForma extends JFrame {
     private JLabel lblAdresa = new JLabel("Adresa");
     private JTextField txtAdresa = new JTextField(20);
     private JLabel lblPol = new JLabel("Pol");
-    private JComboBox<Korisnik.Pol> cbPol = new JComboBox<Korisnik.Pol>();
+    private JComboBox<Korisnik.Pol> cbPol = new JComboBox<>();
     private JLabel lblBrojTelefona = new JLabel("Broj telefona");
     private JTextField txtBrojTelefona = new JTextField(20);
     private JLabel lblPlata = new JLabel("Plata");
@@ -37,7 +37,7 @@ public class VozaciForma extends JFrame {
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
     private JLabel lblAuto = new JLabel("Automobil");
-    private JComboBox<Long> cbAutomobil = new JComboBox<Long>();
+    private JComboBox<Long> cbAutomobil = new JComboBox<>();
 
     private Vozac vozac;
     List<Vozac> listaVozaca = Vozac.ucitajSveVozace();
@@ -47,7 +47,7 @@ public class VozaciForma extends JFrame {
         try {
             vozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG((v.getJMBG()));
 //            vozac = Vozac.pronadjiPoJMBG(v.getJMBG());
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
         if (vozac == null) {
             setTitle("Dodavanje vozaca");
@@ -103,7 +103,8 @@ public class VozaciForma extends JFrame {
     public void initActions() {
         dugmeOk.addActionListener(e -> {
             if (validacija()) {
-                Long JMBG = Long.parseLong(txtJMBG.getText().trim());
+                // TODO: 6/24/2021 ispravi ovaj id da se ucitava iz fajla posto sam dodao zbog binarne pretrage
+                long JMBG = Long.parseLong(txtJMBG.getText().trim());
                 String korisnickoIme = txtKorisnickoIme.getText().trim();
                 String lozinka = txtLozinka.getText().trim();
                 String ime = txtIme.getText().trim();
@@ -111,11 +112,11 @@ public class VozaciForma extends JFrame {
                 String adresa = txtAdresa.getText().trim();
                 Korisnik.Pol pol = Korisnik.Pol.valueOf(cbPol.getSelectedItem().toString());
                 String brojTelefona = txtBrojTelefona.getText().trim();
-                Double plata = Double.parseDouble(txtPlata.getText().trim());
+                double plata = Double.parseDouble(txtPlata.getText().trim());
 //                    Long automobil = (Long) cbAutomobil.getSelectedItem();
-                Integer brojClanskeKarte = Integer.parseInt(txtBrojClanskeKarte.getText().trim());
+                int brojClanskeKarte = Integer.parseInt(txtBrojClanskeKarte.getText().trim());
                 if (vozac == null) {
-                    Vozac vozac = new Vozac(JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
+                    Vozac vozac = new Vozac(0,JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
                     Vozac.upisiVozaca(vozac);
                     JOptionPane.showMessageDialog(null, "Uspesno kreiran vozac!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
                 } else {
@@ -136,12 +137,9 @@ public class VozaciForma extends JFrame {
                 Vozac.upisiVozaca(vozac);
             }
         });
-        dugmePonisti.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VozaciForma.this.dispose();
-                VozaciForma.this.setVisible(false);
-            }
+        dugmePonisti.addActionListener(e -> {
+            VozaciForma.this.dispose();
+            VozaciForma.this.setVisible(false);
         });
     }
 
@@ -202,7 +200,7 @@ public class VozaciForma extends JFrame {
             ok = false;
         }
 
-        if (ok == false) {
+        if (!ok) {
             JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
         }
         return ok;

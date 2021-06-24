@@ -8,24 +8,25 @@ import java.util.*;
 
 public class Vozac extends Korisnik {
 
-
-    public static Korisnik prijavljeniKorisnik = null;
+    private Long id;
     private double plata;
     private int brojClanskeKarte;
     private List<Voznja> listaVoznji;
     private Long brTaksiVozila;
 
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long brTaksiVozila) {
+    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long brTaksiVozila) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+        this.id = id;
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
         this.listaVoznji = listaVoznji;
         this.brTaksiVozila = brTaksiVozila;
     }
 
-    public Vozac(long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte) {
+    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+        this.id = id;
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
     }
@@ -34,47 +35,6 @@ public class Vozac extends Korisnik {
         return "vozac," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
     }
 
-    public static ArrayList<Vozac> vozaciBezAutomobila() {
-        ArrayList<Vozac> vozaci = ucitajSveVozace();
-        ArrayList<Vozac> retVal = new ArrayList<>();
-        for (Vozac vozac : vozaci) {
-            if (vozac.getBrTaksiVozila() == null) {
-                retVal.add(vozac);
-            }
-        }
-        return retVal;
-    }
-
-    public static ArrayList<Vozac> ucitajSveVozace() {
-        ArrayList<Vozac> vozaci = new ArrayList<>();
-        String red;
-        try {
-            BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
-            while ((red = bf.readLine()) != null) {
-                String[] tmp = red.split(",");
-                Pol pol = ucitajPol(tmp[7]);
-                if (tmp[0].equals("vozac")) {
-                    long vozacId = Long.parseLong(tmp[1]);
-                    String korisnickoIme = tmp[2];
-                    String lozinka = tmp[3];
-                    String ime = tmp[4];
-                    String prezime = tmp[5];
-                    String adresa = tmp[6];
-                    String brojTelefona = tmp[8];
-                    boolean obrisan = Boolean.parseBoolean(tmp[9]);
-                    double plata = Double.parseDouble(tmp[10]);
-                    int brClanskeKarte = Integer.parseInt(tmp[11]);
-                    Long voziloId = Vozilo.pronadjiVoziloPoVozacu(vozacId);
-                    Vozac vozac = new Vozac(vozacId, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId);
-                    vozac.setListaVoznji(ucitajListuVoznji(vozac));
-                    vozaci.add(vozac);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return vozaci;
-    }
 
     public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
         List<Voznja> listaVoznji = new ArrayList<>();
@@ -159,59 +119,71 @@ public class Vozac extends Korisnik {
         return pronadjeniVozaci;
     }
 
-//    public static Vozac pretragaPoAutomobilu(long idAutomobila){
-//        List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
-//        List<Vozac> listaVozaca = ucitajSveVozace();
-//        Vozac pronadjeniVozac = null;
-//        for (Vozilo vozilo : vozila) {
-//            if(vozilo.getBrTaksiVozila() == idAutomobila){
-//                pronadjeniVozac = (Vozac) nadjiKorisnikaPrekoJMBG(vozilo.getVozacId());
-//                break;
-//            }
-//        }
-//        return pronadjeniVozac;
-//
-//    }
+    public static List<Vozac> ucitajSveVozace() {
+        List<Vozac> vozaci = new ArrayList<>();
+        String red;
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
+            while ((red = bf.readLine()) != null) {
+                String[] lineParts = red.split(",");
+                if (lineParts[0].equals("vozac")) {
+                    Vozac vozac = ucitajVozacaIzFajla(lineParts);
+                    vozaci.add(vozac);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vozaci;
+    }
 
+    public static List<Long> listaIdVozac() {
+        List<Long> listaId = new ArrayList<>();
+        for (Vozac vozac : ucitajSveVozace()) {
+            listaId.add(vozac.getId());
+        }
+        return listaId;
+    }
 
-//        public static void sacuvajListuVozacaUFajl(List<Vozac> vozaci) {
-//        File file = new File("src\\Data\\korisnici.csv");
-//        try {
-//            PrintWriter writer = new PrintWriter(file);
-//            for (Vozac vozac : vozaci) {
-//                writer.write(vozac.stringToSave());
-//            }
-//            writer.flush();
-//            writer.close();
-//        } catch (FileNotFoundException exception) {
-//            System.out.println("Nepostojeći fajl");
-//        }
-//    }
-//
-//    public String stringToSave(){
-//        return  JMBG+ ',' + korisnickoIme+ ',' + lozinka+ ',' + ime+ ',' + prezime+ ',' +
-//                adresa+ ',' + pol+ ',' + brojTelefona+ ',' + obrisan+ ',' + plata+ ',' + brojClanskeKarte
-//                + ','  + brTaksiVozila + '\n';
-//    }
+    public static Vozac ucitajVozacaIzFajla(String[] lineParts) {
+        long id = Long.parseLong(lineParts[1]);
+        long jmbg = Long.parseLong(lineParts[2]);
+        String korisnickoIme = lineParts[3];
+        String lozinka = lineParts[4];
+        String ime = lineParts[5];
+        String prezime = lineParts[6];
+        String adresa = lineParts[7];
+        Pol pol = ucitajPol(lineParts[8]);
+        String brojTelefona = lineParts[9];
+        boolean obrisan = Boolean.parseBoolean(lineParts[10]);
+        double plata = Double.parseDouble(lineParts[11]);
+        int brClanskeKarte = Integer.parseInt(lineParts[12]);
+        Long voziloId = Vozilo.pronadjiVoziloPoVozacu(jmbg);
+        Vozac vozac = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId);
+        vozac.setListaVoznji(ucitajListuVoznji(vozac));
+        return vozac;
+    }
+
 
     @Override
     public String toString() {
         return "Vozac{" +
-               "JMBG=" + JMBG +
+               "id=" + id +
+               ", JMBG=" + JMBG +
                ", korisnickoIme='" + korisnickoIme + '\'' +
                ", lozinka='" + lozinka + '\'' +
                ", ime='" + ime + '\'' +
                ", prezime='" + prezime + '\'' +
                ", adresa='" + adresa + '\'' +
-               ", pol='" + pol + '\'' +
+               ", pol=" + pol +
                ", brojTelefona='" + brojTelefona + '\'' +
+               ", obrisan=" + obrisan +
                ", plata=" + plata +
                ", brojClanskeKarte=" + brojClanskeKarte +
                ", listaVoznji=" + listaVoznji +
-               ", automobil=" + brTaksiVozila +
+               ", brTaksiVozila=" + brTaksiVozila +
                '}';
     }
-
 
     public double getPlata() {
         return plata;
@@ -245,4 +217,11 @@ public class Vozac extends Korisnik {
         this.brTaksiVozila = brTaksiVozila;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

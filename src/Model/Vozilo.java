@@ -81,6 +81,14 @@ public class Vozilo {
         return vozila;
     }
 
+    public static List<Long> listaIdVozila() {
+        List<Long> listaId = new ArrayList<>();
+        for (Vozilo vozilo : ucitajSvaVozila()) {
+            listaId.add(vozilo.getBrTaksiVozila());
+        }
+        return listaId;
+    }
+
     public static VrstaVozila ucitajVrstuVozila(String vrstaVozila) {
         if (vrstaVozila.trim().equals("AUTOMOBIL")) {
             return Vozilo.VrstaVozila.AUTOMOBIL;
@@ -114,7 +122,7 @@ public class Vozilo {
     public static Long pronadjiVoziloPoVozacu(Long vozacId) {
         List<Vozilo> listaVozila = ucitajSvaVozila();
         for (Vozilo v : listaVozila) {
-            if (v.getVozacId()!= null && v.getVozacId().equals(vozacId)) {
+            if (v.getVozacId() != null && v.getVozacId().equals(vozacId)) {
                 return v.getBrTaksiVozila();
             }
         }

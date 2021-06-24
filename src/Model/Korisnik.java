@@ -72,19 +72,34 @@ public abstract class Korisnik {
             while ((line = bufferedReader.readLine()) != null) {
                 Korisnik korisnik = null;
                 String[] lineParts = line.split(",");
-                Pol pol = ucitajPol(lineParts[7]);
-                switch (lineParts[0]) {
-                    case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]));
-                    case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), Integer.parseInt(lineParts[11]));
+                String uloga = lineParts[0];
+                long id = Long.parseLong(lineParts[1]);
+                long jmbg = Long.parseLong(lineParts[2]);
+                String korisnickoIme = lineParts[3];
+                String lozinka = lineParts[4];
+                String ime = lineParts[5];
+                String prezime = lineParts[6];
+                String adresa = lineParts[7];
+                Pol pol = ucitajPol(lineParts[8]);
+                String brojTelefona = lineParts[9];
+                boolean obrisan = Boolean.parseBoolean(lineParts[10]);
+                switch (uloga) {
+                    case "musterija" -> korisnik = new Musterija(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+                    case "vozac" -> {
+                        double plata = Double.parseDouble(lineParts[11]);
+                        int brClanskeKarte = Integer.parseInt(lineParts[12]);
+                        korisnik = new Vozac(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte);
+                    }
                     case "dispecer" -> {
-                        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[11]);
-                        korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], Boolean.parseBoolean(lineParts[9]), Double.parseDouble(lineParts[10]), lineParts[11], odeljenjeRada);
+                        double plata = Double.parseDouble(lineParts[11]);
+                        String brTelLinije = lineParts[12];
+                        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[12]);
+                        korisnik = new Dispecer(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brTelLinije, odeljenjeRada);
                     }
                 }
                 sviKorisnici.add(korisnik);
             }
             bufferedReader.close();
-
         } catch (FileNotFoundException exception) {
             System.out.println("Fajl nije pronadjen");
         } catch (IOException exception) {
@@ -92,7 +107,6 @@ public abstract class Korisnik {
             System.out.println("Greska pri citanju datoteke");
         }
         return sviKorisnici;
-
     }
 
     public String korisnikUString() {

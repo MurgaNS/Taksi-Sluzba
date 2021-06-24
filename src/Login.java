@@ -3,7 +3,7 @@ import Model.*;
 import java.io.*;
 
 public class Login {
-    public Korisnik login(String korisnickoIme, String lozinka) {
+    public Korisnik login(String kIme, String kLozinka) {
         Korisnik korisnik = null;
         File file = new File("src\\Data\\korisnici.csv");
         try {
@@ -11,17 +11,32 @@ public class Login {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineParts = line.split(",");
-                if (korisnickoIme.equals(lineParts[2]) && lozinka.equals(lineParts[3])) {
-                    Korisnik.Pol pol = Korisnik.ucitajPol(lineParts[7]);
-                    switch (lineParts[0]) {
-                        case "musterija" -> korisnik = new Musterija(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], false);
-                        case "vozac" -> korisnik = new Vozac(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], false, Double.parseDouble(lineParts[10]), Integer.parseInt(lineParts[11]));
+                if (kIme.equals(lineParts[2]) && kLozinka.equals(lineParts[3])) {
+                    String uloga = lineParts[0];
+                    long id = Long.parseLong(lineParts[1]);
+                    long jmbg = Long.parseLong(lineParts[2]);
+                    String korisnickoIme = lineParts[3];
+                    String lozinka = lineParts[4];
+                    String ime = lineParts[5];
+                    String prezime = lineParts[6];
+                    String adresa = lineParts[7];
+                    Korisnik.Pol pol = Korisnik.ucitajPol(lineParts[8]);
+                    String brojTelefona = lineParts[9];
+                    boolean obrisan = Boolean.parseBoolean(lineParts[10]);
+                    switch (uloga) {
+                        case "musterija" -> korisnik = new Musterija(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+                        case "vozac" -> {
+                            double plata = Double.parseDouble(lineParts[11]);
+                            int brClanskeKarte = Integer.parseInt(lineParts[12]);
+                            korisnik = new Vozac(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte);
+                        }
                         case "dispecer" -> {
-                            Dispecer.OdeljenjeRada odeljenjeRada=Dispecer.ucitajOdeljenjeRada(lineParts[11]);
-                            korisnik = new Dispecer(Long.parseLong(lineParts[1]), lineParts[2], lineParts[3], lineParts[4], lineParts[5], lineParts[6], pol, lineParts[8], false, Double.parseDouble(lineParts[10]), lineParts[11], odeljenjeRada);
+                            double plata = Double.parseDouble(lineParts[11]);
+                            String brTelLinije = lineParts[12];
+                            Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[12]);
+                            korisnik = new Dispecer(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brTelLinije, odeljenjeRada);
                         }
                     }
-                    System.out.println("Uspesno ste se ulogovali");
                 }
             }
             bufferedReader.close();
@@ -32,7 +47,6 @@ public class Login {
             exception.printStackTrace();
             System.out.println("Greska pri citanju datoteke");
         }
-        Vozac.prijavljeniKorisnik = korisnik;
         return korisnik;
     }
 }

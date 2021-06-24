@@ -3,14 +3,11 @@ package Gui;
 import Gui.FormeZaDodavanjeIIzmenu.KombPretragaVozacaForma;
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeForma;
 import Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznjeTelefonomForma;
-import Gui.FormeZaDodavanjeIIzmenu.PretragaVozilaForma;
 import Gui.FormeZaPrikaz.*;
 import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
