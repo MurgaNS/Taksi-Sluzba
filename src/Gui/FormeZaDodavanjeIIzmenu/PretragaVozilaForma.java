@@ -55,16 +55,19 @@ public class PretragaVozilaForma extends JFrame {
         dugmeOk.addActionListener(e -> {
             String model = txtModel.getText().trim();
             String proizvodjac = txtProizvodjac.getText().trim();
+            String brojRegOznake = txtBrojRegOznake.getText().trim();
+
             int godinaProizvodnje = 0;
             long brojTaksiVozila = 0;
 
             try {
-                brojTaksiVozila = Long.parseLong(txtBrojTaksiVozila.getText().trim());
                 godinaProizvodnje = Integer.parseInt(txtGodinaProizvodnje.getText().trim());
             } catch (NumberFormatException ignored) {
             }
-
-            String brojRegOznake = txtBrojRegOznake.getText().trim();
+            try {
+                brojTaksiVozila = Long.parseLong(txtBrojTaksiVozila.getText().trim());
+            } catch (NumberFormatException ignored) {
+            }
             if (!model.isEmpty()) {
                 listaPronadjenihVozila.addAll(Vozilo.pretragaPoModelu(model));
             }

@@ -233,14 +233,14 @@ public class Vozilo {
     @Override
     public String toString() {
         return "Vozilo{" +
-               "brTaksiVozila='" + brTaksiVozila + '\'' +
-               ", model='" + model + '\'' +
-               ", proizvodjac='" + proizvodjac + '\'' +
-               ", godProizvodnje=" + godProizvodnje +
-               ", brRegistarskeOznake='" + brRegistarskeOznake + '\'' +
-               ", vrsta='" + vrsta + '\'' +
-               ", vozac=" + vozacId +
-               '}';
+                "brTaksiVozila='" + brTaksiVozila + '\'' +
+                ", model='" + model + '\'' +
+                ", proizvodjac='" + proizvodjac + '\'' +
+                ", godProizvodnje=" + godProizvodnje +
+                ", brRegistarskeOznake='" + brRegistarskeOznake + '\'' +
+                ", vrsta='" + vrsta + '\'' +
+                ", vozac=" + vozacId +
+                '}';
     }
 
     public String stringToSave() {
