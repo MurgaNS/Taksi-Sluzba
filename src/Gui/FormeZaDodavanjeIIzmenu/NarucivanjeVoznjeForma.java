@@ -57,8 +57,6 @@ public class NarucivanjeVoznjeForma extends JFrame {
                 NarucivanjeVoznjeForma.this.dispose();
                 NarucivanjeVoznjeForma.this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju.", "Uspesno porucivanje", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null,"Validacija podataka nije uspela","Greska",JOptionPane.ERROR_MESSAGE);
             }
         });
         dugmePonisti.addActionListener(e -> {
@@ -67,7 +65,27 @@ public class NarucivanjeVoznjeForma extends JFrame {
         });
     }
 
-    private boolean validacija() {
-        return !txtNapomena.getText().trim().isEmpty();
+    private Boolean validacija() {
+        boolean ok = true;
+        String poruka = "Molimo popravite sledece greske u unosu:\n";
+
+        if (txtNapomena.getText().trim().isEmpty()) {
+            poruka += "- Napomena ne sme biti prazna\n";
+            ok = false;
+        }
+
+        if (txtAdresaDolaska.getText().trim().isEmpty()) {
+            poruka += "- Morate uneti adresu dolaska\n";
+            ok = false;
+        }
+
+        if (txtAdresaPolaska.getText().trim().isEmpty()) {
+            poruka += "- Morate uneti adresu polaska\n";
+            ok = false;
+        }
+        if (!ok) {
+            JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
+        }
+        return ok;
     }
 }
