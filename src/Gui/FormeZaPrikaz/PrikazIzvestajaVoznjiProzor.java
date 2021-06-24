@@ -7,7 +7,6 @@ import Model.Voznja;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
 
 public class PrikazIzvestajaVoznjiProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();
@@ -47,6 +46,7 @@ public class PrikazIzvestajaVoznjiProzor extends JFrame {
         tabelaPodataka.setColumnSelectionAllowed(false);
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
+        tabelaPodataka.setAutoCreateRowSorter(true);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
     }
 

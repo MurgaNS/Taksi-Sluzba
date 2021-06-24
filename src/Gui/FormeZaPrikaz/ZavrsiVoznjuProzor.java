@@ -1,10 +1,8 @@
 package Gui.FormeZaPrikaz;
 
-import Gui.FormeZaDodavanjeIIzmenu.VoziloForma;
 import Gui.FormeZaDodavanjeIIzmenu.ZavrsiVoznjuForma;
 import Gui.GlavniProzor;
 import Model.Vozac;
-import Model.Vozilo;
 import Model.Voznja;
 
 import javax.swing.*;
@@ -53,6 +51,7 @@ public class ZavrsiVoznjuProzor extends JFrame {
         tabelaPodataka.setColumnSelectionAllowed(false);
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
+        tabelaPodataka.setAutoCreateRowSorter(true);
     }
 
     public void initActions() {

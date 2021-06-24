@@ -9,8 +9,6 @@ import javax.swing.*;
 import java.util.List;
 
 public class VoziloForma extends JFrame {
-    private JLabel lblBrTaksiVozila = new JLabel("Br. taksi vozila");
-    private JTextField txtBrTaksiVozila = new JTextField(20);
     private JLabel lblProizvodjac = new JLabel("Proizvodjac");
     private JTextField txtProizvodjac = new JTextField(20);
     private JLabel lblModel = new JLabel("Model");
@@ -51,12 +49,9 @@ public class VoziloForma extends JFrame {
     public void initGUI() {
         MigLayout layout = new MigLayout("wrap 2");
         setLayout(layout);
-        txtBrTaksiVozila.setEnabled(false);
         if (vozilo != null) {
             popuniPolja();
         }
-        add(lblBrTaksiVozila);
-        add(txtBrTaksiVozila);
         add(lblProizvodjac);
         add(txtProizvodjac);
         add(lblModel);
@@ -77,7 +72,6 @@ public class VoziloForma extends JFrame {
     public void initActions() {
         dugmeOk.addActionListener(e -> {
             if (validacija()) {
-                Long brTaksiVozila = Long.parseLong(txtBrTaksiVozila.getText().trim());
                 String proizvodjac = txtProizvodjac.getText().trim();
                 String model = txtModel.getText().trim();
                 String godProizvodnje = txtGodProizvodnje.getText().trim();
@@ -92,10 +86,10 @@ public class VoziloForma extends JFrame {
                     } catch (NumberFormatException numberFormatException) {
                         vozacId = null;
                     }
+                    Long brTaksiVozila = Vozilo.generisiIdVozila();
                     Vozilo novoVozilo = new Vozilo(brTaksiVozila, model, proizvodjac, Integer.parseInt(godProizvodnje), brRegOznake, vrsta, false, vozacId);
                     listaVozila.add(novoVozilo);
                 } else {
-                    vozilo.setBrTaksiVozila(brTaksiVozila);
                     vozilo.setProizvodjac(proizvodjac);
                     vozilo.setModel(model);
                     vozilo.setGodProizvodnje(Integer.parseInt(godProizvodnje));
@@ -137,19 +131,6 @@ public class VoziloForma extends JFrame {
         boolean ok = true;
         String poruka = "Molimo popravite sledece greske u unosu:\n";
 
-        if (txtBrTaksiVozila.getText().trim().equals("")) {
-            poruka += "- Morate uneti ID\n";
-            ok = false;
-        } else if (vozilo == null) {
-            Long id = Long.parseLong(txtBrTaksiVozila.getText().trim());
-            List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
-            Vozilo postojiVozilo = Vozilo.pronadjiPoBrojuTaksiVozila(id, listaVozila);
-            if (postojiVozilo != null) {
-                poruka += "- Vozilo sa unetim ID vec postoji\n";
-                ok = false;
-            }
-        }
-
         try {
             Double.parseDouble(txtGodProizvodnje.getText().trim());
         } catch (NumberFormatException e) {
@@ -179,7 +160,6 @@ public class VoziloForma extends JFrame {
     }
 
     private void popuniPolja() {
-        txtBrTaksiVozila.setText(String.valueOf(vozilo.getBrTaksiVozila()));
         txtProizvodjac.setText(vozilo.getProizvodjac());
         txtModel.setText(vozilo.getModel());
         txtGodProizvodnje.setText(String.valueOf(vozilo.getGodProizvodnje()));

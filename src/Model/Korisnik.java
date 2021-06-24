@@ -83,7 +83,6 @@ public abstract class Korisnik {
                 }
                 sviKorisnici.add(korisnik);
             }
-
             bufferedReader.close();
 
         } catch (FileNotFoundException exception) {

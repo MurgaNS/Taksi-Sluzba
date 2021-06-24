@@ -18,6 +18,7 @@ public class VoziloProzor extends JFrame {
     private JButton dugmePretraga = new JButton("Pretraga");
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
+    private List<Vozilo> svaVozila = Vozilo.ucitajSvaVozila();
     private List<Vozilo> listaVozila;
 
     public VoziloProzor() {
@@ -28,6 +29,17 @@ public class VoziloProzor extends JFrame {
         setSize(600, 300);
         initGui();
         initActions();
+    }
+
+    public VoziloProzor(List<Vozilo> lista) {
+        listaVozila = lista;
+        setTitle("Prikaz vozila");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setSize(600, 300);
+        initGui();
+        initActions();
+        dugmeDodaj.setVisible(false);
     }
 
     public void initGui() {
@@ -58,6 +70,7 @@ public class VoziloProzor extends JFrame {
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
+        tabelaPodataka.setAutoCreateRowSorter(true);
         setVisible(true);
     }
 
@@ -73,7 +86,7 @@ public class VoziloProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId), listaVozila);
+                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId), svaVozila);
                 if (vozilo.getVozacId() == null) {
                     int izbor = JOptionPane.showConfirmDialog(null,
                             "Da li ste sigurni da zelite da obrisete vozilo?",
@@ -81,11 +94,7 @@ public class VoziloProzor extends JFrame {
                     if (izbor == JOptionPane.YES_OPTION) {
                         vozilo.setObrisan(true);
                         tabelaModel.removeRow(red);
-                        try {
-                            Vozilo.sacuvajVoziloUFajl(vozilo);
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
+                        Vozilo.sacuvajListuVozilaUFajl(svaVozila);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Nije moguce izbrisati vozilo koje je dodeljeno vozacu.", "Greska", JOptionPane.ERROR_MESSAGE);

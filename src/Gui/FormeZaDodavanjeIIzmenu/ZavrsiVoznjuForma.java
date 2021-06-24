@@ -1,7 +1,5 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
-
-import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
 import Gui.FormeZaPrikaz.ZavrsiVoznjuProzor;
 import Model.TaksiSluzba;
 import Model.Voznja;

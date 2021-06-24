@@ -1,6 +1,5 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
-import Gui.FormeZaPrikaz.PrikazPretrageVozilaProzor;
 import Gui.FormeZaPrikaz.VoziloProzor;
 import Model.Vozilo;
 import net.miginfocom.swing.MigLayout;
@@ -82,7 +81,7 @@ public class PretragaVozilaForma extends JFrame {
                 listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuTaksiVozila(brojTaksiVozila));
             }
             if (!listaPronadjenihVozila.isEmpty()) {
-                PrikazPretrageVozilaProzor prikazPretrageVozilaProzor = new PrikazPretrageVozilaProzor(listaPronadjenihVozila);
+                VoziloProzor prikazPretrageVozilaProzor = new VoziloProzor(listaPronadjenihVozila);
                 prikazPretrageVozilaProzor.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Ne postoje rezultati pretrage.", "Greska!", JOptionPane.ERROR_MESSAGE);

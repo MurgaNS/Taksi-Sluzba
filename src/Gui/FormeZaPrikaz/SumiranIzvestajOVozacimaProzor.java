@@ -55,6 +55,7 @@ public class SumiranIzvestajOVozacimaProzor extends JFrame {
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
+        tabelaPodataka.setAutoCreateRowSorter(true);
         setVisible(true);
     }
     public void initActions() {

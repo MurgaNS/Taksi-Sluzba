@@ -121,7 +121,7 @@ public class Voznja {
         }
         return voznjePutemAplikacije;
     }
-//    @nemanja
+
     public static List<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
         List<Voznja> voznjePutemAplikacije = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
@@ -132,6 +132,7 @@ public class Voznja {
         }
         return voznjePutemAplikacije;
     }
+
     public static List<Voznja> sveVoznjeNarucenePutemTelefona(BrojDana brojDana) {
         List<Voznja> voznjePutemTelefona = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
@@ -235,7 +236,6 @@ public class Voznja {
         return brKilometara / brojac;
     }
 
-//    @nem
     public static double prosecanBrojPredjenihKilometara(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double prosecanBrKilometara = 0;
@@ -268,7 +268,7 @@ public class Voznja {
         }
         return trajanjeVoznje / brojac;
     }
-//@nem
+
     public static double ukupnoProsecnoTrajanjeVoznje(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double trajanjeVoznje = 0;
@@ -300,8 +300,6 @@ public class Voznja {
         return zarada;
     }
 
-
-//@nem
     public static double sumaUkupneZarade(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double sumaZarade = 0;
@@ -348,8 +346,6 @@ public class Voznja {
         return zarada / brojac;
     }
 
-//    @nem
-
     public static double sumaProsecneZaradePoVoznji(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
@@ -365,6 +361,7 @@ public class Voznja {
         }
         return zarada / brojac;
     }
+
     public static double ukupnoTrajanjeVoznji(Vozac vozac, BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
         double ukupnoTrajanjeVoznji = 0;
@@ -405,14 +402,14 @@ public class Voznja {
         }
         return 0;
     }
-//@nemanja
+
     public static int ukupanBrojVoznji(BrojDana brojDana) {
         try {
             List<Voznja> voznje = ucitajSveVoznje();
             int ukupanBrojVoznji = 0;
             for (Voznja voznja : voznje) {
                 if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
-                    ukupanBrojVoznji = ukupanBrojVoznji +1;
+                    ukupanBrojVoznji = ukupanBrojVoznji + 1;
                 }
             }
             return ukupanBrojVoznji;

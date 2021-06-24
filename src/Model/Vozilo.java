@@ -143,7 +143,7 @@ public class Vozilo {
         return null;
     }
 
-    public static void sacuvajVoziloUFajl(Vozilo vozilo) throws IOException {
+    public static void sacuvajNovoVoziloUFajl(Vozilo vozilo) throws IOException {
         List<Vozilo> vozila = ucitajSvaVozila();
         vozila.add(vozilo);
         sacuvajListuVozilaUFajl(vozila);

@@ -1,16 +1,12 @@
 package Gui.FormeZaPrikaz;
 
 import Gui.FormeZaDodavanjeIIzmenu.VozaciForma;
-import Gui.FormeZaDodavanjeIIzmenu.VoziloForma;
 import Model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VozaciProzor extends JFrame {
@@ -74,6 +70,7 @@ public class VozaciProzor extends JFrame {
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
+        tabelaPodataka.setAutoCreateRowSorter(true);
         setVisible(true);
     }
 
@@ -101,7 +98,7 @@ public class VozaciProzor extends JFrame {
                             for (Vozilo vozilo : vozila) {
                                 if (vozilo.getVozacId().equals(vozac.getJMBG())) {
                                     vozilo.setVozacId(null);
-                                    Vozilo.sacuvajVoziloUFajl(vozilo);
+                                    Vozilo.sacuvajNovoVoziloUFajl(vozilo);
 
                                 }
                             }

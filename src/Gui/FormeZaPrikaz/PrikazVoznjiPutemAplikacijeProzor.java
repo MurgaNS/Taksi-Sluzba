@@ -50,6 +50,7 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
         tabelaPodataka.setColumnSelectionAllowed(false);
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
+        tabelaPodataka.setAutoCreateRowSorter(true);
     }
 
     public void initActions() {

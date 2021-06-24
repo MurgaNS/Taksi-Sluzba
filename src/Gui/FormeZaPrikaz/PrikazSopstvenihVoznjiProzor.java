@@ -45,6 +45,7 @@ public class PrikazSopstvenihVoznjiProzor extends JFrame {
         add(scrollPane);
         tabelaPodataka.setRowSelectionAllowed(false);
         tabelaPodataka.setColumnSelectionAllowed(false);
+        tabelaPodataka.setAutoCreateRowSorter(true);
         setVisible(true);
     }
 

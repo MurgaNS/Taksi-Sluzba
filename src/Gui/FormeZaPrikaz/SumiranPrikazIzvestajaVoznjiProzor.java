@@ -48,6 +48,7 @@ public class SumiranPrikazIzvestajaVoznjiProzor extends JFrame {
         tabelaPodataka.setColumnSelectionAllowed(false);
         tabelaPodataka.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaPodataka.setDefaultEditor(Object.class, null);
+        tabelaPodataka.setAutoCreateRowSorter(true);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
     }
 
