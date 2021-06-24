@@ -47,7 +47,7 @@ public class NarucivanjeVoznjeTelefonomForma extends JFrame {
             Voznja.StatusVoznje statusVoznje = Voznja.StatusVoznje.KREIRANA;
             Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.TELEFONOM;
             Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
-            Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0);
+            Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0,"null");
             Voznja.sacuvajVoznju(voznja);
             NarucivanjeVoznjeTelefonomForma.this.dispose();
             NarucivanjeVoznjeTelefonomForma.this.setVisible(false);
