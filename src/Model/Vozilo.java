@@ -60,22 +60,25 @@ public class Vozilo {
 
     public static long generisiIdVozila() {
         List<Vozilo> vozila = ucitajSvaVozila();
+        if (vozila.isEmpty()) {
+            return 1;
+        }
         return vozila.get(vozila.size() - 1).getBrTaksiVozila() + 1;
     }
 
     public static List<Vozilo> ucitajSvaVozila() {
-        List<Vozilo> automobili = new ArrayList<>();
+        List<Vozilo> vozila = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/vozila.csv"));
             while ((red = bf.readLine()) != null) {
                 Vozilo vozilo = voziloDTO(red);
-                automobili.add(vozilo);
+                vozila.add(vozilo);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return automobili;
+        return vozila;
     }
 
     public static VrstaVozila ucitajVrstuVozila(String vrstaVozila) {
@@ -93,14 +96,41 @@ public class Vozilo {
         Vozilo vozilo;
         Long brTaksiVozila = Long.parseLong(lineParts[0]);
         VrstaVozila vrsta = ucitajVrstuVozila(lineParts[5]);
-
+        String model = lineParts[1];
+        String proizvodjac = lineParts[2];
+        int godinaProizvodnje = Integer.parseInt(lineParts[3]);
+        String brRegOznake = lineParts[4];
+        Boolean obrisan = Boolean.parseBoolean(lineParts[6]);
         try {
-            vozilo = new Vozilo(brTaksiVozila, lineParts[1], lineParts[2], Integer.parseInt(lineParts[3]), lineParts[4], vrsta, Boolean.parseBoolean(lineParts[6]), Long.parseLong(lineParts[7]));
+            Long vozacId = Long.parseLong(lineParts[7]);
+            vozilo = new Vozilo(brTaksiVozila, model, proizvodjac, godinaProizvodnje, brRegOznake, vrsta, obrisan, vozacId);
         } catch (NumberFormatException e) {
-            vozilo = new Vozilo(brTaksiVozila, lineParts[1], lineParts[2], Integer.parseInt(lineParts[3]), lineParts[4], vrsta, Boolean.parseBoolean(lineParts[6]));
+            vozilo = new Vozilo(brTaksiVozila, model, proizvodjac, godinaProizvodnje, brRegOznake, vrsta, obrisan);
 
         }
         return vozilo;
+    }
+
+    public static Long pronadjiVoziloPoVozacu(Long vozacId) {
+        List<Vozilo> listaVozila = ucitajSvaVozila();
+        for (Vozilo v : listaVozila) {
+            if (v.getVozacId()!= null && v.getVozacId().equals(vozacId)) {
+                return v.getBrTaksiVozila();
+            }
+        }
+        return null;
+    }
+
+    public static boolean voziloKojeSeMenjaOdgovaraVozacu(Vozac vozac, Vozilo vozilo) {
+        List<Vozilo> listaVozila = ucitajSvaVozila();
+        for (Vozilo v : listaVozila) {
+            if (v.getVozacId() != null) {
+                if (v.getBrTaksiVozila().equals(vozilo.getBrTaksiVozila()) && v.getVozacId().equals(vozac.getJMBG())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static Vozilo pronadjiPoBrojuTaksiVozila(Long brTaksiVozila, List<Vozilo> listaVozila) {

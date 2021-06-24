@@ -47,7 +47,6 @@ public class Vozac extends Korisnik {
 
     public static ArrayList<Vozac> ucitajSveVozace() {
         ArrayList<Vozac> vozaci = new ArrayList<>();
-        List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
@@ -55,21 +54,18 @@ public class Vozac extends Korisnik {
                 String[] tmp = red.split(",");
                 Pol pol = ucitajPol(tmp[7]);
                 if (tmp[0].equals("vozac")) {
-                    Vozilo vozilo = null;
-                    Long voziloId;
-                    try {
-                        if (Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(tmp[11]), listaVozila) != null) {
-                            vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(tmp[11]), listaVozila);
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        break;
-                    }
-                    try {
-                        voziloId = vozilo.getBrTaksiVozila();
-                    } catch (NullPointerException e) {
-                        voziloId = null;
-                    }
-                    Vozac vozac = new Vozac(Long.parseLong(tmp[1]), tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], pol, tmp[8], Boolean.parseBoolean(tmp[9]), Double.parseDouble(tmp[10]), Integer.parseInt(tmp[11]), null, voziloId);
+                    long vozacId = Long.parseLong(tmp[1]);
+                    String korisnickoIme = tmp[2];
+                    String lozinka = tmp[3];
+                    String ime = tmp[4];
+                    String prezime = tmp[5];
+                    String adresa = tmp[6];
+                    String brojTelefona = tmp[8];
+                    boolean obrisan = Boolean.parseBoolean(tmp[9]);
+                    double plata = Double.parseDouble(tmp[10]);
+                    int brClanskeKarte = Integer.parseInt(tmp[11]);
+                    Long voziloId = Vozilo.pronadjiVoziloPoVozacu(vozacId);
+                    Vozac vozac = new Vozac(vozacId, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId);
                     vozac.setListaVoznji(ucitajListuVoznji(vozac));
                     vozaci.add(vozac);
                 }
@@ -105,15 +101,24 @@ public class Vozac extends Korisnik {
         return listaVoznji;
     }
 
+    public static Vozac pronadjiPoJmbg(Long vozacId) {
+        List<Vozac> vozaci = ucitajSveVozace();
+        for (Vozac vozac : vozaci) {
+            if (vozac.getJMBG().equals(vozacId)) {
+                return vozac;
+            }
+        }
+        return null;
+    }
 
     public static void upisiVozaca(Vozac vozac) {
         File file = new File("src\\Data\\korisnici.csv");
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
             writer.append("\nvozac," + vozac.getJMBG() + "," + vozac.getKorisnickoIme() + ","
-                    + vozac.getLozinka() + "," + vozac.getIme() + "," +
-                    vozac.getPrezime() + "," + vozac.getAdresa() + "," + vozac.getPol() + "," + vozac.getBrojTelefona() + "," +
-                    vozac.getPlata() + "," + vozac.getBrojClanskeKarte());
+                          + vozac.getLozinka() + "," + vozac.getIme() + "," +
+                          vozac.getPrezime() + "," + vozac.getAdresa() + "," + vozac.getPol() + "," + vozac.getBrojTelefona() + "," +
+                          vozac.getPlata() + "," + vozac.getBrojClanskeKarte());
             writer.flush();
             writer.close();
         } catch (FileNotFoundException exception) {

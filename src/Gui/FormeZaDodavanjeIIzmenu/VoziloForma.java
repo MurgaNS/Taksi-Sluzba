@@ -1,6 +1,7 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
 import Gui.FormeZaPrikaz.VoziloProzor;
+import Model.Vozac;
 import Model.Vozilo;
 import net.miginfocom.swing.MigLayout;
 
@@ -21,7 +22,7 @@ public class VoziloForma extends JFrame {
     private JLabel lblVrsta = new JLabel("Vrsta");
     String[] vrste = {"AUTOMOBIL", "KOMBI"};
     private JComboBox<String> txtVrsta = new JComboBox<>(vrste);
-    private JLabel lblVozac = new JLabel("VozacId");
+    private JLabel lblVozac = new JLabel("JMBG Vozaca");
     private JTextField txtVozac = new JTextField(20);
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
@@ -48,13 +49,11 @@ public class VoziloForma extends JFrame {
     }
 
     public void initGUI() {
-        MigLayout layout = new MigLayout("wrap 2", "[][]", "[][][][][][]20[]");
+        MigLayout layout = new MigLayout("wrap 2");
         setLayout(layout);
         txtBrTaksiVozila.setEnabled(false);
         if (vozilo != null) {
             popuniPolja();
-        } else {
-            txtBrTaksiVozila.setText(String.valueOf(Vozilo.generisiIdVozila()));
         }
         add(lblBrTaksiVozila);
         add(txtBrTaksiVozila);
@@ -103,7 +102,18 @@ public class VoziloForma extends JFrame {
                     vozilo.setBrRegistarskeOznake(brRegOznake);
                     vozilo.setVrsta(vrsta);
                     try {
-                        vozilo.setVozacId(Long.parseLong(vozac));
+                        Vozac v = Vozac.pronadjiPoJmbg(Long.parseLong(vozac));
+                        if (v != null) {
+                            boolean vozacPostoji = !v.isObrisan();
+                            boolean vozacNemaVozilo = v.getBrTaksiVozila() == null;
+                            boolean vozacImaVoziloKojeSeMenja = Vozilo.voziloKojeSeMenjaOdgovaraVozacu(v, vozilo);
+                            if (vozacPostoji && (vozacNemaVozilo || vozacImaVoziloKojeSeMenja)) {
+                                vozilo.setVozacId(Long.parseLong(vozac));
+                            } else {
+                                vozilo.setVozacId(null);
+                                JOptionPane.showMessageDialog(null, "Vozac ne postoji ili vec ima dodeljen automobil", "Greska", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
                     } catch (NumberFormatException numberFormatException) {
                         vozilo.setVozacId(null);
                     }
