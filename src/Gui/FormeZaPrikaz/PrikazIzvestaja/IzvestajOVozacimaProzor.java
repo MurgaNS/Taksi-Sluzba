@@ -77,7 +77,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
         String prosecnaZaradaPoVoznji = df.format(Voznja.prosecnaZaradaPoVoznji(vozac, brojDana));
         String ukupnaZarada = df.format(Voznja.ukupnaZarada(vozac, brojDana));
         tabelaModel.setValueAt(vozac.getId(), i, 0);
-        tabelaModel.setValueAt(vozac.getIme() + vozac.getPrezime(), i, 1);
+        tabelaModel.setValueAt(vozac.getIme() + " " + vozac.getPrezime(), i, 1);
         tabelaModel.setValueAt(brZavrsenihVoznji, i, 2);
         tabelaModel.setValueAt(brPredjenihKilometara, i, 3);
         tabelaModel.setValueAt(ukTrajanjeVoznji, i, 4);
