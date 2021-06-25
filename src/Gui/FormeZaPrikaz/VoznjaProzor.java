@@ -1,16 +1,21 @@
 package Gui.FormeZaPrikaz;
 
+import Gui.FormeZaPrikaz.PrikazVoznji.DodeliVozacu;
+import Model.TaksiSluzba;
 import Model.Vozac;
 import Model.Voznja;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class VoznjaProzor extends JFrame {
 
     private JToolBar glavniToolBar = new JToolBar();
+    private JButton dodeliBtn = new JButton("Dodeli vožnju");
     private final List<Voznja> listaVoznji;
     private JTable tabelaPodataka;
     private DefaultTableModel tabelaModel;
@@ -23,11 +28,12 @@ public class VoznjaProzor extends JFrame {
         setLocationRelativeTo(null);
         setSize(700, 400);
         initGUI();
-//        initActions();
+        initActions();
     }
 
     public void initGUI() {
         add(glavniToolBar, BorderLayout.NORTH);
+        glavniToolBar.add(dodeliBtn);
         String[] zaglavlja = new String[]{"ID voznje", "Datum porudzbine", "Adresa polaska", "Adresa destinacije", "Broj predjenih kilometara", "Trajanje voznje u minutama", "Status voznje", "Nacin porudzbine", "Vozac JMBG", "Musterija JMBG","Naplacen iznos"};
         Object[][] sadrzaj = new Object[listaVoznji.size()][zaglavlja.length];
         for (int i = 0; i < listaVoznji.size(); i++) {
@@ -55,5 +61,25 @@ public class VoznjaProzor extends JFrame {
         tabelaPodataka.setDefaultEditor(Object.class, null);
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
         setVisible(true);
+    }
+
+    private void initActions(){
+        dodeliBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Voznja voznja = izabranaVoznja();
+
+                DodeliVozacu dodeliVozacu = new DodeliVozacu(voznja);
+                dodeliVozacu.setVisible(true);
+            }
+        });
+    }
+
+
+    public Voznja izabranaVoznja(){
+        int red = tabelaPodataka.getSelectedRow();
+        long idVoznje = (long) tabelaPodataka.getValueAt(red, 0);
+        Voznja voznja = Voznja.pronadjiPoId(idVoznje);
+        return voznja;
     }
 }
