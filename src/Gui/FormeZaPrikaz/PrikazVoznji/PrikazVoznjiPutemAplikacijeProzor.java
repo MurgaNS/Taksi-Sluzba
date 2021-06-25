@@ -22,7 +22,7 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
         if (!listaVoznji.isEmpty()) {
             setTitle("Prikaz voznji putem aplikacije");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLocationRelativeTo(null);
+            setLocation(400,250);
             setSize(1000, 600);
             setVisible(true);
             initGui();

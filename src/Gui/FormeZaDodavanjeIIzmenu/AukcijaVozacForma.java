@@ -20,7 +20,7 @@ public class AukcijaVozacForma extends JFrame {
         setVisible(true);
         setTitle("Aukcija vozac");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(400,250);
         setSize(600, 300);
         initGUI();
         initActions();

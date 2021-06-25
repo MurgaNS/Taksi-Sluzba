@@ -19,7 +19,7 @@ public class TaksiSluzbaProzor extends JFrame {
         this.taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         setTitle("Informacije o taksi sluzbi " + taksiSluzba.getNaziv());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(400,250);
         setSize(1000, 400);
         initGUI();
         initActions();

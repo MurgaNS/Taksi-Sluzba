@@ -153,6 +153,8 @@ public class GlavniProzor extends JFrame {
         prikazIstorijeVoznjiDugme.setBounds(50, 100, 95, 30);
         JButton statistikaDugme = new JButton("Statistika voznji");
         statistikaDugme.setBounds(50, 100, 95, 30);
+        JButton sumiranaStatistikaDugme = new JButton("Sumirana statistika voznji");
+        statistikaDugme.setBounds(50, 100, 95, 30);
         JButton prikazVoznjiPutemAplikacijeDugme = new JButton("Prikaz voznji putem aplikacije");
         prikazVoznjiPutemAplikacijeDugme.setBounds(50, 100, 95, 30);
         JButton prikazVoznjiPutemTelefonaDugme = new JButton("Prikaz voznji putem telefona");
@@ -166,6 +168,7 @@ public class GlavniProzor extends JFrame {
         this.add(prikazVoznjiPutemTelefonaDugme);
         this.add(zavrsiVoznjuDugme);
         this.add(statistikaDugme);
+        this.add(sumiranaStatistikaDugme);
         this.add(aukcijaDugme);
 
         zavrsiVoznjuDugme.addActionListener(e -> new ZavrsiVoznjuProzor());
@@ -173,7 +176,7 @@ public class GlavniProzor extends JFrame {
         prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> new PrikazVoznjiPutemAplikacijeProzor());
         statistikaDugme.addActionListener(e -> new PrikazIzvestajaVoznjiProzor());
         prikazVoznjiPutemTelefonaDugme.addActionListener(e -> new PrikazVoznjiPutemTelefonaProzor());
-        statistikaDugme.addActionListener(e -> {
+        sumiranaStatistikaDugme.addActionListener(e -> {
             SumiranPrikazIzvestajaVoznjiProzor sumiranPrikazIzvestaja = new SumiranPrikazIzvestajaVoznjiProzor();
         });
         aukcijaDugme.addActionListener(e -> {

@@ -25,7 +25,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
         listaVozaca = Vozac.ucitajSveVozace();
         setTitle("Prikaz izvestaja");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(400,250);
         setSize(1000, 500);
         initGui();
         initActions();

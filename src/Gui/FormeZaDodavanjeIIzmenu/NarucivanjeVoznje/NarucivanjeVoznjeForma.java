@@ -22,7 +22,7 @@ public class NarucivanjeVoznjeForma extends JFrame {
     public NarucivanjeVoznjeForma() {
         setTitle("Narucivanje voznje");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(this);
+        setLocation(400,250);
         setSize(600, 300);
         initGui();
         initActions();

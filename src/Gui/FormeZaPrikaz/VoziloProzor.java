@@ -26,7 +26,7 @@ public class VoziloProzor extends JFrame {
         if (!listaVozila.isEmpty()) {
             setTitle("Prikaz vozila");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLocationRelativeTo(null);
+            setLocation(400,250);
             setSize(1000, 300);
             initGui();
             initActions();
@@ -40,7 +40,7 @@ public class VoziloProzor extends JFrame {
         if (!listaVozila.isEmpty()) {
             setTitle("Prikaz vozila");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLocationRelativeTo(null);
+            setLocation(400,250);
             setSize(1000, 300);
             initGui();
             initActions();
@@ -56,7 +56,7 @@ public class VoziloProzor extends JFrame {
         glavniToolBar.add(dugmeIzbrisi);
         glavniToolBar.add(dugmePretraga);
         add(glavniToolBar, BorderLayout.NORTH);
-        String[] zaglavlja = new String[]{"Br. vozila", "Proizvodjac", "Model", "God. proizvodnje", "Br. Reg. Oznake", "Vrsta", "Vozac"};
+        String[] zaglavlja = new String[]{"Br. vozila", "Proizvodjac", "Model", "God. proizvodnje", "Br. Reg. Oznake", "Vrsta", "Vozac JMBG"};
         Object[][] sadrzaj = new Object[listaVozila.size()][zaglavlja.length];
         for (int i = 0; i < listaVozila.size(); i++) {
             Vozilo vozilo = listaVozila.get(i);

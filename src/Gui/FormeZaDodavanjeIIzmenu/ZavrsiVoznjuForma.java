@@ -22,7 +22,7 @@ public class ZavrsiVoznjuForma extends JFrame {
         voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId));
         setTitle("Zavrsavanje voznje");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(400,250);
         setSize(600, 300);
         initGUI();
         initActions();

@@ -23,7 +23,7 @@ public class ZavrsiVoznjuProzor extends JFrame {
         if (!listaVoznji.isEmpty()) {
             setTitle("Prikaz prihvacenih voznji");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLocationRelativeTo(null);
+            setLocation(400,250);
             setSize(1000, 600);
             setVisible(true);
             initGui();

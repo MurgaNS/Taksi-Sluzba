@@ -39,7 +39,7 @@ public class VoziloForma extends JFrame {
             setTitle("Izmena podataka za vozilo " + vozilo.getBrRegistarskeOznake() + " " + vozilo.getProizvodjac() + " " + vozilo.getModel());
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(400,250);
         initGUI();
         setSize(600, 300);
         initActions();
