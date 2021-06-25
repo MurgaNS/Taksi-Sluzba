@@ -1,4 +1,4 @@
-package Gui.FormeZaDodavanjeIIzmenu;
+package Gui.FormeZaDodavanjeIIzmenu.NarucivanjeVoznje;
 
 import Gui.GlavniProzor;
 import Model.Korisnik;

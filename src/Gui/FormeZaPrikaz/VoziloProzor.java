@@ -1,6 +1,6 @@
 package Gui.FormeZaPrikaz;
 
-import Gui.FormeZaDodavanjeIIzmenu.PretragaVozilaForma;
+import Gui.FormeZaDodavanjeIIzmenu.Pretraga.PretragaVozilaForma;
 import Gui.FormeZaDodavanjeIIzmenu.VoziloForma;
 import Model.Vozilo;
 
@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 
 public class VoziloProzor extends JFrame {

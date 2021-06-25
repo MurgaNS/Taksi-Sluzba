@@ -1,9 +1,7 @@
-package Gui.FormeZaDodavanjeIIzmenu;
+package Gui.FormeZaDodavanjeIIzmenu.Pretraga;
 
 import Gui.FormeZaPrikaz.VozaciProzor;
-import Gui.FormeZaPrikaz.VoziloProzor;
 import Model.Vozac;
-import Model.Vozilo;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

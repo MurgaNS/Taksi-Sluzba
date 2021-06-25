@@ -1,4 +1,4 @@
-package Gui.FormeZaPrikaz;
+package Gui.FormeZaPrikaz.PrikazVoznji;
 
 import Gui.FormeZaDodavanjeIIzmenu.AukcijaVozacForma;
 import Gui.GlavniProzor;

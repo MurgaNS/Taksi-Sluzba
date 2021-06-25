@@ -1,4 +1,4 @@
-package Gui.FormeZaPrikaz;
+package Gui.FormeZaPrikaz.PrikazIzvestaja;
 
 import Model.Vozac;
 import Model.Voznja;

@@ -1,4 +1,4 @@
-package Gui.FormeZaDodavanjeIIzmenu;
+package Gui.FormeZaDodavanjeIIzmenu.Pretraga;
 
 import Gui.FormeZaPrikaz.VoziloProzor;
 import Model.Vozilo;
