@@ -200,17 +200,6 @@ public class Vozilo {
         return pronadjenaVozila;
     }
 
-    public static List<Vozilo> pretragaPoBrojuTaksiVozila(Long brTaksiVozila) {
-        List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
-        List<Vozilo> pronadjenaVozila = new ArrayList<>();
-        for (Vozilo vozilo : listaVozila) {
-            if (vozilo.getBrTaksiVozila().equals(brTaksiVozila)) {
-                pronadjenaVozila.add(vozilo);
-            }
-        }
-        return pronadjenaVozila;
-    }
-
     public static void sacuvajNovoVoziloUFajl(Vozilo vozilo) throws IOException {
         List<Vozilo> vozila = ucitajSvaVozila();
         vozila.add(vozilo);
