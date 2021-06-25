@@ -128,6 +128,13 @@ public class VozaciForma extends JFrame {
                     Korisnik.upisiSveKorisnike(korisnici);
                     JOptionPane.showMessageDialog(null, "Uspesno kreiran vozac!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+                    for(Korisnik korisnik : korisnici){
+                        if(korisnik.getJMBG() == JMBG){
+                            vozac = (Vozac) korisnik;
+                            break;
+                        }
+                    }
                     vozac.setJMBG(JMBG);
                     vozac.setKorisnickoIme(korisnickoIme);
                     vozac.setLozinka(lozinka);
@@ -138,7 +145,9 @@ public class VozaciForma extends JFrame {
                     vozac.setBrojTelefona(brojTelefona);
                     vozac.setPlata(plata);
                     vozac.setBrojClanskeKarte(brojClanskeKarte);
+                    Korisnik.upisiSveKorisnike(korisnici);
                     JOptionPane.showMessageDialog(null, "Izmene su sacuvane!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+
                 }
                 VozaciForma.this.dispose();
                 VozaciForma.this.setVisible(false);
