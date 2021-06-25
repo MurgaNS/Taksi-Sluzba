@@ -15,7 +15,7 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
@@ -181,7 +181,8 @@ public class GlavniProzor extends JFrame {
         });
         aukcijaDugme.addActionListener(e -> {
             List<Voznja> listaVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA);
-            listaVoznji.addAll(Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU));
+            List<Voznja> listaKreiranaNaCekanjuVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU);
+            listaVoznji.addAll(listaKreiranaNaCekanjuVoznji);
             new PrikazSopstvenihVoznjiProzor(listaVoznji);
         });
     }

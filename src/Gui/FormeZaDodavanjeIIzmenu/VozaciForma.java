@@ -41,7 +41,7 @@ public class VozaciForma extends JFrame {
 
     private Vozac vozac;
     List<Vozac> listaVozaca = Vozac.ucitajSveVozace();
-    List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
+    List<Vozilo> listaVozila = (List<Vozilo>) Vozilo.ucitajSvaVozila();
 
     public VozaciForma(Vozac v) {
         try {

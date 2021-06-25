@@ -1,8 +1,8 @@
 package Model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import StrukturePodataka.List;
 
 public class Vozilo {
 
@@ -42,7 +42,7 @@ public class Vozilo {
     }
 
     public static List<Vozilo> ucitajNeobrisanaVozila() {
-        List<Vozilo> vozila = new ArrayList<>();
+        List<Vozilo> vozila = new List<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/vozila.csv"));
@@ -67,7 +67,7 @@ public class Vozilo {
     }
 
     public static List<Long> listaIdVozila(List<Vozilo> listaVozila) {
-        List<Long> listaId = new ArrayList<>();
+        List<Long> listaId = new List<>();
         for (Vozilo vozilo : listaVozila) {
             listaId.add(vozilo.getBrTaksiVozila());
         }
@@ -79,7 +79,7 @@ public class Vozilo {
     }
 
     public static List<Vozilo> ucitajSvaVozila() {
-        List<Vozilo> vozila = new ArrayList<>();
+        List<Vozilo> vozila = new List<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/vozila.csv"));
@@ -158,7 +158,7 @@ public class Vozilo {
 
     public static List<Vozilo> pretragaPoModelu(String model) {
         List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
-        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        List<Vozilo> pronadjenaVozila = new List<>();
         for (Vozilo vozilo : listaVozila) {
             if (vozilo.getModel().toLowerCase().contains(model.toLowerCase())) {
                 pronadjenaVozila.add(vozilo);
@@ -169,7 +169,7 @@ public class Vozilo {
 
     public static List<Vozilo> pretragaPoProizvodjacu(String proizvodjac) {
         List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
-        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        List<Vozilo> pronadjenaVozila = new List<>();
         for (Vozilo vozilo : listaVozila) {
             if (vozilo.getProizvodjac().toLowerCase().contains(proizvodjac.toLowerCase())) {
                 pronadjenaVozila.add(vozilo);
@@ -180,7 +180,7 @@ public class Vozilo {
 
     public static List<Vozilo> pretragaPoGodiniProizvodnje(int godinaProizvodnje) {
         List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
-        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        List<Vozilo> pronadjenaVozila = new List<>();
         for (Vozilo vozilo : listaVozila) {
             if (vozilo.getGodProizvodnje() == godinaProizvodnje) {
                 pronadjenaVozila.add(vozilo);
@@ -191,7 +191,7 @@ public class Vozilo {
 
     public static List<Vozilo> pretragaPoBrojuRegOznake(String brojRegOznake) {
         List<Vozilo> listaVozila = ucitajNeobrisanaVozila();
-        List<Vozilo> pronadjenaVozila = new ArrayList<>();
+        List<Vozilo> pronadjenaVozila = new List<>();
         for (Vozilo vozilo : listaVozila) {
             if (vozilo.getBrRegistarskeOznake().toLowerCase().contains(brojRegOznake.toLowerCase())) {
                 pronadjenaVozila.add(vozilo);

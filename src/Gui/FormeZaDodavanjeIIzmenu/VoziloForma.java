@@ -6,7 +6,7 @@ import Model.Vozilo;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class VoziloForma extends JFrame {
     private JLabel lblProizvodjac = new JLabel("Proizvodjac");

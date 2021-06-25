@@ -6,7 +6,10 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+
+import StrukturePodataka.List;
 
 public class Voznja {
 
@@ -107,7 +110,7 @@ public class Voznja {
     }
 
     public static List<Long> ucitajVoznjaId() {
-        List<Long> listaId = new ArrayList<>();
+        List<Long> listaId = new List<>();
         for (Voznja voznja : ucitajSveVoznje()) {
             listaId.add(voznja.getId());
         }
@@ -115,7 +118,7 @@ public class Voznja {
     }
 
     public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine) {
-        List<Voznja> voznjePutemAplikacije = new ArrayList<>();
+        List<Voznja> voznjePutemAplikacije = new List<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getNacinPorudzbine().equals(nacinPorudzbine)) {
@@ -126,7 +129,7 @@ public class Voznja {
     }
 
     public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
-        List<Voznja> voznje = new ArrayList<>();
+        List<Voznja> voznje = new List<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getVozacJMBG().equals(vozac.getJMBG())) {
@@ -137,7 +140,7 @@ public class Voznja {
     }
 
     public static List<Voznja> ucitajVoznju(StatusVoznje statusVoznje) {
-        List<Voznja> voznje = new ArrayList<>();
+        List<Voznja> voznje = new List<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(statusVoznje)) {
@@ -148,7 +151,7 @@ public class Voznja {
     }
 
     public static List<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
-        List<Voznja> sveVoznjePutemAplikacije = new ArrayList<>();
+        List<Voznja> sveVoznjePutemAplikacije = new List<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM) && voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA)) {
@@ -159,7 +162,7 @@ public class Voznja {
     }
 
     public static List<Voznja> sveVoznjeNarucenePutemTelefona(BrojDana brojDana) {
-        List<Voznja> voznjePutemTelefona = new ArrayList<>();
+        List<Voznja> voznjePutemTelefona = new List<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM) && voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA)) {
@@ -183,7 +186,7 @@ public class Voznja {
 
     public static List<Voznja> ucitajVoznje(Korisnik korisnik) {
         List<Voznja> voznje = ucitajSveVoznje();
-        List<Voznja> listaVoznji = new ArrayList<>();
+        List<Voznja> listaVoznji = new List<>();
         for (Voznja voznja : voznje) {
             if (korisnik instanceof Musterija) {
                 try {
@@ -304,7 +307,7 @@ public class Voznja {
 
     public static int brojAktivnihVozaca(BrojDana brojDana) {
         List<Voznja> voznje = ucitajSveVoznje();
-        List<Long> vozaciJmbg = new ArrayList<>();
+        List<Long> vozaciJmbg = new List<>();
         for (Voznja voznja : voznje) {
             if (voznja.getVozacJMBG() != null && !vozaciJmbg.contains(voznja.getVozacJMBG())
                 && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
@@ -461,7 +464,7 @@ public class Voznja {
     }
 
     public static List<Voznja> ucitajSveVoznje() {
-        List<Voznja> sveVoznje = new ArrayList<>();
+        List<Voznja> sveVoznje = new List<>();
         File file = new File("src//Data//voznje.csv");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));

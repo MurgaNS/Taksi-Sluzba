@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.List;
+import StrukturePodataka.List;
 
 public class BinarnaPretraga {
     public static int find(List<Long> array, long target) {

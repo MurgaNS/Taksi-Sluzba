@@ -6,7 +6,7 @@ import Model.Voznja;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class ZavrsiVoznjuForma extends JFrame {
     private JLabel lblBrojPredjenihKilometara = new JLabel("Broj predjenih kilometara");

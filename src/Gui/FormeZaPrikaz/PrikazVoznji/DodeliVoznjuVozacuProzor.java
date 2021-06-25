@@ -1,7 +1,6 @@
 package Gui.FormeZaPrikaz.PrikazVoznji;
 
 import Model.Musterija;
-import Model.Vozac;
 import Model.Vozilo;
 import Model.Voznja;
 import net.miginfocom.swing.MigLayout;
@@ -9,8 +8,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class DodeliVoznjuVozacuProzor extends JFrame {
     private JLabel lblAdresaPolaska = new JLabel("Adresa polaska");
@@ -61,16 +59,13 @@ public class DodeliVoznjuVozacuProzor extends JFrame {
     }
 
     private void initActions(Voznja voznja){
-        dugmeOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                long idVozaca = Long.parseLong(comboBoxVozaci.getSelectedItem().toString());
-                voznja.setVozacJMBG(idVozaca);
-                voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
-                Voznja.izmeniStatusVoznje(voznja);
-                setVisible(false);
+        dugmeOk.addActionListener(e -> {
+            long idVozaca = Long.parseLong(comboBoxVozaci.getSelectedItem().toString());
+            voznja.setVozacJMBG(idVozaca);
+            voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
+            Voznja.izmeniStatusVoznje(voznja);
+            setVisible(false);
 
-            }
         });
     }
 }

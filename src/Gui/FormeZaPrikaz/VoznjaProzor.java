@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class VoznjaProzor extends JFrame {
 
@@ -62,16 +62,13 @@ public class VoznjaProzor extends JFrame {
     }
 
     private void initActions(){
-        dodeliBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Voznja voznja = izabranaVoznja();
-                if (voznja.getStatusVoznje() == Voznja.StatusVoznje.KREIRANA || voznja.getStatusVoznje() == Voznja.StatusVoznje.ODBIJENA) {
-                    DodeliVoznjuVozacuProzor dodeliVoznjuVozacuProzor = new DodeliVoznjuVozacuProzor(voznja);
-                    dodeliVoznjuVozacuProzor.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ne možete dodeliti ovu vožnju.", "Greška", JOptionPane.ERROR_MESSAGE);
-                }
+        dodeliBtn.addActionListener(e -> {
+            Voznja voznja = izabranaVoznja();
+            if (voznja.getStatusVoznje() == Voznja.StatusVoznje.KREIRANA || voznja.getStatusVoznje() == Voznja.StatusVoznje.ODBIJENA) {
+                DodeliVoznjuVozacuProzor dodeliVoznjuVozacuProzor = new DodeliVoznjuVozacuProzor(voznja);
+                dodeliVoznjuVozacuProzor.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ne možete dodeliti ovu vožnju.", "Greška", JOptionPane.ERROR_MESSAGE);
             }
         });
     }

@@ -53,16 +53,9 @@ public class List<E> implements Iterable<E> {
         length++;
     }
 
-    public void addAll(int index, List<E> newElements) {
-        this.rangeCheck(index, length);
-        if (this.length == myArray.length) {
-            increaseSize();
-        }
-        for (int i = length; i > index; i--) {
-            myArray[i] = myArray[i - 1];
-        }
-        for (int i = 0; i < newElements.length; i++) {
-            myArray[length + 1] = newElements.get(i);
+    public void addAll(List<E> newElements) {
+        for(E element: newElements){
+            add(0,element);
         }
     }
 
@@ -119,7 +112,7 @@ public class List<E> implements Iterable<E> {
     //Iterator interface is implemented
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
+        return new Iterator<>() {
             int nextIndex = -1;
 
             @Override

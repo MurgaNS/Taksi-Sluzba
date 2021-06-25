@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class VoziloProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();

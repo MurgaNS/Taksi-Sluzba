@@ -101,7 +101,7 @@ public class VozaciProzor extends JFrame {
                         // TODO: 23-Jun-21  treba ubaciti metodu sacuvajListuVozaca u fajl i proslediti listavozaca od gore
                         vozac.setObrisan(true);
                         Korisnik.upisiSveKorisnike(korisnici);
-                        List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
+                        List<Vozilo> vozila = (List<Vozilo>) Vozilo.ucitajNeobrisanaVozila();
                         try {
                             for (Vozilo vozilo : vozila) {
                                 if (vozilo.getVozacId().equals(vozac.getJMBG())) {
