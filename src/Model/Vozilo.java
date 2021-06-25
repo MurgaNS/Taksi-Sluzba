@@ -66,16 +66,16 @@ public class Vozilo {
         return vozila.get(vozila.size() - 1).getBrTaksiVozila() + 1;
     }
 
-    public static List<Long> listaIdVozila() {
+    public static List<Long> listaIdVozila(List<Vozilo> listaVozila) {
         List<Long> listaId = new ArrayList<>();
-        for (Vozilo vozilo : ucitajSvaVozila()) {
+        for (Vozilo vozilo : listaVozila) {
             listaId.add(vozilo.getBrTaksiVozila());
         }
         return listaId;
     }
 
-    public static Vozilo pretraziPoId(Long id) {
-        return Vozilo.ucitajSvaVozila().get(BinarnaPretraga.find(Vozilo.listaIdVozila(), id));
+    public static Vozilo pretraziPoId(List<Vozilo> listaVozila, Long id) {
+        return listaVozila.get(BinarnaPretraga.find(listaIdVozila(listaVozila), id));
     }
 
     public static List<Vozilo> ucitajSvaVozila() {

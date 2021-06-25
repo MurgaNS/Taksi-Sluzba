@@ -101,7 +101,8 @@ public class VoziloProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId), svaVozila);
+//                binarna pretraga
+                Vozilo vozilo = Vozilo.pretraziPoId(svaVozila,Long.parseLong(voziloId));
                 if (vozilo.getVozacId() == null) {
                     int izbor = JOptionPane.showConfirmDialog(null,
                             "Da li ste sigurni da zelite da obrisete vozilo?",
@@ -129,7 +130,8 @@ public class VoziloProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voziloId = tabelaModel.getValueAt(red, 0).toString();
-                Vozilo vozilo = Vozilo.pronadjiPoBrojuTaksiVozila(Long.parseLong(voziloId), listaVozila);
+//                binarna pretraga
+                Vozilo vozilo = Vozilo.pretraziPoId(svaVozila,Long.parseLong(voziloId));
                 VoziloForma voziloForma = new VoziloForma(vozilo);
                 voziloForma.setVisible(true);
                 VoziloProzor.this.setVisible(false);
