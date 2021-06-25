@@ -1,7 +1,6 @@
 package Model;
 
 
-import javax.swing.*;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -9,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import BinarnaPretraga.BinarnaPretraga;
 import StrukturePodataka.List;
 
 public class Voznja {

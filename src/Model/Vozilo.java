@@ -2,6 +2,7 @@ package Model;
 
 import java.io.*;
 
+import BinarnaPretraga.BinarnaPretraga;
 import StrukturePodataka.List;
 
 public class Vozilo {

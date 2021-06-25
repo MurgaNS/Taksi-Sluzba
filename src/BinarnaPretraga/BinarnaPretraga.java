@@ -1,4 +1,4 @@
-package Model;
+package BinarnaPretraga;
 
 import StrukturePodataka.List;
 
