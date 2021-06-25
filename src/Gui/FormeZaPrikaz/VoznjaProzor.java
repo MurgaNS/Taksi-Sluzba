@@ -1,8 +1,6 @@
 package Gui.FormeZaPrikaz;
 
-import Gui.FormeZaPrikaz.PrikazVoznji.DodeliVozacu;
-import Model.TaksiSluzba;
-import Model.Vozac;
+import Gui.FormeZaPrikaz.PrikazVoznji.DodeliVoznjuVozacuProzor;
 import Model.Voznja;
 
 import javax.swing.*;
@@ -69,8 +67,8 @@ public class VoznjaProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Voznja voznja = izabranaVoznja();
 
-                DodeliVozacu dodeliVozacu = new DodeliVozacu(voznja);
-                dodeliVozacu.setVisible(true);
+                DodeliVoznjuVozacuProzor dodeliVoznjuVozacuProzor = new DodeliVoznjuVozacuProzor(voznja);
+                dodeliVoznjuVozacuProzor.setVisible(true);
             }
         });
     }

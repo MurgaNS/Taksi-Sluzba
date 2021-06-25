@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DodeliVozacu extends JFrame {
+public class DodeliVoznjuVozacuProzor extends JFrame {
     private JLabel lblAdresaPolaska = new JLabel("Adresa polaska");
     private JTextField txtAdresaPolaska = new JTextField(30);
     private JLabel lblAdresaDolaska = new JLabel("Adresa dolaska");
@@ -24,7 +24,7 @@ public class DodeliVozacu extends JFrame {
     private JButton dugmeOk = new JButton("Dodeli");
 
 
-    public DodeliVozacu(Voznja voznja){
+    public DodeliVoznjuVozacuProzor(Voznja voznja){
         setTitle("Dodeli voznju");
         setSize(400, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -55,10 +55,8 @@ public class DodeliVozacu extends JFrame {
         for (Vozilo vozilo : vozila){
             if(vozilo.getVozacId() != null){
                 comboBoxVozaci.addItem(String.valueOf(vozilo.getVozacId()));
-                System.out.println(vozilo.getVozacId());
             }
         }
-
     }
 
     private void initActions(Voznja voznja){
