@@ -1,12 +1,12 @@
-dispecer,1,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,false,30000.0,011110110,PRIJEM_VOZNJE
-dispecer,2,42451855821,elenas2,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,3,42451855821,elenas3,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,4,42451855821,elenas4,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,5,42451855821,elenas5,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,6,42451855821,elenas6,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,7,42451855821,elenas7,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,8,42451855821,elenas8,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
+dispecer,1,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,false,30000.0,011110110,null
+dispecer,2,42451855821,elenas2,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
+dispecer,3,42451855821,elenas3,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
+dispecer,4,42451855821,elenas4,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
+dispecer,5,42451855821,elenas5,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
+dispecer,6,42451855821,elenas6,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
+dispecer,7,42451855821,elenas7,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
+dispecer,8,42451855821,elenas8,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,null
 vozac,1,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
-vozac,2,123123,mitarma,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
-vozac,2,123123,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,true,25000.0,1001
+vozac,2,123123331,mitarma,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,true,25000.0,1001
+vozac,3,123123,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,true,25000.0,1001
 musterija,1,12312312,nemanjaa,12345,Nemanja,Murgaski,Nemanjina 123,MUSKI,5412221,false

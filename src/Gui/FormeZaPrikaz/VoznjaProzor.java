@@ -66,9 +66,12 @@ public class VoznjaProzor extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Voznja voznja = izabranaVoznja();
-
-                DodeliVoznjuVozacuProzor dodeliVoznjuVozacuProzor = new DodeliVoznjuVozacuProzor(voznja);
-                dodeliVoznjuVozacuProzor.setVisible(true);
+                if (voznja.getStatusVoznje() == Voznja.StatusVoznje.KREIRANA || voznja.getStatusVoznje() == Voznja.StatusVoznje.ODBIJENA) {
+                    DodeliVoznjuVozacuProzor dodeliVoznjuVozacuProzor = new DodeliVoznjuVozacuProzor(voznja);
+                    dodeliVoznjuVozacuProzor.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Ne možete dodeliti ovu vožnju.", "Greška", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

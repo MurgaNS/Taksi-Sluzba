@@ -57,6 +57,7 @@ public class DodeliVoznjuVozacuProzor extends JFrame {
                 comboBoxVozaci.addItem(String.valueOf(vozilo.getVozacId()));
             }
         }
+        add(dugmeOk);
     }
 
     private void initActions(Voznja voznja){
@@ -67,6 +68,8 @@ public class DodeliVoznjuVozacuProzor extends JFrame {
                 voznja.setVozacJMBG(idVozaca);
                 voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
                 Voznja.izmeniStatusVoznje(voznja);
+                setVisible(false);
+
             }
         });
     }
