@@ -55,8 +55,8 @@ public class SumiranPrikazIzvestajaVoznjiProzor extends JFrame {
     public void initActions() {
         dugmeIzvestajJedanDan.addActionListener(e -> {
             tabelaModel.setValueAt(Voznja.ukupanBrojVoznji(Voznja.BrojDana.JEDAN_DAN), 0, 0);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.JEDAN_DAN), 0, 1);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.JEDAN_DAN), 0, 2);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.JEDAN_DAN).size(), 0, 1);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.JEDAN_DAN).size(), 0, 2);
 //            uraditi ukupan broj aktivnih vozaca
             tabelaModel.setValueAt(Voznja.ukupnoProsecnoTrajanjeVoznje(Voznja.BrojDana.JEDAN_DAN), 0, 4);
             tabelaModel.setValueAt(Voznja.prosecanBrojPredjenihKilometara(Voznja.BrojDana.JEDAN_DAN), 0, 5);
@@ -68,8 +68,8 @@ public class SumiranPrikazIzvestajaVoznjiProzor extends JFrame {
         });
         dugmeIzvestajSedamDana.addActionListener(e -> {
             tabelaModel.setValueAt(Voznja.ukupanBrojVoznji(Voznja.BrojDana.SEDAM_DANA), 0, 0);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.SEDAM_DANA), 0, 1);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.SEDAM_DANA), 0, 2);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.SEDAM_DANA).size(), 0, 1);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.SEDAM_DANA).size(), 0, 2);
 //            uraditi ukupan broj aktivnih vozaca
             tabelaModel.setValueAt(Voznja.ukupnoProsecnoTrajanjeVoznje(Voznja.BrojDana.SEDAM_DANA), 0, 4);
             tabelaModel.setValueAt(Voznja.prosecanBrojPredjenihKilometara(Voznja.BrojDana.SEDAM_DANA), 0, 5);
@@ -81,8 +81,8 @@ public class SumiranPrikazIzvestajaVoznjiProzor extends JFrame {
         });
         dugmeIzvestajMesecDana.addActionListener(e -> {
             tabelaModel.setValueAt(Voznja.ukupanBrojVoznji(Voznja.BrojDana.MESEC_DANA), 0, 0);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.MESEC_DANA), 0, 1);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.MESEC_DANA), 0, 2);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.MESEC_DANA).size(), 0, 1);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.MESEC_DANA).size(), 0, 2);
 //            uraditi ukupan broj aktivnih vozaca
             tabelaModel.setValueAt(Voznja.ukupnoProsecnoTrajanjeVoznje(Voznja.BrojDana.MESEC_DANA), 0, 4);
             tabelaModel.setValueAt(Voznja.prosecanBrojPredjenihKilometara(Voznja.BrojDana.MESEC_DANA), 0, 5);
@@ -94,8 +94,8 @@ public class SumiranPrikazIzvestajaVoznjiProzor extends JFrame {
         });
         dugmeIzvestajGodinuDana.addActionListener(e -> {
             tabelaModel.setValueAt(Voznja.ukupanBrojVoznji(Voznja.BrojDana.GODINU_DANA), 0, 0);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.GODINU_DANA), 0, 1);
-            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.GODINU_DANA), 0, 2);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemAplikacije(Voznja.BrojDana.GODINU_DANA).size(), 0, 1);
+            tabelaModel.setValueAt(Voznja.sveVoznjeNarucenePutemTelefona(Voznja.BrojDana.GODINU_DANA).size(), 0, 2);
 //            uraditi ukupan broj aktivnih vozaca
             tabelaModel.setValueAt(Voznja.ukupnoProsecnoTrajanjeVoznje(Voznja.BrojDana.GODINU_DANA), 0, 4);
             tabelaModel.setValueAt(Voznja.prosecanBrojPredjenihKilometara(Voznja.BrojDana.GODINU_DANA), 0, 5);
