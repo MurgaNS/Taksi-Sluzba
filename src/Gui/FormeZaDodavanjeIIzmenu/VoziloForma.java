@@ -6,6 +6,7 @@ import Model.Vozilo;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+
 import StrukturePodataka.List;
 
 public class VoziloForma extends JFrame {
@@ -16,7 +17,7 @@ public class VoziloForma extends JFrame {
     private JLabel lblGodProizvodnje = new JLabel("God. proizvodnje");
     private JTextField txtGodProizvodnje = new JTextField(20);
     private JLabel lblBrRegOznake = new JLabel("Br. reg. oznake");
-    private JTextField txtBrRegOznake = new JTextField(20);
+    private JFormattedTextField txtBrRegOznake = new JFormattedTextField("XX-000-000");
     private JLabel lblVrsta = new JLabel("Vrsta");
     String[] vrste = {"AUTOMOBIL", "KOMBI"};
     private JComboBox<String> txtVrsta = new JComboBox<>(vrste);
@@ -39,7 +40,7 @@ public class VoziloForma extends JFrame {
             setTitle("Izmena podataka za vozilo " + vozilo.getBrRegistarskeOznake() + " " + vozilo.getProizvodjac() + " " + vozilo.getModel());
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocation(400,250);
+        setLocation(400, 250);
         initGUI();
         setSize(600, 300);
         initActions();
@@ -52,6 +53,7 @@ public class VoziloForma extends JFrame {
         if (vozilo != null) {
             popuniPolja();
         }
+        txtBrRegOznake.setColumns(20);
         add(lblProizvodjac);
         add(txtProizvodjac);
         add(lblModel);
@@ -106,11 +108,11 @@ public class VoziloForma extends JFrame {
                             } else {
                                 JOptionPane.showMessageDialog(null, "Vozac ne postoji ili vec ima dodeljen automobil!", "Greska", JOptionPane.WARNING_MESSAGE);
                             }
-                        }else{
-                            JOptionPane.showMessageDialog(null,"Vozac sa tim JMBG-om ne postoji\nIzmene nisu sacuvane!","Greska",JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Vozac sa tim JMBG-om ne postoji\nIzmene nisu sacuvane!", "Greska", JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (NumberFormatException numberFormatException) {
-                        JOptionPane.showMessageDialog(null,"Prilikom dodavanja JMBG vozaca mora biti broj!\nIzmene nisu sacuvane!","Greska",JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Prilikom dodavanja JMBG vozaca mora biti broj!\nIzmene nisu sacuvane!", "Greska", JOptionPane.WARNING_MESSAGE);
 
                     }
                 }
@@ -150,7 +152,7 @@ public class VoziloForma extends JFrame {
             ok = false;
         }
 
-        if (txtBrRegOznake.getText().trim().equals("")) {
+        if (txtBrRegOznake.getText().trim().equals("") || txtBrRegOznake.getText().trim().equals("XX-000-000")) {
             poruka += "- Morate uneti broj registarske oznake\n";
             ok = false;
         }
