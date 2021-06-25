@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
-import java.util.List;
+import StrukturePodataka.List;
 
 public class VozaciProzor extends JFrame {
 
@@ -101,7 +101,7 @@ public class VozaciProzor extends JFrame {
                         // TODO: 23-Jun-21  treba ubaciti metodu sacuvajListuVozaca u fajl i proslediti listavozaca od gore
                         vozac.setObrisan(true);
                         Korisnik.upisiSveKorisnike(korisnici);
-                        List<Vozilo> vozila = (List<Vozilo>) Vozilo.ucitajNeobrisanaVozila();
+                        List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
                         try {
                             for (Vozilo vozilo : vozila) {
                                 if (vozilo.getVozacId().equals(vozac.getJMBG())) {

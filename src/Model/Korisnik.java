@@ -2,7 +2,8 @@ package Model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import StrukturePodataka.List;
+
 
 public abstract class Korisnik {
 
@@ -64,7 +65,7 @@ public abstract class Korisnik {
     }
 
     public static List<Korisnik> ucitajSveKorisnike() {
-        List<Korisnik> sviKorisnici = new ArrayList<>();
+        List<Korisnik> sviKorisnici = new List<>();
         File file = new File("src\\Data\\korisnici.csv");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));

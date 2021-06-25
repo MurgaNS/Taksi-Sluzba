@@ -6,7 +6,8 @@ import Model.Voznja;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
+import StrukturePodataka.List;
+
 
 public class SumiranIzvestajOVozacimaProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();

@@ -11,7 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import StrukturePodataka.List;
+
 
 public class VozaciForma extends JFrame {
     private JLabel lblJMBG = new JLabel("JMBG");

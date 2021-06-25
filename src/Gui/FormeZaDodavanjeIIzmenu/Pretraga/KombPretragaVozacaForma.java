@@ -6,7 +6,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
+import StrukturePodataka.List;
+
 
 public class KombPretragaVozacaForma extends JFrame {
     private JLabel lblIme = new JLabel("Ime");
@@ -46,7 +47,7 @@ public class KombPretragaVozacaForma extends JFrame {
     }
 
     public void initActions() {
-        List<Vozac> listaPronadjenihVozaca = new ArrayList<>();
+        List<Vozac> listaPronadjenihVozaca = new List<>();
         dugmeOk.addActionListener(e -> {
             String ime = txtIme.getText().trim();
             String prezime = txtPrezime.getText().trim();

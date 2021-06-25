@@ -4,7 +4,10 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+
+import StrukturePodataka.List;
+
 
 public class Vozac extends Korisnik {
 
@@ -38,7 +41,7 @@ public class Vozac extends Korisnik {
 
 
     public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
-        List<Voznja> listaVoznji = new ArrayList<>();
+        List<Voznja> listaVoznji = new List<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
@@ -89,7 +92,7 @@ public class Vozac extends Korisnik {
 
     public static List<Vozac> pretragaPoImenu(String ime) {
         List<Vozac> listaVozaca = ucitajSveVozace();
-        List<Vozac> pronadjeniVozaci = new ArrayList<>();
+        List<Vozac> pronadjeniVozaci = new List<>();
         for (Vozac vozac : listaVozaca) {
             if (vozac.getIme().toLowerCase().contains(ime.toLowerCase())) {
                 pronadjeniVozaci.add(vozac);
@@ -100,7 +103,7 @@ public class Vozac extends Korisnik {
 
     public static List<Vozac> pretragaPoPrezimenu(String prezime) {
         List<Vozac> listaVozaca = ucitajSveVozace();
-        List<Vozac> pronadjeniVozaci = new ArrayList<>();
+        List<Vozac> pronadjeniVozaci = new List<>();
         for (Vozac vozac : listaVozaca) {
             if (vozac.getPrezime().toLowerCase().contains(prezime.toLowerCase())) {
                 pronadjeniVozaci.add(vozac);
@@ -111,7 +114,7 @@ public class Vozac extends Korisnik {
 
     public static List<Vozac> pretragaPoPlati(double plata) {
         List<Vozac> listaVozaca = ucitajSveVozace();
-        List<Vozac> pronadjeniVozaci = new ArrayList<>();
+        List<Vozac> pronadjeniVozaci = new List<>();
         for (Vozac vozac : listaVozaca) {
             if (vozac.getPlata() == plata) {
                 pronadjeniVozaci.add(vozac);
@@ -121,7 +124,7 @@ public class Vozac extends Korisnik {
     }
 
     public static List<Vozac> ucitajSveVozace() {
-        List<Vozac> vozaci = new ArrayList<>();
+        List<Vozac> vozaci = new List<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
@@ -149,7 +152,7 @@ public class Vozac extends Korisnik {
     }
 
     public static List<Long> listaIdVozac() {
-        List<Long> listaId = new ArrayList<>();
+        List<Long> listaId = new List<>();
         for (Vozac vozac : ucitajSveVozace()) {
             listaId.add(vozac.getId());
         }
