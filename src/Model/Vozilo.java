@@ -66,6 +66,18 @@ public class Vozilo {
         return vozila.get(vozila.size() - 1).getBrTaksiVozila() + 1;
     }
 
+    public static List<Long> listaIdVozila() {
+        List<Long> listaId = new ArrayList<>();
+        for (Vozilo vozilo : ucitajSvaVozila()) {
+            listaId.add(vozilo.getBrTaksiVozila());
+        }
+        return listaId;
+    }
+
+    public static Vozilo pretraziPoId(Long id) {
+        return Vozilo.ucitajSvaVozila().get(BinarnaPretraga.find(Vozilo.listaIdVozila(), id));
+    }
+
     public static List<Vozilo> ucitajSvaVozila() {
         List<Vozilo> vozila = new ArrayList<>();
         String red;
@@ -79,14 +91,6 @@ public class Vozilo {
             e.printStackTrace();
         }
         return vozila;
-    }
-
-    public static List<Long> listaIdVozila() {
-        List<Long> listaId = new ArrayList<>();
-        for (Vozilo vozilo : ucitajSvaVozila()) {
-            listaId.add(vozilo.getBrTaksiVozila());
-        }
-        return listaId;
     }
 
     public static VrstaVozila ucitajVrstuVozila(String vrstaVozila) {
@@ -119,17 +123,7 @@ public class Vozilo {
         return vozilo;
     }
 
-    public static Long pronadjiVoziloPoVozacu(Long vozacId) {
-        List<Vozilo> listaVozila = ucitajSvaVozila();
-        for (Vozilo v : listaVozila) {
-            if (v.getVozacId() != null && v.getVozacId().equals(vozacId)) {
-                return v.getBrTaksiVozila();
-            }
-        }
-        return null;
-    }
-
-    public static boolean voziloKojeSeMenjaOdgovaraVozacu(Vozac vozac, Vozilo vozilo) {
+    public static boolean voziloPripadaVozacu(Vozac vozac, Vozilo vozilo) {
         List<Vozilo> listaVozila = ucitajSvaVozila();
         for (Vozilo v : listaVozila) {
             if (v.getVozacId() != null) {
@@ -141,8 +135,15 @@ public class Vozilo {
         return false;
     }
 
-    public static Vozilo pretraziPoId(Long id) {
-        return Vozilo.ucitajSvaVozila().get(BinarnaPretraga.find(Vozilo.listaIdVozila(), id));
+
+    public static Long pronadjiVoziloPoVozacu(Long vozacId) {
+        List<Vozilo> listaVozila = ucitajSvaVozila();
+        for (Vozilo v : listaVozila) {
+            if (v.getVozacId() != null && v.getVozacId().equals(vozacId)) {
+                return v.getBrTaksiVozila();
+            }
+        }
+        return null;
     }
 
     public static Vozilo pronadjiPoBrojuTaksiVozila(Long brTaksiVozila, List<Vozilo> listaVozila) {
@@ -153,26 +154,6 @@ public class Vozilo {
             }
         }
         return null;
-    }
-
-    public static void sacuvajNovoVoziloUFajl(Vozilo vozilo) throws IOException {
-        List<Vozilo> vozila = ucitajSvaVozila();
-        vozila.add(vozilo);
-        sacuvajListuVozilaUFajl(vozila);
-    }
-
-    public static void sacuvajListuVozilaUFajl(List<Vozilo> vozila) {
-        File file = new File("src\\Data\\vozila.csv");
-        try {
-            PrintWriter writer = new PrintWriter(file);
-            for (Vozilo vozilo : vozila) {
-                writer.write(vozilo.stringToSave());
-            }
-            writer.flush();
-            writer.close();
-        } catch (FileNotFoundException exception) {
-            System.out.println("Nepostojeći fajl");
-        }
     }
 
     public static List<Vozilo> pretragaPoModelu(String model) {
@@ -230,17 +211,37 @@ public class Vozilo {
         return pronadjenaVozila;
     }
 
+    public static void sacuvajNovoVoziloUFajl(Vozilo vozilo) throws IOException {
+        List<Vozilo> vozila = ucitajSvaVozila();
+        vozila.add(vozilo);
+        sacuvajListuVozilaUFajl(vozila);
+    }
+
+    public static void sacuvajListuVozilaUFajl(List<Vozilo> vozila) {
+        File file = new File("src\\Data\\vozila.csv");
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (Vozilo vozilo : vozila) {
+                writer.write(vozilo.stringToSave());
+            }
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Nepostojeći fajl");
+        }
+    }
+
     @Override
     public String toString() {
         return "Vozilo{" +
-                "brTaksiVozila='" + brTaksiVozila + '\'' +
-                ", model='" + model + '\'' +
-                ", proizvodjac='" + proizvodjac + '\'' +
-                ", godProizvodnje=" + godProizvodnje +
-                ", brRegistarskeOznake='" + brRegistarskeOznake + '\'' +
-                ", vrsta='" + vrsta + '\'' +
-                ", vozac=" + vozacId +
-                '}';
+               "brTaksiVozila='" + brTaksiVozila + '\'' +
+               ", model='" + model + '\'' +
+               ", proizvodjac='" + proizvodjac + '\'' +
+               ", godProizvodnje=" + godProizvodnje +
+               ", brRegistarskeOznake='" + brRegistarskeOznake + '\'' +
+               ", vrsta='" + vrsta + '\'' +
+               ", vozac=" + vozacId +
+               '}';
     }
 
     public String stringToSave() {
@@ -257,10 +258,6 @@ public class Vozilo {
 
     public Long getBrTaksiVozila() {
         return brTaksiVozila;
-    }
-
-    public void setBrTaksiVozila(Long brTaksiVozila) {
-        this.brTaksiVozila = brTaksiVozila;
     }
 
     public String getModel() {

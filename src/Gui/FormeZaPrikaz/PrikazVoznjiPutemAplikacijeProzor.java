@@ -19,14 +19,14 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
 
     public PrikazVoznjiPutemAplikacijeProzor() {
         listaVoznji = Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM);
-        if(!listaVoznji.isEmpty()){
-        setTitle("Prikaz voznji putem aplikacije");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(1000, 600);
-        setVisible(true);
-        initGui();
-        initActions();
+        if (!listaVoznji.isEmpty()) {
+            setTitle("Prikaz voznji putem aplikacije");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setSize(1000, 600);
+            setVisible(true);
+            initGui();
+            initActions();
         } else {
             JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -93,7 +93,7 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
                 Voznja.izmeniStatusVoznje(voznja);
                 PrikazVoznjiPutemAplikacijeProzor.this.dispose();
                 PrikazVoznjiPutemAplikacijeProzor.this.setVisible(false);
-                PrikazVoznjiPutemAplikacijeProzor prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacijeProzor();
+                new PrikazVoznjiPutemAplikacijeProzor();
             }
         });
     }

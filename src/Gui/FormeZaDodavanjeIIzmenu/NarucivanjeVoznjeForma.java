@@ -53,7 +53,7 @@ public class NarucivanjeVoznjeForma extends JFrame {
                 Voznja.NacinPorudzbine nacinPorudzbine = Voznja.NacinPorudzbine.APLIKACIJOM;
                 Korisnik musterija = GlavniProzor.getPrijavljeniKorisnik();
                 Voznja voznja = new Voznja(Voznja.preuzmiPoslednjiId() + 1, date, adresaPolaska, adresaDolaska, 0, 0, statusVoznje, nacinPorudzbine, null, musterija.getJMBG(), 0, napomena);
-                Voznja.sacuvajVoznju(voznja);
+                Voznja.sacuvajNovuVoznju(voznja);
                 NarucivanjeVoznjeForma.this.dispose();
                 NarucivanjeVoznjeForma.this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Uspesno ste porucili voznju.", "Uspesno porucivanje", JOptionPane.INFORMATION_MESSAGE);

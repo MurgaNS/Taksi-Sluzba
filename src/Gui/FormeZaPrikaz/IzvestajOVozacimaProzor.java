@@ -70,7 +70,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
         dugmeIzvestajJedanDan.addActionListener(e -> {
             for (int i = 0; i < listaVozaca.size(); i++) {
                 Vozac vozac = listaVozaca.get(i);
-                tabelaModel.setValueAt(Voznja.brojVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), i, 2);
+                tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), i, 2);
                 tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.JEDAN_DAN), i, 3);
                 tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), i, 4);
                 tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), i, 5);
@@ -83,7 +83,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
         dugmeIzvestajSedamDana.addActionListener(e -> {
             for (int i = 0; i < listaVozaca.size(); i++) {
                 Vozac vozac = listaVozaca.get(i);
-                tabelaModel.setValueAt(Voznja.brojVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), i, 2);
+                tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), i, 2);
                 tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.SEDAM_DANA), i, 3);
                 tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), i, 4);
                 tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), i, 5);
@@ -96,7 +96,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
         dugmeIzvestajMesecDana.addActionListener(e -> {
             for (int i = 0; i < listaVozaca.size(); i++) {
                 Vozac vozac = listaVozaca.get(i);
-                tabelaModel.setValueAt(Voznja.brojVoznji(vozac, Voznja.BrojDana.MESEC_DANA), i, 2);
+                tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.MESEC_DANA), i, 2);
                 tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.MESEC_DANA), i, 3);
                 tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.MESEC_DANA), i, 4);
                 tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.MESEC_DANA), i, 5);
@@ -109,7 +109,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
         dugmeIzvestajGodinuDana.addActionListener(e -> {
             for (int i = 0; i < listaVozaca.size(); i++) {
                 Vozac vozac = listaVozaca.get(i);
-                tabelaModel.setValueAt(Voznja.brojVoznji(vozac, Voznja.BrojDana.GODINU_DANA), i, 2);
+                tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.GODINU_DANA), i, 2);
                 tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.GODINU_DANA), i, 3);
                 tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.GODINU_DANA), i, 4);
                 tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.GODINU_DANA), i, 5);

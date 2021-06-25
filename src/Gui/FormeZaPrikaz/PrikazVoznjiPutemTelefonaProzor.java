@@ -18,7 +18,7 @@ public class PrikazVoznjiPutemTelefonaProzor extends JFrame {
 
 
     public PrikazVoznjiPutemTelefonaProzor() {
-        listaVoznji = Voznja.voznjeNarucenePutemTelefona();
+        listaVoznji = Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM);
         setTitle("Prikaz voznji putem telefona");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(this);

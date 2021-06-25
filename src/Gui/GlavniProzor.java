@@ -162,20 +162,16 @@ public class GlavniProzor extends JFrame {
         this.add(aukcijaDugme);
 
         zavrsiVoznjuDugme.addActionListener(e -> new ZavrsiVoznjuProzor());
-        prikazIstorijeVoznjiDugme.addActionListener(e -> {
-            PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
-        });
+        prikazIstorijeVoznjiDugme.addActionListener(e -> new PrikazSopstvenihVoznjiProzor());
         prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> new PrikazVoznjiPutemAplikacijeProzor());
-
         statistikaDugme.addActionListener(e -> new PrikazIzvestajaVoznjiProzor());
+        prikazVoznjiPutemTelefonaDugme.addActionListener(e -> new PrikazVoznjiPutemTelefonaProzor());
         statistikaDugme.addActionListener(e -> {
             SumiranPrikazIzvestajaVoznjiProzor sumiranPrikazIzvestaja = new SumiranPrikazIzvestajaVoznjiProzor();
         });
-        prikazVoznjiPutemTelefonaDugme.addActionListener(e -> new PrikazVoznjiPutemTelefonaProzor());
         aukcijaDugme.addActionListener(e -> {
-            List<Voznja> listaVoznji = Voznja.ucitajVoznjuPoStatusu(Voznja.StatusVoznje.KREIRANA);
-            listaVoznji.addAll(Voznja.ucitajVoznjuPoStatusu(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU));
-
+            List<Voznja> listaVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA);
+            listaVoznji.addAll(Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU));
             new PrikazSopstvenihVoznjiProzor(listaVoznji);
         });
     }

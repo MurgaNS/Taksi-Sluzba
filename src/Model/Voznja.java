@@ -114,7 +114,7 @@ public class Voznja {
         return listaId;
     }
 
-    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje,NacinPorudzbine nacinPorudzbine) {
+    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine) {
         List<Voznja> voznjePutemAplikacije = new ArrayList<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
@@ -127,7 +127,18 @@ public class Voznja {
 
     public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
         List<Voznja> voznje = new ArrayList<>();
-        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
+        List<Voznja> listaVoznji = ucitajSveVoznje();
+        for (Voznja voznja : listaVoznji) {
+            if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getVozacJMBG().equals(vozac.getJMBG())) {
+                voznje.add(voznja);
+            }
+        }
+        return voznje;
+    }
+
+    public static List<Voznja> ucitajVoznju(StatusVoznje statusVoznje) {
+        List<Voznja> voznje = new ArrayList<>();
+        List<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(statusVoznje)) {
                 voznje.add(voznja);
@@ -159,28 +170,7 @@ public class Voznja {
     }
 
     //
-    public static List<Voznja> voznjeNarucenePutemTelefona() {
-        List<Voznja> voznjePutemTelefona = new ArrayList<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
-        for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA) && voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM)) {
-                voznjePutemTelefona.add(voznja);
-            }
-        }
-        return voznjePutemTelefona;
-    }
 
-
-    public static List<Voznja> ucitajVoznjuPoStatusu(StatusVoznje statusVoznje) {
-        List<Voznja> voznje = new ArrayList<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
-        for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(statusVoznje)) {
-                voznje.add(voznja);
-            }
-        }
-        return voznje;
-    }
 
     public static NacinPorudzbine ucitajNacinPorudzbine(String nacinPorudzbine) {
         if (nacinPorudzbine.trim().equals("TELEFONOM")) {
@@ -191,7 +181,7 @@ public class Voznja {
         return null;
     }
 
-    public static List<Voznja> ucitajListuVoznji(Korisnik korisnik) {
+    public static List<Voznja> ucitajVoznje(Korisnik korisnik) {
         List<Voznja> voznje = ucitajSveVoznje();
         List<Voznja> listaVoznji = new ArrayList<>();
         for (Voznja voznja : voznje) {
@@ -410,11 +400,10 @@ public class Voznja {
             case MESEC_DANA -> cal.add(Calendar.MONTH, -1);
             case GODINU_DANA -> cal.add(Calendar.YEAR, -1);
         }
-
         return cal.getTime();
     }
 
-    public static int brojVoznji(Vozac vozac, BrojDana brojDana) {
+    public static int brojZavrsenihVoznji(Vozac vozac, BrojDana brojDana) {
         try {
             List<Voznja> voznje = ucitajSveVoznje();
             int brVoznji = 0;
@@ -444,6 +433,32 @@ public class Voznja {
         return 0;
     }
 
+    public static Voznja voznjaDTO(String[] lineParts) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        long id = Long.parseLong(lineParts[0]);
+        Date datumPorudzbine = simpleDateFormat.parse(lineParts[1]);
+        String adresaPolaska = lineParts[2];
+        String adresaDestinacije = lineParts[3];
+        double brojPredjenihKilometara = Double.parseDouble(lineParts[4]);
+        double trajanjeVoznjeUMin = Double.parseDouble(lineParts[5]);
+        StatusVoznje statusVoznje = ucitajStatusVoznje(lineParts[6]);
+        NacinPorudzbine nacinPorudzbine = ucitajNacinPorudzbine(lineParts[7]);
+        Long vozacId = null;
+        try {
+            vozacId = Long.parseLong(lineParts[8]);
+        } catch (NumberFormatException ignored) {
+
+        }
+        Long musterijaId = Long.parseLong(lineParts[9]);
+        double naplacenIznos = Double.parseDouble(lineParts[10]);
+        String napomena;
+        try {
+            napomena = lineParts[11];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos);
+        }
+        return new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos, napomena);
+    }
 
     public static List<Voznja> ucitajSveVoznje() {
         List<Voznja> sveVoznje = new ArrayList<>();
@@ -453,32 +468,7 @@ public class Voznja {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineParts = line.split(",");
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                long id = Long.parseLong(lineParts[0]);
-                Date datumPorudzbine = simpleDateFormat.parse(lineParts[1]);
-                String adresaPolaska = lineParts[2];
-                String adresaDestinacije = lineParts[3];
-                double brojPredjenihKilometara = Double.parseDouble(lineParts[4]);
-                double trajanjeVoznjeUMin = Double.parseDouble(lineParts[5]);
-                StatusVoznje statusVoznje = ucitajStatusVoznje(lineParts[6]);
-                NacinPorudzbine nacinPorudzbine = ucitajNacinPorudzbine(lineParts[7]);
-                Long vozacId = null;
-                try {
-                    vozacId = Long.parseLong(lineParts[8]);
-                } catch (NumberFormatException ignored) {
-
-                }
-                Long musterijaId = Long.parseLong(lineParts[9]);
-                double naplacenIznos = Double.parseDouble(lineParts[10]);
-                String napomena;
-                try {
-                    napomena = lineParts[11];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos);
-                    sveVoznje.add(voznja);
-                    return sveVoznje;
-                }
-                Voznja voznja = new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos, napomena);
+                Voznja voznja = voznjaDTO(lineParts);
                 sveVoznje.add(voznja);
             }
             bufferedReader.close();
@@ -492,11 +482,7 @@ public class Voznja {
         try {
             PrintWriter writer = new PrintWriter(file);
             for (Voznja voznja : voznje) {
-                if (!voznja.getNapomena().isEmpty() || voznja.getNapomena() != null) {
-                    writer.write(voznja.stringZaCuvanjeSaNapomenom());
-                } else {
-                    writer.write(voznja.stringZaCuvanje());
-                }
+                writer.write(voznja.stringZaCuvanje());
             }
             writer.flush();
             writer.close();
@@ -528,7 +514,7 @@ public class Voznja {
         upisiVoznje(listaVoznji);
     }
 
-    public static void sacuvajVoznju(Voznja voznja) {
+    public static void sacuvajNovuVoznju(Voznja voznja) {
         List<Voznja> voznje = ucitajSveVoznje();
         voznje.add(voznja);
         upisiVoznje(voznje);
@@ -541,17 +527,8 @@ public class Voznja {
         return id + "," + strDate + "," + adresaPolaska + "," +
                adresaDestinacije + "," + brojPredjenihKilometara + "," +
                trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
-               + vozacJMBG + "," + musterijaJMBG + "," + naplacenIznos + "\n";
-    }
-
-    public String stringZaCuvanjeSaNapomenom() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String strDate = dateFormat.format(datumPorudzbine);
-
-        return id + "," + strDate + "," + adresaPolaska + "," +
-               adresaDestinacije + "," + brojPredjenihKilometara + "," +
-               trajanjeVoznjeUMinutama + "," + statusVoznje + "," + nacinPorudzbine + ","
                + vozacJMBG + "," + musterijaJMBG + "," + naplacenIznos + "," + napomena + "\n";
+
     }
 
     public long getId() {

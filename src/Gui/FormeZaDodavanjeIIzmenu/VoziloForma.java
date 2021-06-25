@@ -100,7 +100,7 @@ public class VoziloForma extends JFrame {
                         if (v != null) {
                             boolean vozacPostoji = !v.isObrisan();
                             boolean vozacNemaVozilo = v.getBrTaksiVozila() == null;
-                            boolean vozacImaVoziloKojeSeMenja = Vozilo.voziloKojeSeMenjaOdgovaraVozacu(v, vozilo);
+                            boolean vozacImaVoziloKojeSeMenja = Vozilo.voziloPripadaVozacu(v, vozilo);
                             if (vozacPostoji && (vozacNemaVozilo || vozacImaVoziloKojeSeMenja)) {
                                 vozilo.setVozacId(Long.parseLong(vozac));
                             } else {

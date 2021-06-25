@@ -20,7 +20,7 @@ public class PrikazSopstvenihVoznjiProzor extends JFrame {
     private JButton aukcijaDugme = new JButton("Prijavi se za voznju");
 
     public PrikazSopstvenihVoznjiProzor() {
-        listaVoznji = Voznja.ucitajListuVoznji(GlavniProzor.getPrijavljeniKorisnik());
+        listaVoznji = Voznja.ucitajVoznje(GlavniProzor.getPrijavljeniKorisnik());
         if (!listaVoznji.isEmpty()) {
             setTitle("Prikaz voznji");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
