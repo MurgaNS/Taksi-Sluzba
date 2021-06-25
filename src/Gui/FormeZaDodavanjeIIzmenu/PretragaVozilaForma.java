@@ -51,51 +51,85 @@ public class PretragaVozilaForma extends JFrame {
     }
 
     public void initActions() {
+        txtBrojTaksiVozila.setText("0");
+        txtGodinaProizvodnje.setText("0");
+
         List<Vozilo> listaPronadjenihVozila = new ArrayList<>();
         dugmeOk.addActionListener(e -> {
-            String model = txtModel.getText().trim();
-            String proizvodjac = txtProizvodjac.getText().trim();
-            String brojRegOznake = txtBrojRegOznake.getText().trim();
-
-            int godinaProizvodnje = 0;
-            long brojTaksiVozila = 0;
-
-            try {
-                godinaProizvodnje = Integer.parseInt(txtGodinaProizvodnje.getText().trim());
-            } catch (NumberFormatException ignored) {
+            if (validacija()) {
+                String model = txtModel.getText().trim();
+                String proizvodjac = txtProizvodjac.getText().trim();
+                String brojRegOznake = txtBrojRegOznake.getText().trim();
+                long brojTaksiVozila = Long.parseLong(txtBrojTaksiVozila.getText().trim());
+                int godinaProizvodnje = Integer.parseInt(txtGodinaProizvodnje.getText().trim());
+                if (!model.isEmpty()) {
+                    listaPronadjenihVozila.addAll(Vozilo.pretragaPoModelu(model));
+                }
+                if (!proizvodjac.isEmpty()) {
+                    listaPronadjenihVozila.addAll(Vozilo.pretragaPoProizvodjacu(proizvodjac));
+                }
+                if (godinaProizvodnje != 0) {
+                    listaPronadjenihVozila.addAll(Vozilo.pretragaPoGodiniProizvodnje(godinaProizvodnje));
+                }
+                if (!brojRegOznake.isEmpty()) {
+                    listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuRegOznake(brojRegOznake));
+                }
+                if (brojTaksiVozila != 0) {
+                    listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuTaksiVozila(brojTaksiVozila));
+                }
+                if (!listaPronadjenihVozila.isEmpty()) {
+                    VoziloProzor prikazPretrageVozilaProzor = new VoziloProzor(listaPronadjenihVozila);
+                    prikazPretrageVozilaProzor.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ne postoje rezultati pretrage.", "Greska!", JOptionPane.ERROR_MESSAGE);
+                }
+                PretragaVozilaForma.this.dispose();
+                PretragaVozilaForma.this.setVisible(false);
             }
-            try {
-                brojTaksiVozila = Long.parseLong(txtBrojTaksiVozila.getText().trim());
-            } catch (NumberFormatException ignored) {
-            }
-            if (!model.isEmpty()) {
-                listaPronadjenihVozila.addAll(Vozilo.pretragaPoModelu(model));
-            }
-            if (!proizvodjac.isEmpty()) {
-                listaPronadjenihVozila.addAll(Vozilo.pretragaPoProizvodjacu(proizvodjac));
-            }
-            if (godinaProizvodnje != 0) {
-                listaPronadjenihVozila.addAll(Vozilo.pretragaPoGodiniProizvodnje(godinaProizvodnje));
-            }
-            if (!brojRegOznake.isEmpty()) {
-                listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuRegOznake(brojRegOznake));
-            }
-            if (brojTaksiVozila != 0) {
-                listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuTaksiVozila(brojTaksiVozila));
-            }
-            if (!listaPronadjenihVozila.isEmpty()) {
-                VoziloProzor prikazPretrageVozilaProzor = new VoziloProzor(listaPronadjenihVozila);
-                prikazPretrageVozilaProzor.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Ne postoje rezultati pretrage.", "Greska!", JOptionPane.ERROR_MESSAGE);
-            }
-            PretragaVozilaForma.this.dispose();
-            PretragaVozilaForma.this.setVisible(false);
         });
         dugmePonisti.addActionListener(e -> {
             VoziloProzor voziloProzor = new VoziloProzor();
             PretragaVozilaForma.this.dispose();
             PretragaVozilaForma.this.setVisible(false);
         });
+    }
+
+    private Boolean validacija() {
+        boolean ok = true;
+        String poruka = "Molimo popravite sledece greske u unosu:\n";
+
+        try {
+            Integer.parseInt(txtGodinaProizvodnje.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- Godina proizvodnje vozila mora biti broj\n";
+            ok = false;
+        }
+        try {
+            Long.parseLong(txtBrojTaksiVozila.getText().trim());
+        } catch (NumberFormatException e) {
+            poruka += "- Broj taksi vozila mora biti broj\n";
+            ok = false;
+        }
+//        if (!txtBrojTaksiVozila.getText().trim().isEmpty()) {
+//            try {
+//                Long.parseLong(txtBrojTaksiVozila.getText().trim());
+//            } catch (NumberFormatException e) {
+//                poruka += "- Broj taksi vozila mora biti broj\n";
+//                ok = false;
+//            }
+//        }
+//        if (!txtGodinaProizvodnje.getText().trim().isEmpty()) {
+//            try {
+//                Long.parseLong(txtGodinaProizvodnje.getText().trim());
+//            } catch (NumberFormatException e) {
+//                poruka += "- Broj taksi vozila mora biti broj\n";
+//                ok = false;
+//            }
+//        }
+
+        if (!ok) {
+            JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
+        }
+        return ok;
     }
 }
