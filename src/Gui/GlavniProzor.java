@@ -130,9 +130,7 @@ public class GlavniProzor extends JFrame {
             NarucivanjeVoznjeForma narucivanjeVoznje = new NarucivanjeVoznjeForma();
             narucivanjeVoznje.setVisible(true);
         });
-        prikazVoznjiDugme.addActionListener(e -> {
-            PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
-        });
+        prikazVoznjiDugme.addActionListener(e -> new PrikazSopstvenihVoznjiProzor());
 
         narucivanjeVoznjeTelefonomDugme.addActionListener(e -> {
             NarucivanjeVoznjeTelefonomForma narucivanjeVoznjeTelefonom = new NarucivanjeVoznjeTelefonomForma();
@@ -163,30 +161,22 @@ public class GlavniProzor extends JFrame {
         this.add(statistikaDugme);
         this.add(aukcijaDugme);
 
-        zavrsiVoznjuDugme.addActionListener(e -> {
-            ZavrsiVoznjuProzor zavrsiVoznjuProzor = new ZavrsiVoznjuProzor();
-        });
+        zavrsiVoznjuDugme.addActionListener(e -> new ZavrsiVoznjuProzor());
         prikazIstorijeVoznjiDugme.addActionListener(e -> {
             PrikazSopstvenihVoznjiProzor prikazVoznjiProzor = new PrikazSopstvenihVoznjiProzor();
         });
-        prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> {
-            PrikazVoznjiPutemAplikacijeProzor prikazVoznjiPutemAplikacije = new PrikazVoznjiPutemAplikacijeProzor();
-        });
+        prikazVoznjiPutemAplikacijeDugme.addActionListener(e -> new PrikazVoznjiPutemAplikacijeProzor());
 
-        statistikaDugme.addActionListener(e -> {
-            PrikazIzvestajaVoznjiProzor prikazIzvestaja = new PrikazIzvestajaVoznjiProzor();
-        });
+        statistikaDugme.addActionListener(e -> new PrikazIzvestajaVoznjiProzor());
         statistikaDugme.addActionListener(e -> {
             SumiranPrikazIzvestajaVoznjiProzor sumiranPrikazIzvestaja = new SumiranPrikazIzvestajaVoznjiProzor();
         });
-        prikazVoznjiPutemTelefonaDugme.addActionListener(e -> {
-            PrikazVoznjiPutemTelefonaProzor prikazVoznjiPutemTelefona = new PrikazVoznjiPutemTelefonaProzor();
-        });
+        prikazVoznjiPutemTelefonaDugme.addActionListener(e -> new PrikazVoznjiPutemTelefonaProzor());
         aukcijaDugme.addActionListener(e -> {
             List<Voznja> listaVoznji = Voznja.ucitajVoznjuPoStatusu(Voznja.StatusVoznje.KREIRANA);
             listaVoznji.addAll(Voznja.ucitajVoznjuPoStatusu(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU));
 
-            PrikazSopstvenihVoznjiProzor prikazSopstvenihVoznjiProzor = new PrikazSopstvenihVoznjiProzor(listaVoznji);
+            new PrikazSopstvenihVoznjiProzor(listaVoznji);
         });
     }
 

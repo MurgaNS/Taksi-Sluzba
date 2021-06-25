@@ -24,23 +24,31 @@ public class VoziloProzor extends JFrame {
 
     public VoziloProzor() {
         listaVozila = Vozilo.ucitajNeobrisanaVozila();
-        setTitle("Prikaz vozila");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(1000, 300);
-        initGui();
-        initActions();
+        if (!listaVozila.isEmpty()) {
+            setTitle("Prikaz vozila");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setSize(1000, 300);
+            initGui();
+            initActions();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public VoziloProzor(List<Vozilo> lista) {
         listaVozila = lista;
-        setTitle("Prikaz vozila");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(1000, 300);
-        initGui();
-        initActions();
-        dugmeDodaj.setVisible(false);
+        if (!listaVozila.isEmpty()) {
+            setTitle("Prikaz vozila");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setSize(1000, 300);
+            initGui();
+            initActions();
+            dugmeDodaj.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void initGui() {
@@ -73,10 +81,10 @@ public class VoziloProzor extends JFrame {
         tabelaPodataka.setAutoCreateRowSorter(true);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for(int k=0; k<zaglavlja.length; k++) {
+        for (int k = 0; k < zaglavlja.length; k++) {
             tabelaPodataka.getColumnModel().getColumn(k).setPreferredWidth(150);
         }
-        for (int j = 0; j<tabelaPodataka.getColumnCount();j++) {
+        for (int j = 0; j < tabelaPodataka.getColumnCount(); j++) {
             tabelaPodataka.getColumnModel().getColumn(j).setCellRenderer(centerRenderer);
         }
         setVisible(true);

@@ -19,6 +19,7 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
 
     public PrikazVoznjiPutemAplikacijeProzor() {
         listaVoznji = Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM);
+        if(!listaVoznji.isEmpty()){
         setTitle("Prikaz voznji putem aplikacije");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -26,6 +27,9 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
         setVisible(true);
         initGui();
         initActions();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void initGui() {

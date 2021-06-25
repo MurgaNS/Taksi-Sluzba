@@ -21,25 +21,33 @@ public class PrikazSopstvenihVoznjiProzor extends JFrame {
 
     public PrikazSopstvenihVoznjiProzor() {
         listaVoznji = Voznja.ucitajListuVoznji(GlavniProzor.getPrijavljeniKorisnik());
-        setTitle("Prikaz voznji");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setSize(1000, 600);
-        initGui();
+        if (!listaVoznji.isEmpty()) {
+            setTitle("Prikaz voznji");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setVisible(true);
+            setSize(1000, 600);
+            initGui();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public PrikazSopstvenihVoznjiProzor(List<Voznja> lista) {
         listaVoznji = lista;
-        setTitle("Prikaz voznji");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setSize(1000, 600);
-        initGui();
-        glavniToolBar.add(aukcijaDugme);
-        add(glavniToolBar, BorderLayout.NORTH);
-        initActions();
+        if (!listaVoznji.isEmpty()) {
+            setTitle("Prikaz voznji");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setVisible(true);
+            setSize(1000, 600);
+            initGui();
+            glavniToolBar.add(aukcijaDugme);
+            add(glavniToolBar, BorderLayout.NORTH);
+            initActions();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void initGui() {

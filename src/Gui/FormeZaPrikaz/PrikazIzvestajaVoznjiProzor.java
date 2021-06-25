@@ -20,7 +20,7 @@ public class PrikazIzvestajaVoznjiProzor extends JFrame {
     private Vozac vozac;
 
     public PrikazIzvestajaVoznjiProzor() {
-        setTitle("Prikaz vozila");
+        setTitle("Prikaz izvestaja");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(1000, 300);

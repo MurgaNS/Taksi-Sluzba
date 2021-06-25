@@ -38,7 +38,6 @@ public class NarucivanjeVoznjeTelefonomForma extends JFrame {
 
     }
 
-    // TODO: 6/23/2021 desava se da se iz voznja fajla izbrisu sve voznje prilikom dodavanja
     private void initActions() {
         dugmeOk.addActionListener(e -> {
             Date date = java.util.Calendar.getInstance().getTime();

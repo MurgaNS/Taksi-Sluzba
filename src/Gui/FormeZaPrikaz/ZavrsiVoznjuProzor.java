@@ -20,13 +20,17 @@ public class ZavrsiVoznjuProzor extends JFrame {
 
     public ZavrsiVoznjuProzor() {
         listaVoznji = Voznja.ucitajVoznje(Voznja.StatusVoznje.PRIHVACENA, (Vozac) GlavniProzor.getPrijavljeniKorisnik());
-        setTitle("Prikaz prihvacenih voznji");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(1000, 600);
-        setVisible(true);
-        initGui();
-        initActions();
+        if (!listaVoznji.isEmpty()) {
+            setTitle("Prikaz prihvacenih voznji");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setSize(1000, 600);
+            setVisible(true);
+            initGui();
+            initActions();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nema podataka!", "Greska", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void initGui() {

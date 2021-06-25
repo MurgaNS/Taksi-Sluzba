@@ -213,9 +213,6 @@ public class Voznja {
             }
 
         }
-        if (listaVoznji.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ne postoji lista voznji za ovog korisnika", "Greska", JOptionPane.WARNING_MESSAGE);
-        }
         return listaVoznji;
     }
 

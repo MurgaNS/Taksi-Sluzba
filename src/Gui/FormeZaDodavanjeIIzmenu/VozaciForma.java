@@ -103,7 +103,6 @@ public class VozaciForma extends JFrame {
     public void initActions() {
         dugmeOk.addActionListener(e -> {
             if (validacija()) {
-                // TODO: 6/24/2021 ispravi ovaj id da se ucitava iz fajla posto sam dodao zbog binarne pretrage
                 List<Vozac> vozaci = Vozac.ucitajSveVozace();
                 long id = 1;
                 if(!vozaci.isEmpty()) {

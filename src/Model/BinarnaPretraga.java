@@ -3,10 +3,6 @@ package Model;
 import java.util.List;
 
 public class BinarnaPretraga {
-    public BinarnaPretraga() {
-
-    }
-
     public static int find(List<Long> array, long target) {
         return binarySearch(array, target, 0, array.size() - 1);
     }
