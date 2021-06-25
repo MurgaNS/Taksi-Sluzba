@@ -1,6 +1,6 @@
 dispecer,1,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,false,30000.0,011110110,PRIJEM_VOZNJE
 dispecer,2,4245185215821,elenas,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-vozac,1,73457553512390,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
+vozac,1,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
 vozac,2,12312332141231,nikolan,12345,Nikola,Nikolic,Kralja Petra 4/A Beograd,MUSKI,06415532,false,25000.0,1001
 vozac,3,1231412412323,markom,12345,Marko,Markovic,Kralja Petra 4/A Beograd,MUSKI,064136332,false,25000.0,1001
 musterija,1,12312332112,nemanja,12345,Nemanja,Murgaski,Nemanjina 123,MUSKI,5412221,false
