@@ -1,13 +1,7 @@
 dispecer,1,72137652102,petarp,12345,Petar,Petrovic,Bulevar Mihajla Pupina 4 Beograd,MUSKI,064123123,false,30000.0,011110110,PRIJEM_VOZNJE
-dispecer,2,42451855821,elenas2,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,3,42451855821,elenas3,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,4,42451855821,elenas4,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,5,42451855821,elenas5,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,6,42451855821,elenas6,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,7,42451855821,elenas7,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-dispecer,8,42451855821,elenas8,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
-vozac,1,73457553590,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
-vozac,2,123123,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
-musterija,1,12312312,nemanjaa,12345,Nemanja,Murgaski,Nemanjina 123,MUSKI,5412221,false
-vozac,3,1231233311,milanm,12345,milan,miladinovic,milanova321,MUSKI,0653112,false,50000.0,311
-vozac,4,1312312,marko,12345,marko,markovic,markova31,MUSKI,065123311,false,30000.0,210
+dispecer,2,4245185215821,elenas,12345,Elena,Selic,Kosovska 33/A Beograd,ZENSKI,064123543,false,35000.0,011110111,REKLAMACIJE
+vozac,1,73457553512390,mitarm,12345,Mitar,Miric,Kralja Petra 4/A Beograd,MUSKI,064123332,false,25000.0,1001
+vozac,2,12312332141231,nikolan,12345,Nikola,Nikolic,Kralja Petra 4/A Beograd,MUSKI,06415532,false,25000.0,1001
+vozac,3,1231412412323,markom,12345,Marko,Markovic,Kralja Petra 4/A Beograd,MUSKI,064136332,false,25000.0,1001
+musterija,1,12312332112,nemanja,12345,Nemanja,Murgaski,Nemanjina 123,MUSKI,5412221,false
+musterija,2,312412231412,darkod,12345,Darko,Darkovic,Nemanjina 123,MUSKI,5412221,false

@@ -38,7 +38,6 @@ public class TaksiSluzba {
         FileWriter fileWriter = new FileWriter(file, false);
         fileWriter.write(taksiSluzba.stringToSave());
         fileWriter.close();
-        System.out.println("Uspesno ste izmenili podatke o taksi sluzbi.");
     }
 
     @Override

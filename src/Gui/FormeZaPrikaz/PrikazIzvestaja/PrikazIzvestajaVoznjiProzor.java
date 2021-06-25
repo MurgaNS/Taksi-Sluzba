@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class PrikazIzvestajaVoznjiProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();
@@ -18,11 +19,12 @@ public class PrikazIzvestajaVoznjiProzor extends JFrame {
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
     private Vozac vozac;
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     public PrikazIzvestajaVoznjiProzor() {
         setTitle("Prikaz izvestaja");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocation(400,250);
+        setLocation(400, 250);
         setSize(1000, 300);
         initGui();
         initActions();
@@ -50,54 +52,37 @@ public class PrikazIzvestajaVoznjiProzor extends JFrame {
         tabelaPodataka.getTableHeader().setReorderingAllowed(false);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for(int k=0; k<zaglavlja.length; k++) {
+        for (int k = 0; k < zaglavlja.length; k++) {
             tabelaPodataka.getColumnModel().getColumn(k).setPreferredWidth(150);
         }
-        for (int j = 0; j<tabelaPodataka.getColumnCount();j++) {
+        for (int j = 0; j < tabelaPodataka.getColumnCount(); j++) {
             tabelaPodataka.getColumnModel().getColumn(j).setCellRenderer(centerRenderer);
         }
     }
 
+    public void popuniTabelu(Voznja.BrojDana brojDana) {
+        int brZavrsenihVoznji = Voznja.brojZavrsenihVoznji(vozac, brojDana);
+        String brPredjenihKilometara = df.format(Voznja.brojPredjenihKilometara(vozac, brojDana));
+        String ukTrajanjeVoznji = df.format(Voznja.ukupnoTrajanjeVoznji(vozac, brojDana));
+        String prosecanBrKilometaraPoVoznji = df.format(Voznja.prosecanBrojKilometaraPoVoznji(vozac, brojDana));
+        String prosecnoTrajanjeVoznje = df.format(Voznja.prosecnoTrajanjeVoznje(vozac, brojDana));
+        String prosecnoVremeBezVoznje = df.format(Voznja.prosecnoVremeBezVoznje(vozac, brojDana));
+        String prosecnaZaradaPoVoznji = df.format(Voznja.prosecnaZaradaPoVoznji(vozac, brojDana));
+        String ukupnaZarada = df.format(Voznja.ukupnaZarada(vozac, brojDana));
+        tabelaModel.setValueAt(brZavrsenihVoznji, 0, 0);
+        tabelaModel.setValueAt(brPredjenihKilometara, 0, 1);
+        tabelaModel.setValueAt(ukTrajanjeVoznji, 0, 2);
+        tabelaModel.setValueAt(prosecanBrKilometaraPoVoznji, 0, 3);
+        tabelaModel.setValueAt(prosecnoTrajanjeVoznje, 0, 4);
+        tabelaModel.setValueAt(prosecnoVremeBezVoznje, 0, 5);
+        tabelaModel.setValueAt(prosecnaZaradaPoVoznji, 0, 6);
+        tabelaModel.setValueAt(ukupnaZarada, 0, 7);
+    }
+
     public void initActions() {
-        dugmeIzvestajJedanDan.addActionListener(e -> {
-            tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 0);
-            tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 1);
-            tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 2);
-            tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 3);
-            tabelaModel.setValueAt(Voznja.prosecnoTrajanjeVoznje(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 4);
-            tabelaModel.setValueAt(Voznja.prosecnoVremeBezVoznje(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 5);
-            tabelaModel.setValueAt(Voznja.prosecnaZaradaPoVoznji(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 6);
-            tabelaModel.setValueAt(Voznja.ukupnaZarada(vozac, Voznja.BrojDana.JEDAN_DAN), 0, 7);
-        });
-        dugmeIzvestajSedamDana.addActionListener(e -> {
-            tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 0);
-            tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 1);
-            tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 2);
-            tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 3);
-            tabelaModel.setValueAt(Voznja.prosecnoTrajanjeVoznje(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 4);
-            tabelaModel.setValueAt(Voznja.prosecnoVremeBezVoznje(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 5);
-            tabelaModel.setValueAt(Voznja.prosecnaZaradaPoVoznji(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 6);
-            tabelaModel.setValueAt(Voznja.ukupnaZarada(vozac, Voznja.BrojDana.SEDAM_DANA), 0, 7);
-        });
-        dugmeIzvestajMesecDana.addActionListener(e -> {
-            tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.MESEC_DANA), 0, 0);
-            tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.MESEC_DANA), 0, 1);
-            tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.MESEC_DANA), 0, 2);
-            tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.MESEC_DANA), 0, 3);
-            tabelaModel.setValueAt(Voznja.prosecnoTrajanjeVoznje(vozac, Voznja.BrojDana.MESEC_DANA), 0, 4);
-            tabelaModel.setValueAt(Voznja.prosecnoVremeBezVoznje(vozac, Voznja.BrojDana.MESEC_DANA), 0, 5);
-            tabelaModel.setValueAt(Voznja.prosecnaZaradaPoVoznji(vozac, Voznja.BrojDana.MESEC_DANA), 0, 6);
-            tabelaModel.setValueAt(Voznja.ukupnaZarada(vozac, Voznja.BrojDana.MESEC_DANA), 0, 7);
-        });
-        dugmeIzvestajGodinuDana.addActionListener(e -> {
-            tabelaModel.setValueAt(Voznja.brojZavrsenihVoznji(vozac, Voznja.BrojDana.GODINU_DANA), 0, 0);
-            tabelaModel.setValueAt(Voznja.brojPredjenihKilometara(vozac, Voznja.BrojDana.GODINU_DANA), 0, 1);
-            tabelaModel.setValueAt(Voznja.ukupnoTrajanjeVoznji(vozac, Voznja.BrojDana.GODINU_DANA), 0, 2);
-            tabelaModel.setValueAt(Voznja.prosecanBrojKilometaraPoVoznji(vozac, Voznja.BrojDana.GODINU_DANA), 0, 3);
-            tabelaModel.setValueAt(Voznja.prosecnoTrajanjeVoznje(vozac, Voznja.BrojDana.GODINU_DANA), 0, 4);
-            tabelaModel.setValueAt(Voznja.prosecnoVremeBezVoznje(vozac, Voznja.BrojDana.GODINU_DANA), 0, 5);
-            tabelaModel.setValueAt(Voznja.prosecnaZaradaPoVoznji(vozac, Voznja.BrojDana.GODINU_DANA), 0, 6);
-            tabelaModel.setValueAt(Voznja.ukupnaZarada(vozac, Voznja.BrojDana.GODINU_DANA), 0, 7);
-        });
+        dugmeIzvestajJedanDan.addActionListener(e -> popuniTabelu(Voznja.BrojDana.JEDAN_DAN));
+        dugmeIzvestajSedamDana.addActionListener(e -> popuniTabelu(Voznja.BrojDana.SEDAM_DANA));
+        dugmeIzvestajMesecDana.addActionListener(e -> popuniTabelu(Voznja.BrojDana.MESEC_DANA));
+        dugmeIzvestajGodinuDana.addActionListener(e -> popuniTabelu(Voznja.BrojDana.GODINU_DANA));
     }
 }

@@ -104,12 +104,14 @@ public class VoziloForma extends JFrame {
                             if (vozacPostoji && (vozacNemaVozilo || vozacImaVoziloKojeSeMenja)) {
                                 vozilo.setVozacId(Long.parseLong(vozac));
                             } else {
-                                vozilo.setVozacId(null);
-                                JOptionPane.showMessageDialog(null, "Vozac ne postoji ili vec ima dodeljen automobil", "Greska", JOptionPane.WARNING_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Vozac ne postoji ili vec ima dodeljen automobil!", "Greska", JOptionPane.WARNING_MESSAGE);
                             }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Vozac sa tim JMBG-om ne postoji\nIzmene nisu sacuvane!","Greska",JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (NumberFormatException numberFormatException) {
-                        vozilo.setVozacId(null);
+                        JOptionPane.showMessageDialog(null,"Prilikom dodavanja JMBG vozaca mora biti broj!\nIzmene nisu sacuvane!","Greska",JOptionPane.WARNING_MESSAGE);
+
                     }
                 }
                 Vozilo.sacuvajListuVozilaUFajl(listaVozila);

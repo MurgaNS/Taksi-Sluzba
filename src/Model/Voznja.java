@@ -287,7 +287,7 @@ public class Voznja {
             }
         } catch (NullPointerException ignored) {
         }
-        return trajanjeVoznje / brojac;
+        return (trajanjeVoznje / brojac);
     }
 
 

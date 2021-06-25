@@ -1,9 +1,9 @@
-1,Passat B7,Volkswagen,2013,BG-549-432,AUTOMOBIL,false,73457553590
-2,Passat B6,Volkswagen,2009,BG-321-221,AUTOMOBIL,false,123123331
-3,507,Peugeot,2013,BG-333-4211,AUTOMOBIL,false,null
+1,Passat B7,Volkswagen123,2013,BG-549-432,AUTOMOBIL,false,73457553512390
+2,Passat B6,Volkswagen,2009,BG-321-221,AUTOMOBIL,true,null
+3,507,Peugeot,2013,BG-333-4211,AUTOMOBIL,true,null
 4,Corolla,Toyotaa,2010,BG-654-3421,AUTOMOBIL,true,null
-5,Octavia,Skoda,2009,BG-333-3421,AUTOMOBIL,false,null
+5,Octavia,Skodadd,2009,BG-333-3421,AUTOMOBIL,true,null
 6,Fiesta,Ford,2009,BG-555-432,AUTOMOBIL,true,null
 7,asd,asd,2009,asd,AUTOMOBIL,true,null
 8,asdasd,asasd,2001,asdasd,AUTOMOBIL,true,null
-1,Passat B7,Volkswagen,2013,BG-549-432,AUTOMOBIL,false,null
+9,Punto,Fiat,2009,BG-123-333,AUTOMOBIL,false,12312332141231
