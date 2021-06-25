@@ -17,7 +17,7 @@ public class DodeliVoznjuVozacuProzor extends JFrame {
     private JTextField txtAdresaDolaska = new JTextField(30);
     private JLabel lblMusterija = new JLabel("Musterija");
     private JTextField txtMusterija = new JTextField(20);
-    private JLabel lblVozaci = new JLabel("Izaberi vozaca: ");
+    private JLabel lblVozaci = new JLabel("Unesi vozaca(izaberite JMBG vozaca): ");
     private JComboBox<String> comboBoxVozaci = new JComboBox<>();
     private JButton dugmeOk = new JButton("Dodeli");
 

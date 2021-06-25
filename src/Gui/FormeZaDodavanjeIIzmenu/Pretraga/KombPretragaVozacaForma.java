@@ -45,27 +45,56 @@ public class KombPretragaVozacaForma extends JFrame {
         add(dugmeOk);
         add(dugmePonisti);
     }
+    public static boolean vozacPostoji(List<Vozac> vozaci, long vozacJmbg){
+        for(Vozac vozac : vozaci){
+            if(vozac.getJMBG() == vozacJmbg){
+                return true;
+            }
+        }
+        return false;
 
+    }
     public void initActions() {
-        List<Vozac> listaPronadjenihVozaca = new List<>();
         dugmeOk.addActionListener(e -> {
+            List<Vozac> listaPronadjenihVozaca = new List<>();
+
             String ime = txtIme.getText().trim();
             String prezime = txtPrezime.getText().trim();
-            double plata = 0;
-            long automobil = 0;
+            String plataString = txtPlata.getText().trim();
+            String automobilIdString = txtAutomobil.getText().trim();
 
             if (!ime.isEmpty()) {
-                listaPronadjenihVozaca.addAll(Vozac.pretragaPoImenu(ime));
+                List<Vozac> vozaci = Vozac.pretragaPoImenu(ime);
+                for(Vozac vozac : vozaci){
+                    if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
+                        listaPronadjenihVozaca.add(vozac);
+                    }
+                }
             }
             if (!prezime.isEmpty()) {
-                listaPronadjenihVozaca.addAll(Vozac.pretragaPoPrezimenu(prezime));
+                List<Vozac> vozaci = Vozac.pretragaPoPrezimenu(prezime);
+                for(Vozac vozac : vozaci){
+                    if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
+                        listaPronadjenihVozaca.add(vozac);
+                    }
+                }
             }
-            if (plata != 0) {
-                listaPronadjenihVozaca.addAll(Vozac.pretragaPoPlati(plata));
+            if (!plataString.isEmpty()) {
+                double plata = Double.parseDouble(plataString);
+                List<Vozac> vozaci = Vozac.pretragaPoPlati(plata);
+                for(Vozac vozac : vozaci){
+                    if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
+                        listaPronadjenihVozaca.add(vozac);
+                    }
+                }
             }
-//            if (automobil != 0) {
-//                listaPronadjenihVozaca.add(Vozac.pretragaPoAutomobilu(automobil));
-//            }
+            if (!automobilIdString.isEmpty()) {
+                long automobilId = Long.parseLong(automobilIdString);
+                Vozac vozac = Vozac.pretragaPoAutomobilu(automobilId);
+                if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
+                    listaPronadjenihVozaca.add(vozac);
+                }
+            }
 
             if (listaPronadjenihVozaca != null) {
                 VozaciProzor vozaciProzor = new VozaciProzor(listaPronadjenihVozaca);
