@@ -116,13 +116,21 @@ public class Vozac extends Korisnik {
         List<Vozac> listaVozaca = ucitajSveVozace();
         List<Vozac> pronadjeniVozaci = new List<>();
         for (Vozac vozac : listaVozaca) {
-            if (vozac.getPlata() == plata) {
+            if (vozac.getPlata() >= plata) {
                 pronadjeniVozaci.add(vozac);
             }
         }
         return pronadjeniVozaci;
     }
-
+    public static Vozac pretragaPoAutomobilu(long automobilId){
+        List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
+        for(Vozilo vozilo : vozila){
+            long vozacJMBG = vozilo.getVozacId();
+            Vozac vozac = Vozac.pronadjiPoJmbg(vozacJMBG);
+            return vozac;
+        }
+        return null;
+    }
     public static List<Vozac> ucitajSveVozace() {
         List<Vozac> vozaci = new List<>();
         String red;

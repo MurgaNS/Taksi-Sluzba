@@ -64,7 +64,11 @@ public class VoznjaProzor extends JFrame {
     private void initActions(){
         dodeliBtn.addActionListener(e -> {
             Voznja voznja = izabranaVoznja();
-            if (voznja.getStatusVoznje() == Voznja.StatusVoznje.KREIRANA || voznja.getStatusVoznje() == Voznja.StatusVoznje.ODBIJENA) {
+            if(voznja == null){
+                JOptionPane.showMessageDialog(null, "Niste odabrali vožnju.", "Greška", JOptionPane.ERROR_MESSAGE);
+
+            }
+            else if (voznja.getStatusVoznje() == Voznja.StatusVoznje.KREIRANA || voznja.getStatusVoznje() == Voznja.StatusVoznje.ODBIJENA) {
                 DodeliVoznjuVozacuProzor dodeliVoznjuVozacuProzor = new DodeliVoznjuVozacuProzor(voznja);
                 dodeliVoznjuVozacuProzor.setVisible(true);
             }else{
@@ -76,8 +80,11 @@ public class VoznjaProzor extends JFrame {
 
     public Voznja izabranaVoznja(){
         int red = tabelaPodataka.getSelectedRow();
-        long idVoznje = (long) tabelaPodataka.getValueAt(red, 0);
-        Voznja voznja = Voznja.pronadjiPoId(idVoznje);
-        return voznja;
+        if(red != -1 ) {
+            long idVoznje = (long) tabelaPodataka.getValueAt(red, 0);
+            Voznja voznja = Voznja.pronadjiPoId(idVoznje);
+            return voznja;
+        }
+        return null;
     }
 }
