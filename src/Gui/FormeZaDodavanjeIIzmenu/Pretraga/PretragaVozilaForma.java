@@ -46,7 +46,7 @@ public class PretragaVozilaForma extends JFrame {
         add(txtBrojRegOznake);
         add(lblBrojTaksiVozila);
         add(txtBrojTaksiVozila);
-        add(dugmeOk,"split 2");
+        add(dugmeOk, "split 2");
         add(dugmePonisti);
     }
 
@@ -75,7 +75,10 @@ public class PretragaVozilaForma extends JFrame {
                     listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuRegOznake(brojRegOznake));
                 }
                 if (brojTaksiVozila != 0) {
-                    listaPronadjenihVozila.addAll(Vozilo.pretragaPoBrojuTaksiVozila(brojTaksiVozila));
+                    try {
+                        listaPronadjenihVozila.add(Vozilo.pretraziPoId(Vozilo.ucitajNeobrisanaVozila(), brojTaksiVozila));
+                    } catch (IndexOutOfBoundsException | NullPointerException ignored) {
+                    }
                 }
                 if (!listaPronadjenihVozila.isEmpty()) {
                     VoziloProzor prikazPretrageVozilaProzor = new VoziloProzor(listaPronadjenihVozila);
