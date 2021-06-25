@@ -37,7 +37,7 @@ public class VozaciForma extends JFrame {
     private JTextField txtBrojClanskeKarte = new JTextField(20);
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
-    private JLabel lblAuto = new JLabel("Automobil");
+    private JLabel lblAutomobil = new JLabel("Automobil");
     private JComboBox<Long> cbAutomobil = new JComboBox<>();
 
     private Vozac vozac;
@@ -94,7 +94,7 @@ public class VozaciForma extends JFrame {
         add(txtPlata);
         add(lblBrojClanskeKarte);
         add(txtBrojClanskeKarte);
-        add(lblAuto);
+        add(lblAutomobil);
         add(cbAutomobil);
         add(new JLabel());
         add(dugmeOk, "split 2");
@@ -142,7 +142,6 @@ public class VozaciForma extends JFrame {
                 }
                 VozaciForma.this.dispose();
                 VozaciForma.this.setVisible(false);
-                Vozac.upisiVozaca(vozac);
             }
         });
         dugmePonisti.addActionListener(e -> {

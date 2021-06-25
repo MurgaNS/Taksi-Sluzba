@@ -96,7 +96,7 @@ public abstract class Korisnik {
                     case "dispecer" -> {
                         double plata = Double.parseDouble(lineParts[11]);
                         String brTelLinije = lineParts[12];
-                        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[12]);
+                        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[13]);
                         korisnik = new Dispecer(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brTelLinije, odeljenjeRada);
                     }
                 }
