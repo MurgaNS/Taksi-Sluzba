@@ -8,6 +8,7 @@ import Gui.FormeZaPrikaz.PrikazIzvestaja.IzvestajOVozacimaProzor;
 import Gui.FormeZaPrikaz.PrikazIzvestaja.PrikazIzvestajaVoznjiProzor;
 import Gui.FormeZaPrikaz.PrikazIzvestaja.SumiranIzvestajOVozacimaProzor;
 import Gui.FormeZaPrikaz.PrikazIzvestaja.SumiranPrikazIzvestajaVoznjiProzor;
+import Gui.FormeZaPrikaz.PrikazVoznji.AukcijaVoznjeProzor;
 import Gui.FormeZaPrikaz.PrikazVoznji.PrikazSopstvenihVoznjiProzor;
 import Gui.FormeZaPrikaz.PrikazVoznji.PrikazVoznjiPutemAplikacijeProzor;
 import Gui.FormeZaPrikaz.PrikazVoznji.PrikazVoznjiPutemTelefonaProzor;
@@ -25,6 +26,7 @@ public class GlavniProzor extends JFrame {
 
 
     public GlavniProzor(Korisnik korisnik) {
+        System.out.println(korisnik);
         TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         prijavljeniKorisnik = korisnik;
         setTitle("Taksi sluzba " + taksiSluzba.getNaziv());
@@ -51,11 +53,6 @@ public class GlavniProzor extends JFrame {
             VozaciProzor vp = new VozaciProzor();
             vp.setVisible(true);
         });
-
-//        kombPretragaVozacaProzor.addActionListener(e -> {
-//        KombPretragaVozacaProzor pvp = new KombPretragaVozacaProzor();
-//        pvp.setVisible(true);
-//        });
 
         JMenuItem otvoriTaksiSluzbaProzor;
         JMenuItem otvoriVozilaProzor;
@@ -183,7 +180,7 @@ public class GlavniProzor extends JFrame {
             List<Voznja> listaVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA);
             List<Voznja> listaKreiranaNaCekanjuVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU);
             listaVoznji.addAll(listaKreiranaNaCekanjuVoznji);
-            new PrikazSopstvenihVoznjiProzor(listaVoznji);
+            new AukcijaVoznjeProzor();
         });
     }
 

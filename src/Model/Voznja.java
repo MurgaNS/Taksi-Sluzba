@@ -131,10 +131,14 @@ public class Voznja {
     public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
         List<Voznja> voznje = new List<>();
         List<Voznja> listaVoznji = ucitajSveVoznje();
-        for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getVozacJMBG().equals(vozac.getJMBG())) {
-                voznje.add(voznja);
+        try {
+            for (Voznja voznja : listaVoznji) {
+                if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getVozacJMBG().equals(vozac.getJMBG())) {
+                    voznje.add(voznja);
+                }
             }
+        }catch (NullPointerException ignored){
+//            voznja nema dodeljenog vozaca i izbacuje gresku
         }
         return voznje;
     }

@@ -1,5 +1,6 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
+import Model.Aukcija;
 import Model.Vozac;
 import Model.Voznja;
 import net.miginfocom.swing.MigLayout;
@@ -20,7 +21,7 @@ public class AukcijaVozacForma extends JFrame {
         setVisible(true);
         setTitle("Aukcija vozac");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocation(400,250);
+        setLocation(400, 250);
         setSize(600, 300);
         initGUI();
         initActions();
@@ -36,5 +37,17 @@ public class AukcijaVozacForma extends JFrame {
     }
 
     public void initActions() {
+        dugmeOk.addActionListener(e -> {
+            double minutaDoDestinacije = Double.parseDouble(txtMinutaDoDestinacije.getText().trim());
+            long vozacId = vozac.getId();
+            long voznjaId = voznja.getId();
+            long aukcijaId = Aukcija.generisiIdAukcije();
+            double ocena = 0;
+            Aukcija.sacuvajAukciju(new Aukcija(aukcijaId, vozacId, voznjaId, minutaDoDestinacije, ocena));
+        });
+        dugmePonisti.addActionListener(e -> {
+            AukcijaVozacForma.this.dispose();
+            AukcijaVozacForma.this.setVisible(false);
+        });
     }
 }
