@@ -3,6 +3,7 @@ package Model;
 import StrukturePodataka.List;
 
 import java.io.*;
+import java.util.Calendar;
 
 public class Aukcija {
     long aukcijaId;
@@ -68,6 +69,15 @@ public class Aukcija {
             return 1;
         }
         return aukcije.get(aukcije.size() - 1).getAukcijaId() + 1;
+    }
+
+    public static double izracunajOcenu(double brojVoznji, double vremeDolaska, double godinaProizvodnjeVozila, double ocenaVozaca) {
+        double brojVoznjiSuma = (1 / brojVoznji) * 2;
+        double vremeDolaskaSuma = (1 / vremeDolaska) * 4;
+        int trenutnaGodina = Calendar.getInstance().get(Calendar.YEAR);
+        double starostVozilaSuma = (godinaProizvodnjeVozila / trenutnaGodina) * 2;
+        double prosecnaOcenaVozaca = (ocenaVozaca / 5) * 2;
+        return brojVoznjiSuma + vremeDolaskaSuma + starostVozilaSuma + prosecnaOcenaVozaca;
     }
 
     public static void sacuvajAukciju(Aukcija aukcija) {

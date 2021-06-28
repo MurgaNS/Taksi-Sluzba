@@ -122,15 +122,16 @@ public class Vozac extends Korisnik {
         }
         return pronadjeniVozaci;
     }
-    public static Vozac pretragaPoAutomobilu(long automobilId){
+
+    public static Vozac pretragaPoAutomobilu(long automobilId) {
         List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
-        for(Vozilo vozilo : vozila){
+        for (Vozilo vozilo : vozila) {
             long vozacJMBG = vozilo.getVozacId();
-            Vozac vozac = Vozac.pronadjiPoJmbg(vozacJMBG);
-            return vozac;
+            return Vozac.pronadjiPoJmbg(vozacJMBG);
         }
         return null;
     }
+
     public static List<Vozac> ucitajSveVozace() {
         List<Vozac> vozaci = new List<>();
         String red;
@@ -157,6 +158,11 @@ public class Vozac extends Korisnik {
             }
         }
         return v;
+    }
+
+    public static int brojVoznji(Vozac vozac) {
+        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
+        return listaVoznji.size();
     }
 
     public static List<Long> listaIdVozac() {

@@ -139,10 +139,14 @@ public class Vozilo {
 
     public static Long pronadjiVoziloPoVozacu(Long vozacId) {
         List<Vozilo> listaVozila = ucitajSvaVozila();
-        for (Vozilo v : listaVozila) {
-            if (v.getVozacId() != null && v.getVozacId().equals(vozacId)) {
-                return v.getBrTaksiVozila();
+        try {
+            for (Vozilo v : listaVozila) {
+                if (v.getVozacId() != null && v.getVozacId().equals(vozacId)) {
+                    return v.getBrTaksiVozila();
+                }
             }
+        }catch (NullPointerException ignored){
+//            kada vozilo nema vozaca izbaci gresku i pukne program
         }
         return null;
     }
