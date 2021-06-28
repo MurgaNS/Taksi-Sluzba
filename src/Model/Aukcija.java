@@ -5,7 +5,6 @@ import StrukturePodataka.List;
 
 import java.io.*;
 import java.util.Calendar;
-import java.util.Collections;
 
 public class Aukcija {
     long aukcijaId;
@@ -56,8 +55,13 @@ public class Aukcija {
                 }
             }
         }
-        for (int i = 0; i < indeksiZaBrisanje.size(); i++) {
-            voznje.remove(i);
+        for (Integer i : indeksiZaBrisanje) {
+            try {
+                voznje.remove((i - 1));
+
+            } catch (ArrayIndexOutOfBoundsException ignored) {
+//                lista prazna
+            }
         }
         return voznje;
     }
