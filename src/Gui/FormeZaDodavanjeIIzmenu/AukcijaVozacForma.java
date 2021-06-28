@@ -1,5 +1,6 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
+import Gui.FormeZaPrikaz.PrikazVoznji.AukcijaVoznjeProzor;
 import Model.Aukcija;
 import Model.Vozac;
 import Model.Vozilo;
@@ -50,10 +51,14 @@ public class AukcijaVozacForma extends JFrame {
             double ocenaVozaca = 0;
             double ocena = Aukcija.izracunajOcenu(brojVoznji, vremeDolaska, godinaProizvodnjeVozila, ocenaVozaca);
             Aukcija.sacuvajAukciju(new Aukcija(aukcijaId, vozacId, voznjaId, minutaDoDestinacije, ocena));
+            AukcijaVozacForma.this.dispose();
+            AukcijaVozacForma.this.setVisible(false);
+            new AukcijaVoznjeProzor();
         });
         dugmePonisti.addActionListener(e -> {
             AukcijaVozacForma.this.dispose();
             AukcijaVozacForma.this.setVisible(false);
+            new AukcijaVoznjeProzor();
         });
     }
 }

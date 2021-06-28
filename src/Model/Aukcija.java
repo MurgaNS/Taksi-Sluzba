@@ -1,9 +1,11 @@
 package Model;
 
+import Gui.GlavniProzor;
 import StrukturePodataka.List;
 
 import java.io.*;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class Aukcija {
     long aukcijaId;
@@ -38,19 +40,26 @@ public class Aukcija {
         List<Aukcija> aukcije = ucitajAukcije();
         List<Voznja> voznje = Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM);
         voznje.addAll(Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM));
-        List<Voznja> voznjeZaAukciju = new List<>();
+        Vozac vozac = (Vozac) GlavniProzor.getPrijavljeniKorisnik();
+        List<Integer> indeksiZaBrisanje = new List<>();
         if (aukcije.isEmpty()) {
             return voznje;
-        } else {
+        }
+        for (Voznja voznja : voznje) {
             for (Aukcija aukcija : aukcije) {
-                for (Voznja voznja : voznje) {
-                    if (aukcija.getVoznjaId() != voznja.getId()) {
-                        voznjeZaAukciju.add(voznja);
+                try {
+                    if (voznja.getId() == aukcija.getVoznjaId() && aukcija.getVozacId() == vozac.getId()) {
+                        indeksiZaBrisanje.add(voznje.indexOf(voznja));
+                        break;
                     }
+                } catch (NullPointerException ignored) {
                 }
             }
         }
-        return voznjeZaAukciju;
+        for (int i = 0; i < indeksiZaBrisanje.size(); i++) {
+            voznje.remove(i);
+        }
+        return voznje;
     }
 
     public static Aukcija aukcijaDTO(String aukcijaString) {
@@ -96,8 +105,19 @@ public class Aukcija {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Aukcija{" +
+               "aukcijaId=" + aukcijaId +
+               ", voznjaId=" + voznjaId +
+               ", vozacId=" + vozacId +
+               ", minutaDoDestinacije=" + minutaDoDestinacije +
+               ", ocena=" + ocena +
+               '}';
+    }
+
     public String stringToSave() {
-        return aukcijaId + "," + vozacId + "," + voznjaId + "," + minutaDoDestinacije + "," + ocena;
+        return aukcijaId + "," + vozacId + "," + voznjaId + "," + minutaDoDestinacije + "," + ocena + "\n";
     }
 
     public long getAukcijaId() {

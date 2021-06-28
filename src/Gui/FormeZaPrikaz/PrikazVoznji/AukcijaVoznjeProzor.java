@@ -87,6 +87,8 @@ public class AukcijaVoznjeProzor extends JFrame {
                     JOptionPane.showMessageDialog(null, "Ne postoji voznja", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }
+            AukcijaVoznjeProzor.this.dispose();
+            AukcijaVoznjeProzor.this.setVisible(false);
         });
     }
 }
