@@ -42,14 +42,12 @@ public class Aukcija {
             filtriraneVoznje.add(voznja);
             for (Aukcija aukcija : aukcije) {
                 if (aukcija.getVoznjaId() == voznja.getId() && aukcija.getVozacId() == vozac.getId()) {
-                    filtriraneVoznje.remove(Voznja.pronadjiPoId(aukcija.getVoznjaId()));
+                    filtriraneVoznje = Voznja.izbrisiPoId(voznja.getId(), filtriraneVoznje);
+                    break;
                 }
             }
         }
-        if (!filtriraneVoznje.isEmpty()) {
-            return filtriraneVoznje;
-        }
-        return voznje;
+        return filtriraneVoznje;
     }
 
     public static Aukcija aukcijaDTO(String aukcijaString) {

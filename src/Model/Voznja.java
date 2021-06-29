@@ -139,6 +139,16 @@ public class Voznja {
         return kreiraneVoznje;
     }
 
+    public static ArrayList<Voznja> izbrisiPoId(Long voznjaId,ArrayList<Voznja> listaVoznji) {
+        ArrayList<Voznja> voznje = new ArrayList<>();
+        for (Voznja v : listaVoznji) {
+            if (v.getId() != voznjaId) {
+                voznje.add(v);
+            }
+        }
+        return voznje;
+    }
+
     public static ArrayList<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
         ArrayList<Voznja> voznje = new ArrayList<>();
         ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
