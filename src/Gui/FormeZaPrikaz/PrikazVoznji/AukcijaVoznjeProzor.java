@@ -44,7 +44,7 @@ public class AukcijaVoznjeProzor extends JFrame {
 
     private void initGui() {
         add(glavniToolBar, BorderLayout.NORTH);
-        String[] zaglavlja = new String[]{"Id", "Datum porudzbine", "Adresa polaska", "Adresa destinacije", "Status voznje", "Nacin porudzbine", "Naplacen iznos"};
+        String[] zaglavlja = new String[]{"Voznja Id", "Datum porudzbine", "Adresa polaska", "Adresa destinacije", "Status voznje", "Nacin porudzbine", "Naplacen iznos"};
         Object[][] sadrzaj = new Object[listaVoznji.size()][zaglavlja.length];
         for (int i = 0; i < listaVoznji.size(); i++) {
             Voznja voznja = listaVoznji.get(i);
@@ -106,6 +106,8 @@ public class AukcijaVoznjeProzor extends JFrame {
                 Voznja voznja = Voznja.pronadjiPoId(voznjaId,Voznja.ucitajSveVoznje());
                 if (voznja != null) {
                     Aukcija.zavrsiAukciju(voznja);
+                    AukcijaVoznjeProzor.this.dispose();
+                    AukcijaVoznjeProzor.this.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Ne postoji voznja", "Greska", JOptionPane.ERROR_MESSAGE);
                 }

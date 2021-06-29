@@ -1,18 +1,22 @@
 package Model;
 
+import Gui.FormeZaPrikaz.PrikazVoznji.AukcijaVoznjeProzor;
 import Gui.GlavniProzor;
 import StrukturePodataka.ArrayList;
 
 import java.io.*;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class Aukcija {
+    long aukcijaId;
     long voznjaId;
     long vozacId;
     double minutaDoDestinacije;
     double ocena;
 
-    public Aukcija(long voznjaId, long vozacId, double minutaDoDestinacije, double ocena) {
+    public Aukcija(long aukcijaId, long voznjaId, long vozacId, double minutaDoDestinacije, double ocena) {
+        this.aukcijaId = aukcijaId;
         this.voznjaId = voznjaId;
         this.vozacId = vozacId;
         this.minutaDoDestinacije = minutaDoDestinacije;
@@ -33,30 +37,37 @@ public class Aukcija {
         return aukcije;
     }
 
+    public static long generisiIdAukcije() {
+        ArrayList<Aukcija> aukcije = ucitajAukcije();
+        if (aukcije.isEmpty()) {
+            System.out.println("Aukcija.csv prazno -> generisiIdAukcije()");
+            return 1;
+        }
+        return aukcije.get(aukcije.size() - 1).getAukcijaId() + 1;
+    }
+
     public static ArrayList<Voznja> ucitajVoznjeZaAukciju() {
         ArrayList<Aukcija> aukcije = ucitajAukcije();
-        ArrayList<Voznja> voznje = Voznja.ucitajKreiraneVoznje();
+        ArrayList<Voznja> sveVoznje = Voznja.ucitajSveVoznje();
         Vozac vozac = (Vozac) GlavniProzor.getPrijavljeniKorisnik();
-        ArrayList<Voznja> filtriraneVoznje = new ArrayList<>();
-        for (Voznja voznja : voznje) {
-            filtriraneVoznje.add(voznja);
-            for (Aukcija aukcija : aukcije) {
-                if (aukcija.getVoznjaId() == voznja.getId() && aukcija.getVozacId() == vozac.getId()) {
-                    filtriraneVoznje = Voznja.izbrisiPoId(voznja.getId(), filtriraneVoznje);
-                    break;
-                }
+        for (Aukcija aukcija : aukcije) {
+            System.out.println("Aukcija -> " + aukcija);
+            Voznja voznja = Voznja.pronadjiVoznjuPoId(aukcija.getVoznjaId(), sveVoznje);
+            if (voznja != null && aukcija.getVoznjaId() == voznja.getId() && aukcija.getVozacId() == vozac.getJMBG()) {
+                sveVoznje.remove(sveVoznje.indexOf(voznja) - 1);
             }
         }
-        return filtriraneVoznje;
+        return sveVoznje;
     }
 
     public static Aukcija aukcijaDTO(String aukcijaString) {
         String[] lineParts = aukcijaString.split(",");
-        long voznjaId = Long.parseLong(lineParts[0].trim());
-        long vozacId = Long.parseLong(lineParts[1].trim());
-        double minutaDoDestinacije = Double.parseDouble(lineParts[2].trim());
-        double ocena = Double.parseDouble(lineParts[3].trim());
-        return new Aukcija(voznjaId, vozacId, minutaDoDestinacije, ocena);
+        long id = Long.parseLong(lineParts[0].trim());
+        long voznjaId = Long.parseLong(lineParts[1].trim());
+        long vozacId = Long.parseLong(lineParts[2].trim());
+        double minutaDoDestinacije = Double.parseDouble(lineParts[3].trim());
+        double ocena = Double.parseDouble(lineParts[4].trim());
+        return new Aukcija(id, voznjaId, vozacId, minutaDoDestinacije, ocena);
     }
 
     public static double izracunajOcenu(double brojVoznji, double vremeDolaska, double godinaProizvodnjeVozila,
@@ -104,7 +115,6 @@ public class Aukcija {
         ArrayList<Aukcija> aukcije = ucitajAukcije();
         ArrayList<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
         Voznja voznja = Voznja.pronadjiPoId(v.getId(), listaVoznji);
-
         Vozac pobednik = null;
         for (Aukcija aukcija : aukcije) {
             if (aukcija.getVoznjaId() == voznja.getId()) {
@@ -120,9 +130,8 @@ public class Aukcija {
         }
         voznja.setVozacJMBG(pobednik.getJMBG());
         voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
-        System.out.println(voznja);
-        System.out.println(pobednik);
         Voznja.upisiVoznje(listaVoznji);
+        new AukcijaVoznjeProzor();
     }
 
     @Override
@@ -135,7 +144,7 @@ public class Aukcija {
     }
 
     public String stringToSave() {
-        return voznjaId + "," + vozacId + "," + minutaDoDestinacije + "," + ocena + "\n";
+        return aukcijaId + "," + voznjaId + "," + vozacId + "," + minutaDoDestinacije + "," + ocena + "\n";
     }
 
     public long getVoznjaId() {
@@ -170,4 +179,11 @@ public class Aukcija {
         this.ocena = ocena;
     }
 
+    public long getAukcijaId() {
+        return aukcijaId;
+    }
+
+    public void setAukcijaId(long aukcijaId) {
+        this.aukcijaId = aukcijaId;
+    }
 }

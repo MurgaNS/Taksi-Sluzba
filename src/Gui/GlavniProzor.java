@@ -119,9 +119,7 @@ public class GlavniProzor extends JFrame {
             VoznjaProzor voznjaProzor = new VoznjaProzor();
             voznjaProzor.setVisible(true);
         });
-        zavrsiAukcijuProzor.addActionListener(e->{
-            new AukcijaVoznjeProzor();
-        });
+        zavrsiAukcijuProzor.addActionListener(e -> new AukcijaVoznjeProzor());
     }
 
 

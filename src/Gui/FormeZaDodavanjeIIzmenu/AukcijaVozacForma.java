@@ -42,6 +42,7 @@ public class AukcijaVozacForma extends JFrame {
         dugmeOk.addActionListener(e -> {
             double minutaDoDestinacije = Double.parseDouble(txtMinutaDoDestinacije.getText().trim());
             // TODO: 6/29/2021 prebaciti u ID
+            long aukcijaId = Aukcija.generisiIdAukcije();
             long vozacId = vozac.getJMBG();
             long voznjaId = voznja.getId();
             int brojVoznji = Vozac.brojVoznji(vozac);
@@ -50,7 +51,7 @@ public class AukcijaVozacForma extends JFrame {
             int godinaProizvodnjeVozila = vozilo.getGodProizvodnje();
             double ocenaVozaca = 1;
             double ocena = Aukcija.izracunajOcenu(brojVoznji, vremeDolaska, godinaProizvodnjeVozila, ocenaVozaca);
-            Aukcija.sacuvajAukciju(new Aukcija(voznjaId, vozacId, minutaDoDestinacije, ocena));
+            Aukcija.sacuvajAukciju(new Aukcija(aukcijaId, voznjaId, vozacId, minutaDoDestinacije, ocena));
             AukcijaVozacForma.this.dispose();
             AukcijaVozacForma.this.setVisible(false);
             new AukcijaVoznjeProzor();

@@ -110,6 +110,15 @@ public class Voznja {
         return listaVoznji.get(BinarnaPretraga.find(ucitajVoznjaId(), id));
     }
 
+    public static Voznja pronadjiVoznjuPoId(Long id, ArrayList<Voznja> listaVoznji) {
+        for (Voznja v : listaVoznji) {
+            if (v.getId() == id) {
+                return v;
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Long> ucitajVoznjaId() {
         ArrayList<Long> listaId = new ArrayList<>();
         for (Voznja voznja : ucitajSveVoznje()) {
