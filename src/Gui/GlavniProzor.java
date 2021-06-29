@@ -26,7 +26,6 @@ public class GlavniProzor extends JFrame {
 
 
     public GlavniProzor(Korisnik korisnik) {
-        System.out.println(korisnik);
         TaksiSluzba taksiSluzba = TaksiSluzba.preuzmiPodatkeOTaksiSluzbi();
         prijavljeniKorisnik = korisnik;
         setTitle("Taksi sluzba " + taksiSluzba.getNaziv());

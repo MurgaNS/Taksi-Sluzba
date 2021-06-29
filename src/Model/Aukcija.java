@@ -85,11 +85,18 @@ public class Aukcija {
     }
 
     public static double izracunajOcenu(double brojVoznji, double vremeDolaska, double godinaProizvodnjeVozila, double ocenaVozaca) {
+        if (brojVoznji < 1) {
+            brojVoznji = 1;
+        }
+        if (ocenaVozaca < 1) {
+            ocenaVozaca = 1;
+        }
         double brojVoznjiSuma = (1 / brojVoznji) * 2;
         double vremeDolaskaSuma = (1 / vremeDolaska) * 4;
         int trenutnaGodina = Calendar.getInstance().get(Calendar.YEAR);
         double starostVozilaSuma = (godinaProizvodnjeVozila / trenutnaGodina) * 2;
         double prosecnaOcenaVozaca = (ocenaVozaca / 5) * 2;
+
         return brojVoznjiSuma + vremeDolaskaSuma + starostVozilaSuma + prosecnaOcenaVozaca;
     }
 
