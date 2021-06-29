@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class VozaciProzor extends JFrame {
 
@@ -18,7 +18,7 @@ public class VozaciProzor extends JFrame {
 
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
-    private List<Vozac> listaVozaca;
+    private ArrayList<Vozac> listaVozaca;
 
 
     public VozaciProzor() {
@@ -30,7 +30,7 @@ public class VozaciProzor extends JFrame {
         initGUI();
         initActions();
     }
-    public VozaciProzor(List<Vozac> listaPronadjenihVozaca) {
+    public VozaciProzor(ArrayList<Vozac> listaPronadjenihVozaca) {
         listaVozaca = listaPronadjenihVozaca;
         setTitle("Prikaz vozaca");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,7 +84,7 @@ public class VozaciProzor extends JFrame {
                 String vozacId = tabelaModel.getValueAt(red, 0).toString();
 
                 //Vozac vozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG(Long.parseLong(vozacId));
-                List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+                ArrayList<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
                 Vozac vozac = null;
                 for(Korisnik korisnik : korisnici) {
                     if(korisnik.getJMBG() == Long.parseLong(vozacId)){
@@ -101,7 +101,7 @@ public class VozaciProzor extends JFrame {
                         // TODO: 23-Jun-21  treba ubaciti metodu sacuvajListuVozaca u fajl i proslediti listavozaca od gore
                         vozac.setObrisan(true);
                         Korisnik.upisiSveKorisnike(korisnici);
-                        List<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
+                        ArrayList<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
                         try {
                             for (Vozilo vozilo : vozila) {
                                 if (vozilo.getVozacId().equals(vozac.getJMBG())) {

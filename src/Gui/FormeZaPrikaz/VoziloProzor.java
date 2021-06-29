@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class VoziloProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();
@@ -18,8 +18,8 @@ public class VoziloProzor extends JFrame {
     private JButton dugmePretraga = new JButton("Pretraga");
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
-    private List<Vozilo> svaVozila = Vozilo.ucitajSvaVozila();
-    private List<Vozilo> listaVozila;
+    private ArrayList<Vozilo> svaVozila = Vozilo.ucitajSvaVozila();
+    private ArrayList<Vozilo> listaVozila;
 
     public VoziloProzor() {
         listaVozila = Vozilo.ucitajNeobrisanaVozila();
@@ -35,7 +35,7 @@ public class VoziloProzor extends JFrame {
         }
     }
 
-    public VoziloProzor(List<Vozilo> lista) {
+    public VoziloProzor(ArrayList<Vozilo> lista) {
         listaVozila = lista;
         if (!listaVozila.isEmpty()) {
             setTitle("Prikaz vozila");

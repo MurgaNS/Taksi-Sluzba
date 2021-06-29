@@ -1,17 +1,11 @@
 package Gui.FormeZaDodavanjeIIzmenu;
 
-import Gui.FormeZaPrikaz.TaksiSluzbaProzor;
-import Gui.FormeZaPrikaz.VozaciProzor;
-import Gui.FormeZaPrikaz.VoziloProzor;
 import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import StrukturePodataka.List;
+
+import StrukturePodataka.ArrayList;
 
 
 public class VozaciForma extends JFrame {
@@ -41,8 +35,8 @@ public class VozaciForma extends JFrame {
     private JComboBox<Long> cbAutomobil = new JComboBox<>();
 
     private Vozac vozac;
-    List<Vozac> listaVozaca = Vozac.ucitajSveVozace();
-    List<Vozilo> listaVozila = (List<Vozilo>) Vozilo.ucitajSvaVozila();
+    ArrayList<Vozac> listaVozaca = Vozac.ucitajSveVozace();
+    ArrayList<Vozilo> listaVozila =  Vozilo.ucitajSvaVozila();
 
     public VozaciForma(Vozac v) {
         try {
@@ -104,7 +98,7 @@ public class VozaciForma extends JFrame {
     public void initActions() {
         dugmeOk.addActionListener(e -> {
             if (validacija()) {
-                List<Vozac> vozaci = Vozac.ucitajSveVozace();
+                ArrayList<Vozac> vozaci = Vozac.ucitajSveVozace();
                 long id = 1;
                 if(!vozaci.isEmpty()) {
                     id = vozaci.get(vozaci.size() - 1).getId() + 1;
@@ -123,12 +117,12 @@ public class VozaciForma extends JFrame {
                 if (vozac == null) {
                     Vozac vozac = new Vozac(id,JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
                     //Vozac.upisiVozaca(vozac);
-                    List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+                    ArrayList<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
                     korisnici.add(vozac);
                     Korisnik.upisiSveKorisnike(korisnici);
                     JOptionPane.showMessageDialog(null, "Uspesno kreiran vozac!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+                    ArrayList<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
                     for(Korisnik korisnik : korisnici){
                         if(korisnik.getJMBG() == JMBG){
                             vozac = (Vozac) korisnik;
@@ -168,7 +162,7 @@ public class VozaciForma extends JFrame {
             ok = false;
         } else if (vozac == null) {
             String id = txtJMBG.getText().trim();
-            List<Vozac> listaVozaca = Vozac.ucitajSveVozace();
+            ArrayList<Vozac> listaVozaca = Vozac.ucitajSveVozace();
 //            Vozac postojiVozac = (Vozac) Vozac.nadjiKorisnikaPrekoJMBG(vozac.getJMBG());
 //            if (postojiVozac != null) {
 //                poruka += "- Vozac sa unetim ID vec postoji\n";

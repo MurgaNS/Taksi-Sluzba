@@ -5,8 +5,8 @@ import Model.Vozac;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import StrukturePodataka.List;
+
+import StrukturePodataka.ArrayList;
 
 
 public class KombPretragaVozacaForma extends JFrame {
@@ -45,7 +45,7 @@ public class KombPretragaVozacaForma extends JFrame {
         add(dugmeOk);
         add(dugmePonisti);
     }
-    public static boolean vozacPostoji(List<Vozac> vozaci, long vozacJmbg){
+    public static boolean vozacPostoji(ArrayList<Vozac> vozaci, long vozacJmbg){
         for(Vozac vozac : vozaci){
             if(vozac.getJMBG() == vozacJmbg){
                 return true;
@@ -56,7 +56,7 @@ public class KombPretragaVozacaForma extends JFrame {
     }
     public void initActions() {
         dugmeOk.addActionListener(e -> {
-            List<Vozac> listaPronadjenihVozaca = new List<>();
+            ArrayList<Vozac> listaPronadjenihVozaca = new ArrayList<>();
 
             String ime = txtIme.getText().trim();
             String prezime = txtPrezime.getText().trim();
@@ -64,7 +64,7 @@ public class KombPretragaVozacaForma extends JFrame {
             String automobilIdString = txtAutomobil.getText().trim();
 
             if (!ime.isEmpty()) {
-                List<Vozac> vozaci = Vozac.pretragaPoImenu(ime);
+                ArrayList<Vozac> vozaci = Vozac.pretragaPoImenu(ime);
                 for(Vozac vozac : vozaci){
                     if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
                         listaPronadjenihVozaca.add(vozac);
@@ -72,7 +72,7 @@ public class KombPretragaVozacaForma extends JFrame {
                 }
             }
             if (!prezime.isEmpty()) {
-                List<Vozac> vozaci = Vozac.pretragaPoPrezimenu(prezime);
+                ArrayList<Vozac> vozaci = Vozac.pretragaPoPrezimenu(prezime);
                 for(Vozac vozac : vozaci){
                     if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
                         listaPronadjenihVozaca.add(vozac);
@@ -81,7 +81,7 @@ public class KombPretragaVozacaForma extends JFrame {
             }
             if (!plataString.isEmpty()) {
                 double plata = Double.parseDouble(plataString);
-                List<Vozac> vozaci = Vozac.pretragaPoPlati(plata);
+                ArrayList<Vozac> vozaci = Vozac.pretragaPoPlati(plata);
                 for(Vozac vozac : vozaci){
                     if(!vozacPostoji(listaPronadjenihVozaca, vozac.getJMBG())){
                         listaPronadjenihVozaca.add(vozac);

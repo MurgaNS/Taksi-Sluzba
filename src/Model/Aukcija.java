@@ -1,28 +1,26 @@
 package Model;
 
 import Gui.GlavniProzor;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 import java.io.*;
 import java.util.Calendar;
 
 public class Aukcija {
-    long aukcijaId;
     long voznjaId;
     long vozacId;
     double minutaDoDestinacije;
     double ocena;
 
-    public Aukcija(long aukcijaId, long voznjaId, long vozacId, double minutaDoDestinacije, double ocena) {
-        this.aukcijaId = aukcijaId;
+    public Aukcija(long voznjaId, long vozacId, double minutaDoDestinacije, double ocena) {
         this.voznjaId = voznjaId;
         this.vozacId = vozacId;
         this.minutaDoDestinacije = minutaDoDestinacije;
         this.ocena = ocena;
     }
 
-    public static List<Aukcija> ucitajAukcije() {
-        List<Aukcija> aukcije = new List<>();
+    public static ArrayList<Aukcija> ucitajAukcije() {
+        ArrayList<Aukcija> aukcije = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/aukcije.csv"));
@@ -35,56 +33,36 @@ public class Aukcija {
         return aukcije;
     }
 
-    public static List<Voznja> ucitajVoznjeZaAukciju() {
-        List<Aukcija> aukcije = ucitajAukcije();
-        List<Voznja> voznje = Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA, Voznja.NacinPorudzbine.TELEFONOM);
-        voznje.addAll(Voznja.ucitajVoznje(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU, Voznja.NacinPorudzbine.APLIKACIJOM));
+    public static ArrayList<Voznja> ucitajVoznjeZaAukciju() {
+        ArrayList<Aukcija> aukcije = ucitajAukcije();
+        ArrayList<Voznja> voznje = Voznja.ucitajKreiraneVoznje();
         Vozac vozac = (Vozac) GlavniProzor.getPrijavljeniKorisnik();
-        List<Integer> indeksiZaBrisanje = new List<>();
-        if (aukcije.isEmpty()) {
-            return voznje;
-        }
+        ArrayList<Voznja> filtriraneVoznje = new ArrayList<>();
         for (Voznja voznja : voznje) {
+            filtriraneVoznje.add(voznja);
             for (Aukcija aukcija : aukcije) {
-                try {
-                    if (voznja.getId() == aukcija.getVoznjaId() && aukcija.getVozacId() == vozac.getId()) {
-                        indeksiZaBrisanje.add(voznje.indexOf(voznja));
-                        break;
-                    }
-                } catch (NullPointerException ignored) {
+                if (aukcija.getVoznjaId() == voznja.getId() && aukcija.getVozacId() == vozac.getId()) {
+                    filtriraneVoznje.remove(Voznja.pronadjiPoId(aukcija.getVoznjaId()));
                 }
             }
         }
-        for (Integer i : indeksiZaBrisanje) {
-            try {
-                voznje.remove((i - 1));
-
-            } catch (ArrayIndexOutOfBoundsException ignored) {
-//                lista prazna
-            }
+        if (!filtriraneVoznje.isEmpty()) {
+            return filtriraneVoznje;
         }
         return voznje;
     }
 
     public static Aukcija aukcijaDTO(String aukcijaString) {
         String[] lineParts = aukcijaString.split(",");
-        long aukcijaId = Long.parseLong(lineParts[0]);
-        long voznjaId = Long.parseLong(lineParts[1]);
-        long vozacId = Long.parseLong(lineParts[2]);
-        double minutaDoDestinacije = Double.parseDouble(lineParts[3]);
-        double ocena = Double.parseDouble(lineParts[4]);
-        return new Aukcija(aukcijaId, voznjaId, vozacId, minutaDoDestinacije, ocena);
+        long voznjaId = Long.parseLong(lineParts[0].trim());
+        long vozacId = Long.parseLong(lineParts[1].trim());
+        double minutaDoDestinacije = Double.parseDouble(lineParts[2].trim());
+        double ocena = Double.parseDouble(lineParts[3].trim());
+        return new Aukcija(voznjaId, vozacId, minutaDoDestinacije, ocena);
     }
 
-    public static long generisiIdAukcije() {
-        List<Aukcija> aukcije = ucitajAukcije();
-        if (aukcije.isEmpty()) {
-            return 1;
-        }
-        return aukcije.get(aukcije.size() - 1).getAukcijaId() + 1;
-    }
-
-    public static double izracunajOcenu(double brojVoznji, double vremeDolaska, double godinaProizvodnjeVozila, double ocenaVozaca) {
+    public static double izracunajOcenu(double brojVoznji, double vremeDolaska, double godinaProizvodnjeVozila,
+                                        double ocenaVozaca) {
         if (brojVoznji < 1) {
             brojVoznji = 1;
         }
@@ -101,7 +79,7 @@ public class Aukcija {
     }
 
     public static void sacuvajAukciju(Aukcija aukcija) {
-        List<Aukcija> aukcije = ucitajAukcije();
+        ArrayList<Aukcija> aukcije = ucitajAukcije();
         aukcije.add(aukcija);
         File file = new File("src//Data//aukcije.csv");
         try {
@@ -118,9 +96,7 @@ public class Aukcija {
 
     @Override
     public String toString() {
-        return "Aukcija{" +
-               "aukcijaId=" + aukcijaId +
-               ", voznjaId=" + voznjaId +
+        return "Aukcija{voznjaId=" + voznjaId +
                ", vozacId=" + vozacId +
                ", minutaDoDestinacije=" + minutaDoDestinacije +
                ", ocena=" + ocena +
@@ -128,15 +104,7 @@ public class Aukcija {
     }
 
     public String stringToSave() {
-        return aukcijaId + "," + vozacId + "," + voznjaId + "," + minutaDoDestinacije + "," + ocena + "\n";
-    }
-
-    public long getAukcijaId() {
-        return aukcijaId;
-    }
-
-    public void setAukcijaId(long aukcijaId) {
-        this.aukcijaId = aukcijaId;
+        return vozacId + "," + voznjaId + "," + minutaDoDestinacije + "," + ocena + "\n";
     }
 
     public long getVoznjaId() {

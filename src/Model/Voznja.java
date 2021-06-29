@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import BinarnaPretraga.BinarnaPretraga;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class Voznja {
 
@@ -109,17 +109,17 @@ public class Voznja {
         return ucitajSveVoznje().get(BinarnaPretraga.find(ucitajVoznjaId(), id));
     }
 
-    public static List<Long> ucitajVoznjaId() {
-        List<Long> listaId = new List<>();
+    public static ArrayList<Long> ucitajVoznjaId() {
+        ArrayList<Long> listaId = new ArrayList<>();
         for (Voznja voznja : ucitajSveVoznje()) {
             listaId.add(voznja.getId());
         }
         return listaId;
     }
 
-    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine) {
-        List<Voznja> voznjePutemAplikacije = new List<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
+    public static ArrayList<Voznja> ucitajVoznje(StatusVoznje statusVoznje, NacinPorudzbine nacinPorudzbine) {
+        ArrayList<Voznja> voznjePutemAplikacije = new ArrayList<>();
+        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getNacinPorudzbine().equals(nacinPorudzbine)) {
                 voznjePutemAplikacije.add(voznja);
@@ -128,24 +128,35 @@ public class Voznja {
         return voznjePutemAplikacije;
     }
 
-    public static List<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
-        List<Voznja> voznje = new List<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
+    public static ArrayList<Voznja> ucitajKreiraneVoznje() {
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> kreiraneVoznje = new ArrayList<>();
+        for (Voznja voznja : voznje) {
+            if (voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA_NA_CEKANJU) || voznja.getStatusVoznje().equals(StatusVoznje.KREIRANA)) {
+                kreiraneVoznje.add(voznja);
+            }
+        }
+        return kreiraneVoznje;
+    }
+
+    public static ArrayList<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
+        ArrayList<Voznja> voznje = new ArrayList<>();
+        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         try {
             for (Voznja voznja : listaVoznji) {
                 if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getVozacJMBG().equals(vozac.getJMBG())) {
                     voznje.add(voznja);
                 }
             }
-        }catch (NullPointerException ignored){
+        } catch (NullPointerException ignored) {
 //            voznja nema dodeljenog vozaca i izbacuje gresku
         }
         return voznje;
     }
 
-    public static List<Voznja> ucitajVoznju(StatusVoznje statusVoznje) {
-        List<Voznja> voznje = new List<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
+    public static ArrayList<Voznja> ucitajVoznju(StatusVoznje statusVoznje) {
+        ArrayList<Voznja> voznje = new ArrayList<>();
+        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getStatusVoznje().equals(statusVoznje)) {
                 voznje.add(voznja);
@@ -154,9 +165,9 @@ public class Voznja {
         return voznje;
     }
 
-    public static List<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
-        List<Voznja> sveVoznjePutemAplikacije = new List<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
+    public static ArrayList<Voznja> sveVoznjeNarucenePutemAplikacije(BrojDana brojDana) {
+        ArrayList<Voznja> sveVoznjePutemAplikacije = new ArrayList<>();
+        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine().equals(NacinPorudzbine.APLIKACIJOM) && voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA)) {
                 sveVoznjePutemAplikacije.add(voznja);
@@ -165,9 +176,9 @@ public class Voznja {
         return sveVoznjePutemAplikacije;
     }
 
-    public static List<Voznja> sveVoznjeNarucenePutemTelefona(BrojDana brojDana) {
-        List<Voznja> voznjePutemTelefona = new List<>();
-        List<Voznja> listaVoznji = ucitajSveVoznje();
+    public static ArrayList<Voznja> sveVoznjeNarucenePutemTelefona(BrojDana brojDana) {
+        ArrayList<Voznja> voznjePutemTelefona = new ArrayList<>();
+        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja voznja : listaVoznji) {
             if (voznja.getNacinPorudzbine().equals(NacinPorudzbine.TELEFONOM) && voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA)) {
                 voznjePutemTelefona.add(voznja);
@@ -188,9 +199,9 @@ public class Voznja {
         return null;
     }
 
-    public static List<Voznja> ucitajVoznje(Korisnik korisnik) {
-        List<Voznja> voznje = ucitajSveVoznje();
-        List<Voznja> listaVoznji = new List<>();
+    public static ArrayList<Voznja> ucitajVoznje(Korisnik korisnik) {
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> listaVoznji = new ArrayList<>();
         for (Voznja voznja : voznje) {
             if (korisnik instanceof Musterija) {
                 try {
@@ -214,7 +225,7 @@ public class Voznja {
     }
 
     public static double brojPredjenihKilometara(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double brKilometara = 0;
         try {
             for (Voznja voznja : voznje) {
@@ -230,7 +241,7 @@ public class Voznja {
     }
 
     public static double prosecanBrojKilometaraPoVoznji(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double brKilometara = 0;
         int brojac = 0;
         try {
@@ -246,7 +257,7 @@ public class Voznja {
     }
 
     public static double prosecanBrojPredjenihKilometara(BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double prosecanBrKilometara = 0;
         int brojac = 0;
         try {
@@ -263,7 +274,7 @@ public class Voznja {
 
 
     public static double prosecnoTrajanjeVoznje(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double trajanjeVoznje = 0;
         int brojac = 0;
         try {
@@ -279,7 +290,7 @@ public class Voznja {
     }
 
     public static double ukupnoProsecnoTrajanjeVoznje(BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double trajanjeVoznje = 0;
         int brojac = 0;
         try {
@@ -296,7 +307,7 @@ public class Voznja {
 
 
     public static double ukupnaZarada(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
         try {
             for (Voznja voznja : voznje) {
@@ -310,8 +321,8 @@ public class Voznja {
     }
 
     public static int brojAktivnihVozaca(BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
-        List<Long> vozaciJmbg = new List<>();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Long> vozaciJmbg = new ArrayList<>();
         for (Voznja voznja : voznje) {
             if (voznja.getVozacJMBG() != null && !vozaciJmbg.contains(voznja.getVozacJMBG())
                 && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
@@ -324,7 +335,7 @@ public class Voznja {
     }
 
     public static double sumaUkupneZarade(BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double sumaZarade = 0;
         try {
             for (Voznja voznja : voznje) {
@@ -338,7 +349,7 @@ public class Voznja {
     }
 
     public static double prosecnoVremeBezVoznje(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double radnoVreme = 0;
         double trajanjeVoznji = 0;
         try {
@@ -354,7 +365,7 @@ public class Voznja {
     }
 
     public static double prosecnaZaradaPoVoznji(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
         int brojac = 0;
         try {
@@ -370,7 +381,7 @@ public class Voznja {
     }
 
     public static double sumaProsecneZaradePoVoznji(BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double zarada = 0;
         int brojac = 0;
         try {
@@ -386,7 +397,7 @@ public class Voznja {
     }
 
     public static double ukupnoTrajanjeVoznji(Vozac vozac, BrojDana brojDana) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         double ukupnoTrajanjeVoznji = 0;
         try {
             for (Voznja voznja : voznje) {
@@ -412,7 +423,7 @@ public class Voznja {
 
     public static int brojZavrsenihVoznji(Vozac vozac, BrojDana brojDana) {
         try {
-            List<Voznja> voznje = ucitajSveVoznje();
+            ArrayList<Voznja> voznje = ucitajSveVoznje();
             int brVoznji = 0;
             for (Voznja voznja : voznje) {
                 if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getVozacJMBG().equals(vozac.getJMBG()) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
@@ -427,7 +438,7 @@ public class Voznja {
 
     public static int ukupanBrojVoznji(BrojDana brojDana) {
         try {
-            List<Voznja> voznje = ucitajSveVoznje();
+            ArrayList<Voznja> voznje = ucitajSveVoznje();
             int ukupanBrojVoznji = 0;
             for (Voznja voznja : voznje) {
                 if (voznja.getStatusVoznje().equals(StatusVoznje.ZAVRSENA) && voznja.getDatumPorudzbine().after(vratiDatum(brojDana))) {
@@ -467,8 +478,8 @@ public class Voznja {
         return new Voznja(id, datumPorudzbine, adresaPolaska, adresaDestinacije, brojPredjenihKilometara, trajanjeVoznjeUMin, statusVoznje, nacinPorudzbine, vozacId, musterijaId, naplacenIznos, napomena);
     }
 
-    public static List<Voznja> ucitajSveVoznje() {
-        List<Voznja> sveVoznje = new List<>();
+    public static ArrayList<Voznja> ucitajSveVoznje() {
+        ArrayList<Voznja> sveVoznje = new ArrayList<>();
         File file = new File("src//Data//voznje.csv");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -484,7 +495,7 @@ public class Voznja {
         return sveVoznje;
     }
 
-    public static void upisiVoznje(List<Voznja> voznje) {
+    public static void upisiVoznje(ArrayList<Voznja> voznje) {
         File file = new File("src\\Data\\voznje.csv");
         try {
             PrintWriter writer = new PrintWriter(file);
@@ -502,7 +513,7 @@ public class Voznja {
     public static long preuzmiPoslednjiId() {
         long id = 0;
         try {
-            List<Voznja> listaVoznji = ucitajSveVoznje();
+            ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
             id = listaVoznji.get(listaVoznji.size() - 1).getId();
         } catch (NumberFormatException | IndexOutOfBoundsException ignored) {
         }
@@ -510,7 +521,7 @@ public class Voznja {
     }
 
     public static void izmeniStatusVoznje(Voznja voznja) {
-        List<Voznja> listaVoznji = ucitajSveVoznje();
+        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         for (Voznja v : listaVoznji) {
             if (v.getId() == voznja.getId()) {
                 v.setStatusVoznje(voznja.getStatusVoznje());
@@ -522,7 +533,7 @@ public class Voznja {
     }
 
     public static void sacuvajNovuVoznju(Voznja voznja) {
-        List<Voznja> voznje = ucitajSveVoznje();
+        ArrayList<Voznja> voznje = ucitajSveVoznje();
         voznje.add(voznja);
         upisiVoznje(voznje);
 

@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 
 public class Vozac extends Korisnik {
@@ -14,11 +14,11 @@ public class Vozac extends Korisnik {
     private Long id;
     private double plata;
     private int brojClanskeKarte;
-    private List<Voznja> listaVoznji;
+    private ArrayList<Voznja> listaVoznji;
     private Long brTaksiVozila;
 
 
-    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, List<Voznja> listaVoznji, Long brTaksiVozila) {
+    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, ArrayList<Voznja> listaVoznji, Long brTaksiVozila) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.id = id;
         this.plata = plata;
@@ -40,8 +40,8 @@ public class Vozac extends Korisnik {
     }
 
 
-    public static List<Voznja> ucitajListuVoznji(Vozac vozac) {
-        List<Voznja> listaVoznji = new List<>();
+    public static ArrayList<Voznja> ucitajListuVoznji(Vozac vozac) {
+        ArrayList<Voznja> listaVoznji = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/voznje.csv"));
@@ -66,7 +66,7 @@ public class Vozac extends Korisnik {
     }
 
     public static Vozac pronadjiPoJmbg(Long vozacId) {
-        List<Vozac> vozaci = ucitajSveVozace();
+        ArrayList<Vozac> vozaci = ucitajSveVozace();
         for (Vozac vozac : vozaci) {
             if (vozac.getJMBG().equals(vozacId)) {
                 return vozac;
@@ -90,9 +90,9 @@ public class Vozac extends Korisnik {
         }
     }
 
-    public static List<Vozac> pretragaPoImenu(String ime) {
-        List<Vozac> listaVozaca = ucitajSveVozace();
-        List<Vozac> pronadjeniVozaci = new List<>();
+    public static ArrayList<Vozac> pretragaPoImenu(String ime) {
+        ArrayList<Vozac> listaVozaca = ucitajSveVozace();
+        ArrayList<Vozac> pronadjeniVozaci = new ArrayList<>();
         for (Vozac vozac : listaVozaca) {
             if (vozac.getIme().toLowerCase().contains(ime.toLowerCase())) {
                 pronadjeniVozaci.add(vozac);
@@ -101,9 +101,9 @@ public class Vozac extends Korisnik {
         return pronadjeniVozaci;
     }
 
-    public static List<Vozac> pretragaPoPrezimenu(String prezime) {
-        List<Vozac> listaVozaca = ucitajSveVozace();
-        List<Vozac> pronadjeniVozaci = new List<>();
+    public static ArrayList<Vozac> pretragaPoPrezimenu(String prezime) {
+        ArrayList<Vozac> listaVozaca = ucitajSveVozace();
+        ArrayList<Vozac> pronadjeniVozaci = new ArrayList<>();
         for (Vozac vozac : listaVozaca) {
             if (vozac.getPrezime().toLowerCase().contains(prezime.toLowerCase())) {
                 pronadjeniVozaci.add(vozac);
@@ -112,9 +112,9 @@ public class Vozac extends Korisnik {
         return pronadjeniVozaci;
     }
 
-    public static List<Vozac> pretragaPoPlati(double plata) {
-        List<Vozac> listaVozaca = ucitajSveVozace();
-        List<Vozac> pronadjeniVozaci = new List<>();
+    public static ArrayList<Vozac> pretragaPoPlati(double plata) {
+        ArrayList<Vozac> listaVozaca = ucitajSveVozace();
+        ArrayList<Vozac> pronadjeniVozaci = new ArrayList<>();
         for (Vozac vozac : listaVozaca) {
             if (vozac.getPlata() >= plata) {
                 pronadjeniVozaci.add(vozac);
@@ -124,7 +124,7 @@ public class Vozac extends Korisnik {
     }
 
     public static Vozac pretragaPoAutomobilu(long automobilId) {
-        List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
+        ArrayList<Vozilo> vozila = Vozilo.ucitajSvaVozila();
         for (Vozilo vozilo : vozila) {
             long vozacJMBG = vozilo.getVozacId();
             return Vozac.pronadjiPoJmbg(vozacJMBG);
@@ -132,8 +132,8 @@ public class Vozac extends Korisnik {
         return null;
     }
 
-    public static List<Vozac> ucitajSveVozace() {
-        List<Vozac> vozaci = new List<>();
+    public static ArrayList<Vozac> ucitajSveVozace() {
+        ArrayList<Vozac> vozaci = new ArrayList<>();
         String red;
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/Data/korisnici.csv"));
@@ -161,12 +161,12 @@ public class Vozac extends Korisnik {
     }
 
     public static int brojVoznji(Vozac vozac) {
-        List<Voznja> listaVoznji = ucitajListuVoznji(vozac);
+        ArrayList<Voznja> listaVoznji = ucitajListuVoznji(vozac);
         return listaVoznji.size();
     }
 
-    public static List<Long> listaIdVozac() {
-        List<Long> listaId = new List<>();
+    public static ArrayList<Long> listaIdVozac() {
+        ArrayList<Long> listaId = new ArrayList<>();
         for (Vozac vozac : ucitajSveVozace()) {
             listaId.add(vozac.getId());
         }
@@ -229,11 +229,11 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
     }
 
-    public List<Voznja> getListaVoznji() {
+    public ArrayList<Voznja> getListaVoznji() {
         return listaVoznji;
     }
 
-    public void setListaVoznji(List<Voznja> listaVoznji) {
+    public void setListaVoznji(ArrayList<Voznja> listaVoznji) {
         this.listaVoznji = listaVoznji;
     }
 

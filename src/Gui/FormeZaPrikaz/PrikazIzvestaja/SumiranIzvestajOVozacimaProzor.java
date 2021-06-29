@@ -6,7 +6,7 @@ import Model.Voznja;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 
 public class SumiranIzvestajOVozacimaProzor extends JFrame {
@@ -19,7 +19,7 @@ public class SumiranIzvestajOVozacimaProzor extends JFrame {
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
 
-    private List<Vozac> listaVozaca;
+    private ArrayList<Vozac> listaVozaca;
 
     public SumiranIzvestajOVozacimaProzor() {
         listaVozaca = Vozac.ucitajSveVozace();

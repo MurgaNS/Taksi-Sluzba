@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.text.DecimalFormat;
 
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 
 public class IzvestajOVozacimaProzor extends JFrame {
@@ -23,7 +23,7 @@ public class IzvestajOVozacimaProzor extends JFrame {
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
 
-    private List<Vozac> listaVozaca;
+    private ArrayList<Vozac> listaVozaca;
 
     public IzvestajOVozacimaProzor() {
         listaVozaca = Vozac.ucitajSveVozace();

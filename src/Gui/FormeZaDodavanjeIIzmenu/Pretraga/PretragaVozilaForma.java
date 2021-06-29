@@ -6,7 +6,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class PretragaVozilaForma extends JFrame {
     private JLabel lblModel = new JLabel("Model");
@@ -54,7 +54,7 @@ public class PretragaVozilaForma extends JFrame {
         txtBrojTaksiVozila.setText("0");
         txtGodinaProizvodnje.setText("0");
 
-        List<Vozilo> listaPronadjenihVozila = new List<>();
+        ArrayList<Vozilo> listaPronadjenihVozila = new ArrayList<>();
         dugmeOk.addActionListener(e -> {
             if (validacija()) {
                 String model = txtModel.getText().trim();

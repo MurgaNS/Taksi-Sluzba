@@ -6,9 +6,8 @@ import Model.Voznja;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import StrukturePodataka.List;
+
+import StrukturePodataka.ArrayList;
 
 public class DodeliVoznjuVozacuProzor extends JFrame {
     private JLabel lblAdresaPolaska = new JLabel("Adresa polaska");
@@ -49,7 +48,7 @@ public class DodeliVoznjuVozacuProzor extends JFrame {
         txtMusterija.setText(musterija.getIme() + " " + musterija.getPrezime());
         add(lblVozaci);
         add(comboBoxVozaci);
-        List<Vozilo> vozila = Vozilo.ucitajSvaVozila();
+        ArrayList<Vozilo> vozila = Vozilo.ucitajSvaVozila();
         for (Vozilo vozilo : vozila){
             if(vozilo.getVozacId() != null){
                 comboBoxVozaci.addItem(String.valueOf(vozilo.getVozacId()));

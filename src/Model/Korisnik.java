@@ -1,8 +1,8 @@
 package Model;
 
 import java.io.*;
-import java.util.ArrayList;
-import StrukturePodataka.List;
+
+import StrukturePodataka.ArrayList;
 
 
 public abstract class Korisnik {
@@ -35,7 +35,7 @@ public abstract class Korisnik {
     }
 
     public static Korisnik postojiKorisnik(String korisnickoIme, String lozinka) {
-        List<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
+        ArrayList<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
         for (Korisnik k : korisnici) {
             if (k.getKorisnickoIme().equals(korisnickoIme) && k.getLozinka().equals(lozinka)) {
                 return k;
@@ -55,7 +55,7 @@ public abstract class Korisnik {
     }
 
     public static Korisnik nadjiKorisnikaPrekoJMBG(Long JMBG) {
-        List<Korisnik> korisnici = ucitajSveKorisnike();
+        ArrayList<Korisnik> korisnici = ucitajSveKorisnike();
         for (Korisnik korisnik : korisnici) {
             if (korisnik.getJMBG().equals(JMBG)) {
                 return korisnik;
@@ -64,8 +64,8 @@ public abstract class Korisnik {
         return null;
     }
 
-    public static List<Korisnik> ucitajSveKorisnike() {
-        List<Korisnik> sviKorisnici = new List<>();
+    public static ArrayList<Korisnik> ucitajSveKorisnike() {
+        ArrayList<Korisnik> sviKorisnici = new ArrayList<>();
         File file = new File("src\\Data\\korisnici.csv");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -123,7 +123,7 @@ public abstract class Korisnik {
                "," + brojTelefona +
                "," + obrisan;
     }
-    public static void upisiSveKorisnike(List<Korisnik> korisnici) {
+    public static void upisiSveKorisnike(ArrayList<Korisnik> korisnici) {
         File file = new File("src\\Data\\korisnici.csv");
         try {
             PrintWriter writer = new PrintWriter(file);

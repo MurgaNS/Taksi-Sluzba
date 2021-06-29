@@ -7,13 +7,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
     private JToolBar glavniToolBar = new JToolBar();
     private JButton dugmePrihvati = new JButton("Prihvati");
     private JButton dugmeOdbij = new JButton("Odbij");
-    private List<Voznja> listaVoznji;
+    private ArrayList<Voznja> listaVoznji;
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
 

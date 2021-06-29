@@ -3,18 +3,18 @@ package StrukturePodataka;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class List<E> implements Iterable<E> {
+public class ArrayList<E> implements Iterable<E> {
     private static final int INIT_SIZE = 10;
     private E[] myArray;
     private int length;
 
     //Konstruktori
-    public List() {
-        this(List.INIT_SIZE);
+    public ArrayList() {
+        this(ArrayList.INIT_SIZE);
     }
 
     @SuppressWarnings(value = {"unchecked"})
-    public List(int capacity) {
+    public ArrayList(int capacity) {
         this.myArray = (E[]) new Object[capacity];
         this.length = 0;
     }
@@ -53,7 +53,7 @@ public class List<E> implements Iterable<E> {
         length++;
     }
 
-    public void addAll(List<E> newElements) {
+    public void addAll(ArrayList<E> newElements) {
         for(E element: newElements){
             add(0,element);
         }
@@ -69,7 +69,6 @@ public class List<E> implements Iterable<E> {
         rangeCheck(index, length - 1);
         return myArray[index];
     }
-
     // Vraca index elementa
     public int indexOf(E element) {
         for (int i = 0; i < length; i++) {
@@ -131,7 +130,7 @@ public class List<E> implements Iterable<E> {
             public void remove() {
                 if (nextIndex <= 0)
                     throw new RuntimeException("next() required before calling remove()");
-                List.this.remove(nextIndex - 1);
+                ArrayList.this.remove(nextIndex - 1);
             }
         };
     }

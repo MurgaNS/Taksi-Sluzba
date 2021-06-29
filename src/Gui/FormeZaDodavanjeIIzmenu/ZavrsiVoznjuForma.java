@@ -6,7 +6,7 @@ import Model.Voznja;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class ZavrsiVoznjuForma extends JFrame {
     private JLabel lblBrojPredjenihKilometara = new JLabel("Broj predjenih kilometara");
@@ -16,7 +16,7 @@ public class ZavrsiVoznjuForma extends JFrame {
     private JButton dugmeOk = new JButton("Sacuvaj");
     private JButton dugmePonisti = new JButton("Ponisti");
     private Voznja voznja;
-    private List<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
+    private ArrayList<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
 
     public ZavrsiVoznjuForma(String voznjaId) {
         voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId));

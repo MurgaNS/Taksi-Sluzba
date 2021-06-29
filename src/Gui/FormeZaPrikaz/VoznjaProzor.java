@@ -6,15 +6,14 @@ import Model.Voznja;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import StrukturePodataka.List;
+
+import StrukturePodataka.ArrayList;
 
 public class VoznjaProzor extends JFrame {
 
     private JToolBar glavniToolBar = new JToolBar();
     private JButton dodeliBtn = new JButton("Dodeli vožnju");
-    private final List<Voznja> listaVoznji;
+    private final ArrayList<Voznja> listaVoznji;
     private JTable tabelaPodataka;
     private DefaultTableModel tabelaModel;
 

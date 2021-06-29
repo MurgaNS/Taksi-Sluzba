@@ -1,20 +1,18 @@
 package Gui.FormeZaPrikaz.PrikazVoznji;
 
-import Gui.FormeZaDodavanjeIIzmenu.AukcijaVozacForma;
 import Gui.GlavniProzor;
-import Model.Vozac;
 import Model.Voznja;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class PrikazSopstvenihVoznjiProzor extends JFrame {
 
     private DefaultTableModel tabelaModel;
     private JTable tabelaPodataka;
-    private List<Voznja> listaVoznji;
+    private ArrayList<Voznja> listaVoznji;
     public PrikazSopstvenihVoznjiProzor() {
         listaVoznji = Voznja.ucitajVoznje(GlavniProzor.getPrijavljeniKorisnik());
         if (!listaVoznji.isEmpty()) {

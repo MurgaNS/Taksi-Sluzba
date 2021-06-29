@@ -1,13 +1,13 @@
 package BinarnaPretraga;
 
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class BinarnaPretraga {
-    public static int find(List<Long> array, long target) {
+    public static int find(ArrayList<Long> array, long target) {
         return binarySearch(array, target, 0, array.size() - 1);
     }
 
-    public static int binarySearch(List<Long> array, long target, int low, int high) {
+    public static int binarySearch(ArrayList<Long> array, long target, int low, int high) {
         if (low > high) {
             return -1;
         }

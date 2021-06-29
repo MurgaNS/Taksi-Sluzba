@@ -5,7 +5,7 @@ import Gui.GlavniProzor;
 import Model.Aukcija;
 import Model.Vozac;
 import Model.Voznja;
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -17,7 +17,7 @@ public class AukcijaVoznjeProzor extends JFrame {
     private JTable tabelaPodataka;
     private JToolBar glavniToolBar = new JToolBar();
     private JButton aukcijaDugme = new JButton("Prijavi se za voznju");
-    private List<Voznja> listaVoznji;
+    private ArrayList<Voznja> listaVoznji;
 
     public AukcijaVoznjeProzor() {
         listaVoznji = Aukcija.ucitajVoznjeZaAukciju();

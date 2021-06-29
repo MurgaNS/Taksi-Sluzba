@@ -7,7 +7,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
-import StrukturePodataka.List;
+import StrukturePodataka.ArrayList;
 
 public class VoziloForma extends JFrame {
     private JLabel lblProizvodjac = new JLabel("Proizvodjac");
@@ -27,7 +27,7 @@ public class VoziloForma extends JFrame {
     private JButton dugmePonisti = new JButton("Ponisti");
 
     private Vozilo vozilo;
-    List<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
+    ArrayList<Vozilo> listaVozila = Vozilo.ucitajSvaVozila();
 
     public VoziloForma(Vozilo v) {
         try {

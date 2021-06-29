@@ -16,7 +16,8 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import StrukturePodataka.List;
+
+import StrukturePodataka.ArrayList;
 
 public class GlavniProzor extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
@@ -175,12 +176,7 @@ public class GlavniProzor extends JFrame {
         sumiranaStatistikaDugme.addActionListener(e -> {
             SumiranPrikazIzvestajaVoznjiProzor sumiranPrikazIzvestaja = new SumiranPrikazIzvestajaVoznjiProzor();
         });
-        aukcijaDugme.addActionListener(e -> {
-            List<Voznja> listaVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA);
-            List<Voznja> listaKreiranaNaCekanjuVoznji = Voznja.ucitajVoznju(Voznja.StatusVoznje.KREIRANA_NA_CEKANJU);
-            listaVoznji.addAll(listaKreiranaNaCekanjuVoznji);
-            new AukcijaVoznjeProzor();
-        });
+        aukcijaDugme.addActionListener(e -> new AukcijaVoznjeProzor());
     }
 
     public static Korisnik getPrijavljeniKorisnik() {
