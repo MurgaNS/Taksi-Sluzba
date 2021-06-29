@@ -115,7 +115,7 @@ public class VozaciForma extends JFrame {
 //                    Long automobil = (Long) cbAutomobil.getSelectedItem();
                 int brojClanskeKarte = Integer.parseInt(txtBrojClanskeKarte.getText().trim());
                 if (vozac == null) {
-                    Vozac vozac = new Vozac(id,JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte);
+                    Vozac vozac = new Vozac(id,JMBG,korisnickoIme,lozinka,ime,prezime, adresa,pol,brojTelefona,false,plata,brojClanskeKarte, 0);
                     //Vozac.upisiVozaca(vozac);
                     ArrayList<Korisnik> korisnici = Korisnik.ucitajSveKorisnike();
                     korisnici.add(vozac);

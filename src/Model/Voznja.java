@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import BinarnaPretraga.BinarnaPretraga;
+import Gui.FormeZaPrikaz.VoznjaProzor;
 import StrukturePodataka.ArrayList;
 
 public class Voznja {
@@ -105,8 +106,8 @@ public class Voznja {
         };
     }
 
-    public static Voznja pronadjiPoId(long id) {
-        return ucitajSveVoznje().get(BinarnaPretraga.find(ucitajVoznjaId(), id));
+    public static Voznja pronadjiPoId(long id, ArrayList<Voznja> listaVoznji) {
+        return listaVoznji.get(BinarnaPretraga.find(ucitajVoznjaId(), id));
     }
 
     public static ArrayList<Long> ucitajVoznjaId() {
@@ -139,7 +140,7 @@ public class Voznja {
         return kreiraneVoznje;
     }
 
-    public static ArrayList<Voznja> izbrisiPoId(Long voznjaId,ArrayList<Voznja> listaVoznji) {
+    public static ArrayList<Voznja> izbrisiPoId(Long voznjaId, ArrayList<Voznja> listaVoznji) {
         ArrayList<Voznja> voznje = new ArrayList<>();
         for (Voznja v : listaVoznji) {
             if (v.getId() != voznjaId) {
@@ -546,8 +547,8 @@ public class Voznja {
         ArrayList<Voznja> voznje = ucitajSveVoznje();
         voznje.add(voznja);
         upisiVoznje(voznje);
-
     }
+
 
     public String stringZaCuvanje() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");

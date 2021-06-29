@@ -19,7 +19,7 @@ public class ZavrsiVoznjuForma extends JFrame {
     private ArrayList<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
 
     public ZavrsiVoznjuForma(String voznjaId) {
-        voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId));
+        voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId),Voznja.ucitajSveVoznje());
         setTitle("Zavrsavanje voznje");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocation(400,250);

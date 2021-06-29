@@ -24,11 +24,12 @@ public class Login {
                     String brojTelefona = lineParts[9];
                     boolean obrisan = Boolean.parseBoolean(lineParts[10]);
                     switch (uloga) {
-                        case "musterija" -> korisnik = new Musterija(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+                        case "musterija" -> korisnik = new Musterija(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
                         case "vozac" -> {
                             double plata = Double.parseDouble(lineParts[11]);
                             int brClanskeKarte = Integer.parseInt(lineParts[12]);
-                            korisnik = new Vozac(id,jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte);
+                            double prosecnaOcena = Double.parseDouble(lineParts[13]);
+                            korisnik = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, prosecnaOcena);
                         }
                         case "dispecer" -> {
                             double plata = Double.parseDouble(lineParts[11]);

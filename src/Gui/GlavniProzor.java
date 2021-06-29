@@ -59,6 +59,7 @@ public class GlavniProzor extends JFrame {
         JMenuItem otvoriVoznjaProzor;
         JMenuItem otvoriIzvestajOVozacimaProzor;
         JMenuItem otvoriSumiranIzvestajProzor;
+        JMenuItem zavrsiAukcijuProzor;
 
         JMenu taksiSluzbaMenu = new JMenu("Taksi sluzba");
         otvoriTaksiSluzbaProzor = new JMenuItem("Prikazi podatke");
@@ -82,11 +83,16 @@ public class GlavniProzor extends JFrame {
         otvoriSumiranIzvestajProzor = new JMenuItem("Sumiran izvestaj");
         izvestajMenu.add(otvoriSumiranIzvestajProzor);
 
+        JMenu aukcijaMenu = new JMenu("Aukcija");
+        zavrsiAukcijuProzor = new JMenuItem("Zavrsi aukciju");
+        aukcijaMenu.add(zavrsiAukcijuProzor);
+
         mainMenu.add(taksiSluzbaMenu);
         mainMenu.add(vozaciMenu);
         mainMenu.add(vozilaMenu);
         mainMenu.add(voznjaMenu);
         mainMenu.add(izvestajMenu);
+        mainMenu.add(aukcijaMenu);
 
         otvoriTaksiSluzbaProzor.addActionListener(e -> {
             TaksiSluzbaProzor taksiSluzbaProzor = new TaksiSluzbaProzor();
@@ -112,6 +118,9 @@ public class GlavniProzor extends JFrame {
         otvoriVoznjaProzor.addActionListener(e -> {
             VoznjaProzor voznjaProzor = new VoznjaProzor();
             voznjaProzor.setVisible(true);
+        });
+        zavrsiAukcijuProzor.addActionListener(e->{
+            new AukcijaVoznjeProzor();
         });
     }
 

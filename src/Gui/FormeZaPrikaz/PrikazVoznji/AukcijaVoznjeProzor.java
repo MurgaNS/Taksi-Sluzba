@@ -3,6 +3,7 @@ package Gui.FormeZaPrikaz.PrikazVoznji;
 import Gui.FormeZaDodavanjeIIzmenu.AukcijaVozacForma;
 import Gui.GlavniProzor;
 import Model.Aukcija;
+import Model.Dispecer;
 import Model.Vozac;
 import Model.Voznja;
 import StrukturePodataka.ArrayList;
@@ -17,10 +18,17 @@ public class AukcijaVoznjeProzor extends JFrame {
     private JTable tabelaPodataka;
     private JToolBar glavniToolBar = new JToolBar();
     private JButton aukcijaDugme = new JButton("Prijavi se za voznju");
+    private JButton zavrsiAukcijuDugme = new JButton("Zavrsi aukciju");
     private ArrayList<Voznja> listaVoznji;
 
     public AukcijaVoznjeProzor() {
-        listaVoznji = Aukcija.ucitajVoznjeZaAukciju();
+        if (GlavniProzor.getPrijavljeniKorisnik() instanceof Dispecer) {
+            glavniToolBar.add(zavrsiAukcijuDugme);
+            listaVoznji = Voznja.ucitajKreiraneVoznje();
+        } else {
+            glavniToolBar.add(aukcijaDugme);
+            listaVoznji = Aukcija.ucitajVoznjeZaAukciju();
+        }
         if (!listaVoznji.isEmpty()) {
             setTitle("Prikaz voznji");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -35,7 +43,6 @@ public class AukcijaVoznjeProzor extends JFrame {
     }
 
     private void initGui() {
-        glavniToolBar.add(aukcijaDugme);
         add(glavniToolBar, BorderLayout.NORTH);
         String[] zaglavlja = new String[]{"Id", "Datum porudzbine", "Adresa polaska", "Adresa destinacije", "Status voznje", "Nacin porudzbine", "Naplacen iznos"};
         Object[][] sadrzaj = new Object[listaVoznji.size()][zaglavlja.length];
@@ -75,7 +82,7 @@ public class AukcijaVoznjeProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 long voznjaId = Long.parseLong(tabelaModel.getValueAt(red, 0).toString());
-                Voznja voznja = Voznja.pronadjiPoId(voznjaId);
+                Voznja voznja = Voznja.pronadjiPoId(voznjaId,Voznja.ucitajSveVoznje());
                 if (voznja != null) {
                     Vozac v = (Vozac) GlavniProzor.getPrijavljeniKorisnik();
                     if (v.getBrTaksiVozila() != null) {
@@ -89,6 +96,20 @@ public class AukcijaVoznjeProzor extends JFrame {
             }
             AukcijaVoznjeProzor.this.dispose();
             AukcijaVoznjeProzor.this.setVisible(false);
+        });
+        zavrsiAukcijuDugme.addActionListener(e -> {
+            int red = tabelaPodataka.getSelectedRow();
+            if (red == -1) {
+                JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+            } else {
+                long voznjaId = Long.parseLong(tabelaModel.getValueAt(red, 0).toString());
+                Voznja voznja = Voznja.pronadjiPoId(voznjaId,Voznja.ucitajSveVoznje());
+                if (voznja != null) {
+                    Aukcija.zavrsiAukciju(voznja);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ne postoji voznja", "Greska", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
     }
 }

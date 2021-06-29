@@ -90,7 +90,8 @@ public abstract class Korisnik {
                         double plata = Double.parseDouble(lineParts[11]);
                         int brClanskeKarte = Integer.parseInt(lineParts[12]);
                         Long brTaksiVozila = null;
-                        korisnik = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, brTaksiVozila);
+                        double prosecnaOcena= Double.parseDouble(lineParts[13]);
+                        korisnik = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, brTaksiVozila,prosecnaOcena);
                         Vozac.ucitajVoziloVozacu((Vozac) korisnik);
                     }
                     case "dispecer" -> {

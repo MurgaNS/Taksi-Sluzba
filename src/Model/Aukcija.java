@@ -78,7 +78,15 @@ public class Aukcija {
 
     public static void sacuvajAukciju(Aukcija aukcija) {
         ArrayList<Aukcija> aukcije = ucitajAukcije();
-        aukcije.add(aukcija);
+        boolean postoji = false;
+        for (Aukcija a : aukcije) {
+            if (a.getVoznjaId() == aukcija.getVoznjaId() && a.getVozacId() == aukcija.getVozacId()) {
+                postoji = true;
+            }
+        }
+        if (!postoji) {
+            aukcije.add(aukcija);
+        }
         File file = new File("src//Data//aukcije.csv");
         try {
             PrintWriter writer = new PrintWriter(file);
@@ -92,6 +100,31 @@ public class Aukcija {
         }
     }
 
+    public static void zavrsiAukciju(Voznja v) {
+        ArrayList<Aukcija> aukcije = ucitajAukcije();
+        ArrayList<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
+        Voznja voznja = Voznja.pronadjiPoId(v.getId(), listaVoznji);
+
+        Vozac pobednik = null;
+        for (Aukcija aukcija : aukcije) {
+            if (aukcija.getVoznjaId() == voznja.getId()) {
+                if (pobednik == null) {
+                    pobednik = Vozac.pronadjiPoJmbg(aukcija.getVozacId());
+                } else {
+                    Vozac vozac = Vozac.pronadjiPoJmbg(aukcija.getVozacId());
+                    if (vozac.getProsecnaOcena() > pobednik.getProsecnaOcena()) {
+                        pobednik = vozac;
+                    }
+                }
+            }
+        }
+        voznja.setVozacJMBG(pobednik.getJMBG());
+        voznja.setStatusVoznje(Voznja.StatusVoznje.DODELJENA);
+        System.out.println(voznja);
+        System.out.println(pobednik);
+        Voznja.upisiVoznje(listaVoznji);
+    }
+
     @Override
     public String toString() {
         return "Aukcija{voznjaId=" + voznjaId +
@@ -102,7 +135,7 @@ public class Aukcija {
     }
 
     public String stringToSave() {
-        return vozacId + "," + voznjaId + "," + minutaDoDestinacije + "," + ocena + "\n";
+        return voznjaId + "," + vozacId + "," + minutaDoDestinacije + "," + ocena + "\n";
     }
 
     public long getVoznjaId() {
@@ -136,4 +169,5 @@ public class Aukcija {
     public void setOcena(double ocena) {
         this.ocena = ocena;
     }
+
 }

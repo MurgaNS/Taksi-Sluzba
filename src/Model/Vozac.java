@@ -16,27 +16,30 @@ public class Vozac extends Korisnik {
     private int brojClanskeKarte;
     private ArrayList<Voznja> listaVoznji;
     private Long brTaksiVozila;
+    private double prosecnaOcena;
 
 
-    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, ArrayList<Voznja> listaVoznji, Long brTaksiVozila) {
+    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, ArrayList<Voznja> listaVoznji, Long brTaksiVozila, double ocena) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.id = id;
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
         this.listaVoznji = listaVoznji;
         this.brTaksiVozila = brTaksiVozila;
+        this.prosecnaOcena = ocena;
     }
 
-    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte) {
+    public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, double ocena) {
         super(JMBG, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
         this.id = id;
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
+        this.prosecnaOcena = ocena;
     }
 
 
     public String korisnikUString() {
-        return "vozac," + id + "," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte;
+        return "vozac," + id + "," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte + "," + brTaksiVozila + "," + prosecnaOcena;
     }
 
 
@@ -54,7 +57,6 @@ public class Vozac extends Korisnik {
                 if (tmp[8].equals(String.valueOf(vozac.getJMBG()))) {
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     Date date = formatter.parse(tmp[1]);
-
                     Voznja voznja = new Voznja(Long.parseLong(tmp[0]), date, tmp[2], tmp[3], Double.parseDouble(tmp[4]), Double.parseDouble(tmp[5]), statusVoznje, nacinPorudzbine, Long.parseLong(tmp[8]), Long.parseLong(tmp[9]), Double.parseDouble(tmp[10]));
                     listaVoznji.add(voznja);
                 }
@@ -186,8 +188,9 @@ public class Vozac extends Korisnik {
         boolean obrisan = Boolean.parseBoolean(lineParts[10]);
         double plata = Double.parseDouble(lineParts[11]);
         int brClanskeKarte = Integer.parseInt(lineParts[12]);
+        double prosecnaOcena = Double.parseDouble(lineParts[13]);
         Long voziloId = Vozilo.pronadjiVoziloPoVozacu(jmbg);
-        Vozac vozac = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId);
+        Vozac vozac = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId, prosecnaOcena);
         vozac.setListaVoznji(ucitajListuVoznji(vozac));
         return vozac;
     }
@@ -196,8 +199,7 @@ public class Vozac extends Korisnik {
     @Override
     public String toString() {
         return "Vozac{" +
-               "id=" + id +
-               ", JMBG=" + JMBG +
+               "JMBG=" + JMBG +
                ", korisnickoIme='" + korisnickoIme + '\'' +
                ", lozinka='" + lozinka + '\'' +
                ", ime='" + ime + '\'' +
@@ -206,11 +208,21 @@ public class Vozac extends Korisnik {
                ", pol=" + pol +
                ", brojTelefona='" + brojTelefona + '\'' +
                ", obrisan=" + obrisan +
+               ", id=" + id +
                ", plata=" + plata +
                ", brojClanskeKarte=" + brojClanskeKarte +
                ", listaVoznji=" + listaVoznji +
                ", brTaksiVozila=" + brTaksiVozila +
+               ", prosecnaOcena=" + prosecnaOcena +
                '}';
+    }
+
+    public double getProsecnaOcena() {
+        return prosecnaOcena;
+    }
+
+    public void setProsecnaOcena(double prosecnaOcena) {
+        this.prosecnaOcena = prosecnaOcena;
     }
 
     public double getPlata() {

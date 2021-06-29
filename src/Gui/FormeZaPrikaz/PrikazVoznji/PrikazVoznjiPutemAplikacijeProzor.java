@@ -72,7 +72,7 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voznjaId = tabelaModel.getValueAt(red, 0).toString();
-                Voznja voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId));
+                Voznja voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId),Voznja.ucitajSveVoznje());
                 voznja.setStatusVoznje(Voznja.StatusVoznje.PRIHVACENA);
                 voznja.setVozacJMBG(GlavniProzor.getPrijavljeniKorisnik().getJMBG());
                 Voznja.izmeniStatusVoznje(voznja);
@@ -87,7 +87,7 @@ public class PrikazVoznjiPutemAplikacijeProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 String voznjaId = tabelaModel.getValueAt(red, 0).toString();
-                Voznja voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId));
+                Voznja voznja = Voznja.pronadjiPoId(Long.parseLong(voznjaId),Voznja.ucitajSveVoznje());
                 voznja.setStatusVoznje(Voznja.StatusVoznje.ODBIJENA);
                 voznja.setVozacJMBG(GlavniProzor.getPrijavljeniKorisnik().getJMBG());
                 Voznja.izmeniStatusVoznje(voznja);
