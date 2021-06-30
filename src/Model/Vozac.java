@@ -202,7 +202,7 @@ public class Vozac extends Korisnik {
         boolean obrisan = Boolean.parseBoolean(lineParts[10]);
         double plata = Double.parseDouble(lineParts[11]);
         int brClanskeKarte = Integer.parseInt(lineParts[12]);
-        double brUspesnihVoznji = Double.parseDouble(lineParts[13]);
+        double brUspesnihVoznji = Double.parseDouble(lineParts[14]);
         Long voziloId = Vozilo.pronadjiVoziloPoVozacu(jmbg);
         Vozac vozac = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId, brUspesnihVoznji);
         vozac.setListaVoznji(ucitajListuVoznji(vozac));
