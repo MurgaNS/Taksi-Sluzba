@@ -133,10 +133,12 @@ public class GlavniProzor extends JFrame {
 
         JButton prikazVoznjiDugme = new JButton("Prikaz sopstvenih voznji");
         prikazVoznjiDugme.setBounds(50, 100, 95, 30);
+        JButton oceniVoznjuDugme = new JButton("Oceni voznju");
+        oceniVoznjuDugme.setBounds(50, 100, 95, 30);
         this.add(prikazVoznjiDugme);
         this.add(narucivanjeVoznjeDugme);
         this.add(narucivanjeVoznjeTelefonomDugme);
-
+        this.add(oceniVoznjuDugme);
         narucivanjeVoznjeDugme.addActionListener(e -> {
             NarucivanjeVoznjeForma narucivanjeVoznje = new NarucivanjeVoznjeForma();
             narucivanjeVoznje.setVisible(true);
@@ -146,7 +148,9 @@ public class GlavniProzor extends JFrame {
         narucivanjeVoznjeTelefonomDugme.addActionListener(e -> {
             NarucivanjeVoznjeTelefonomForma narucivanjeVoznjeTelefonom = new NarucivanjeVoznjeTelefonomForma();
             narucivanjeVoznjeTelefonom.setVisible(true);
-
+        });
+        oceniVoznjuDugme.addActionListener(e->{
+            new OceniVozacaProzor();
         });
     }
 

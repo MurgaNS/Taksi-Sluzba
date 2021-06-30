@@ -6,7 +6,6 @@ import StrukturePodataka.ArrayList;
 
 import java.io.*;
 import java.util.Calendar;
-import java.util.Collections;
 
 public class Aukcija {
     long aukcijaId;
@@ -93,6 +92,7 @@ public class Aukcija {
         for (Aukcija a : aukcije) {
             if (a.getVoznjaId() == aukcija.getVoznjaId() && a.getVozacId() == aukcija.getVozacId()) {
                 postoji = true;
+                break;
             }
         }
         if (!postoji) {
@@ -122,7 +122,7 @@ public class Aukcija {
                     pobednik = Vozac.pronadjiPoJmbg(aukcija.getVozacId());
                 } else {
                     Vozac vozac = Vozac.pronadjiPoJmbg(aukcija.getVozacId());
-                    if (vozac.getProsecnaOcena() > pobednik.getProsecnaOcena()) {
+                    if (vozac.getBrojUspesnihVoznji() > pobednik.getBrojUspesnihVoznji()) {
                         pobednik = vozac;
                     }
                 }

@@ -16,7 +16,7 @@ public class Vozac extends Korisnik {
     private int brojClanskeKarte;
     private ArrayList<Voznja> listaVoznji;
     private Long brTaksiVozila;
-    private double prosecnaOcena;
+    private double brojUspesnihVoznji;
 
 
     public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, ArrayList<Voznja> listaVoznji, Long brTaksiVozila, double ocena) {
@@ -26,7 +26,7 @@ public class Vozac extends Korisnik {
         this.brojClanskeKarte = brojClanskeKarte;
         this.listaVoznji = listaVoznji;
         this.brTaksiVozila = brTaksiVozila;
-        this.prosecnaOcena = ocena;
+        this.brojUspesnihVoznji = ocena;
     }
 
     public Vozac(long id, long JMBG, String korisnickoIme, String lozinka, String ime, String prezime, String adresa, Pol pol, String brojTelefona, boolean obrisan, double plata, int brojClanskeKarte, double ocena) {
@@ -34,12 +34,11 @@ public class Vozac extends Korisnik {
         this.id = id;
         this.plata = plata;
         this.brojClanskeKarte = brojClanskeKarte;
-        this.prosecnaOcena = ocena;
+        this.brojUspesnihVoznji = ocena;
     }
 
-
     public String korisnikUString() {
-        return "vozac," + id + "," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte + "," + brTaksiVozila + "," + prosecnaOcena;
+        return "vozac," + id + "," + super.korisnikUString() + "," + plata + "," + brojClanskeKarte + "," + brTaksiVozila + "," + brojUspesnihVoznji;
     }
 
 
@@ -134,6 +133,21 @@ public class Vozac extends Korisnik {
         return null;
     }
 
+    public static void sacuvajVozaca(Vozac v) {
+        ArrayList<Korisnik> korisnici = ucitajSveKorisnike();
+        for (Korisnik k : korisnici) {
+            if (k instanceof Vozac) {
+                if (k.getJMBG().equals(v.getJMBG())) {
+                    ((Vozac) k).setPlata(v.getPlata());
+                    ((Vozac) k).setBrojClanskeKarte(v.getBrojClanskeKarte());
+                    ((Vozac) k).setBrTaksiVozila(v.getBrTaksiVozila());
+                    ((Vozac) k).setBrojUspesnihVoznji(v.getBrojUspesnihVoznji());
+                }
+            }
+        }
+        upisiSveKorisnike(korisnici);
+    }
+
     public static ArrayList<Vozac> ucitajSveVozace() {
         ArrayList<Vozac> vozaci = new ArrayList<>();
         String red;
@@ -188,9 +202,9 @@ public class Vozac extends Korisnik {
         boolean obrisan = Boolean.parseBoolean(lineParts[10]);
         double plata = Double.parseDouble(lineParts[11]);
         int brClanskeKarte = Integer.parseInt(lineParts[12]);
-        double prosecnaOcena = Double.parseDouble(lineParts[13]);
+        double brUspesnihVoznji = Double.parseDouble(lineParts[13]);
         Long voziloId = Vozilo.pronadjiVoziloPoVozacu(jmbg);
-        Vozac vozac = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId, prosecnaOcena);
+        Vozac vozac = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, voziloId, brUspesnihVoznji);
         vozac.setListaVoznji(ucitajListuVoznji(vozac));
         return vozac;
     }
@@ -213,16 +227,16 @@ public class Vozac extends Korisnik {
                ", brojClanskeKarte=" + brojClanskeKarte +
                ", listaVoznji=" + listaVoznji +
                ", brTaksiVozila=" + brTaksiVozila +
-               ", prosecnaOcena=" + prosecnaOcena +
+               ", brojUspensihVoznji=" + brojUspesnihVoznji +
                '}';
     }
 
-    public double getProsecnaOcena() {
-        return prosecnaOcena;
+    public double getBrojUspesnihVoznji() {
+        return brojUspesnihVoznji;
     }
 
-    public void setProsecnaOcena(double prosecnaOcena) {
-        this.prosecnaOcena = prosecnaOcena;
+    public void setBrojUspesnihVoznji(double brojUspesnihVoznji) {
+        this.brojUspesnihVoznji = brojUspesnihVoznji;
     }
 
     public double getPlata() {

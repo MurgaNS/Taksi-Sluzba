@@ -149,38 +149,17 @@ public class Voznja {
         return kreiraneVoznje;
     }
 
-    public static ArrayList<Voznja> izbrisiPoId(Long voznjaId, ArrayList<Voznja> listaVoznji) {
-        ArrayList<Voznja> voznje = new ArrayList<>();
-        for (Voznja v : listaVoznji) {
-            if (v.getId() != voznjaId) {
-                voznje.add(v);
-            }
-        }
-        return voznje;
-    }
-
-    public static ArrayList<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Vozac vozac) {
+    public static ArrayList<Voznja> ucitajVoznje(StatusVoznje statusVoznje, Korisnik korisnik) {
         ArrayList<Voznja> voznje = new ArrayList<>();
         ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
         try {
             for (Voznja voznja : listaVoznji) {
-                if (voznja.getStatusVoznje().equals(statusVoznje) && voznja.getVozacJMBG().equals(vozac.getJMBG())) {
+                if (voznja.getStatusVoznje().equals(statusVoznje) && (voznja.getVozacJMBG().equals(korisnik.getJMBG()) || voznja.getMusterijaJMBG().equals(korisnik.getJMBG()))) {
                     voznje.add(voznja);
                 }
             }
         } catch (NullPointerException ignored) {
 //            voznja nema dodeljenog vozaca i izbacuje gresku
-        }
-        return voznje;
-    }
-
-    public static ArrayList<Voznja> ucitajVoznju(StatusVoznje statusVoznje) {
-        ArrayList<Voznja> voznje = new ArrayList<>();
-        ArrayList<Voznja> listaVoznji = ucitajSveVoznje();
-        for (Voznja voznja : listaVoznji) {
-            if (voznja.getStatusVoznje().equals(statusVoznje)) {
-                voznje.add(voznja);
-            }
         }
         return voznje;
     }
