@@ -81,7 +81,7 @@ public class VoznjaProzor extends JFrame {
         int red = tabelaPodataka.getSelectedRow();
         if(red != -1 ) {
             long idVoznje = (long) tabelaPodataka.getValueAt(red, 0);
-            Voznja voznja = Voznja.pronadjiPoId(idVoznje,Voznja.ucitajSveVoznje());
+            Voznja voznja = Voznja.binarnaPretraga(idVoznje,Voznja.ucitajSveVoznje());
             return voznja;
         }
         return null;

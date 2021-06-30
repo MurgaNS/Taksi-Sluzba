@@ -73,7 +73,7 @@ public class OceniVozacaProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 long voznjaId = Long.parseLong(tabelaModel.getValueAt(red, 0).toString());
-                Voznja voznja = Voznja.pronadjiPoId(voznjaId, Voznja.ucitajSveVoznje());
+                Voznja voznja = Voznja.binarnaPretraga(voznjaId, Voznja.ucitajSveVoznje());
                 Vozac vozac = (Vozac) Korisnik.nadjiKorisnikaPrekoJMBG(voznja.getVozacJMBG());
                 vozac.setBrojUspesnihVoznji(vozac.getBrojUspesnihVoznji() + 1);
                 Vozac.sacuvajVozaca(vozac);

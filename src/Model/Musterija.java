@@ -23,7 +23,19 @@ public class Musterija extends Korisnik {
                ", obrisan=" + obrisan +
                '}';
     }
-
+    public static Musterija musterijaDTO(String[] lineParts){
+        long id = Long.parseLong(lineParts[1]);
+        long jmbg = Long.parseLong(lineParts[2]);
+        String korisnickoIme = lineParts[3];
+        String lozinka = lineParts[4];
+        String ime = lineParts[5];
+        String prezime = lineParts[6];
+        String adresa = lineParts[7];
+        Pol pol = ucitajPol(lineParts[8]);
+        String brojTelefona = lineParts[9];
+        boolean obrisan = Boolean.parseBoolean(lineParts[10]);
+        return new Musterija(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
+    }
     public long getId() {
         return id;
     }

@@ -82,7 +82,7 @@ public class AukcijaVoznjeProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 long voznjaId = Long.parseLong(tabelaModel.getValueAt(red, 0).toString());
-                Voznja voznja = Voznja.pronadjiPoId(voznjaId,Voznja.ucitajSveVoznje());
+                Voznja voznja = Voznja.binarnaPretraga(voznjaId,Voznja.ucitajSveVoznje());
                 if (voznja != null) {
                     Vozac v = (Vozac) GlavniProzor.getPrijavljeniKorisnik();
                     if (v.getBrTaksiVozila() != null) {
@@ -103,7 +103,7 @@ public class AukcijaVoznjeProzor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
             } else {
                 long voznjaId = Long.parseLong(tabelaModel.getValueAt(red, 0).toString());
-                Voznja voznja = Voznja.pronadjiPoId(voznjaId,Voznja.ucitajSveVoznje());
+                Voznja voznja = Voznja.binarnaPretraga(voznjaId,Voznja.ucitajSveVoznje());
                 if (voznja != null) {
                     Aukcija.zavrsiAukciju(voznja);
                     AukcijaVoznjeProzor.this.dispose();

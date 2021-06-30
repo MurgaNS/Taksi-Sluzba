@@ -205,8 +205,21 @@ public class Vozilo {
         return pronadjenaVozila;
     }
 
-    public static void sacuvajNovoVoziloUFajl(Vozilo vozilo) throws IOException {
+    public static void sacuvajVoziloUFajl(Vozilo vozilo) throws IOException {
         ArrayList<Vozilo> vozila = ucitajSvaVozila();
+        for(Vozilo v: vozila){
+            if(v.getBrTaksiVozila().equals(vozilo.getBrTaksiVozila())){
+                v.setVozacId(vozilo.getVozacId());
+                v.setVrsta(vozilo.getVrsta());
+                v.setModel(vozilo.getModel());
+                v.setProizvodjac(vozilo.getProizvodjac());
+                v.setObrisan(vozilo.isObrisan());
+                v.setBrRegistarskeOznake(vozilo.getBrRegistarskeOznake());
+                v.setGodProizvodnje(vozilo.getGodProizvodnje());
+                sacuvajListuVozilaUFajl(vozila);
+                break;
+            }
+        }
         vozila.add(vozilo);
         sacuvajListuVozilaUFajl(vozila);
     }

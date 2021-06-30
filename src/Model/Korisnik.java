@@ -74,32 +74,10 @@ public abstract class Korisnik {
                 Korisnik korisnik = null;
                 String[] lineParts = line.split(",");
                 String uloga = lineParts[0];
-                long id = Long.parseLong(lineParts[1]);
-                long jmbg = Long.parseLong(lineParts[2]);
-                String korisnickoIme = lineParts[3];
-                String lozinka = lineParts[4];
-                String ime = lineParts[5];
-                String prezime = lineParts[6];
-                String adresa = lineParts[7];
-                Pol pol = ucitajPol(lineParts[8]);
-                String brojTelefona = lineParts[9];
-                boolean obrisan = Boolean.parseBoolean(lineParts[10]);
                 switch (uloga) {
-                    case "musterija" -> korisnik = new Musterija(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan);
-                    case "vozac" -> {
-                        double plata = Double.parseDouble(lineParts[11]);
-                        int brClanskeKarte = Integer.parseInt(lineParts[12]);
-                        Long brTaksiVozila = null;
-                        double brojUspesnihVoznji= Double.parseDouble(lineParts[14]);
-                        korisnik = new Vozac(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brClanskeKarte, null, brTaksiVozila,brojUspesnihVoznji);
-                        Vozac.ucitajVoziloVozacu((Vozac) korisnik);
-                    }
-                    case "dispecer" -> {
-                        double plata = Double.parseDouble(lineParts[11]);
-                        String brTelLinije = lineParts[12];
-                        Dispecer.OdeljenjeRada odeljenjeRada = Dispecer.ucitajOdeljenjeRada(lineParts[13]);
-                        korisnik = new Dispecer(id, jmbg, korisnickoIme, lozinka, ime, prezime, adresa, pol, brojTelefona, obrisan, plata, brTelLinije, odeljenjeRada);
-                    }
+                    case "musterija" -> korisnik = Musterija.musterijaDTO(lineParts);
+                    case "vozac" -> korisnik = Vozac.vozacDTO(lineParts);
+                    case "dispecer" -> korisnik = Dispecer.dispecerDTO(lineParts);
                 }
                 sviKorisnici.add(korisnik);
             }
@@ -124,6 +102,7 @@ public abstract class Korisnik {
                "," + brojTelefona +
                "," + obrisan;
     }
+
     public static void upisiSveKorisnike(ArrayList<Korisnik> korisnici) {
         File file = new File("src\\Data\\korisnici.csv");
         try {

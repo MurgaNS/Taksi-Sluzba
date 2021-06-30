@@ -98,7 +98,6 @@ public class VozaciProzor extends JFrame {
                         vozacId + " - Potvrda brisanja", JOptionPane.YES_NO_OPTION);
                 if (izbor == JOptionPane.YES_OPTION) {
                     try {
-                        // TODO: 23-Jun-21  treba ubaciti metodu sacuvajListuVozaca u fajl i proslediti listavozaca od gore
                         vozac.setObrisan(true);
                         Korisnik.upisiSveKorisnike(korisnici);
                         ArrayList<Vozilo> vozila = Vozilo.ucitajNeobrisanaVozila();
@@ -106,7 +105,7 @@ public class VozaciProzor extends JFrame {
                             for (Vozilo vozilo : vozila) {
                                 if (vozilo.getVozacId().equals(vozac.getJMBG())) {
                                     vozilo.setVozacId(null);
-                                    Vozilo.sacuvajNovoVoziloUFajl(vozilo);
+                                    Vozilo.sacuvajVoziloUFajl(vozilo);
 
                                 }
                             }

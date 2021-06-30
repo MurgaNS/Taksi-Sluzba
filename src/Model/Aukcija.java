@@ -114,7 +114,7 @@ public class Aukcija {
     public static void zavrsiAukciju(Voznja v) {
         ArrayList<Aukcija> aukcije = ucitajAukcije();
         ArrayList<Voznja> listaVoznji = Voznja.ucitajSveVoznje();
-        Voznja voznja = Voznja.pronadjiPoId(v.getId(), listaVoznji);
+        Voznja voznja = Voznja.binarnaPretraga(v.getId(), listaVoznji);
         Vozac pobednik = null;
         for (Aukcija aukcija : aukcije) {
             if (aukcija.getVoznjaId() == voznja.getId()) {

@@ -156,7 +156,7 @@ public class Vozac extends Korisnik {
             while ((red = bf.readLine()) != null) {
                 String[] lineParts = red.split(",");
                 if (lineParts[0].equals("vozac")) {
-                    Vozac vozac = ucitajVozacaIzFajla(lineParts);
+                    Vozac vozac = vozacDTO(lineParts);
                     ucitajVoziloVozacu(vozac);
                     vozaci.add(vozac);
                 }
@@ -189,7 +189,7 @@ public class Vozac extends Korisnik {
         return listaId;
     }
 
-    public static Vozac ucitajVozacaIzFajla(String[] lineParts) {
+    public static Vozac vozacDTO(String[] lineParts) {
         long id = Long.parseLong(lineParts[1]);
         long jmbg = Long.parseLong(lineParts[2]);
         String korisnickoIme = lineParts[3];

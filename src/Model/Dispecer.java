@@ -56,7 +56,7 @@ public class Dispecer extends Korisnik {
         }
     }
 
-    public static Dispecer ucitajDispeceraIzFajla(String[] lineParts) {
+    public static Dispecer dispecerDTO(String[] lineParts) {
         long id = Long.parseLong(lineParts[1]);
         long jmbg = Long.parseLong(lineParts[2]);
         String korisnickoIme = lineParts[3];
@@ -84,7 +84,7 @@ public class Dispecer extends Korisnik {
                 String[] lineParts = line.split(",");
                 String uloga = lineParts[0];
                 if (uloga.equals("dispecer")) {
-                    listaDispecera.add(ucitajDispeceraIzFajla(lineParts));
+                    listaDispecera.add(dispecerDTO(lineParts));
                 }
             }
             bufferedReader.close();
@@ -97,14 +97,6 @@ public class Dispecer extends Korisnik {
             System.out.println("Greska pri citanju datoteke");
         }
         return listaDispecera;
-    }
-
-    public static List<Long> listaIdDispecer() {
-        List<Long> listaId = new ArrayList<>();
-        for (Dispecer d : ucitajSveDispecere()) {
-            listaId.add(d.getId());
-        }
-        return listaId;
     }
 
     public long getId() {
