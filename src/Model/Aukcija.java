@@ -39,7 +39,6 @@ public class Aukcija {
     public static long generisiIdAukcije() {
         ArrayList<Aukcija> aukcije = ucitajAukcije();
         if (aukcije.isEmpty()) {
-            System.out.println("Aukcija.csv prazno -> generisiIdAukcije()");
             return 1;
         }
         return aukcije.get(aukcije.size() - 1).getAukcijaId() + 1;
@@ -50,7 +49,6 @@ public class Aukcija {
         ArrayList<Voznja> sveVoznje = Voznja.ucitajSveVoznje();
         Vozac vozac = (Vozac) GlavniProzor.getPrijavljeniKorisnik();
         for (Aukcija aukcija : aukcije) {
-            System.out.println("Aukcija -> " + aukcija);
             Voznja voznja = Voznja.pronadjiVoznjuPoId(aukcija.getVoznjaId(), sveVoznje);
             if (voznja != null && aukcija.getVoznjaId() == voznja.getId() && aukcija.getVozacId() == vozac.getJMBG()) {
                 sveVoznje.remove(sveVoznje.indexOf(voznja) - 1);
@@ -88,16 +86,8 @@ public class Aukcija {
 
     public static void sacuvajAukciju(Aukcija aukcija) {
         ArrayList<Aukcija> aukcije = ucitajAukcije();
-        boolean postoji = false;
-        for (Aukcija a : aukcije) {
-            if (a.getVoznjaId() == aukcija.getVoznjaId() && a.getVozacId() == aukcija.getVozacId()) {
-                postoji = true;
-                break;
-            }
-        }
-        if (!postoji) {
-            aukcije.add(aukcija);
-        }
+        aukcije.add(aukcija);
+
         File file = new File("src//Data//aukcije.csv");
         try {
             PrintWriter writer = new PrintWriter(file);
