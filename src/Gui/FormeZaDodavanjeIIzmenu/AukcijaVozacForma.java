@@ -48,7 +48,7 @@ public class AukcijaVozacForma extends JFrame {
             double vremeDolaska = Double.parseDouble(txtMinutaDoDestinacije.getText().trim());
             Vozilo vozilo = Vozilo.pretraziPoId(Vozilo.ucitajSvaVozila(), vozac.getBrTaksiVozila());
             int godinaProizvodnjeVozila = vozilo.getGodProizvodnje();
-            double ocenaVozaca = 1;
+            double ocenaVozaca = vozac.getBrojUspesnihVoznji();
             double ocena = Aukcija.izracunajOcenu(brojVoznji, vremeDolaska, godinaProizvodnjeVozila, ocenaVozaca);
             Aukcija.sacuvajAukciju(new Aukcija(aukcijaId, voznjaId, vozacId, minutaDoDestinacije, ocena));
             AukcijaVozacForma.this.dispose();
